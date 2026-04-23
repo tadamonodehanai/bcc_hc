@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<!-- saved from url=(0204)file:///Users/whiteleek/Downloads/%E3%82%B7%E3%83%8B%E3%82%A2CX%E4%BA%8B%E6%A5%AD_%E3%83%92%E3%82%99%E3%82%B7%E3%82%99%E3%83%8D%E3%82%B9%E3%83%A2%E3%83%86%E3%82%99%E3%83%AB%E5%85%A8%E4%BD%93%E5%83%8F.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>シニアCX事業｜ビジネスモデル全体像と将来性</title>
+<style>
+  :root {
+    --text-primary: #2C2C2A;
+    --text-secondary: #5F5E5A;
+    --text-tertiary: #888780;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F7F5EE;
+    --bg-tertiary: #F1EFE8;
+    --border-subtle: rgba(0,0,0,0.12);
+    --border-medium: rgba(0,0,0,0.25);
+    --accent-teal: #0F6E56;
+    --accent-purple: #534AB7;
+    --accent-coral: #993C1D;
+    --accent-blue: #185FA5;
+    --accent-info: #378ADD;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+  .cover {
+    padding: 56px 0 40px;
+    border-bottom: 0.5px solid var(--border-medium);
+    margin-bottom: 48px;
+  }
+  .cover .eyebrow {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.08em;
+    margin: 0 0 12px;
+  }
+  .cover h1 {
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 0 10px;
+    letter-spacing: 0.02em;
+  }
+  .cover .subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 0 0 24px;
+  }
+  .cover .meta {
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+  section { margin-bottom: 56px; }
+  h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--border-subtle);
+  }
+  h2 .num {
+    display: inline-block;
+    width: 28px; height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 13px;
+    background: var(--text-primary);
+    color: #fff;
+    border-radius: 50%;
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 24px 0 8px;
+  }
+  p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text-primary);
+    margin: 0 0 14px;
+  }
+  p.lead {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+  strong, b {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  .figure-wrap {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0 28px;
+  }
+  svg { display: block; width: 100%; height: auto; }
+
+  /* SVG text helpers */
+  .t  { font-family: inherit; font-size: 14px; font-weight: 400; fill: var(--text-primary); }
+  .ts { font-family: inherit; font-size: 12px; font-weight: 400; fill: var(--text-secondary); }
+  .th { font-family: inherit; font-size: 14px; font-weight: 500; fill: var(--text-primary); }
+  .section-title { font-family: inherit; font-size: 14px; font-weight: 500; fill: var(--text-primary); }
+
+  /* color families for SVG */
+  .c-gray rect   { fill: #F1EFE8; stroke: #888780; }
+  .c-gray .th    { fill: #2C2C2A; }
+  .c-gray .ts    { fill: #5F5E5A; }
+  .c-teal rect   { fill: #E1F5EE; stroke: #1D9E75; }
+  .c-teal .th    { fill: #085041; }
+  .c-teal .ts    { fill: #0F6E56; }
+  .c-purple rect { fill: #EEEDFE; stroke: #7F77DD; }
+  .c-purple .th  { fill: #3C3489; }
+  .c-purple .ts  { fill: #534AB7; }
+  .c-coral rect  { fill: #FAECE7; stroke: #D85A30; }
+  .c-coral .th   { fill: #712B13; }
+  .c-coral .ts   { fill: #993C1D; }
+  .c-blue rect   { fill: #E6F1FB; stroke: #378ADD; }
+  .c-blue .th    { fill: #0C447C; }
+  .c-blue .ts    { fill: #185FA5; }
+  .box-neutral   { fill: #FFFFFF; stroke: #B4B2A9; }
+
+  /* Market metric cards */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 0 0 24px;
+  }
+  .metric {
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .metric .lab { font-size: 12px; color: var(--text-secondary); margin: 0 0 6px; }
+  .metric .val { font-size: 22px; font-weight: 500; margin: 0; color: var(--text-primary); }
+  .metric .sub { font-size: 11px; color: var(--text-tertiary); margin: 4px 0 0; }
+
+  .scenario {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .scenario.highlight { border: 2px solid var(--accent-info); }
+  .scenario-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .scenario-name { font-size: 15px; font-weight: 500; }
+  .scenario-pen { font-size: 12px; color: var(--text-secondary); }
+  .scenario-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.2fr 1fr;
+    gap: 12px;
+    font-size: 13px;
+    align-items: baseline;
+  }
+  .scenario-row .k { color: var(--text-secondary); font-size: 12px; }
+  .scenario-row .v { color: var(--text-primary); font-size: 15px; font-weight: 500; }
+  .scenario-row .highlight-v { color: var(--accent-info); }
+  .scenario-note {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin: 16px 0 0;
+    line-height: 1.7;
+  }
+
+  /* Notes / points */
+  .point-block {
+    background: var(--bg-primary);
+    border-left: 3px solid var(--accent-info);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .point-block .label {
+    font-size: 12px;
+    color: var(--accent-info);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin: 0 0 6px;
+  }
+  .point-block .title {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+  .point-block p { font-size: 14px; margin: 0; }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .summary-item {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .summary-item .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 10px;
+    background: var(--text-primary);
+    color: #fff;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .summary-item .title {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+  .summary-item p { font-size: 14px; margin: 0; }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 0.5px solid var(--border-subtle);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 32px 20px 56px; }
+    .cover h1 { font-size: 24px; }
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    .scenario-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { max-width: none; padding: 0; }
+    section { page-break-inside: avoid; }
+    .figure-wrap { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="cover">
+    <p class="eyebrow">BCC ヘルスケア事業｜内部資料</p>
+    <h1>シニアCX事業｜ビジネスモデル全体像と将来性</h1>
+    <p class="subtitle">4段階プロダクト構造、プロモーション設計、市場規模、他業種展開ロードマップ</p>
+    <p class="meta">2026.Apr ver.1.0</p>
+  </header>
+
+  <!-- ===================== 図1 ===================== -->
+  <section>
+    <h2><span class="num">1</span>ビジネスモデル全体像｜4段階の製品構造</h2>
+    <p class="lead">この事業の収益構造は、4つの教材が「役割分担」しながら顧客を育てる構造になっている。各段階で「何を売るか」「何を目的とするか」が全く違う。</p>
+
+    <div class="figure-wrap">
+      <svg viewBox="0 0 680 540" role="img">
+        <title>4段階プロダクト構造</title>
+        <desc>基本テキスト・実装テキスト・業界別モジュール・資格認定の4段階ビジネスモデル</desc>
+        <defs>
+          <marker id="arrow1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </marker>
+        </defs>
+
+        <text class="th section-title" x="40" y="30">4段階プロダクト構造</text>
+        <text class="ts" x="40" y="48">各段階で役割が違う。認知から収益化、継続課金まで連続した設計</text>
+
+        <g class="c-gray">
+          <rect x="40" y="70" width="146" height="90" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="113" y="94" text-anchor="middle">① 基本テキスト</text>
+          <text class="ts" x="113" y="114" text-anchor="middle">プロモーション</text>
+          <text class="ts" x="113" y="132" text-anchor="middle">認知獲得・重要性訴求</text>
+          <text class="ts" x="113" y="150" text-anchor="middle">低価格 / 無料配布</text>
+        </g>
+        <g class="c-teal">
+          <rect x="202" y="70" width="146" height="90" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="275" y="94" text-anchor="middle">② 実装テキスト</text>
+          <text class="ts" x="275" y="114" text-anchor="middle">リード育成</text>
+          <text class="ts" x="275" y="132" text-anchor="middle">決裁者の判断材料</text>
+          <text class="ts" x="275" y="150" text-anchor="middle">中価格帯</text>
+        </g>
+        <g class="c-purple">
+          <rect x="364" y="70" width="146" height="90" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="437" y="94" text-anchor="middle">③ 業界別モジュール</text>
+          <text class="ts" x="437" y="114" text-anchor="middle">売上源</text>
+          <text class="ts" x="437" y="132" text-anchor="middle">スタッフ向け研修</text>
+          <text class="ts" x="437" y="150" text-anchor="middle">数万円/人</text>
+        </g>
+        <g class="c-coral">
+          <rect x="526" y="70" width="114" height="90" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="583" y="94" text-anchor="middle">④ 資格認定</text>
+          <text class="ts" x="583" y="114" text-anchor="middle">継続課金</text>
+          <text class="ts" x="583" y="132" text-anchor="middle">品質保証・更新</text>
+          <text class="ts" x="583" y="150" text-anchor="middle">年次更新料</text>
+        </g>
+
+        <line x1="186" y1="115" x2="198" y2="115" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow1)"></line>
+        <line x1="348" y1="115" x2="360" y2="115" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow1)"></line>
+        <line x1="510" y1="115" x2="522" y2="115" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow1)"></line>
+
+        <text class="th section-title" x="40" y="200">主な購入者</text>
+        <rect class="box-neutral" x="40" y="212" width="146" height="48" rx="6" stroke-width="0.5"></rect>
+        <text class="ts" x="113" y="232" text-anchor="middle">経営者・店長</text>
+        <text class="ts" x="113" y="250" text-anchor="middle">業界団体・メディア</text>
+        <rect class="box-neutral" x="202" y="212" width="146" height="48" rx="6" stroke-width="0.5"></rect>
+        <text class="ts" x="275" y="232" text-anchor="middle">経営者・店長</text>
+        <text class="ts" x="275" y="250" text-anchor="middle">マネージャー</text>
+        <rect class="box-neutral" x="364" y="212" width="146" height="48" rx="6" stroke-width="0.5"></rect>
+        <text class="ts" x="437" y="232" text-anchor="middle">店舗 → スタッフ</text>
+        <text class="ts" x="437" y="250" text-anchor="middle">法人一括導入</text>
+        <rect class="box-neutral" x="526" y="212" width="114" height="48" rx="6" stroke-width="0.5"></rect>
+        <text class="ts" x="583" y="232" text-anchor="middle">修了スタッフ</text>
+        <text class="ts" x="583" y="250" text-anchor="middle">店として保持</text>
+
+        <text class="th section-title" x="40" y="290">BCC理念との対応</text>
+        <g class="c-gray">
+          <rect x="40" y="302" width="146" height="40" rx="6" stroke-width="0.5"></rect>
+          <text class="th" x="113" y="327" text-anchor="middle">ひらく</text>
+        </g>
+        <g class="c-teal">
+          <rect x="202" y="302" width="146" height="40" rx="6" stroke-width="0.5"></rect>
+          <text class="th" x="275" y="327" text-anchor="middle">つなぐ</text>
+        </g>
+        <g class="c-purple">
+          <rect x="364" y="302" width="146" height="40" rx="6" stroke-width="0.5"></rect>
+          <text class="th" x="437" y="327" text-anchor="middle">届ける</text>
+        </g>
+        <g class="c-coral">
+          <rect x="526" y="302" width="114" height="40" rx="6" stroke-width="0.5"></rect>
+          <text class="th" x="583" y="327" text-anchor="middle">めぐらせる</text>
+        </g>
+
+        <text class="th section-title" x="40" y="372">LTV観点の設計</text>
+        <text class="ts" x="40" y="390">①②は顧客獲得の入口、③が主な売上源、④が継続性と品質保証</text>
+
+        <g class="c-gray">
+          <rect x="40" y="408" width="600" height="110" rx="12" stroke-width="0.5"></rect>
+          <text class="th" x="60" y="432">教材間の連鎖構造</text>
+          <text class="ts" x="60" y="454">① → ② ：安価な導入でリード獲得。決裁者の判断基盤を整える</text>
+          <text class="ts" x="60" y="472">② → ③ ：一度導入が決まれば、スタッフ人数分の研修売上が発生</text>
+          <text class="ts" x="60" y="490">③ → ④ ：認定された人材が店に残ることで、継続課金と追加研修の循環</text>
+          <text class="ts" x="60" y="508">④ → ② ：認定継続ほど新人教育ニーズが生まれ、再び②へ還流</text>
+        </g>
+      </svg>
+    </div>
+
+    <p>ポイントは<strong>①②は顧客獲得の入口、③が主な売上源、④が継続性の担保</strong>という役割分担。そして②→③→④は必ずこの順序で通る設計やから、②を突破できれば③以降の売上はほぼ自然に立ち上がる。ここが決裁者向けの②を丁寧に作った理由でもある。</p>
+  </section>
+
+  <!-- ===================== 図2 ===================== -->
+  <section>
+    <h2><span class="num">2</span>プロモーション・ファネル｜誰に、いつ、どう届けるか</h2>
+    <p class="lead">各段階の教材は、到達させるべきチャネルも違う。ここを設計しないと、「良い教材があるのに売れない」状態になる。</p>
+
+    <div class="figure-wrap">
+      <svg viewBox="0 0 680 620" role="img">
+        <title>プロモーション・ファネル</title>
+        <desc>認知から継続までの4段階と、各段階でのチャネル・施策の対応</desc>
+        <defs>
+          <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </marker>
+        </defs>
+
+        <text class="th section-title" x="40" y="30">プロモーション・ファネル</text>
+        <text class="ts" x="40" y="48">段階ごとに届ける相手とチャネルが違う。どれか一つ欠けると全体が詰まる</text>
+
+        <g class="c-gray">
+          <rect x="40" y="70" width="600" height="116" rx="12" stroke-width="0.5"></rect>
+          <text class="th" x="60" y="92">認知層（AWARENESS）</text>
+          <text class="ts" x="60" y="110">プロダクト：① 基本テキスト</text>
+          <line x1="60" y1="122" x2="620" y2="122" stroke="#B4B2A9" stroke-width="0.5"></line>
+          <text class="ts" x="60" y="142">業界団体との連携：全日美連・日本理美容協会など</text>
+          <text class="ts" x="60" y="160">メディア：業界誌（BOB・美容の経営プラン・Beautopia）での連載・寄稿</text>
+          <text class="ts" x="60" y="178">展示会：ビューティーワールドジャパン・理美容業界向け商談会</text>
+        </g>
+
+        <g class="c-teal">
+          <rect x="40" y="200" width="600" height="116" rx="12" stroke-width="0.5"></rect>
+          <text class="th" x="60" y="222">関心・判断層（CONSIDERATION）</text>
+          <text class="ts" x="60" y="240">プロダクト：② 実装テキスト（本書）</text>
+          <line x1="60" y1="252" x2="620" y2="252" stroke="#5DCAA5" stroke-width="0.5"></line>
+          <text class="ts" x="60" y="272">セミナー：決裁者向け無料ウェビナー・小規模勉強会</text>
+          <text class="ts" x="60" y="290">営業：チェーン本部・大手サロンへのトップダウン営業</text>
+          <text class="ts" x="60" y="308">事例公開：実証サロンの成果開示・CX改善レポート</text>
+        </g>
+
+        <g class="c-purple">
+          <rect x="40" y="330" width="600" height="116" rx="12" stroke-width="0.5"></rect>
+          <text class="th" x="60" y="352">導入・収益層（CONVERSION）</text>
+          <text class="ts" x="60" y="370">プロダクト：③ 業界別モジュール</text>
+          <line x1="60" y1="382" x2="620" y2="382" stroke="#AFA9EC" stroke-width="0.5"></line>
+          <text class="ts" x="60" y="402">法人一括契約：店舗単位でスタッフ全員に研修を提供</text>
+          <text class="ts" x="60" y="420">e-ラーニング：オンライン動画＋確認テスト＋集合研修のハイブリッド</text>
+          <text class="ts" x="60" y="438">認定講師派遣：スタッフ向け集中ワークショップ</text>
+        </g>
+
+        <g class="c-coral">
+          <rect x="40" y="460" width="600" height="116" rx="12" stroke-width="0.5"></rect>
+          <text class="th" x="60" y="482">継続・拡張層（LOYALTY）</text>
+          <text class="ts" x="60" y="500">プロダクト：④ 資格認定</text>
+          <line x1="60" y1="512" x2="620" y2="512" stroke="#F0997B" stroke-width="0.5"></line>
+          <text class="ts" x="60" y="532">年次更新：継続課金＋新テーマ追加研修</text>
+          <text class="ts" x="60" y="550">認定店ブランド：ステッカー・Web表示・地域包括支援センターへの紹介</text>
+          <text class="ts" x="60" y="568">コミュニティ：認定者同士のケーススタディ交流・新人紹介網</text>
+        </g>
+
+        <line x1="340" y1="186" x2="340" y2="200" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow2)"></line>
+        <line x1="340" y1="316" x2="340" y2="330" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow2)"></line>
+        <line x1="340" y1="446" x2="340" y2="460" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow2)"></line>
+      </svg>
+    </div>
+
+    <p>設計の肝は、<strong>①はB2Bマーケティング（認知層を広く取りに行く）／②はB2Bセールス（決裁者を口説く）／③以降はB2B2C（店を起点にスタッフへ展開）</strong>とチャネル性格を切り替えていること。一本のパイプラインと思わずに、3つの売り方の組み合わせと考えると、営業体制も組みやすい。</p>
+  </section>
+
+  <!-- ===================== 図3 ===================== -->
+  <section>
+    <h2><span class="num">3</span>美容業界の市場ポテンシャル｜到達可能市場の大きさ</h2>
+    <p class="lead">全国の美容業界の基礎指標と、本ビジネスモデルで到達可能な3つのシナリオ。</p>
+
+    <div class="figure-wrap">
+      <div class="metric-grid">
+        <div class="metric">
+          <p class="lab">美容室</p>
+          <p class="val">27.4万軒</p>
+          <p class="sub">2023年度・毎年 +2%</p>
+        </div>
+        <div class="metric">
+          <p class="lab">理容室</p>
+          <p class="val">11.0万軒</p>
+          <p class="sub">減少傾向</p>
+        </div>
+        <div class="metric">
+          <p class="lab">美容師数</p>
+          <p class="val">58.0万人</p>
+          <p class="sub">店平均 2.1人</p>
+        </div>
+        <div class="metric">
+          <p class="lab">業界市場規模</p>
+          <p class="val">2.6兆円</p>
+          <p class="sub">美容室 1.35兆含む</p>
+        </div>
+      </div>
+
+      <p style="font-size:14px;font-weight:500;margin:8px 0 8px;">到達可能市場（SAM）の試算</p>
+      <p style="font-size:12px;color:var(--text-secondary);margin:0 0 16px;">前提：1店舗あたり 実装テキスト15万円／業界別モジュール 3万円×2人／資格認定 年間更新料 1万円×2人</p>
+
+      <div class="scenario">
+        <div class="scenario-head">
+          <span class="scenario-name">保守シナリオ（ペネトレーション 1%）</span>
+          <span class="scenario-pen">2,740店</span>
+        </div>
+        <div class="scenario-row">
+          <span class="k">実装テキスト</span><span class="v">4.1億円</span>
+          <span class="k">業界別モジュール</span><span class="v">1.6億円</span>
+        </div>
+        <div class="scenario-row" style="margin-top:8px;">
+          <span class="k">年次継続（資格）</span><span class="v">0.5億円/年</span>
+          <span class="k">初年度合計</span><span class="v highlight-v">約6.2億円</span>
+        </div>
+      </div>
+
+      <div class="scenario highlight">
+        <div class="scenario-head">
+          <span class="scenario-name">標準シナリオ（ペネトレーション 5%）</span>
+          <span class="scenario-pen">13,700店</span>
+        </div>
+        <div class="scenario-row">
+          <span class="k">実装テキスト</span><span class="v">20.6億円</span>
+          <span class="k">業界別モジュール</span><span class="v">8.2億円</span>
+        </div>
+        <div class="scenario-row" style="margin-top:8px;">
+          <span class="k">年次継続（資格）</span><span class="v">2.7億円/年</span>
+          <span class="k">初年度合計</span><span class="v highlight-v">約31.5億円</span>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-head">
+          <span class="scenario-name">野心シナリオ（ペネトレーション 10%）</span>
+          <span class="scenario-pen">27,400店</span>
+        </div>
+        <div class="scenario-row">
+          <span class="k">実装テキスト</span><span class="v">41.1億円</span>
+          <span class="k">業界別モジュール</span><span class="v">16.4億円</span>
+        </div>
+        <div class="scenario-row" style="margin-top:8px;">
+          <span class="k">年次継続（資格）</span><span class="v">5.5億円/年</span>
+          <span class="k">初年度合計</span><span class="v highlight-v">約63.0億円</span>
+        </div>
+      </div>
+
+      <p class="scenario-note">※ 価格は仮置き。実際の価格設計は業界別モジュール販売時に再検討が必要。2年目以降は新店舗への展開＋既存店への追加研修＋継続認定更新が積み上がる。</p>
+    </div>
+
+    <p>価格は仮置きやけど、<strong>ペネトレーション5%で30億円規模</strong>。これは美容業界だけで、1年目の絵。2年目以降は新規店舗＋既存店での追加研修＋認定更新で複利的に伸びる。</p>
+  </section>
+
+  <!-- ===================== 図4 ===================== -->
+  <section>
+    <h2><span class="num">4</span>他業種展開ロードマップ｜将来性</h2>
+    <p class="lead">美容業界はあくまで最初のテストマーケット。本丸は、高齢者接点のある他業界への拡張にある。</p>
+
+    <div class="figure-wrap">
+      <svg viewBox="0 0 680 620" role="img">
+        <title>他業種展開ロードマップ</title>
+        <desc>2026年から2040年にかけての業界別展開と市場拡大の将来性</desc>
+
+        <text class="th section-title" x="40" y="30">他業種展開ロードマップ</text>
+        <text class="ts" x="40" y="48">美容業界で作った型を、高齢者接点のある業界へ順次展開。2040年の高齢化35%を見据える</text>
+
+        <text class="th section-title" x="40" y="84">PHASE 1 ｜ 2026-2027 ｜ 型の完成</text>
+        <g class="c-purple">
+          <rect x="40" y="96" width="600" height="54" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="60" y="118">美容業界（テストマーケット）</text>
+          <text class="ts" x="60" y="136">27.4万軒 / 58万人 / 2.6兆円。共通骨格＋業界固有の型を確立</text>
+        </g>
+
+        <text class="th section-title" x="40" y="176">PHASE 2 ｜ 2027-2029 ｜ 隣接業界への展開</text>
+        <g class="c-teal">
+          <rect x="40" y="188" width="294" height="70" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="60" y="208">飲食業（高頻度接点）</text>
+          <text class="ts" x="60" y="226">個人飲食店 約50万店</text>
+          <text class="ts" x="60" y="244">高齢者の常連化が売上を支える業態</text>
+        </g>
+        <g class="c-teal">
+          <rect x="346" y="188" width="294" height="70" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="366" y="208">調剤薬局・ドラッグストア</text>
+          <text class="ts" x="366" y="226">調剤 約6.2万店 / ドラッグ 約2.3万店</text>
+          <text class="ts" x="366" y="244">医療接点としての役割が年々増大</text>
+        </g>
+
+        <text class="th section-title" x="40" y="284">PHASE 3 ｜ 2029-2033 ｜ 生活インフラへ拡張</text>
+        <g class="c-blue">
+          <rect x="40" y="296" width="190" height="70" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="60" y="316">金融（銀行・保険）</text>
+          <text class="ts" x="60" y="334">窓口接客・個人相談</text>
+          <text class="ts" x="60" y="352">高齢者資産管理の最前線</text>
+        </g>
+        <g class="c-blue">
+          <rect x="242" y="296" width="194" height="70" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="262" y="316">公共交通</text>
+          <text class="ts" x="262" y="334">駅員・バス・タクシー</text>
+          <text class="ts" x="262" y="352">移動の自立性を守る接点</text>
+        </g>
+        <g class="c-blue">
+          <rect x="448" y="296" width="192" height="70" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="468" y="316">小売・百貨店</text>
+          <text class="ts" x="468" y="334">売場・レジ・問い合わせ</text>
+          <text class="ts" x="468" y="352">生活必需品の購買接点</text>
+        </g>
+
+        <text class="th section-title" x="40" y="392">PHASE 4 ｜ 2033-2040 ｜ 地域社会への統合</text>
+        <g class="c-coral">
+          <rect x="40" y="404" width="600" height="70" rx="8" stroke-width="0.5"></rect>
+          <text class="th" x="60" y="424">自治体・地域包括支援・民間ヘルスケア全域</text>
+          <text class="ts" x="60" y="442">BCCマーケ部門・自治体部門と連動。地域ごとの認定ネットワークを構築</text>
+          <text class="ts" x="60" y="460">「健やかさが循環する地域」を実装。介護DXとも統合し、業界横断の標準規格へ</text>
+        </g>
+
+        <text class="th section-title" x="40" y="508">環境変化：追い風として働く人口動態</text>
+        <g class="c-gray">
+          <rect x="40" y="520" width="600" height="80" rx="8" stroke-width="0.5"></rect>
+          <text class="ts" x="60" y="540">2025年 ｜ 高齢化率 30.0%（3,657万人）</text>
+          <text class="ts" x="60" y="558">2040年 ｜ 高齢化率 34.8%（団塊ジュニアが65歳超）</text>
+          <text class="ts" x="60" y="576">2042年 ｜ 高齢者人口ピーク 3,878万人</text>
+          <text class="ts" x="60" y="594">2050年 ｜ 高齢化率 37.1%　※ 市場規模は時間とともに不可避的に拡大</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===================== まとめ ===================== -->
+  <section>
+    <h2><span class="num">5</span>全体戦略のサマリー</h2>
+    <p class="lead">4枚の図を通して、このビジネスモデルの本質的な強みは3つにまとめられる。</p>
+
+    <div class="summary-grid">
+      <div class="summary-item">
+        <span class="badge">STRENGTH 1</span>
+        <p class="title">教材の4段階が"役割分担"できている</p>
+        <p>同じ顧客に対して①で認知、②で判断、③で収益化、④で継続と、段階ごとに違う商品を売っている。これは単品販売ではなく<strong>顧客ライフサイクル全体をカバーする設計</strong>で、1社のLTVが極めて長い。特に④の資格認定は年次更新型で、サブスク的な安定収益を生む。</p>
+      </div>
+
+      <div class="summary-item">
+        <span class="badge">STRENGTH 2</span>
+        <p class="title">美容業界は"テストマーケット"として最適</p>
+        <p>27.4万軒の店舗数（コンビニの約5倍）、毎年新規オープン4,000店超、離職率が高く人材育成ニーズが常在する。しかも、チェーン系と個人店の両方が存在するため、<strong>大口法人営業と個店SaaS的販売の両モデルを検証できる</strong>。業界団体や業界誌も密に発達していて、認知獲得の経路が整っている。</p>
+      </div>
+
+      <div class="summary-item">
+        <span class="badge">STRENGTH 3</span>
+        <p class="title">高齢化は"止まらない追い風"</p>
+        <p>2025年時点で高齢化率30%、2040年に35%、2050年に37%。この15〜25年間、シニアCXのニーズは構造的に拡大し続ける。つまり、<strong>マーケットタイミングを逃すことはあっても、市場が消える心配はない</strong>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 論点 ===================== -->
+  <section>
+    <h2><span class="num">6</span>戦略上の重要論点</h2>
+    <p class="lead">図を作りながら見えた、これから詰めるべき論点。</p>
+
+    <div class="point-block">
+      <p class="label">POINT 1 ｜ 価格設計</p>
+      <p class="title">仮置き単価は控えめ、上振れ余地あり</p>
+      <p>試算の価格（実装15万円／業界別3万円×人／認定1万円）は「決裁者が即決できる金額」を意識した控えめな数字。BCCが実績として持つ「介護レク広場」「レクリエーション介護士」「高齢者健幸サポーター」の価格帯を参照して、業界別モジュール30億円を狙うなら1人あたり単価を上げつつ、法人一括契約の割引設計で心理的ハードルを下げる方が現実的。</p>
+    </div>
+
+    <div class="point-block">
+      <p class="label">POINT 2 ｜ スケール戦略</p>
+      <p class="title">拡販アクセルは「業界団体との提携」</p>
+      <p>個店へのダイレクト営業で27万軒は回りきれない。日本理容美容協会・全日本美容技術選手権協会・各地の美容組合など、業界団体との公式な連携・認定スキーム化が早期スケールの鍵。介護業界で「介護福祉士」が制度として成立しているのと同じ構造を、美容業界で作れるかどうか。これが10%ペネトレーションの野心シナリオの成否を分ける。</p>
+    </div>
+
+    <div class="point-block">
+      <p class="label">POINT 3 ｜ 他業種展開戦略</p>
+      <p class="title">Phase 2以降は「業界団体戦略」で仕掛ける</p>
+      <p>飲食業も調剤薬局も、単独営業で展開すると非常に非効率。美容業界で作った"型"と"認定実績"を持って、各業界団体・厚労省・経産省に公認制度化を働きかける戦略が視野に入る。BCCの自治体部門とも連動しやすい。</p>
+    </div>
+
+    <div class="point-block">
+      <p class="label">POINT 4 ｜ プロモーション配分</p>
+      <p class="title">トップ営業集中＋業界誌1本連載を推奨</p>
+      <p>認知層に向けて、展示会と業界誌連載に年間予算を張るのか、インフルエンサー美容師・チェーン本部へのトップ営業に集中するのか。展示会は効果測定が難しく、ブース費だけで数百万かかる。立ち上がり期は選択と集中が肝要。</p>
+    </div>
+  </section>
+
+  <footer>
+    本資料は内部検討用の草案です。市場データは以下の公開資料に基づきます：厚生労働省「衛生行政報告例（令和5年度）」／総務省統計局「人口推計・高齢者統計（2025）」／国立社会保障・人口問題研究所「日本の将来推計人口（令和5年推計）」／ホットペッパービューティーアカデミー「数字で見る美容業界」ほか。価格・シナリオ試算は仮置きの数値です。
+  </footer>
+</div>
+
+
+</body></html>
