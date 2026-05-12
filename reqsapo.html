@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>レクサポ事業 自走化計画 — 内部資料</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4ED;
+    --bg-alt: #EFEAE0;
+    --bg-card: #FDFBF6;
+    --ink: #1F1A14;
+    --ink-2: #4A453E;
+    --ink-3: #8B847C;
+    --rule: #D8D0C2;
+    --rule-strong: #B5AC9C;
+    --t1: #2D6B5E;
+    --t1-bg: #E0EBE7;
+    --t2: #A06B2E;
+    --t2-bg: #F0E5D3;
+    --t3: #8B847C;
+    --t3-bg: #E8E4DC;
+    --accent: #C25530;
+    --serif: 'Shippori Mincho', 'Hiragino Mincho Pro', serif;
+    --sans: 'Noto Sans JP', 'Hiragino Kaku Gothic Pro', sans-serif;
+    --mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.85;
+    font-weight: 400;
+    font-feature-settings: "palt";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ---------- Layout ---------- */
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  header.cover {
+    padding: 88px 0 64px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  header.cover::before {
+    content: "";
+    position: absolute;
+    top: 88px;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    opacity: 0.18;
+  }
+
+  header.cover::after {
+    content: "";
+    position: absolute;
+    top: 168px;
+    right: 60px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid var(--t1);
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+
+  .doc-meta {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 32px;
+  }
+
+  .doc-meta .dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  header.cover h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    margin-bottom: 28px;
+  }
+
+  header.cover h1 .accent {
+    color: var(--accent);
+  }
+
+  header.cover .lead {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--ink-2);
+    line-height: 1.9;
+    max-width: 620px;
+    font-weight: 400;
+  }
+
+  header.cover .lead em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .cover-footer {
+    display: flex;
+    gap: 48px;
+    margin-top: 48px;
+    font-size: 12px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+  }
+
+  .cover-footer dt {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .cover-footer dd {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  /* ---------- Main grid ---------- */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 80px;
+    padding: 64px 0 120px;
+    align-items: start;
+  }
+
+  /* ---------- Sidebar TOC ---------- */
+  .toc {
+    position: sticky;
+    top: 40px;
+    font-size: 12px;
+  }
+
+  .toc-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .toc ol {
+    list-style: none;
+  }
+
+  .toc li {
+    margin-bottom: 14px;
+  }
+
+  .toc a {
+    color: var(--ink-2);
+    text-decoration: none;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    transition: color 0.2s;
+    line-height: 1.5;
+  }
+
+  .toc a:hover {
+    color: var(--accent);
+  }
+
+  .toc .num {
+    font-family: var(--serif);
+    font-size: 11px;
+    color: var(--ink-3);
+    min-width: 24px;
+  }
+
+  .toc .sub {
+    margin-top: 8px;
+    margin-left: 36px;
+  }
+
+  .toc .sub li {
+    margin-bottom: 6px;
+  }
+
+  .toc .sub a {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  /* ---------- Main content ---------- */
+  main {
+    max-width: 760px;
+  }
+
+  section {
+    margin-bottom: 96px;
+    scroll-margin-top: 32px;
+  }
+
+  .section-head {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .section-num {
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .section-num::after {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+    vertical-align: middle;
+    margin-left: 16px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+
+  h2 .ja-sub {
+    display: block;
+    font-size: 14px;
+    font-family: var(--sans);
+    color: var(--ink-3);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+  }
+
+  h3 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 56px 0 20px;
+    color: var(--ink);
+  }
+
+  h3 .h3-num {
+    color: var(--accent);
+    font-size: 16px;
+    margin-right: 12px;
+    vertical-align: 2px;
+  }
+
+  h4 {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink-2);
+    margin: 32px 0 12px;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  p.lead {
+    font-size: 18px;
+    font-family: var(--serif);
+    line-height: 1.9;
+    color: var(--ink-2);
+    margin-bottom: 32px;
+  }
+
+  strong {
+    font-weight: 500;
+    background: linear-gradient(transparent 60%, rgba(194, 85, 48, 0.18) 60%);
+    padding: 0 2px;
+  }
+
+  /* ---------- Pull quote ---------- */
+  .pullquote {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.7;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding: 8px 0 8px 28px;
+    margin: 40px 0;
+    font-weight: 400;
+  }
+
+  .pullquote::first-line {
+    color: var(--accent);
+  }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .card-num {
+    font-family: var(--serif);
+    color: var(--ink-3);
+    font-size: 13px;
+    min-width: 32px;
+  }
+
+  .card h4 {
+    margin: 0;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .card p {
+    margin-bottom: 0;
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  /* ---------- Tables ---------- */
+  .table-wrap {
+    margin: 28px 0 32px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  th {
+    background: var(--bg-alt);
+    font-weight: 500;
+    color: var(--ink-2);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  td {
+    color: var(--ink);
+  }
+
+  td code {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: var(--bg-alt);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--ink-2);
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  /* ---------- Track badges ---------- */
+  .track-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .track-badge .bar {
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .track-1 { color: var(--t1); background: var(--t1-bg); }
+  .track-2 { color: var(--t2); background: var(--t2-bg); }
+  .track-3 { color: var(--t3); background: var(--t3-bg); }
+
+  /* ---------- KPI box ---------- */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 24px 0 32px;
+  }
+
+  .kpi {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-top: 2px solid var(--t1);
+    padding: 20px;
+    border-radius: 2px;
+  }
+
+  .kpi.track-2-border { border-top-color: var(--t2); }
+  .kpi.track-3-border { border-top-color: var(--t3); }
+
+  .kpi-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+  }
+
+  .kpi-value {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: var(--ink);
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  .kpi-value small {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-left: 4px;
+  }
+
+  /* ---------- Quarter pills ---------- */
+  .q-pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: var(--bg-alt);
+    color: var(--ink-2);
+    margin-right: 8px;
+    font-weight: 500;
+  }
+
+  /* ---------- Lists ---------- */
+  ul.refined, ol.refined {
+    margin: 20px 0 24px;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  ul.refined li, ol.refined li {
+    padding-left: 28px;
+    margin-bottom: 12px;
+    position: relative;
+    line-height: 1.85;
+  }
+
+  ul.refined li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 14px;
+    width: 12px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  ol.refined {
+    counter-reset: refined;
+  }
+
+  ol.refined li {
+    counter-increment: refined;
+  }
+
+  ol.refined li::before {
+    content: counter(refined, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--serif);
+    font-size: 12px;
+    color: var(--accent);
+    line-height: 1.85;
+  }
+
+  /* ---------- Diagrams ---------- */
+  .figure {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    padding: 32px 24px 24px;
+    border-radius: 4px;
+    margin: 32px 0;
+  }
+
+  .figure svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .figure-caption {
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+    text-align: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ---------- Callout ---------- */
+  .callout {
+    background: var(--t3-bg);
+    border-left: 2px solid var(--t3);
+    padding: 20px 24px;
+    margin: 28px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .callout-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--t3);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin: 0;
+    color: var(--ink-2);
+    line-height: 1.8;
+  }
+
+  .callout.accent-callout {
+    background: rgba(194, 85, 48, 0.08);
+    border-left-color: var(--accent);
+  }
+
+  .callout.accent-callout .callout-label {
+    color: var(--accent);
+  }
+
+  /* ---------- Footer ---------- */
+  footer.doc-footer {
+    border-top: 1px solid var(--rule);
+    padding: 48px 0 80px;
+    color: var(--ink-3);
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  footer.doc-footer .footer-mark {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink-2);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .body-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .toc {
+      position: static;
+      background: var(--bg-card);
+      padding: 24px;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+    }
+    main { max-width: 100%; }
+    header.cover { padding: 56px 0 40px; }
+    h2 { font-size: 30px; }
+    h3 { font-size: 20px; }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 0 20px; }
+    .cover-footer { flex-direction: column; gap: 16px; }
+    .table-wrap { font-size: 12px; overflow-x: auto; }
+    th, td { padding: 10px 12px; }
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    body { background: white; font-size: 11px; }
+    .toc { display: none; }
+    .body-grid { grid-template-columns: 1fr; }
+    section { break-inside: avoid-page; }
+    .card, .table-wrap, .figure { break-inside: avoid; }
+    header.cover::before, header.cover::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ========== COVER ========== -->
+  <header class="cover">
+    <div class="doc-meta">
+      <span class="dot"></span>
+      <span>内部資料 / Internal</span>
+      <span>戦略ロードマップ</span>
+      <span>v1.0</span>
+    </div>
+    <h1>レクサポ事業<br><span class="accent">自走化計画</span></h1>
+    <p class="lead">
+      属人化された業務を、状態機械と書類自動生成で解きほぐす。<br>
+      その先に、判断の自動化、そして<em>めぐる仕組み</em>を組み上げる。<br>
+      これは、健やかさを循環させる事業の設計図である。
+    </p>
+    <dl class="cover-footer">
+      <div>
+        <dt>策定</dt>
+        <dd>2026年5月</dd>
+      </div>
+      <div>
+        <dt>対象期間</dt>
+        <dd>12ヶ月（4四半期）</dd>
+      </div>
+      <div>
+        <dt>事業</dt>
+        <dd>BCC ヘルスケア / レクサポ</dd>
+      </div>
+    </dl>
+  </header>
+
+  <!-- ========== BODY GRID ========== -->
+  <div class="body-grid">
+
+    <!-- ========== TOC ========== -->
+    <aside>
+      <nav class="toc">
+        <div class="toc-label">目次</div>
+        <ol>
+          <li><a href="#overview"><span class="num">00</span><span>概要</span></a></li>
+          <li>
+            <a href="#bigpicture"><span class="num">01</span><span>全体像</span></a>
+            <ol class="sub">
+              <li><a href="#why">なぜ自走化か</a></li>
+              <li><a href="#framework">3層フレームワーク</a></li>
+              <li><a href="#roadmap">12ヶ月ロードマップ</a></li>
+            </ol>
+          </li>
+          <li>
+            <a href="#track1"><span class="num">02</span><span>事務自動化</span></a>
+            <ol class="sub">
+              <li><a href="#t1-overview">目的とKPI</a></li>
+              <li><a href="#t1-state">状態管理エンジン</a></li>
+              <li><a href="#t1-docs">書類自動生成</a></li>
+              <li><a href="#t1-api">API連携・入金照合</a></li>
+              <li><a href="#t1-stability">運用安定・高度化</a></li>
+            </ol>
+          </li>
+          <li>
+            <a href="#track2"><span class="num">03</span><span>判断自動化</span></a>
+            <ol class="sub">
+              <li><a href="#t2-overview">目的とKPI</a></li>
+              <li><a href="#t2-data">データ蓄積</a></li>
+              <li><a href="#t2-score">スコア設計</a></li>
+              <li><a href="#t2-rec">推薦エンジン</a></li>
+              <li><a href="#t2-audit">自動審査</a></li>
+            </ol>
+          </li>
+          <li><a href="#track3"><span class="num">04</span><span>育成（将来）</span></a></li>
+          <li><a href="#execution"><span class="num">05</span><span>実行に向けて</span></a></li>
+        </ol>
+      </nav>
+    </aside>
+
+    <!-- ========== MAIN ========== -->
+    <main>
+
+      <!-- 00 概要 -->
+      <section id="overview">
+        <div class="section-head">
+          <span class="section-num">00</span>
+          <h2>概要<span class="ja-sub">Executive Summary</span></h2>
+        </div>
+
+        <p class="lead">
+          レクサポ事業を、属人運用から自走するプラットフォームへ。<br>
+          12ヶ月で「事務の自動化」を完成させ、「判断の自動化」に踏み出す。
+        </p>
+
+        <p>
+          本資料は、レクサポ事業の今後12ヶ月における事業高度化計画を、社内の合意形成と実行のためにまとめたものである。事業のミッション「健やかさは、めぐる」を起点に、現在属人化されている業務をシステム化し、最終的に使われるほど精度が上がる仕組みを目指す。
+        </p>
+
+        <p>
+          計画は3つのトラックから構成される。最優先かつ最大の山は<strong>事務自動化</strong>。書類処理と状態管理を機械に移し、担当者を判断業務に解放する。次に<strong>判断自動化</strong>として、マッチング推薦と自動審査を組み込み、量のスケールに耐える仕組みを作る。そして長期視点として<strong>育成</strong>──サポーターの学びと成長を事業の資産に変える設計──を位置づける。
+        </p>
+
+        <div class="callout accent-callout">
+          <div class="callout-label">本資料の読み方</div>
+          <p>
+            01は全社共通の前提。02・03は実行担当者向けの詳細仕様。04は方針確認のみで、具体は別途検討。05は今月〜来月の意思決定事項を含む。
+          </p>
+        </div>
+      </section>
+
+      <!-- 01 全体像 -->
+      <section id="bigpicture">
+        <div class="section-head">
+          <span class="section-num">01</span>
+          <h2>全体像<span class="ja-sub">The Big Picture</span></h2>
+        </div>
+
+        <h3 id="why"><span class="h3-num">1.1</span>なぜ自走化か</h3>
+
+        <p>
+          現在のレクサポ業務は、依頼受領、書類作成、スケジュール調整、報告管理、請求・支払処理のいずれもが担当者の経験と手作業に依存している。事業の量が増えるほど、担当者の負荷が線形に増え、成長が頭打ちになる構造である。
+        </p>
+
+        <p>
+          ここで重要なのは、単なる「自動化」ではなく「自走化」を目指すことである。両者は似て非なるものだ。
+        </p>
+
+        <div class="pullquote">
+          自動化は、業務を一周させる仕組み。<br>
+          自走化は、一周ごとに次の一周が強くなる仕組み。
+        </div>
+
+        <p>
+          MVVに掲げた「健やかさは、めぐる」は、価値が一方通行で消費されるのではなく、循環し、累積し、増幅していく構造を要求する。事業の現場でこれを実装すると、データが溜まり、信頼が蓄積し、コンテンツが育ち、次のマッチング、次の実施、次の成長を支える──そういうフライホイールになる。
+        </p>
+
+        <h3 id="framework"><span class="h3-num">1.2</span>3層の自動化フレームワーク</h3>
+
+        <p>
+          自走化に向けた取り組みは、性質の異なる3つの層に分けて整理する。それぞれ目的・難易度・到達時期が異なる。
+        </p>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="card-num">01</span>
+            <h4>作業の自動化 ── やらなくていいことを、やらせない</h4>
+          </div>
+          <p>書類生成、ステータス更新、通知、API連携。ルールベースで完全に置換可能な領域。本計画ではQ1〜Q2で完成させる。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="card-num">02</span>
+            <h4>判断の自動化 ── 考える時間を、考えるべきことに使う</h4>
+          </div>
+          <p>マッチング推薦、信頼スコアによる承認、品質判定。データに基づく確率的な判断を機械が担う。Q3〜Q4で着手。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="card-num">03</span>
+            <h4>成長の自動化 ── 使われるほど、良くなる</h4>
+          </div>
+          <p>育成、コンテンツ蓄積、ネットワーク効果。プラットフォームそのものが価値を増殖する段階。長期視野で土台を作る。</p>
+        </div>
+
+        <h3 id="roadmap"><span class="h3-num">1.3</span>12ヶ月ロードマップ</h3>
+
+        <p>
+          3つのトラックを並走させる。ただし優先度は明確である。事務自動化が他2つの土台になる。判断自動化はそのデータを使って動く。育成は方針として並走させるが、Q4までに詳細化する。
+        </p>
+
+        <div class="figure">
+          <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- Top label -->
+            <text x="340" y="30" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="14" fill="#C25530" letter-spacing="2">12-MONTH ROADMAP</text>
+
+            <!-- Column headers -->
+            <text x="187" y="68" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="16" fill="#1F1A14" font-weight="500">Q1</text>
+            <text x="187" y="84" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#8B847C" letter-spacing="1">月1-3</text>
+            <text x="323" y="68" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="16" fill="#1F1A14" font-weight="500">Q2</text>
+            <text x="323" y="84" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#8B847C" letter-spacing="1">月4-6</text>
+            <text x="459" y="68" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="16" fill="#1F1A14" font-weight="500">Q3</text>
+            <text x="459" y="84" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#8B847C" letter-spacing="1">月7-9</text>
+            <text x="595" y="68" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="16" fill="#1F1A14" font-weight="500">Q4</text>
+            <text x="595" y="84" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#8B847C" letter-spacing="1">月10-12</text>
+
+            <!-- Divider -->
+            <line x1="20" y1="100" x2="660" y2="100" stroke="#D8D0C2" stroke-width="0.5"/>
+
+            <!-- Row 1: 事務自動化 -->
+            <rect x="20" y="120" width="6" height="52" fill="#2D6B5E"/>
+            <text x="36" y="142" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#1F1A14">事務自動化</text>
+            <text x="36" y="160" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#8B847C" letter-spacing="1">TRACK 01</text>
+
+            <rect x="125" y="120" width="124" height="52" fill="#E0EBE7" stroke="#2D6B5E" stroke-width="0.5" rx="3"/>
+            <text x="187" y="140" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#2D6B5E">状態管理</text>
+            <text x="187" y="158" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#2D6B5E">書類自動生成</text>
+
+            <rect x="261" y="120" width="124" height="52" fill="#E0EBE7" stroke="#2D6B5E" stroke-width="0.5" rx="3"/>
+            <text x="323" y="140" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#2D6B5E">API連携</text>
+            <text x="323" y="158" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#2D6B5E">入金照合</text>
+
+            <rect x="397" y="120" width="124" height="52" fill="#E0EBE7" stroke="#2D6B5E" stroke-width="0.5" rx="3"/>
+            <text x="459" y="151" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#2D6B5E">運用安定化</text>
+
+            <rect x="533" y="120" width="124" height="52" fill="#E0EBE7" stroke="#2D6B5E" stroke-width="0.5" rx="3"/>
+            <text x="595" y="151" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#2D6B5E">分析・高度化</text>
+
+            <!-- Row 2: 判断自動化 -->
+            <rect x="20" y="185" width="6" height="52" fill="#A06B2E"/>
+            <text x="36" y="207" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#1F1A14">判断自動化</text>
+            <text x="36" y="225" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#8B847C" letter-spacing="1">TRACK 02</text>
+
+            <rect x="125" y="185" width="124" height="52" fill="#F0E5D3" stroke="#A06B2E" stroke-width="0.5" rx="3"/>
+            <text x="187" y="216" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#A06B2E">データ蓄積</text>
+
+            <rect x="261" y="185" width="124" height="52" fill="#F0E5D3" stroke="#A06B2E" stroke-width="0.5" rx="3"/>
+            <text x="323" y="216" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#A06B2E">スコア設計</text>
+
+            <rect x="397" y="185" width="124" height="52" fill="#F0E5D3" stroke="#A06B2E" stroke-width="0.5" rx="3"/>
+            <text x="459" y="216" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#A06B2E">推薦エンジン</text>
+
+            <rect x="533" y="185" width="124" height="52" fill="#F0E5D3" stroke="#A06B2E" stroke-width="0.5" rx="3"/>
+            <text x="595" y="216" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#A06B2E">自動審査</text>
+
+            <!-- Row 3: 育成 -->
+            <rect x="20" y="250" width="6" height="52" fill="#8B847C" opacity="0.6"/>
+            <text x="36" y="272" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="500" fill="#1F1A14" opacity="0.7">育成</text>
+            <text x="36" y="290" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#8B847C" letter-spacing="1">TRACK 03</text>
+
+            <rect x="125" y="250" width="532" height="52" fill="#E8E4DC" stroke="#8B847C" stroke-dasharray="3 3" stroke-width="0.5" rx="3" opacity="0.7"/>
+            <text x="391" y="281" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-style="italic" fill="#8B847C">方針として並走 ── 詳細はQ4までに別途検討</text>
+          </svg>
+          <div class="figure-caption">図 1.3 ── 12ヶ月ロードマップ：3トラックの並走</div>
+        </div>
+      </section>
+
+      <!-- 02 トラック1 -->
+      <section id="track1">
+        <div class="section-head">
+          <span class="track-badge track-1"><span class="bar"></span>TRACK 01</span>
+          <span class="section-num">02</span>
+          <h2>事務自動化<span class="ja-sub">Process Automation ── 最優先</span></h2>
+        </div>
+
+        <h3 id="t1-overview"><span class="h3-num">2.1</span>目的とKPI</h3>
+
+        <p>
+          現在ボトルネックとなっている書類・事務の属人運用を、状態管理エンジンと書類自動生成によって完全に機械化する。担当者の事務時間をほぼゼロにし、判断業務へ時間を移す。これがすべての出発点である。
+        </p>
+
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">1件あたり事務時間</div>
+            <div class="kpi-value">▲80%<small>削減</small></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">月間処理可能件数</div>
+            <div class="kpi-value">5倍<small>同人員で</small></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">書類エラー率</div>
+            <div class="kpi-value">▲95%<small>削減</small></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">入金照合工数</div>
+            <div class="kpi-value">▲90%<small>削減</small></div>
+          </div>
+        </div>
+
+        <h3 id="t1-state"><span class="h3-num">2.2</span>状態管理エンジン<span class="q-pill" style="margin-left:12px">Q1</span></h3>
+
+        <p>
+          属人化の根は「いつ・誰が・何を出すか」が個人の頭の中にあることだ。これを<strong>状態機械（State Machine）</strong>に移し替える。1件のレク依頼が明確に定義された状態を持ち、状態の遷移ごとに書類・通知・データ更新が連鎖的に発火する。
+        </p>
+
+        <p>
+          設計のポイントは、状態の数を「過不足なく」定義すること。少なすぎると業務実態を表現できず、多すぎると運用が破綻する。下記の10状態を出発点とする。
+        </p>
+
+        <h4>状態定義</h4>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:18%">ステータス</th>
+                <th style="width:32%">遷移条件</th>
+                <th>状態遷移時に発火する処理</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>申込中</code></td>
+                <td>施設がレク依頼を作成・送信</td>
+                <td>サポーター宛の通知</td>
+              </tr>
+              <tr>
+                <td><code>受領済</code></td>
+                <td>サポーターが受領ボタンを押下</td>
+                <td>業務委託依頼書を自動生成 / 施設宛の確認通知</td>
+              </tr>
+              <tr>
+                <td><code>契約中</code></td>
+                <td>両者の合意確認（自動 or 確認後）</td>
+                <td>発注書を自動生成 / 施設・サポーターに送付</td>
+              </tr>
+              <tr>
+                <td><code>実施前</code></td>
+                <td>レク当日の前日0時に自動遷移</td>
+                <td>前日確認のチェックリストを両者に送付</td>
+              </tr>
+              <tr>
+                <td><code>実施中</code></td>
+                <td>レク当日の開始時刻に自動遷移</td>
+                <td>（特になし、ログのみ）</td>
+              </tr>
+              <tr>
+                <td><code>実施完了</code></td>
+                <td>サポーターが実施確認書を送信</td>
+                <td>施設宛に確認依頼通知 / 業務委託報告書を生成し管理本部送信</td>
+              </tr>
+              <tr>
+                <td><code>報告中</code></td>
+                <td>実施完了から自動遷移</td>
+                <td>施設の承認待ち（リマインダー発火）</td>
+              </tr>
+              <tr>
+                <td><code>請求中</code></td>
+                <td>施設が報告書を承認</td>
+                <td>請求書を生成・施設送付 / 支払い明細書をサポーター送付 / 売上を記録</td>
+              </tr>
+              <tr>
+                <td><code>入金待ち</code></td>
+                <td>請求書発行から自動遷移</td>
+                <td>支払期日のリマインダー / 期日超過で督促フロー起動</td>
+              </tr>
+              <tr>
+                <td><code>完了</code></td>
+                <td>入金確認</td>
+                <td>両者に完了通知 / データクローズ / 案件を実績DBに移管</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="callout-label">設計上の留意点</div>
+          <p>
+            例外フロー（キャンセル、延期、代替、トラブル）も別途状態として定義する必要があり、本表は正常系のみ。Q1の前半で例外含む完全な状態遷移図をFigJamで作成する。
+          </p>
+        </div>
+
+        <h3 id="t1-docs"><span class="h3-num">2.3</span>書類自動生成（6種類）<span class="q-pill" style="margin-left:12px">Q1</span></h3>
+
+        <p>
+          状態遷移をトリガーに、業務上必要な6種類の書類を自動生成する。書類はPDFと電子データの両方を保持し、関係者へのメール送付・システム上のダウンロードリンクで届ける。
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:20%">書類</th>
+                <th style="width:25%">発火タイミング</th>
+                <th style="width:15%">受領者</th>
+                <th>主な記載項目</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>業務委託依頼書</strong></td>
+                <td><code>申込中→受領済</code></td>
+                <td>サポーター</td>
+                <td>依頼内容、日時、場所、報酬、契約条件</td>
+              </tr>
+              <tr>
+                <td><strong>発注書</strong></td>
+                <td><code>受領済→契約中</code></td>
+                <td>施設</td>
+                <td>依頼内容、合計金額、振込先、支払期日</td>
+              </tr>
+              <tr>
+                <td><strong>実施確認書</strong></td>
+                <td>当日（モバイル入力）</td>
+                <td>サポーター入力 → 施設承認</td>
+                <td>実施日時、参加人数、内容、写真、満足度、振り返り</td>
+              </tr>
+              <tr>
+                <td><strong>業務委託報告書</strong></td>
+                <td><code>実施完了</code></td>
+                <td>管理本部</td>
+                <td>実施確認書の集約、原価・売上、サポーター実績</td>
+              </tr>
+              <tr>
+                <td><strong>請求書</strong></td>
+                <td><code>報告中→請求中</code></td>
+                <td>施設</td>
+                <td>請求金額、内訳、支払期日、振込先</td>
+              </tr>
+              <tr>
+                <td><strong>支払い明細書</strong></td>
+                <td><code>請求中</code>（請求書と同時）</td>
+                <td>サポーター</td>
+                <td>報酬額、源泉徴収、振込予定日、振込先</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>実施確認書の特別扱い</h4>
+
+        <p>
+          6種類のうち、実施確認書だけが「現場でサポーターが入力する」という性質を持つ。ここのUXは、サポーターが続けたくなる仕組みの中核になるため、モバイル前提で設計する。写真添付、音声入力（後でテキスト化）、選択式チェック、自由記述は短く ── 全体で1〜2分で完了することを目標値とする。
+        </p>
+
+        <p>
+          また、実施確認書から得られるデータ（参加人数、満足度、コメント、写真）は、Track 02のスコア設計の入力源にもなる。「事務書類」ではなく「データ資産」として設計する視点を持つ。
+        </p>
+
+        <h3 id="t1-api"><span class="h3-num">2.4</span>販売管理API連携・入金照合<span class="q-pill" style="margin-left:12px">Q2</span></h3>
+
+        <p>
+          Q1で生成した請求書・支払い明細書のデータを、社内の販売管理システムにAPI経由で連携する。これにより、二重入力を完全に排除し、会計処理の自動化を実現する。
+        </p>
+
+        <p>
+          入金照合は、銀行の入出金データ（CSV取込 or オープンバンキングAPI）と請求書を突合するロジックを実装する。マッチング基準は、振込元名 + 金額 + 振込日のセットで自動判定し、確度が低いものは人間レビューに回す。
+        </p>
+
+        <h4>連携項目</h4>
+        <ul class="refined">
+          <li>請求データ（請求書発行と同時に販売管理へ）</li>
+          <li>入金データ（販売管理から取得 → ステータス更新）</li>
+          <li>支払データ（サポーター宛振込指示 → 経理システムへ）</li>
+          <li>実績データ（売上、原価、粗利を月次・四半期で集計）</li>
+        </ul>
+
+        <h3 id="t1-stability"><span class="h3-num">2.5</span>運用安定化・高度化<span class="q-pill" style="margin-left:12px">Q3-Q4</span></h3>
+
+        <p>
+          Q3は「機能を増やさず、安定させる」期間と位置づける。本番運用のなかで出てくるエッジケース、ユーザーフィードバック、エラー監視への対応に集中する。ここを軽視すると、せっかく作ったシステムが信頼されない。
+        </p>
+
+        <p>
+          Q4は、運用データを使った高度化に入る。書類のテンプレート最適化（読みやすさ・ブランディング）、通知の出し分け（重要度・タイミング）、ダッシュボード（管理本部・施設・サポーター各々向け）の整備など。Track 02との連携も本格化する。
+        </p>
+      </section>
+
+      <!-- 03 トラック2 -->
+      <section id="track2">
+        <div class="section-head">
+          <span class="track-badge track-2"><span class="bar"></span>TRACK 02</span>
+          <span class="section-num">03</span>
+          <h2>判断自動化<span class="ja-sub">Decision Automation</span></h2>
+        </div>
+
+        <h3 id="t2-overview"><span class="h3-num">3.1</span>目的とKPI</h3>
+
+        <p>
+          現状の検索ベースのマッチングと、部門担当者による手動承認には、2つのボトルネックがある。<strong>マッチング</strong>は施設が自分で条件を入力して検索結果を絞り込む必要があり、選択疲れと意思決定の遅さを生む。<strong>承認</strong>は部門担当者の作業時間に縛られ、新規レクが検索に出るまでにタイムラグが発生する。
+        </p>
+
+        <p>
+          このトラックでは、データに基づく確率的な判断を機械が担うことで、両方を解消する。
+        </p>
+
+        <div class="kpi-row">
+          <div class="kpi track-2-border">
+            <div class="kpi-label">マッチング所要時間</div>
+            <div class="kpi-value">▲50%<small>削減</small></div>
+          </div>
+          <div class="kpi track-2-border">
+            <div class="kpi-label">レク登録〜公開</div>
+            <div class="kpi-value">3日 → 1時間</div>
+          </div>
+          <div class="kpi track-2-border">
+            <div class="kpi-label">推薦成約率</div>
+            <div class="kpi-value">+30%<small>vs検索のみ</small></div>
+          </div>
+        </div>
+
+        <h3 id="t2-data"><span class="h3-num">3.2</span>データ蓄積基盤<span class="q-pill" style="margin-left:12px">Q1</span></h3>
+
+        <p>
+          スコアも推薦も、データがなければ動かない。Track 01の書類生成と同時に、後段で使えるデータを構造化して蓄える基盤を作る。具体的には、各書類・各状態遷移・各実施結果について、後で集計・分析・学習に使える形でログ化する。
+        </p>
+
+        <h4>蓄積するデータ群</h4>
+        <ul class="refined">
+          <li><strong>サポーター属性</strong>：得意領域、対応可能エリア、利用頻度、過去実績件数</li>
+          <li><strong>施設属性</strong>：規模、利用者層、過去依頼傾向、好みのレクタイプ</li>
+          <li><strong>マッチング履歴</strong>：誰が誰を選び、選ばれ、実施に至ったか</li>
+          <li><strong>実施結果</strong>：満足度、参加人数、トラブル有無、コメント</li>
+          <li><strong>キャンセル・トラブル</strong>：理由、頻度、関係者</li>
+        </ul>
+
+        <h3 id="t2-score"><span class="h3-num">3.3</span>スコア設計<span class="q-pill" style="margin-left:12px">Q2</span></h3>
+
+        <p>
+          蓄積したデータから、3種類のスコアを算出する。これらが後段の推薦・審査の入力になる。
+        </p>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="card-num">A</span>
+            <h4>信頼スコア（サポーター）</h4>
+          </div>
+          <p>過去実施件数、平均満足度、キャンセル率、施設からの評価コメント、レスポンス速度などを総合。一定値以上のサポーターはレク登録時に自動承認の対象となる。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="card-num">B</span>
+            <h4>適合スコア（マッチング）</h4>
+          </div>
+          <p>「このサポーターが、この施設のこのレク依頼にどれくらい合うか」を数値化。得意領域の一致、エリア、過去類似実績、時間帯適合などを組み合わせる。推薦の核となる指標。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span class="card-num">C</span>
+            <h4>品質スコア（実施結果）</h4>
+          </div>
+          <p>実施確認書から自動算出。満足度、参加人数の達成率、写真・コメントの質などを統合。低品質を自動検知し、フォロー対象としてフラグする。</p>
+        </div>
+
+        <h3 id="t2-rec"><span class="h3-num">3.4</span>推薦エンジン<span class="q-pill" style="margin-left:12px">Q3</span></h3>
+
+        <p>
+          現在の「検索 → 結果一覧」を、「依頼条件入力 → 上位3名の推薦」に置き換える。施設は最初から最適な選択肢を提示され、迷いと作業時間が減る。
+        </p>
+
+        <p>
+          v1はルールベース（適合スコアの上位N件 + スケジュール空き）で十分。実運用データが溜まり次第、v2で機械学習に拡張する。重要なのは、推薦理由を必ず人間に説明可能な形で出すこと（「過去◯件の類似実績」「同エリアで◯件の高評価」など）。ブラックボックスにしない。
+        </p>
+
+        <h3 id="t2-audit"><span class="h3-num">3.5</span>自動審査<span class="q-pill" style="margin-left:12px">Q4</span></h3>
+
+        <p>
+          新規レク登録の部門担当者承認は、信頼スコアが一定値以上のサポーターに対しては自動承認とする。これにより、レク登録から検索表示までのタイムラグが「数日」から「1時間以内」に短縮される。
+        </p>
+
+        <p>
+          ただし、初回登録者、過去にトラブルがあった登録者、内容に特殊条件（医療的配慮など）を含むものは引き続き人間レビュー。スコアと内容パターンによる二段階のフィルタを設計する。
+        </p>
+      </section>
+
+      <!-- 04 育成（将来） -->
+      <section id="track3">
+        <div class="section-head">
+          <span class="track-badge track-3"><span class="bar"></span>TRACK 03</span>
+          <span class="section-num">04</span>
+          <h2>育成<span class="ja-sub">Talent Development ── 将来構想</span></h2>
+        </div>
+
+        <div class="callout">
+          <div class="callout-label">本セクションの位置づけ</div>
+          <p>
+            育成トラックは、事業として必要性が高い領域として認識しているが、本計画期間中に詳細を詰めるまでには至っていない。本資料では方針のみを明記し、具体施策はQ4までに別途検討する。
+          </p>
+        </div>
+
+        <h3><span class="h3-num">4.1</span>方針</h3>
+
+        <p>
+          サポーター育成を、事業のコストではなく資産として位置づける。資格取得支援、スキル可視化、実施事例の学習教材化を通じて、「サポーターが育つほど、プラットフォームが強くなる」構造を作る。
+        </p>
+
+        <p>
+          これは単なる教育コンテンツの提供ではなく、Track 01とTrack 02で蓄積したデータを再利用する仕組みでもある。実施確認書から自動的に集まる写真・コメント・評価が、新規サポーターの学習教材になり、品質スコアがスキルバッジ判定の根拠になる ── そうした循環構造を目指す。
+        </p>
+
+        <h3><span class="h3-num">4.2</span>今後検討する論点</h3>
+
+        <p>
+          下記は、Q4までに方向性を決める必要のある論点である。本資料では結論を出さない。
+        </p>
+
+        <ol class="refined">
+          <li>サポーター資格取得支援の仕組み（社内検定 or 外部資格との連携）</li>
+          <li>スキルバッジの階層と付与ロジック（何段階、どんな基準で付与するか）</li>
+          <li>バッジを施設側にどう見せるか、単価にどう反映するか</li>
+          <li>学習コンテンツの調達方針（自社制作、サポーター提供、外部購入）</li>
+          <li>事例ライブラリのデータソースと公開範囲（誰が、何を、どこまで見られるか）</li>
+          <li>育成と「リードジェネレーション（受験者の増加）」の接続設計</li>
+        </ol>
+
+        <p>
+          これらは、Track 01で蓄積されるデータの種類と粒度に依存するため、Q2終わりの時点で改めて検討着手することを推奨する。
+        </p>
+      </section>
+
+      <!-- 05 実行 -->
+      <section id="execution">
+        <div class="section-head">
+          <span class="section-num">05</span>
+          <h2>実行に向けて<span class="ja-sub">Execution</span></h2>
+        </div>
+
+        <h3><span class="h3-num">5.1</span>直近の意思決定事項</h3>
+
+        <p>本計画を実行に移すために、今月〜来月のうちに以下を確定する必要がある。</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:30%">決定事項</th>
+                <th style="width:50%">内容</th>
+                <th>期限</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>状態定義の合意</strong></td>
+                <td>2.2の10状態 + 例外フロー（キャンセル・延期・代替）の最終確定</td>
+                <td>今月中</td>
+              </tr>
+              <tr>
+                <td><strong>書類フォーマット</strong></td>
+                <td>6種類の書類について、項目・レイアウト・ブランディングを確定</td>
+                <td>今月中</td>
+              </tr>
+              <tr>
+                <td><strong>開発体制</strong></td>
+                <td>内製 / 外注 / SaaS活用の方針決定、見積取得、契約</td>
+                <td>来月中</td>
+              </tr>
+              <tr>
+                <td><strong>販売管理連携仕様</strong></td>
+                <td>API仕様確認、連携項目の確定、テスト環境の準備</td>
+                <td>Q1中盤</td>
+              </tr>
+              <tr>
+                <td><strong>モバイルUX設計</strong></td>
+                <td>実施確認書のモバイル入力体験のプロトタイプ作成</td>
+                <td>Q1中盤</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3><span class="h3-num">5.2</span>リスクと依存</h3>
+
+        <ul class="refined">
+          <li><strong>販売管理システム側の制約</strong>：API仕様や開発リソースに依存。早期に確認しないとQ2のスケジュールが崩れる。</li>
+          <li><strong>サポーターのモバイル利用への抵抗</strong>：実施確認書のモバイル入力に難色を示す層の存在を想定。十分なオンボとサポートが必要。</li>
+          <li><strong>状態定義の例外フローの複雑性</strong>：当日キャンセル、代替手配、トラブル発生時など、複雑なケースが業務実態として多い場合、状態数が増えて運用が破綻するリスク。シンプルさを優先する設計判断が必要。</li>
+          <li><strong>データ品質</strong>：Track 02のスコア・推薦は、Track 01で蓄積するデータの質に完全に依存する。書類設計の段階から「後で何に使うか」を逆算する。</li>
+        </ul>
+
+        <h3><span class="h3-num">5.3</span>次の一歩</h3>
+
+        <p>本資料を社内合意のたたき台として、以下のアクションを開始する。</p>
+
+        <ol class="refined">
+          <li>本資料の関係部署レビュー（管理本部、開発、現場担当）</li>
+          <li>状態定義のワークショップ開催（FigJamで例外フロー含めて図化）</li>
+          <li>書類6種類のフォーマット決定会議</li>
+          <li>開発見積依頼（候補ベンダー3社程度）</li>
+          <li>Q1キックオフミーティングの設定</li>
+        </ol>
+
+        <div class="pullquote">
+          属人化を解いた先に、判断を譲り、<br>
+          育成を仕組みに変える。<br>
+          ここから、健やかさはめぐりはじめる。
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="doc-footer">
+    <div>
+      <div class="footer-mark">健やかさは、めぐる。</div>
+      <div style="margin-top:8px;">BCC ヘルスケア / レクサポ事業 自走化計画</div>
+    </div>
+    <div style="text-align:right;">
+      <div>2026年5月 策定</div>
+      <div>内部資料 / 取扱注意</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Smooth scroll already handled by CSS scroll-behavior
+  // Highlight active TOC item on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+
+  function updateActiveTOC() {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+    tocLinks.forEach(link => {
+      link.style.color = '';
+      if (link.getAttribute('href') === '#' + current) {
+        link.style.color = 'var(--accent)';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveTOC);
+  updateActiveTOC();
+</script>
+
+</body>
+</html>
