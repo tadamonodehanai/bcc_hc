@@ -294,7 +294,7 @@
   .domain-overview-card.money::after {
     content: "★ 最重要";
     position: absolute;
-    top: 16px;
+    bottom: 16px;
     right: 16px;
     font-family: var(--font-mono);
     font-size: 9px;
@@ -302,6 +302,7 @@
     color: var(--accent-gold);
     padding: 4px 8px;
     border: 1px solid var(--accent-gold);
+    background: var(--bg-money);
   }
   .domain-overview-card.strategic {
     background: var(--bg-deep);
@@ -314,7 +315,7 @@
   .domain-overview-card.strategic::after {
     content: "★ 戦略要";
     position: absolute;
-    top: 16px;
+    bottom: 16px;
     right: 16px;
     font-family: var(--font-mono);
     font-size: 9px;
@@ -322,6 +323,11 @@
     color: var(--accent-gold);
     padding: 4px 8px;
     border: 1px solid var(--accent-gold);
+    background: var(--bg-deep);
+  }
+  .domain-overview-card.money,
+  .domain-overview-card.strategic {
+    padding-bottom: 56px;
   }
   .dom-tag {
     font-family: var(--font-mono);
@@ -857,7 +863,7 @@
       <a href="#domain-06" class="domain-overview-card strategic">
         <span class="dom-tag">06 — CLIENT-INTERFACE</span>
         <span class="dom-name">顧客接点としての価値</span>
-        <span class="dom-hyp">資産は存在する。働いているかは別問題。</span>
+        <span class="dom-hyp">語られる7万人と、実態の乖離。</span>
       </a>
     </div>
   </div>
@@ -1121,29 +1127,31 @@
       </div>
       <div class="domain-hypothesis">
         <span class="domain-hypothesis-label">仮説（二段構え）</span>
-        <strong>仮説Ａ：</strong>広場は、ＢＣＣの介護領域における独自性を構成する戦略資産である。15年の蓄積、7万人会員、業界認知は本物の資産であり、これまで多数のクライアント接点を生み出してきた。<br><br>
-        <strong>仮説Ｂ：</strong>しかし、その戦略資産が現在の営業・対外発信の現場で武器として現役で機能している保証はない。資産を働かせる仕組みが、近年弱まっている可能性がある。14期の中心テーマの一つは、この<strong>資産の再起動</strong>である。
+        <strong>仮説Ａ：</strong>広場は、ＢＣＣの介護領域における独自性を構成する戦略資産である。15年の蓄積、7万人会員、業界認知は本物の資産であり、これまで多数のクライアント接点を生み出してきた。営業や対外発信の場面では、現在も「広場がある」ということ自体が武器として機能している。<br><br>
+        <strong>仮説Ｂ：</strong>しかし、その武器の<strong>実態と効果には課題がある</strong>。7万人という会員数の分母に対して、アンケート回答数が3桁に届かない、リピート利用が定着しているのか不明、アクティブ会員の実数が見えない── 営業トークで語る「7万人」と、現場の実態との間に乖離が生じている可能性がある。14期の中心テーマの一つは、語られる資産を<strong>現役の実態として再起動する</strong>ことである。
       </div>
 
       <div class="domain-block">
         <div class="domain-block-label">測る指標</div>
         <ul class="domain-list">
+          <li>7万人会員の <strong>うち、直近12ヶ月で動いた実数</strong>（ログイン・素材DL・LINE等）</li>
+          <li>アンケート回答数の推移と、母数に対する回答率</li>
+          <li>素材ダウンロードのリピート率（同一会員の再訪頻度）</li>
           <li>過去3年で、広場が起点・経由となって生まれた取引・関係の実例リスト</li>
-          <li>現在進行中の取引のうち、「広場経由」と特定できる案件数</li>
-          <li>営業資料・提案書における広場への言及頻度（過去3年の変化）</li>
-          <li>失注案件・継続案件における広場の言及有無</li>
-          <li>ＢＣＣ社内（営業・ヘルスケアカンパニー）が広場をどの程度活用しているかの実態</li>
-          <li>競合（ベネッセ、TOPPAN）と比較したクライアントの認知（Phase 1以降の外部ヒアリングで補完）</li>
+          <li>営業資料・提案書で「7万人」が語られる頻度と、その実態の乖離度</li>
+          <li>営業現場で「広場の話」が出てから商談に繋がる確率（社内営業ヒアリング）</li>
+          <li>ＢＣＣ社内（営業・ヘルスケアカンパニー）が広場を活用しきれているかの実態</li>
         </ul>
       </div>
 
       <div class="domain-block">
         <div class="domain-block-label">測定方法（観るフェーズでは社内ヒアリングに集中）</div>
         <ul class="domain-list">
-          <li><strong>社長へのヒアリング：</strong>具体的実例の体系的な棚卸し（最優先）</li>
-          <li><strong>営業責任者へのヒアリング：</strong>広場が営業現場で果たしてきた役割と現状</li>
-          <li><strong>ヘルスケアカンパニー責任者へのヒアリング：</strong>カンパニー全体への貢献度合いの認識</li>
-          <li>過去3年の提案書・営業資料における広場言及の頻度調査（資料レビュー）</li>
+          <li><strong>社長へのヒアリング：</strong>15年の中で生まれた具体的実例（広場経由の取引・関係）の体系的な棚卸し</li>
+          <li><strong>営業責任者へのヒアリング：</strong>現在の営業現場での広場活用実態、商談での効果実感</li>
+          <li><strong>ヘルスケアカンパニー責任者へのヒアリング：</strong>カンパニー全体での貢献認識</li>
+          <li>過去3年の提案書・営業資料における広場言及の頻度・文脈の調査</li>
+          <li>7万人会員のアクティブ実数の定量分析（ログ・回答数・DL履歴）</li>
           <li>外部クライアントへのヒアリングはPhase 1以降に慎重に設計（クライアント関係を傷つけるリスクを避けるため）</li>
         </ul>
       </div>
@@ -1151,8 +1159,8 @@
       <div class="domain-decision">
         <span class="domain-decision-label">仕分けへの接続</span>
         <ul class="domain-decision-list">
-          <li><span class="if">Ａ成立 × Ｂ成立 →</span><span>現状維持と微調整。戦略資産を継続稼働させながら、磨きをかける。</span></li>
-          <li><span class="if">Ａ成立 × Ｂ不成立 →</span><span>資産は眠っている状態。<strong>「再起動」が最重要テーマ</strong>。営業・対外発信の現場で武器として使える形に再装着する。Phase 2「磨く」の中心対象。</span></li>
+          <li><span class="if">Ａ成立 × Ｂ成立（語る数字＝実態）→</span><span>現状維持と微調整。戦略資産を継続稼働させながら、磨きをかける。</span></li>
+          <li><span class="if">Ａ成立 × Ｂ不成立（語る数字＞実態）→</span><span><strong>「再起動」が最重要テーマ</strong>。アクティブ会員数を実態として育て直し、語れる数字と現場の実効性を一致させる。Phase 2「磨く」の中心対象。</span></li>
           <li><span class="if">Ａ不成立 →</span><span>前提が覆る。広場の戦略価値そのものを再定義し、Document A §00を書き直す。</span></li>
         </ul>
       </div>
