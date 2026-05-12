@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>観るフェーズ 検証テンプレート｜介護レク広場 14期戦略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --bg-money: #2E1F18;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 100px 0 90px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 80px;
+    right: -100px;
+    width: 380px;
+    height: 380px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--accent-warm);
+  }
+
+  .phase-banner {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 20px;
+    padding: 14px 28px;
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    margin-bottom: 40px;
+  }
+  .phase-banner-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-gold);
+  }
+  .phase-banner-verb {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-on-deep);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 54px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent-warm);
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    margin-bottom: 56px;
+    max-width: 660px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep { background: var(--bg-section); border-top: none; }
+  .section.dark {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-top: none;
+  }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead {
+    font-size: 16px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    max-width: 700px;
+  }
+
+  /* Mission cards */
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .mission-card {
+    padding: 36px 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .mission-card-title {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+  .mission-card-body {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 2;
+  }
+
+  /* Domain overview */
+  .domain-overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .domain-overview-card {
+    background: var(--bg-card);
+    padding: 28px 24px;
+    border: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .domain-overview-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-warm);
+    box-shadow: 0 6px 24px rgba(184, 92, 61, 0.1);
+  }
+  .domain-overview-card.money {
+    background: var(--bg-money);
+    border-color: var(--bg-money);
+    color: var(--text-on-deep);
+  }
+  .domain-overview-card.money .dom-tag { color: var(--accent-gold); }
+  .domain-overview-card.money .dom-name { color: var(--text-on-deep); }
+  .domain-overview-card.money .dom-hyp { color: rgba(242, 236, 222, 0.8); }
+  .domain-overview-card.money::after {
+    content: "★ 最重要";
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    padding: 4px 8px;
+    border: 1px solid var(--accent-gold);
+  }
+  .dom-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .dom-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .dom-hyp {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    margin-top: 4px;
+  }
+
+  /* Detailed domain section */
+  .domain-detail {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    padding: 56px 48px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .domain-detail.money {
+    background: var(--bg-money);
+    border-color: var(--bg-money);
+    color: var(--text-on-deep);
+  }
+  .domain-detail.money .domain-head-name { color: var(--text-on-deep); }
+  .domain-detail.money .domain-block-label { color: var(--accent-gold); }
+  .domain-detail.money .domain-block-content,
+  .domain-detail.money .domain-list li { color: rgba(242, 236, 222, 0.9); }
+  .domain-detail.money .domain-list li::before { color: var(--accent-gold); }
+  .domain-detail.money .domain-hypothesis { color: var(--text-on-deep); border-color: var(--accent-gold); }
+  .domain-detail.money .domain-money-sub { background: rgba(184, 146, 74, 0.1); border-color: rgba(184, 146, 74, 0.3); }
+  .domain-detail.money .domain-money-sub h4 { color: var(--accent-gold); }
+  .domain-detail.money .domain-decision {
+    background: rgba(184, 146, 74, 0.1);
+    border-color: var(--accent-gold);
+  }
+  .domain-detail.money .domain-decision-label { color: var(--accent-gold); }
+
+  .domain-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .domain-detail.money .domain-head { border-color: rgba(184, 146, 74, 0.3); }
+  .domain-head-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .domain-head-name {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .domain-hypothesis {
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 2;
+    color: var(--text-primary);
+    padding: 24px 28px;
+    background: var(--bg-section);
+    border-left: 3px solid var(--accent-warm);
+    margin-bottom: 40px;
+  }
+  .domain-hypothesis-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .domain-block {
+    margin-bottom: 32px;
+  }
+  .domain-block-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .domain-block-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border-soft);
+  }
+  .domain-detail.money .domain-block-label::after { background: rgba(184, 146, 74, 0.3); }
+
+  .domain-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .domain-list li {
+    padding-left: 24px;
+    position: relative;
+    font-size: 14.5px;
+    line-height: 2;
+    color: var(--text-secondary);
+  }
+  .domain-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent-warm);
+    font-size: 12px;
+  }
+
+  .domain-money-sub {
+    padding: 24px 28px;
+    background: var(--bg-section);
+    border: 1px solid var(--border-soft);
+    margin-bottom: 16px;
+  }
+  .domain-money-sub h4 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .domain-decision {
+    background: var(--bg-section);
+    border: 1px solid var(--border-soft);
+    padding: 28px 32px;
+    margin-top: 24px;
+  }
+  .domain-decision-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .domain-decision-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .domain-decision-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text-secondary);
+    align-items: start;
+  }
+  .domain-decision-list li .if {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--accent-warm);
+    white-space: nowrap;
+  }
+  .domain-detail.money .domain-decision-list li { color: rgba(242, 236, 222, 0.9); }
+  .domain-detail.money .domain-decision-list li .if { color: var(--accent-gold); }
+
+  /* Bridge to Phase 1 */
+  .bridge-frame {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    padding: 56px 48px;
+    margin-top: 32px;
+  }
+  .bridge-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .bridge-step {
+    flex: 1;
+    min-width: 200px;
+    padding: 28px 24px;
+    background: var(--bg-paper);
+    border-top: 3px solid var(--accent-warm);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .bridge-step-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .bridge-step-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .bridge-step-from {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-line);
+    margin-top: auto;
+  }
+
+  /* Next actions */
+  .nextactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 32px;
+  }
+  .nextaction {
+    padding: 32px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .nextaction-num {
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--accent-gold);
+    font-weight: 500;
+  }
+  .nextaction-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--text-on-deep);
+    line-height: 1.5;
+  }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--accent-gold);
+  }
+
+  /* Footer */
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* Page nav (between docs) */
+  .pagenav {
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-side.disabled { opacity: 0.35; pointer-events: none; cursor: default; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-side.disabled .pagenav-direction { color: var(--text-muted); }
+  .pagenav-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    .domain-detail { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 60px 0 60px; }
+    .hero-title { font-size: 36px; }
+    .hero-subtitle { font-size: 16px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 26px; }
+    .mission-grid { grid-template-columns: 1fr; }
+    .domain-overview-grid { grid-template-columns: 1fr; }
+    .domain-detail { padding: 40px 24px; }
+    .domain-head-name { font-size: 28px; }
+    .domain-hypothesis { font-size: 15px; padding: 20px; }
+    .bridge-flow { flex-direction: column; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜Document B</a>
+    <span class="banner-tag">v0.1 / 2026.05 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-label">DOCUMENT B — 検討稿</div>
+      <div class="phase-banner">
+        <span class="phase-banner-num">PHASE 0</span>
+        <span class="phase-banner-verb">観る</span>
+      </div>
+      <h1 class="hero-title">
+        観るフェーズの<br>
+        <em>5つの検証ドメイン</em>。
+      </h1>
+      <p class="hero-subtitle">
+        「思いつき」ではなく「証拠」で14期を組み立てるための、<br>
+        測定・検証テンプレート。
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Period</span>
+          <span class="hero-meta-value">2026.05 — 2026.09<br>（5ヶ月）</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Goal</span>
+          <span class="hero-meta-value">14期戦略書を<br>最終化する</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Output</span>
+          <span class="hero-meta-value">5ドメイン<br>検証レポート</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　このフェーズの位置づけ</span>
+      <h2 class="section-title">仮説のまま走らない。<br>「観る」で土台を作る。</h2>
+    </div>
+    <p class="section-lead">
+      Phase 0 は14期スタート前の観察期間。公式LINEの再開と並行して、4つの戦略的転換（Document A §02）を裏付ける証拠を集める。ここで得られたデータが、Phase 1（仕分ける）の意思決定材料になる。
+    </p>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <span class="mission-card-title">前提：判断は「証拠」で進める。</span>
+        <span class="mission-card-body">「個人ユーザーが主」「業界に金はない」「無料が利用の前提」── これらは現時点ではすべて仮説。観るフェーズで仮説を検証または棄却することで、Phase 1以降の投資判断の精度を上げる。</span>
+      </div>
+      <div class="mission-card">
+        <span class="mission-card-title">原則：単純有料化は最初から候補外。</span>
+        <span class="mission-card-body">介護業界の支払い余力は薄い。広場の課金主体は「現場の個人」ではなく、「介護現場に届きたい第三者」または「施設が他経費科目で支出する仕組み」になる前提で、対価の出所を探索する。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　5つの測定ドメイン</span>
+      <h2 class="section-title">何を測れば、<br>仕分けが進むのか。</h2>
+    </div>
+    <p class="section-lead">
+      観るフェーズで検証すべき5つの仮説領域を、独立した「測定ドメイン」として並走させる。各ドメインは「仮説 → 測る指標 → 測定方法 → 仕分けへの接続」の同じ4要素で構成される。
+    </p>
+    <div class="domain-overview-grid">
+      <a href="#domain-01" class="domain-overview-card">
+        <span class="dom-tag">01 — WHO</span>
+        <span class="dom-name">ユーザーの実像</span>
+        <span class="dom-hyp">誰が、どんな立場で使っているか</span>
+      </a>
+      <a href="#domain-02" class="domain-overview-card">
+        <span class="dom-tag">02 — WHAT</span>
+        <span class="dom-name">提供価値の本質</span>
+        <span class="dom-hyp">素材か、時間か、別の何かか</span>
+      </a>
+      <a href="#domain-03" class="domain-overview-card money">
+        <span class="dom-tag">03 — MONEY</span>
+        <span class="dom-name">マネタイズ構造</span>
+        <span class="dom-hyp">対価はどこから生まれるか</span>
+      </a>
+      <a href="#domain-04" class="domain-overview-card">
+        <span class="dom-tag">04 — CHANNEL</span>
+        <span class="dom-name">チャネル運用</span>
+        <span class="dom-hyp">8チャネルの役割と冗長性</span>
+      </a>
+      <a href="#domain-05" class="domain-overview-card">
+        <span class="dom-tag">05 — ASSET</span>
+        <span class="dom-name">コンテンツ資産</span>
+        <span class="dom-hyp">何が本当に効く素材か</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 03　ドメイン詳細</span>
+      <h2 class="section-title">5ドメインの<br>検証テンプレート。</h2>
+    </div>
+    <p class="section-lead">
+      各ドメインを「仮説／測る指標／測定方法／仕分けへの接続」の4ブロックで構造化。後でスプレッドシートに展開できる粒度で記述している。
+    </p>
+
+    <!-- Domain 01 -->
+    <div class="domain-detail" id="domain-01">
+      <div class="domain-head">
+        <span class="domain-head-tag">DOMAIN 01 — WHO</span>
+        <span class="domain-head-name">ユーザーの実像</span>
+      </div>
+      <div class="domain-hypothesis">
+        <span class="domain-hypothesis-label">仮説</span>
+        広場の主たる利用者は、施設の業務指示ではなく、現場の介護職個人が「自己責任」で使っている。法人契約モデルへの単純移行は成立しない。
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測る指標</div>
+        <ul class="domain-list">
+          <li>役職分布（現場職員／リーダー／管理職）</li>
+          <li>利用シーン（業務時間内／業務時間外／持ち帰り）</li>
+          <li>利用デバイス（個人スマホ／施設PC／施設タブレット）</li>
+          <li>上司・組織の認知有無（「広場の利用を会社に伝えているか」）</li>
+          <li>「もし月500円かかるとしたら自費で使うか」の意思</li>
+        </ul>
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測定方法</div>
+        <ul class="domain-list">
+          <li>LINEアンケート（属性、認知、自費継続意思　3〜5問×3ヶ月）</li>
+          <li>Webアクセスログの時間帯／デバイス分析</li>
+          <li>個別ヒアリング 5〜8名（深掘り）</li>
+        </ul>
+      </div>
+
+      <div class="domain-decision">
+        <span class="domain-decision-label">仕分けへの接続</span>
+        <ul class="domain-decision-list">
+          <li><span class="if">仮説が確からしい →</span><span>個人課金は最初から捨てる。価値は個人に届け、対価は別主体から取る設計に振り切る。</span></li>
+          <li><span class="if">仮説が外れた →</span><span>意外と組織で使われている場合、法人プラン・施設長向け提案の検討を再開。</span></li>
+          <li><span class="if">グレーゾーン →</span><span>「個人→推薦→施設導入」の橋渡しモデルを試す。</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Domain 02 -->
+    <div class="domain-detail" id="domain-02">
+      <div class="domain-head">
+        <span class="domain-head-tag">DOMAIN 02 — WHAT</span>
+        <span class="domain-head-name">提供価値の本質</span>
+      </div>
+      <div class="domain-hypothesis">
+        <span class="domain-hypothesis-label">仮説</span>
+        提供価値の本体は「素材そのもの」ではなく、「考える手間の代行」「時間の節約」「精神的負担の軽減」にある。素材は手段であって、価値ではない。
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測る指標</div>
+        <ul class="domain-list">
+          <li>1回の利用で短縮される準備時間（分）</li>
+          <li>「広場がなくなったら一番困ること」のフリーアンサー</li>
+          <li>他サービス（介護アンテナ等）との併用状況と使い分け理由</li>
+          <li>利用後の現場での反応・効果の実感度（5段階）</li>
+          <li>推奨意向（NPS）</li>
+        </ul>
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測定方法</div>
+        <ul class="domain-list">
+          <li>LINEアンケート（NPS、フリーアンサー）</li>
+          <li>ヒアリング（「最後に使ったレクの話を聞かせてください」型）</li>
+          <li>SNS反応・メルマガクリック箇所の質的分析</li>
+        </ul>
+      </div>
+
+      <div class="domain-decision">
+        <span class="domain-decision-label">仕分けへの接続</span>
+        <ul class="domain-decision-list">
+          <li><span class="if">価値が「時短」なら →</span><span>探しやすさ・印刷しやすさ・LINE経由の即時提供に集中投資。素材を量産する運用は削る。</span></li>
+          <li><span class="if">価値が「負担軽減」なら →</span><span>コンテンツの質感（柔らかさ・励まし）とコミュニティ機能に磨きをかける。</span></li>
+          <li><span class="if">価値が「学び」なら →</span><span>教育コンテンツとして再パッケージ、研修費との接続を狙う。</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Domain 03 - MONEY (highlighted) -->
+    <div class="domain-detail money" id="domain-03">
+      <div class="domain-head">
+        <span class="domain-head-tag">DOMAIN 03 — MONEY</span>
+        <span class="domain-head-name">マネタイズ構造</span>
+      </div>
+      <div class="domain-hypothesis">
+        <span class="domain-hypothesis-label">仮説</span>
+        介護現場には直接の支払い余力は薄い。対価は「介護現場の個人にリーチしたい第三者」から取る構造が現実的。施設が出す場合も、レク予算ではなく「別科目」から拠出される仕組みが必要。
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測る指標（3つのお金の入り口を並行検証）</div>
+
+        <div class="domain-money-sub">
+          <h4>A. 第三者からのスポンサー型</h4>
+          <ul class="domain-list">
+            <li>介護関連企業の「個人介護職にリーチしたい度」と払える単価感</li>
+            <li>想定スポンサー候補：食品・健康用品・福祉用具・出版・教育・寝具・自治体</li>
+            <li>過去のキャンペーン・タイアップのROI実績</li>
+          </ul>
+        </div>
+
+        <div class="domain-money-sub">
+          <h4>B. 加算・補助金との接続</h4>
+          <ul class="domain-list">
+            <li>科学的介護加算、個別機能訓練加算、LIFE 等との連動可能性</li>
+            <li>レク実施が「事業所の収益増」につながる仕組みの設計可否</li>
+          </ul>
+        </div>
+
+        <div class="domain-money-sub">
+          <h4>C. 施設の経費科目の探索</h4>
+          <ul class="domain-list">
+            <li>レク予算ではなく、広報費・研修費・福利厚生費・備品費として落ちるか</li>
+            <li>1施設あたり、年間で動かせる金額レンジ</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測定方法</div>
+        <ul class="domain-list">
+          <li>メーカー・企業 5社へのヒアリング（「○○ができたら何円払えますか」型）</li>
+          <li>施設管理者 5名への経費科目ヒアリング</li>
+          <li>加算制度・補助金制度の制度調査（社内で1名アサイン）</li>
+          <li>BCC社内、ヘルスケア事業部内のシナジー確認</li>
+        </ul>
+      </div>
+
+      <div class="domain-decision">
+        <span class="domain-decision-label">仕分けへの接続</span>
+        <ul class="domain-decision-list">
+          <li><span class="if">A成立 →</span><span>「協賛コンテンツ」「実証実験パッケージ」「タイアップ素材」として有料化対象を再定義。</span></li>
+          <li><span class="if">B成立 →</span><span>EBR（科学的根拠付きレク）に本格投資、加算取得支援を事業化対象に。</span></li>
+          <li><span class="if">C成立 →</span><span>施設長・経営者向けのROI提案資料を整備し、施設経由で間接課金。</span></li>
+          <li><span class="if">どれも厳しい →</span><span>BCC社内のヘルスケア事業の販促・データ集積機能として広場を再定義。広場単独収益は諦める。</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Domain 04 -->
+    <div class="domain-detail" id="domain-04">
+      <div class="domain-head">
+        <span class="domain-head-tag">DOMAIN 04 — CHANNEL</span>
+        <span class="domain-head-name">チャネル運用</span>
+      </div>
+      <div class="domain-hypothesis">
+        <span class="domain-hypothesis-label">仮説</span>
+        Web・LINE・メルマガ・Facebook・X・Instagram・YouTube・介護レクNewsの8チャネルは、運用工数の割に独自の役割が果たされていない。重複・冗長性が大きく、削減余地が大きい。
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測る指標</div>
+        <ul class="domain-list">
+          <li>チャネルごとの月間運用工数（実時間）と運用コスト</li>
+          <li>チャネルごとのフォロワー／会員／到達数の推移</li>
+          <li>チャネル間のフォロワー重複率（同じ人が複数チャネルにいるか）</li>
+          <li>「このチャネルでしか得られない情報・接点」が存在するか</li>
+          <li>流入 → 定着 → 深いエンゲージへの転換率</li>
+        </ul>
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測定方法</div>
+        <ul class="domain-list">
+          <li>各チャネルのアナリティクス収集と一覧化</li>
+          <li>運用担当者からの工数申告（時間ベース）</li>
+          <li>ユーザーアンケート（「主にどこを見ていますか／重複している場所は？」）</li>
+        </ul>
+      </div>
+
+      <div class="domain-decision">
+        <span class="domain-decision-label">仕分けへの接続</span>
+        <ul class="domain-decision-list">
+          <li><span class="if">工数高 × 価値低 →</span><span>削除／停止候補（特にBOT配信に近いSNSは大胆に削れる可能性）。</span></li>
+          <li><span class="if">工数低 × 価値高 →</span><span>残す・磨く。</span></li>
+          <li><span class="if">重複が大きい →</span><span>統合または一方の停止。</span></li>
+          <li><span class="if">ハブ候補 →</span><span>LINEを中心に動線を再設計、他は流入装置に整理。</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Domain 05 -->
+    <div class="domain-detail" id="domain-05">
+      <div class="domain-head">
+        <span class="domain-head-tag">DOMAIN 05 — ASSET</span>
+        <span class="domain-head-name">コンテンツ資産</span>
+      </div>
+      <div class="domain-hypothesis">
+        <span class="domain-hypothesis-label">仮説</span>
+        15年蓄積された素材は質のばらつきが大きく、一部の高品質コンテンツが利用の大半を支えているパレート構造になっている可能性が高い。介護レクNewsと既存素材の関係性も不明瞭。
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測る指標</div>
+        <ul class="domain-list">
+          <li>素材カテゴリーごとの利用頻度 TOP / BOTTOM</li>
+          <li>利用が集中する素材の共通特性（テーマ・難易度・形式・分量）</li>
+          <li>ユーザーの「使えた」「使えなかった」フィードバック</li>
+          <li>介護レクNewsの読了率・転送率と既存素材への送客</li>
+          <li>同業（介護アンテナ等）との素材レベルの相対評価</li>
+        </ul>
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測定方法</div>
+        <ul class="domain-list">
+          <li>ダウンロード／閲覧ログの定量分析（過去2年分）</li>
+          <li>LINE経由のフィードバック収集</li>
+          <li>内部の介護有資格者・専門家による品質レビュー（サンプリング）</li>
+        </ul>
+      </div>
+
+      <div class="domain-decision">
+        <span class="domain-decision-label">仕分けへの接続</span>
+        <ul class="domain-decision-list">
+          <li><span class="if">利用率の低い素材 →</span><span>アーカイブ／非表示／削除。残しておく罪悪感を捨てる。</span></li>
+          <li><span class="if">利用率の高い素材 →</span><span>「広場の代表作」として磨き、ブランド資産化する。</span></li>
+          <li><span class="if">カテゴリーごと古い →</span><span>カテゴリー単位での刷新／廃止判断。</span></li>
+          <li><span class="if">介護レクNews →</span><span>関係性の再定義（補完か統合か、別ブランドにするか）。</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 04　仕分けへのつなぎ</span>
+      <h2 class="section-title">観察データは、<br>3つの判断材料に変換される。</h2>
+    </div>
+    <p class="section-lead">
+      5ドメインを並行で測ったあと、Phase 1（仕分ける）には3つの判断材料として渡される。観るフェーズの最後に、これらをまとめた「14期戦略書」を経営層に提出する。
+    </p>
+    <div class="bridge-frame">
+      <div class="bridge-flow">
+        <div class="bridge-step">
+          <span class="bridge-step-num">01 — 事業の再定義</span>
+          <span class="bridge-step-title">誰のために、<br>何をする事業か。</span>
+          <span class="bridge-step-from">FROM: D01 + D02</span>
+        </div>
+        <div class="bridge-step">
+          <span class="bridge-step-num">02 — 収益の道筋</span>
+          <span class="bridge-step-title">どこから<br>お金が来るのか。</span>
+          <span class="bridge-step-from">FROM: D03</span>
+        </div>
+        <div class="bridge-step">
+          <span class="bridge-step-num">03 — 仕分け具体</span>
+          <span class="bridge-step-title">何を残し、<br>何を削るのか。</span>
+          <span class="bridge-step-from">FROM: D04 + D05</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 05　次のアクション</span>
+      <h2 class="section-title">観るための準備に、<br>すぐ着手する。</h2>
+    </div>
+    <p class="section-lead">
+      観るフェーズを最大限活かすために、開始前に整えておくべきことを3つ並べる。LINE再開と同時に走らせる。
+    </p>
+    <div class="nextactions">
+      <div class="nextaction">
+        <span class="nextaction-num">A.</span>
+        <span class="nextaction-title">5ドメインのテンプレートをスプレッドシート化、ヒアリングと集計を埋めていく作業環境を整える</span>
+        <span class="nextaction-doc">Worksheet</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">B.</span>
+        <span class="nextaction-title">Domain 03（マネタイズ構造）の3仮説 A/B/C それぞれの検証設問とヒアリングシナリオを設計</span>
+        <span class="nextaction-doc">Priority</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">C.</span>
+        <span class="nextaction-title">施設5社・企業5社の選定基準とヒアリングリストを作成、アポイント取得を開始</span>
+        <span class="nextaction-doc">Field</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">D.</span>
+        <span class="nextaction-title">LINE運用12週間プランの実行と週次集計フォーマットを確定</span>
+        <span class="nextaction-doc">Ongoing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="doc_a_direction_roadmap.html" class="pagenav-side">
+      <span class="pagenav-direction">← Prev</span>
+      <span class="pagenav-title">Document A<br>事業方向性と14期ロードマップ</span>
+    </a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <span class="pagenav-side right disabled">
+      <span class="pagenav-direction">Next（準備中）</span>
+      <span class="pagenav-title">Document C<br>仕分けるフェーズ 判断シート</span>
+    </span>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">
+      介護レク広場 14期戦略 ／ Document B — 観るフェーズの5検証ドメイン<br>
+      検討稿 v0.1 ／ 2026年5月 ／ 内部討議用
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

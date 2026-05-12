@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>事業の方向性と14期ロードマップ｜介護レク広場</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    right: -40px;
+    width: 320px;
+    height: 320px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--accent-warm);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 64px;
+    max-width: 620px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep {
+    background: var(--bg-section);
+    border-top: none;
+  }
+  .section.dark {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-top: none;
+  }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead {
+    font-size: 16px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    max-width: 680px;
+  }
+
+  /* Challenge list */
+  .challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 48px;
+  }
+  .challenge-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+  .challenge-item:last-child { border-bottom: 1px solid var(--border-soft); }
+  .challenge-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-warm);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .challenge-body { display: flex; flex-direction: column; gap: 8px; }
+  .challenge-title {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .challenge-note {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  /* Shift grid - 認識転換 */
+  .shift-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border-soft);
+    margin-top: 48px;
+    border: 1px solid var(--border-soft);
+  }
+  .shift-card {
+    background: var(--bg-card);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 280px;
+  }
+  .shift-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .shift-title {
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .shift-arrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-top: 1px dashed var(--border-line);
+    margin-top: auto;
+  }
+  .shift-from, .shift-to {
+    font-family: var(--font-display);
+    font-size: 14px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .shift-from { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-to { color: var(--accent-deep); font-weight: 500; }
+  .shift-mark { font-family: var(--font-mono); color: var(--accent-warm); font-size: 14px; }
+  .shift-body {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-secondary);
+  }
+
+  /* Roadmap */
+  .roadmap-frame {
+    background: var(--bg-card);
+    border: 1px solid var(--border-line);
+    padding: 48px 36px;
+    margin-top: 24px;
+  }
+  .roadmap-zones {
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+    gap: 24px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+  .zone-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-line);
+  }
+  .zone-label.exec { color: var(--accent-warm); }
+
+  .phase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .phase-card {
+    padding: 24px 20px;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+  .phase-card.exec {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-color: var(--bg-deep);
+  }
+  .phase-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  .phase-card.exec .phase-tag { color: var(--accent-gold); }
+  .phase-verb {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+  .phase-card.exec .phase-verb { color: var(--text-on-deep); }
+  .phase-period {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    padding-top: 8px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-card.exec .phase-period { color: rgba(242, 236, 222, 0.7); border-color: rgba(184, 146, 74, 0.3); }
+  .phase-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+  .phase-card.exec .phase-desc { color: rgba(242, 236, 222, 0.85); }
+
+  /* Phase detail */
+  .phase-detail {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 56px;
+    padding: 56px 0;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-detail:last-child { border-bottom: 1px solid var(--border-soft); }
+  .phase-detail-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .phase-detail-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .phase-detail-verb {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin: 8px 0 12px;
+  }
+  .phase-detail-period {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .phase-detail-purpose {
+    font-family: var(--font-display);
+    font-size: 19px;
+    line-height: 1.9;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .phase-detail-section { margin-bottom: 24px; }
+  .phase-detail-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .phase-detail-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .phase-detail-list li {
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+  }
+  .phase-detail-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent-warm);
+    font-size: 12px;
+  }
+  .phase-detail-gate {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: var(--bg-section);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--accent-warm);
+  }
+  .phase-detail-gate strong {
+    color: var(--text-primary);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--font-display);
+  }
+
+  /* Criteria */
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .criteria-card {
+    background: var(--bg-card);
+    padding: 36px 28px;
+    border-top: 3px solid var(--accent-warm);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .criteria-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--accent-warm);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .criteria-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .criteria-q {
+    font-size: 13px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+    padding-top: 16px;
+    border-top: 1px solid var(--border-soft);
+    margin-top: 4px;
+  }
+
+  /* Next actions */
+  .nextactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 32px;
+  }
+  .nextaction {
+    padding: 32px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .nextaction-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-gold);
+    font-weight: 500;
+  }
+  .nextaction-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--text-on-deep);
+    line-height: 1.5;
+  }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--accent-gold);
+  }
+
+  /* Footer */
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* Page nav (between docs) */
+  .pagenav {
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-side.disabled { opacity: 0.35; pointer-events: none; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  /* Print */
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    body { font-size: 12px; }
+    .hero-title { font-size: 42px; }
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-title { font-size: 38px; }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 28px; }
+    .shift-grid { grid-template-columns: 1fr; }
+    .phase-row { grid-template-columns: 1fr; }
+    .roadmap-zones { grid-template-columns: 1fr; }
+    .phase-detail { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+    .criteria-grid { grid-template-columns: 1fr; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜Document A</a>
+    <span class="banner-tag">v0.1 / 2026.05 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-label">DOCUMENT A — 検討稿</div>
+      <h1 class="hero-title">
+        事業の方向性と、<br>
+        14期の<em>ロードマップ</em>。
+      </h1>
+      <p class="hero-subtitle">
+        介護レク広場を「素材を探す場」から、<br>
+        現場と業界をつなぐ事業へと再構築する。
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Period</span>
+          <span class="hero-meta-value">2026.05 — 2027.09</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Phases</span>
+          <span class="hero-meta-value">観る・仕分ける<br>磨く・魅せる</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Status</span>
+          <span class="hero-meta-value">議論用<br>ドラフト</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　現状認識</span>
+      <h2 class="section-title">広場が抱える、<br>5つの構造的課題。</h2>
+    </div>
+    <p class="section-lead">
+      広場は立ち上げから15年、7万人の会員基盤と一定の業界認知を持つ一方で、事業としては5つの構造的課題を抱えている。これらは個別の問題ではなく、互いに連鎖して「次の手」を打ちにくくしている。
+    </p>
+    <div class="challenge-list">
+      <div class="challenge-item">
+        <span class="challenge-num">01</span>
+        <div class="challenge-body">
+          <span class="challenge-title">事業単体での売上がない。</span>
+          <span class="challenge-note">運用コスト＞売上の状態が常態化。バナー広告と単発アンケートに依存しており、収益構造が不安定。</span>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <span class="challenge-num">02</span>
+        <div class="challenge-body">
+          <span class="challenge-title">15年前のプラットフォーム。</span>
+          <span class="challenge-note">サイト基盤が古く、効果的な会員管理・データ収集・分析ができていない。改修コストは事業規模に対して大きい。</span>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <span class="challenge-num">03</span>
+        <div class="challenge-body">
+          <span class="challenge-title">素材の品質がバラバラ。</span>
+          <span class="challenge-note">15年間の蓄積によって生まれた品質格差。一部の高品質コンテンツが利用の大半を支えているパレート構造の可能性。</span>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <span class="challenge-num">04</span>
+        <div class="challenge-body">
+          <span class="challenge-title">介護レクの資格制度的優先順位の低下。</span>
+          <span class="challenge-note">業界全体でのレクリエーションの位置づけが弱まっており、施設の投資意欲を引き出しにくい。</span>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <span class="challenge-num">05</span>
+        <div class="challenge-body">
+          <span class="challenge-title">会員のアクティブ数が可視化できていない。</span>
+          <span class="challenge-note">7万人会員のうち、実際に動いている人と非アクティブな人の区別がつかない。誰に何を届けているかが見えない。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　戦略的転換</span>
+      <h2 class="section-title">事業の組み立て方を、<br>4つの観点で転換する。</h2>
+    </div>
+    <p class="section-lead">
+      課題に個別対応するのではなく、まず「事業の組み立て方そのもの」を転換する。これがすべての判断の前提になる。
+    </p>
+    <div class="shift-grid">
+      <div class="shift-card">
+        <span class="shift-tag">SHIFT 01 — Architecture</span>
+        <span class="shift-title">Web と LINE の役割を、<br>ストックとフローに分業する。</span>
+        <span class="shift-body">古いWebプラットフォームを無理にリプレイスせず、ストック資産として残す。LINEを行動データ収集と日常接点のフローとして新設し、両者を補完関係にする。</span>
+        <div class="shift-arrow">
+          <span class="shift-from">Web 一本依存</span>
+          <span class="shift-mark">→</span>
+          <span class="shift-to">Web × LINE 分業</span>
+        </div>
+      </div>
+      <div class="shift-card">
+        <span class="shift-tag">SHIFT 02 — User Reality</span>
+        <span class="shift-title">ユーザー像の前提を、<br>個人ベースに置き直す。</span>
+        <span class="shift-body">広場の利用者は法人や組織として動いているのではなく、現場の介護職個人が自己責任で使っている可能性が高い。施設契約モデルを前提に置かず、個人ユーザーの実像を起点にする。</span>
+        <div class="shift-arrow">
+          <span class="shift-from">法人想定</span>
+          <span class="shift-mark">→</span>
+          <span class="shift-to">個人ユーザー前提</span>
+        </div>
+      </div>
+      <div class="shift-card">
+        <span class="shift-tag">SHIFT 03 — Monetization</span>
+        <span class="shift-title">対価の出所を、<br>業界外に求める。</span>
+        <span class="shift-body">介護業界に直接の支払い余力は薄い。「介護現場の個人にリーチしたい第三者」から対価を取る構造、または施設が他経費科目で支出できる仕組みを設計する。単純な有料化は最初から候補から外す。</span>
+        <div class="shift-arrow">
+          <span class="shift-from">介護業界内</span>
+          <span class="shift-mark">→</span>
+          <span class="shift-to">業界外スポンサー</span>
+        </div>
+      </div>
+      <div class="shift-card">
+        <span class="shift-tag">SHIFT 04 — Discipline</span>
+        <span class="shift-title">まず価値を加える前に、<br>スリム化を経営する。</span>
+        <span class="shift-body">新しい機能を足す前に、現在ある資産を「残す・削る・磨く」で仕分ける。スリム化によって生まれた余力を、磨く対象に集中投資する。「やめる勇気」を経営判断として明文化する。</span>
+        <div class="shift-arrow">
+          <span class="shift-from">足し算経営</span>
+          <span class="shift-mark">→</span>
+          <span class="shift-to">引き算 → 磨き込み</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 03　全体ロードマップ</span>
+      <h2 class="section-title">観察期と本実行期に分け、<br>14期内で完結させる。</h2>
+    </div>
+    <p class="section-lead">
+      公式LINEの再開と並行して、まず3〜5ヶ月の観察期で材料を集める。BCC 14期（2026.10〜2027.09）に入ってから、仕分け・磨き・発信の3フェーズを順に実行する。全期間で4つの動詞「観る・仕分ける・磨く・魅せる」を貫く。
+    </p>
+    <div class="roadmap-frame">
+      <div class="roadmap-zones">
+        <span class="zone-label">観察期（13期末）</span>
+        <span class="zone-label exec">BCC 14期 — 本実行期</span>
+      </div>
+      <div class="phase-row">
+        <div class="phase-card">
+          <span class="phase-tag">PHASE 0</span>
+          <span class="phase-verb">観る</span>
+          <span class="phase-desc">観察と仮説検証。<br>14期戦略書を最終化する。</span>
+          <span class="phase-period">2026.05 — 09　(5M)</span>
+        </div>
+        <div class="phase-card exec">
+          <span class="phase-tag">PHASE 1 / Q1</span>
+          <span class="phase-verb">仕分ける</span>
+          <span class="phase-desc">残す・削る・磨くを意思決定。スリム化を実行する。</span>
+          <span class="phase-period">2026.10 — 12　(3M)</span>
+        </div>
+        <div class="phase-card exec">
+          <span class="phase-tag">PHASE 2 / Q2-3</span>
+          <span class="phase-verb">磨く</span>
+          <span class="phase-desc">残した価値に集中投資。検証ベースで新収益のタネを試す。</span>
+          <span class="phase-period">2027.01 — 06　(6M)</span>
+        </div>
+        <div class="phase-card exec">
+          <span class="phase-tag">PHASE 3 / Q4</span>
+          <span class="phase-verb">魅せる</span>
+          <span class="phase-desc">14期成果を可視化。15期投資判断の材料を整える。</span>
+          <span class="phase-period">2027.07 — 09　(3M)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-detail">
+      <div class="phase-detail-head">
+        <span class="phase-detail-num">PHASE 0</span>
+        <span class="phase-detail-verb">観る</span>
+        <span class="phase-detail-period">2026年5月 — 9月<br>（5ヶ月、観察期）</span>
+      </div>
+      <div>
+        <p class="phase-detail-purpose">14期の戦略を「思いつき」ではなく「証拠」で組み立てるための材料を集める。</p>
+        <div class="phase-detail-section">
+          <span class="phase-detail-label">主要アクション</span>
+          <ul class="phase-detail-list">
+            <li>公式LINEの再開と最初の3ヶ月運用（既存12週間プランを実装）</li>
+            <li>既存7万人会員のアクセスログ・利用パターンの棚卸し</li>
+            <li>利用施設5〜10件、ヘルスケア企業／自治体3〜5社へのヒアリング</li>
+            <li>競合（WAN-かいご、介護アンテナ）の再ベンチマーク</li>
+            <li>5つの測定ドメインによる仮説検証（Document B 参照）</li>
+          </ul>
+        </div>
+        <div class="phase-detail-section">
+          <span class="phase-detail-label">アウトプット</span>
+          <ul class="phase-detail-list">
+            <li>LINE運用3ヶ月レポート</li>
+            <li>ニーズ仮説検証レポート（5ドメイン分）</li>
+            <li>14期戦略書（最終版）</li>
+          </ul>
+        </div>
+        <div class="phase-detail-gate">
+          <strong>判断ゲート（9月末）</strong>
+          戦略書をもって経営承認を取得。Phase 1で何を削るかの初期リストを確定し、14期スタートに接続する。
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-detail">
+      <div class="phase-detail-head">
+        <span class="phase-detail-num">PHASE 1</span>
+        <span class="phase-detail-verb">仕分ける</span>
+        <span class="phase-detail-period">2026年10月 — 12月<br>（3ヶ月、14期 Q1）</span>
+      </div>
+      <div>
+        <p class="phase-detail-purpose">14期スタートに合わせて、残すもの・削るもの・磨くものを明確に意思決定し、スリム化を実行する。最も心理的に難しいフェーズ。</p>
+        <div class="phase-detail-section">
+          <span class="phase-detail-label">主要アクション</span>
+          <ul class="phase-detail-list">
+            <li>「残す」「削る」「磨く」の最終決定と、社内合意の取得</li>
+            <li>不採算オペレーション・低利用コンテンツの段階停止</li>
+            <li>削った分の人時を、磨く対象へ再配分</li>
+            <li>新コンセプトの社内発表 → 既存会員告知 → 業界への発信</li>
+            <li>WebサイトとLINEの役割分担を明文化</li>
+          </ul>
+        </div>
+        <div class="phase-detail-section">
+          <span class="phase-detail-label">アウトプット</span>
+          <ul class="phase-detail-list">
+            <li>スリム化計画書と実行報告</li>
+            <li>新コンセプト発表資料（社内向け／対外向け）</li>
+            <li>整理後のサービスマップ</li>
+          </ul>
+        </div>
+        <div class="phase-detail-gate">
+          <strong>判断ゲート（12月末）</strong>
+          スリム化のコスト削減効果とユーザー反応を経営層に報告。Phase 2の集中投資対象を最終確定する。
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-detail">
+      <div class="phase-detail-head">
+        <span class="phase-detail-num">PHASE 2</span>
+        <span class="phase-detail-verb">磨く</span>
+        <span class="phase-detail-period">2027年1月 — 6月<br>（6ヶ月、14期 Q2-Q3）</span>
+      </div>
+      <div>
+        <p class="phase-detail-purpose">残したコアサービスに集中投資して、見える価値を作る。ここで初めて新しい収益のタネを小さく試す。</p>
+        <div class="phase-detail-section">
+          <span class="phase-detail-label">主要アクション</span>
+          <ul class="phase-detail-list">
+            <li>コアコンテンツの品質統一とブランディング再整備</li>
+            <li>LINE × Web の動線最適化、ロイヤルユーザー層の顕在化</li>
+            <li>EBR（科学的根拠付きレク）の試験運用（記事・事例・白書1本）</li>
+            <li>有料サービスの最小MVP（最も需要が確認できた1機能から）</li>
+            <li>データソリューションの最小実証（1〜2社と小規模実証実験）</li>
+            <li>BCCヘルスケア事業との接続点の整理</li>
+          </ul>
+        </div>
+        <div class="phase-detail-section">
+          <span class="phase-detail-label">アウトプット</span>
+          <ul class="phase-detail-list">
+            <li>磨き上げ後の広場（Web・LINE）</li>
+            <li>有料サービス試験運用レポート</li>
+            <li>データ実証レポート</li>
+            <li>14期中間総括</li>
+          </ul>
+        </div>
+        <div class="phase-detail-gate">
+          <strong>判断ゲート（6月末）</strong>
+          有料化・データ販売それぞれの成立可能性を判定。15期で本格投資するか、見送るかの判断材料を揃える。
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-detail">
+      <div class="phase-detail-head">
+        <span class="phase-detail-num">PHASE 3</span>
+        <span class="phase-detail-verb">魅せる</span>
+        <span class="phase-detail-period">2027年7月 — 9月<br>（3ヶ月、14期 Q4）</span>
+      </div>
+      <div>
+        <p class="phase-detail-purpose">14期の成果を「誰が見ても素敵な事業」として可視化し、15期以降への接続を作る。</p>
+        <div class="phase-detail-section">
+          <span class="phase-detail-label">主要アクション</span>
+          <ul class="phase-detail-list">
+            <li>14期事業報告書の作成（社内向け・経営層向け）</li>
+            <li>業界向けプレスリリース、事例発表、展示会出展</li>
+            <li>15期事業計画と予算案の策定</li>
+            <li>「次の3年」の中期ロードマップ案</li>
+            <li>外部発信物の制作（業界誌寄稿、登壇、ホワイトペーパー）</li>
+          </ul>
+        </div>
+        <div class="phase-detail-section">
+          <span class="phase-detail-label">アウトプット</span>
+          <ul class="phase-detail-list">
+            <li>14期事業報告書</li>
+            <li>15期事業計画案</li>
+            <li>対外発信物一式</li>
+          </ul>
+        </div>
+        <div class="phase-detail-gate">
+          <strong>判断ゲート（9月末）</strong>
+          15期の投資判断と組織体制を経営決定。アプリ事業化／データ事業化のGo/No-Goを本判断する。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 04　判断基準</span>
+      <h2 class="section-title">残す・削る・磨くは、<br>3つの基準で決める。</h2>
+    </div>
+    <p class="section-lead">
+      仕分けるフェーズで迷わないために、判断基準を先に合意しておく。コンテンツ・チャネル・キャンペーンなど、対象すべてに同じ3基準で○△×をつけることで、意思決定を情緒ではなく論理で進める。
+    </p>
+    <div class="criteria-grid">
+      <div class="criteria-card">
+        <span class="criteria-num">01</span>
+        <span class="criteria-name">利用ベース</span>
+        <span class="criteria-q">直近12ヶ月のアクティブ率と運用工数（コスト）が見合っているか。コストの割に動かない資産は、まず候補に挙げる。</span>
+      </div>
+      <div class="criteria-card">
+        <span class="criteria-num">02</span>
+        <span class="criteria-name">ブランドベース</span>
+        <span class="criteria-q">BCCのヘルスケア事業全体の中で、広場が担う固有のポジションを強化するか。他事業と重複する機能か、独自価値か。</span>
+      </div>
+      <div class="criteria-card">
+        <span class="criteria-num">03</span>
+        <span class="criteria-name">未来ベース</span>
+        <span class="criteria-q">14〜15期の事業の柱になりうるか、そこから派生する芽があるか。今は小さくとも、将来育つ可能性のあるものか。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 05　次のアクション</span>
+      <h2 class="section-title">まず「観る」から始める。</h2>
+    </div>
+    <p class="section-lead">
+      Phase 0の検証設計を、5つの測定ドメインで具体化したものが Document B となる。並行して、フェーズごとのタスクと判断材料を Document C 以降にまとめていく。
+    </p>
+    <div class="nextactions">
+      <div class="nextaction">
+        <span class="nextaction-num">A.</span>
+        <span class="nextaction-title">本資料（事業方向性とロードマップ）の社内確認</span>
+        <span class="nextaction-doc">Document A</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">B.</span>
+        <span class="nextaction-title">観るフェーズの5ドメイン検証テンプレートに着手</span>
+        <span class="nextaction-doc">Document B</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">C.</span>
+        <span class="nextaction-title">仕分けるフェーズの判断シートを設計</span>
+        <span class="nextaction-doc">Document C ／ 後続</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">D.</span>
+        <span class="nextaction-title">磨くフェーズの集中投資対象の絞り込み</span>
+        <span class="nextaction-doc">Document D ／ 後続</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">E.</span>
+        <span class="nextaction-title">魅せるフェーズの発信計画と15期接続</span>
+        <span class="nextaction-doc">Document E ／ 後続</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="index.html" class="pagenav-side">
+      <span class="pagenav-direction">← Prev</span>
+      <span class="pagenav-title">検討資料インデックス</span>
+    </a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <a href="doc_b_phase0_kanru_verification.html" class="pagenav-side right">
+      <span class="pagenav-direction">Next →</span>
+      <span class="pagenav-title">Document B<br>観るフェーズ 検証テンプレート</span>
+    </a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">
+      介護レク広場 14期戦略 ／ Document A — 事業の方向性と14期ロードマップ<br>
+      検討稿 v0.1 ／ 2026年5月 ／ 内部討議用
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
