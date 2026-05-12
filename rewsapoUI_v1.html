@@ -1,0 +1,2586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>レクサポ UI イメージ v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Noto+Sans+JP:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* page (背景の余白) */
+    --page: #EDE8DA;
+    --page-2: #F5F1E6;
+
+    /* app surface */
+    --bg-app: #FAF8F2;
+    --bg-card: #FFFFFF;
+    --bg-soft: #F4F0E5;
+
+    /* ink */
+    --ink: #1F1A14;
+    --ink-2: #5A554D;
+    --ink-3: #8E887E;
+    --ink-4: #B5AFA3;
+
+    /* brand */
+    --teal: #2D6B5E;
+    --teal-deep: #1F4D43;
+    --teal-soft: #DCEAE5;
+    --teal-ghost: #F0F6F3;
+
+    --amber: #C25530;
+    --amber-deep: #9E4422;
+    --amber-soft: #F5E3D9;
+    --amber-ghost: #FBF2EC;
+
+    --warn: #C99744;
+    --warn-soft: #F5E5C9;
+
+    --rule: #E5DFD2;
+    --rule-soft: #F0EBDE;
+
+    --shadow-sm: 0 1px 2px rgba(31, 26, 20, 0.04), 0 2px 6px rgba(31, 26, 20, 0.04);
+    --shadow-md: 0 2px 8px rgba(31, 26, 20, 0.06), 0 8px 24px rgba(31, 26, 20, 0.05);
+    --shadow-lg: 0 4px 16px rgba(31, 26, 20, 0.08), 0 24px 48px rgba(31, 26, 20, 0.08);
+
+    --serif: 'Shippori Mincho', 'Hiragino Mincho Pro', serif;
+    --sans: 'Noto Sans JP', 'Hiragino Kaku Gothic Pro', sans-serif;
+    --num: 'DM Sans', 'Noto Sans JP', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--page);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+    font-feature-settings: "palt";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============================================================
+     PAGE FRAME
+     ============================================================ */
+  .page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  header.cover {
+    padding: 80px 0 56px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .doc-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 28px;
+  }
+
+  .doc-meta .dot {
+    width: 6px; height: 6px;
+    background: var(--amber);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+
+  header.cover h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  header.cover h1 .accent { color: var(--amber); }
+
+  header.cover .lead {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ink-2);
+    max-width: 640px;
+    line-height: 1.9;
+  }
+
+  /* ============================================================
+     DESIGN SYSTEM STRIP
+     ============================================================ */
+  .system-strip {
+    margin: 56px 0;
+    padding: 32px;
+    background: var(--page-2);
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+  }
+
+  .system-strip h3 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .system-strip .small-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 16px;
+  }
+
+  .swatches {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .swatch {
+    width: 56px;
+    text-align: center;
+  }
+
+  .swatch-chip {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    margin-bottom: 6px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+  }
+
+  .swatch-name {
+    font-size: 10px;
+    color: var(--ink-3);
+    font-family: var(--num);
+  }
+
+  .type-samples {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .type-sample {
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+  }
+
+  .type-sample-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+  }
+
+  /* ============================================================
+     ROLE SECTION
+     ============================================================ */
+  .role-section {
+    margin: 96px 0;
+  }
+
+  .role-header {
+    display: flex;
+    align-items: baseline;
+    gap: 32px;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .role-num {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--amber);
+    letter-spacing: 0.12em;
+  }
+
+  .role-title {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .role-meta {
+    font-size: 12px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .role-meta strong {
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+
+  /* ============================================================
+     SCREEN ROW
+     ============================================================ */
+  .screens-row {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .screen-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .screen-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 4px;
+  }
+
+  .screen-name {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  /* ============================================================
+     DEVICE FRAMES
+     ============================================================ */
+  .device-tablet-p {
+    width: 440px;
+    height: 620px;
+    background: var(--bg-app);
+    border-radius: 28px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+    padding: 1px; /* hairline for chrome */
+  }
+
+  .device-mobile {
+    width: 320px;
+    height: 660px;
+    background: var(--bg-app);
+    border-radius: 32px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .device-tablet-l {
+    width: 760px;
+    height: 510px;
+    background: var(--bg-app);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* tiny chrome bars (subtle realism) */
+  .device-mobile::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 5px;
+    background: var(--ink);
+    opacity: 0.15;
+    border-radius: 3px;
+    z-index: 100;
+  }
+
+  /* ============================================================
+     COMMON UI ELEMENTS (in-app)
+     ============================================================ */
+
+  /* status pills */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  .pill::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .pill.teal { background: var(--teal-soft); color: var(--teal-deep); }
+  .pill.amber { background: var(--amber-soft); color: var(--amber-deep); }
+  .pill.warn { background: var(--warn-soft); color: #8C6A24; }
+  .pill.gray { background: var(--bg-soft); color: var(--ink-3); }
+
+  /* avatars */
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--teal-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--teal-deep);
+    flex-shrink: 0;
+  }
+
+  .avatar.sm { width: 28px; height: 28px; font-size: 11px; }
+  .avatar.lg { width: 48px; height: 48px; font-size: 18px; }
+  .avatar.amber { background: var(--amber-soft); color: var(--amber-deep); }
+  .avatar.gray { background: var(--bg-soft); color: var(--ink-3); }
+
+  /* buttons */
+  .btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    line-height: 1;
+    border-radius: 999px;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: white;
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  .btn-accent {
+    background: var(--amber);
+    color: white;
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  .btn-ghost {
+    background: var(--bg-card);
+    color: var(--ink);
+    padding: 12px 20px;
+    font-size: 13px;
+    border: 1px solid var(--rule);
+  }
+
+  .btn-block {
+    width: 100%;
+    padding: 16px;
+  }
+
+  /* svg icons */
+  .ico {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  .ico.sm { width: 14px; height: 14px; }
+  .ico.lg { width: 24px; height: 24px; }
+
+  /* ============================================================
+     SCREEN: FACILITY HOME
+     ============================================================ */
+  .fh-screen {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fh-top {
+    padding: 20px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fh-facility {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .fh-facility-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .fh-facility-sub {
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+
+  .fh-icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-2);
+    position: relative;
+  }
+
+  .fh-dot {
+    position: absolute;
+    top: 7px; right: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    border: 2px solid var(--bg-app);
+  }
+
+  .fh-greet {
+    padding: 24px 24px 0;
+  }
+
+  .fh-greet h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  .fh-greet p {
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .fh-section-label {
+    padding: 24px 24px 12px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fh-section-label .count {
+    font-family: var(--num);
+    color: var(--ink-2);
+  }
+
+  .fh-rec-card {
+    margin: 0 20px 12px;
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .fh-rec-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .fh-rec-time {
+    font-family: var(--num);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .fh-rec-date {
+    font-size: 10px;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+
+  .fh-rec-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .fh-rec-supporter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule-soft);
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+
+  .fh-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    padding: 0 20px;
+    margin-top: 4px;
+  }
+
+  .fh-stat {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid var(--rule-soft);
+  }
+
+  .fh-stat-val {
+    font-family: var(--num);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .fh-stat-label {
+    font-size: 9px;
+    color: var(--ink-3);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .fh-cta {
+    margin: 20px 20px 16px;
+  }
+
+  .fh-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--amber);
+    color: white;
+    padding: 16px 18px;
+    border-radius: 14px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .fh-nav {
+    margin-top: auto;
+    background: var(--bg-card);
+    border-top: 1px solid var(--rule);
+    padding: 12px 20px 16px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .fh-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--ink-3);
+    font-size: 10px;
+  }
+
+  .fh-nav-item.active {
+    color: var(--teal-deep);
+  }
+
+  /* ============================================================
+     SCREEN: FACILITY REQUEST FLOW
+     ============================================================ */
+  .fr-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fr-top {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .fr-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-2);
+    font-size: 13px;
+  }
+
+  .fr-step {
+    font-family: var(--num);
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  .fr-step .current {
+    color: var(--amber);
+    font-weight: 600;
+  }
+
+  .fr-progress {
+    display: flex;
+    gap: 4px;
+    padding: 16px 20px 0;
+  }
+
+  .fr-progress span {
+    height: 3px;
+    flex: 1;
+    border-radius: 2px;
+    background: var(--rule);
+  }
+
+  .fr-progress span.done { background: var(--teal); }
+  .fr-progress span.current { background: var(--teal); }
+
+  .fr-title {
+    padding: 20px 20px 4px;
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .fr-sub {
+    padding: 0 20px 20px;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .fr-categories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 20px;
+  }
+
+  .fr-cat {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .fr-cat.selected {
+    border-color: var(--teal);
+    background: var(--teal-ghost);
+  }
+
+  .fr-cat-ico {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--teal-soft);
+    color: var(--teal-deep);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fr-cat.selected .fr-cat-ico {
+    background: var(--teal);
+    color: white;
+  }
+
+  .fr-cat-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .fr-cat-meta {
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+
+  .fr-rec-section {
+    padding: 20px 20px 0;
+  }
+
+  .fr-rec-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .fr-rec-mini {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid var(--rule-soft);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .fr-rec-mini-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .fr-rec-mini-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .fr-rec-mini-meta {
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+
+  .fr-bottom {
+    margin-top: auto;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ============================================================
+     SCREEN: SUPPORTER HOME
+     ============================================================ */
+  .sh-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sh-top {
+    padding: 36px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sh-logo {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--teal-deep);
+    letter-spacing: 0.05em;
+  }
+
+  .sh-greet {
+    padding: 20px 20px 8px;
+  }
+
+  .sh-greet h2 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .sh-greet-sub {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  .sh-rec {
+    margin: 16px 16px 0;
+    background: var(--bg-card);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sh-rec::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: var(--teal-ghost);
+    border-radius: 0 18px 0 100%;
+  }
+
+  .sh-rec-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .sh-rec-time {
+    font-family: var(--num);
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .sh-rec-date {
+    font-size: 10px;
+    color: var(--ink-3);
+    margin-top: 6px;
+  }
+
+  .sh-rec-facility {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-bottom: 4px;
+  }
+
+  .sh-rec-title {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .sh-rec-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+
+  .sh-rec-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .sh-rec-actions button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--rule);
+    background: var(--bg-card);
+    border-radius: 10px;
+    font-size: 12px;
+    font-family: var(--sans);
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .sh-rec-actions button.primary {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+
+  .sh-week {
+    margin: 16px 16px 0;
+    background: var(--teal-ghost);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .sh-week-item {
+    text-align: center;
+  }
+
+  .sh-week-val {
+    font-family: var(--num);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--teal-deep);
+  }
+
+  .sh-week-lbl {
+    font-size: 9px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+
+  .sh-alert {
+    margin: 12px 16px 0;
+    background: var(--amber-ghost);
+    border: 1px solid var(--amber-soft);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--amber-deep);
+  }
+
+  .sh-alert-strong { font-weight: 600; }
+
+  .sh-nav {
+    margin-top: auto;
+    background: var(--bg-card);
+    border-top: 1px solid var(--rule);
+    padding: 10px 12px 18px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  /* ============================================================
+     SCREEN: SUPPORTER CONFIRMATION (実施確認書)
+     ============================================================ */
+  .sc-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-app);
+  }
+
+  .sc-top {
+    padding: 36px 20px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .sc-top-title {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .sc-progress-line {
+    height: 3px;
+    background: var(--rule-soft);
+    position: relative;
+  }
+
+  .sc-progress-line::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 40%;
+    background: var(--teal);
+  }
+
+  .sc-context {
+    padding: 14px 20px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .sc-context-name {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .sc-context-meta {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  .sc-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 0 16px;
+  }
+
+  .sc-field {
+    margin: 0 16px 12px;
+    background: var(--bg-card);
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .sc-field-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-2);
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sc-field-label .optional {
+    font-size: 10px;
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+
+  .sc-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .sc-step-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    background: var(--bg-card);
+    color: var(--ink-2);
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sc-step-val {
+    font-family: var(--num);
+    font-size: 28px;
+    font-weight: 500;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .sc-step-val small {
+    font-size: 12px;
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+
+  .sc-faces {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .sc-face {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    border: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .sc-face.selected {
+    background: var(--amber-soft);
+    border-color: var(--amber);
+    transform: scale(1.1);
+  }
+
+  .sc-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .sc-photo {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    border: 1px dashed var(--rule);
+    background: var(--bg-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-3);
+  }
+
+  .sc-photo.filled {
+    background: linear-gradient(135deg, var(--teal-soft), var(--teal-ghost));
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .sc-photo.filled::after {
+    content: "✓";
+    position: absolute;
+    top: 4px; right: 4px;
+    width: 16px; height: 16px;
+    background: var(--teal);
+    color: white;
+    font-size: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sc-input {
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--bg-app);
+    font-family: var(--sans);
+    resize: none;
+  }
+
+  .sc-input-row {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .sc-input-row .sc-input { flex: 1; }
+
+  .sc-mic {
+    width: 44px;
+    border-radius: 10px;
+    background: var(--teal);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sc-submit {
+    padding: 14px 16px 24px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  /* ============================================================
+     SCREEN: STAFF DASHBOARD
+     ============================================================ */
+  .sd-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-app);
+  }
+
+  .sd-top {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .sd-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sd-brand-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--ink);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .sd-brand-name {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .sd-brand-sub {
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+
+  .sd-search {
+    flex: 1;
+    max-width: 280px;
+    margin: 0 24px;
+    padding: 8px 14px;
+    background: var(--bg-soft);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sd-top-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sd-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 16px;
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .sd-main { display: flex; flex-direction: column; gap: 14px; }
+
+  .sd-page-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .sd-page-meta {
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+
+  .sd-kpis {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .sd-kpi {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+
+  .sd-kpi-label {
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .sd-kpi-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .sd-kpi-val {
+    font-family: var(--num);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .sd-kpi-delta {
+    font-family: var(--num);
+    font-size: 10px;
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  .sd-kpi-delta.down { color: var(--amber); }
+
+  .sd-chart {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 14px 16px;
+    flex: 1;
+  }
+
+  .sd-chart-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .sd-chart-title {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .sd-chart-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--bg-soft);
+    border-radius: 6px;
+    padding: 2px;
+    font-size: 10px;
+  }
+
+  .sd-chart-tabs span {
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: var(--ink-3);
+  }
+
+  .sd-chart-tabs span.active {
+    background: var(--bg-card);
+    color: var(--ink);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sd-side {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+  }
+
+  .sd-side h4 {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+    font-weight: 500;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .sd-alert {
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--bg-soft);
+    cursor: pointer;
+  }
+
+  .sd-alert.amber {
+    background: var(--amber-ghost);
+  }
+
+  .sd-alert-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .sd-alert-content { flex: 1; min-width: 0; }
+
+  .sd-alert-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .sd-alert-meta {
+    font-size: 9px;
+    color: var(--ink-3);
+  }
+
+  .sd-alert-count {
+    font-family: var(--num);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--amber);
+  }
+
+  /* ============================================================
+     SCREEN: STAFF APPROVAL QUEUE
+     ============================================================ */
+  .sq-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-app);
+  }
+
+  .sq-tabs {
+    padding: 14px 24px 0;
+    display: flex;
+    gap: 24px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .sq-tab {
+    padding: 8px 0 12px;
+    font-size: 12px;
+    color: var(--ink-3);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .sq-tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+    font-weight: 500;
+  }
+
+  .sq-tab .count {
+    background: var(--bg-soft);
+    color: var(--ink-3);
+    font-family: var(--num);
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+
+  .sq-tab.active .count {
+    background: var(--ink);
+    color: white;
+  }
+
+  .sq-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    overflow: hidden;
+  }
+
+  .sq-list {
+    overflow-y: auto;
+    padding: 12px;
+  }
+
+  .sq-filters {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+    padding: 0 4px;
+  }
+
+  .sq-filter {
+    padding: 4px 10px;
+    border-radius: 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    font-size: 10px;
+    color: var(--ink-3);
+    cursor: pointer;
+  }
+
+  .sq-filter.active {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+
+  .sq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+  }
+
+  .sq-item.selected {
+    border-color: var(--ink);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sq-item-body { flex: 1; min-width: 0; }
+
+  .sq-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .sq-item-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .sq-item-time {
+    font-size: 9px;
+    color: var(--ink-3);
+    flex-shrink: 0;
+  }
+
+  .sq-item-preview {
+    font-size: 11px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .sq-item-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+
+  .sq-score {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--teal-deep);
+    font-weight: 500;
+  }
+
+  .sq-detail {
+    background: var(--bg-card);
+    border-left: 1px solid var(--rule);
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sq-detail-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sq-detail-title {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .sq-detail-sub {
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+
+  .sq-detail-content {
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    padding: 10px 12px;
+    background: var(--bg-soft);
+    border-radius: 8px;
+  }
+
+  .sq-detail-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sq-detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .sq-detail-row dt { color: var(--ink-3); }
+  .sq-detail-row dd { color: var(--ink); font-weight: 500; }
+
+  .sq-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 8px;
+  }
+
+  .sq-actions button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--sans);
+    cursor: pointer;
+    border: 1px solid var(--rule);
+    background: var(--bg-card);
+    color: var(--ink);
+  }
+
+  .sq-actions button.approve {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+
+  /* ============================================================
+     NOTES BELOW SCREENS
+     ============================================================ */
+  .role-notes {
+    margin-top: 56px;
+    padding: 28px 32px;
+    background: var(--page-2);
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .role-notes h4 {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .role-notes ul {
+    list-style: none;
+  }
+
+  .role-notes li {
+    padding-left: 20px;
+    position: relative;
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.85;
+    margin-bottom: 6px;
+  }
+
+  .role-notes li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 12px;
+    width: 10px;
+    height: 1px;
+    background: var(--amber);
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer.foot {
+    margin: 80px 0 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+    color: var(--ink-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  .foot-mark {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink-2);
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 920px) {
+    .system-strip { grid-template-columns: 1fr; gap: 24px; }
+    .type-samples { grid-template-columns: 1fr; }
+    .role-header { flex-direction: column; gap: 12px; }
+    .role-meta { margin-left: 0; text-align: left; }
+    .role-notes { grid-template-columns: 1fr; gap: 20px; }
+    .screens-row { gap: 32px; }
+    .device-tablet-l { width: 100%; max-width: 760px; height: auto; aspect-ratio: 760/510; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ========== COVER ========== -->
+  <header class="cover">
+    <div class="doc-meta">
+      <span><span class="dot"></span>UI イメージ v1</span>
+      <span>仮説ベース</span>
+      <span>2026.05</span>
+    </div>
+    <h1>レクサポ<br><span class="accent">UI イメージ</span></h1>
+    <p class="lead">
+      自走化計画から仮説立てた、3つのロール向けインターフェース。<br>
+      タッチデバイスを主軸に、誰でも迷わず使える静かな設計を目指す。
+    </p>
+  </header>
+
+  <!-- ========== DESIGN SYSTEM ========== -->
+  <section class="system-strip">
+    <div>
+      <div class="small-label">DESIGN PRINCIPLES</div>
+      <h3>静かな実用性</h3>
+      <p style="font-size:13px; color:var(--ink-2); line-height:1.8;">
+        装飾より構造で語る。<br>
+        余白でリズムを作り、文字は十分に大きく、状態はひと目で。<br>
+        色は主要動作だけに限定する。
+      </p>
+    </div>
+    <div>
+      <div class="small-label">DESIGN TOKENS</div>
+      <div style="display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:11px; color:var(--ink-3); margin-bottom:10px;">COLOR</div>
+          <div class="swatches">
+            <div class="swatch"><div class="swatch-chip" style="background:#2D6B5E;"></div><div class="swatch-name">teal</div></div>
+            <div class="swatch"><div class="swatch-chip" style="background:#C25530;"></div><div class="swatch-name">amber</div></div>
+            <div class="swatch"><div class="swatch-chip" style="background:#1F1A14;"></div><div class="swatch-name">ink</div></div>
+            <div class="swatch"><div class="swatch-chip" style="background:#FAF8F2;"></div><div class="swatch-name">bg</div></div>
+          </div>
+        </div>
+        <div style="flex:1; min-width:240px;">
+          <div style="font-size:11px; color:var(--ink-3); margin-bottom:10px;">TYPOGRAPHY</div>
+          <div class="type-samples">
+            <div class="type-sample">
+              <div class="type-sample-label">DISPLAY</div>
+              <div style="font-family:var(--serif); font-size:20px; font-weight:500;">健やかさは、めぐる</div>
+              <div style="font-size:10px; color:var(--ink-3); margin-top:4px;">Shippori Mincho</div>
+            </div>
+            <div class="type-sample">
+              <div class="type-sample-label">BODY</div>
+              <div style="font-size:14px;">レクリエーションを依頼する</div>
+              <div style="font-size:10px; color:var(--ink-3); margin-top:4px;">Noto Sans JP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ROLE 01: FACILITY
+       ============================================================ -->
+  <section class="role-section">
+    <div class="role-header">
+      <div>
+        <div class="role-num">ROLE 01</div>
+        <div class="role-title">施設側</div>
+      </div>
+      <div class="role-meta">
+        <strong>想定デバイス</strong>　タブレット（縦持ち）<br>
+        <strong>主な利用者</strong>　ケアマネ・施設職員<br>
+        <strong>利用シーン</strong>　事務所での予定確認、レク依頼
+      </div>
+    </div>
+
+    <div class="screens-row">
+
+      <!-- =========== Screen 1: Home =========== -->
+      <div class="screen-wrap">
+        <div class="screen-label">SCREEN 1.1</div>
+        <div class="screen-name">ホーム ── 今日のレクと予定</div>
+        <div class="device-tablet-p">
+          <div class="fh-screen">
+            <!-- top bar -->
+            <div class="fh-top">
+              <div class="fh-facility">
+                <div class="avatar amber">あ</div>
+                <div>
+                  <div class="fh-facility-name">あおぞらの家</div>
+                  <div class="fh-facility-sub">担当: 林さん</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <div class="fh-icon-btn">
+                  <svg class="ico" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                  <span class="fh-dot"></span>
+                </div>
+                <div class="fh-icon-btn">
+                  <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- greeting -->
+            <div class="fh-greet">
+              <h2>おはようございます</h2>
+              <p>今日は穏やかな1日になりますように</p>
+            </div>
+
+            <!-- today's rec -->
+            <div class="fh-section-label">
+              <span>今日のレクリエーション</span>
+              <span class="count">1件</span>
+            </div>
+
+            <div class="fh-rec-card">
+              <div class="fh-rec-top">
+                <div>
+                  <div class="fh-rec-time">14:00</div>
+                  <div class="fh-rec-date">— 15:00</div>
+                </div>
+                <span class="pill teal">実施前</span>
+              </div>
+              <div class="fh-rec-title">ピアノで歌う 昭和歌謡レク</div>
+              <div class="fh-rec-supporter">
+                <div class="avatar sm">田</div>
+                <div>田中 美咲 さん　・　★ 4.8 / 32件</div>
+              </div>
+            </div>
+
+            <!-- stats -->
+            <div class="fh-stats">
+              <div class="fh-stat">
+                <div class="fh-stat-val">12</div>
+                <div class="fh-stat-label">今月実施</div>
+              </div>
+              <div class="fh-stat">
+                <div class="fh-stat-val">65%</div>
+                <div class="fh-stat-label">予算消化</div>
+              </div>
+              <div class="fh-stat">
+                <div class="fh-stat-val">5/14</div>
+                <div class="fh-stat-label">次回予定</div>
+              </div>
+            </div>
+
+            <!-- cta -->
+            <div class="fh-cta">
+              <div class="fh-cta-btn">
+                <span>新しいレクを依頼する</span>
+                <svg class="ico" viewBox="0 0 24 24" stroke="white"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+
+            <!-- nav -->
+            <div class="fh-nav">
+              <div class="fh-nav-item active">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z"/></svg>
+                <span>ホーム</span>
+              </div>
+              <div class="fh-nav-item">
+                <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <span>探す</span>
+              </div>
+              <div class="fh-nav-item">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span>依頼中</span>
+              </div>
+              <div class="fh-nav-item">
+                <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>履歴</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== Screen 2: Request Flow =========== -->
+      <div class="screen-wrap">
+        <div class="screen-label">SCREEN 1.2</div>
+        <div class="screen-name">レク依頼フロー ── 種類を選ぶ</div>
+        <div class="device-tablet-p">
+          <div class="fr-screen">
+            <!-- top -->
+            <div class="fr-top">
+              <div class="fr-back">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>戻る</span>
+              </div>
+              <div class="fr-step"><span class="current">1</span> / 3 ステップ</div>
+            </div>
+
+            <!-- progress -->
+            <div class="fr-progress">
+              <span class="current"></span><span></span><span></span>
+            </div>
+
+            <!-- title -->
+            <h2 class="fr-title">どんなレクを<br>依頼しますか?</h2>
+            <p class="fr-sub">カテゴリーを選んでください</p>
+
+            <!-- categories -->
+            <div class="fr-categories">
+              <div class="fr-cat selected">
+                <div class="fr-cat-ico">
+                  <svg class="ico" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </div>
+                <div class="fr-cat-name">音楽</div>
+                <div class="fr-cat-meta">12のプラン</div>
+              </div>
+              <div class="fr-cat">
+                <div class="fr-cat-ico">
+                  <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v6M9 11h6M9 21l3-7 3 7"/></svg>
+                </div>
+                <div class="fr-cat-name">体操・運動</div>
+                <div class="fr-cat-meta">8のプラン</div>
+              </div>
+              <div class="fr-cat">
+                <div class="fr-cat-ico">
+                  <svg class="ico" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/></svg>
+                </div>
+                <div class="fr-cat-name">工作・手芸</div>
+                <div class="fr-cat-meta">9のプラン</div>
+              </div>
+              <div class="fr-cat">
+                <div class="fr-cat-ico">
+                  <svg class="ico" viewBox="0 0 24 24"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"/><line x1="3" y1="22" x2="21" y2="22"/></svg>
+                </div>
+                <div class="fr-cat-name">ゲーム</div>
+                <div class="fr-cat-meta">14のプラン</div>
+              </div>
+            </div>
+
+            <!-- recommendation -->
+            <div class="fr-rec-section">
+              <div class="fr-rec-label">あなたの施設におすすめ</div>
+              <div class="fr-rec-mini">
+                <div class="avatar amber">田</div>
+                <div class="fr-rec-mini-info">
+                  <div class="fr-rec-mini-title">ピアノで歌う 昭和歌謡</div>
+                  <div class="fr-rec-mini-meta">田中さん　・　★ 4.8　・　過去2回実施</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- bottom CTA -->
+            <div class="fr-bottom">
+              <button class="btn btn-primary btn-block">
+                次へ進む
+                <svg class="ico" viewBox="0 0 24 24" stroke="white"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- notes -->
+    <div class="role-notes">
+      <div>
+        <h4>設計のポイント</h4>
+        <ul>
+          <li>挨拶は静かに ── 業務ツールだが「ようこそ」より「おはようございます」</li>
+          <li>大きな数字は「時刻」と「件数」のみ。それ以外は控えめに</li>
+          <li>CTAは画面に1つだけ。迷わせない</li>
+          <li>下部ナビは4項目に絞る</li>
+        </ul>
+      </div>
+      <div>
+        <h4>業務との接続</h4>
+        <ul>
+          <li>「実施前」「実施中」「完了」のステータスはバックエンドの状態機械と直結</li>
+          <li>依頼フローのStep完了で「申込中」状態を生成 → サポーターへ自動通知</li>
+          <li>「あなたへの推薦」は過去履歴 + 適合スコア（Track 02）の結果を表示</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ROLE 02: SUPPORTER
+       ============================================================ -->
+  <section class="role-section">
+    <div class="role-header">
+      <div>
+        <div class="role-num">ROLE 02</div>
+        <div class="role-title">サポーター</div>
+      </div>
+      <div class="role-meta">
+        <strong>想定デバイス</strong>　スマートフォン<br>
+        <strong>主な利用者</strong>　レク介護士（個人事業主・副業含む）<br>
+        <strong>利用シーン</strong>　移動中・現場での確認と入力
+      </div>
+    </div>
+
+    <div class="screens-row">
+
+      <!-- =========== Screen 2.1: Supporter Home =========== -->
+      <div class="screen-wrap">
+        <div class="screen-label">SCREEN 2.1</div>
+        <div class="screen-name">ホーム ── 今日の予定</div>
+        <div class="device-mobile">
+          <div class="sh-screen">
+            <!-- top -->
+            <div class="sh-top">
+              <div class="sh-logo">レクサポ</div>
+              <div class="fh-icon-btn" style="width:32px; height:32px;">
+                <svg class="ico sm" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                <span class="fh-dot"></span>
+              </div>
+            </div>
+
+            <!-- greeting -->
+            <div class="sh-greet">
+              <h2>こんにちは、田中さん</h2>
+              <div class="sh-greet-sub">今日のレクは1件です</div>
+            </div>
+
+            <!-- today's rec -->
+            <div class="sh-rec">
+              <div class="sh-rec-top">
+                <div>
+                  <div class="sh-rec-time">14:00</div>
+                  <div class="sh-rec-date">2026年5月12日(火)</div>
+                </div>
+                <span class="pill teal">受領済</span>
+              </div>
+              <div class="sh-rec-facility">あおぞらの家</div>
+              <div class="sh-rec-title">ピアノで歌う 昭和歌謡</div>
+              <div class="sh-rec-row">
+                <svg class="ico sm" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>東京都港区南青山 ・ 徒歩7分</span>
+              </div>
+              <div class="sh-rec-row">
+                <svg class="ico sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>60分 ・ 参加者 約10名</span>
+              </div>
+              <div class="sh-rec-actions">
+                <button>詳細を見る</button>
+                <button class="primary">経路</button>
+              </div>
+            </div>
+
+            <!-- week stats -->
+            <div class="sh-week">
+              <div class="sh-week-item">
+                <div class="sh-week-val">3</div>
+                <div class="sh-week-lbl">今週の予定</div>
+              </div>
+              <div class="sh-week-item">
+                <div class="sh-week-val">¥85,400</div>
+                <div class="sh-week-lbl">今月見込</div>
+              </div>
+              <div class="sh-week-item">
+                <div class="sh-week-val">★4.9</div>
+                <div class="sh-week-lbl">平均評価</div>
+              </div>
+            </div>
+
+            <!-- incoming alert -->
+            <div class="sh-alert">
+              <svg class="ico sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <div>
+                <span class="sh-alert-strong">新着依頼が2件</span> 届いています
+              </div>
+            </div>
+
+            <!-- nav -->
+            <div class="sh-nav">
+              <div class="fh-nav-item active">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z"/></svg>
+                <span>ホーム</span>
+              </div>
+              <div class="fh-nav-item">
+                <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>予定</span>
+              </div>
+              <div class="fh-nav-item">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span>受信</span>
+              </div>
+              <div class="fh-nav-item">
+                <svg class="ico" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>実績</span>
+              </div>
+              <div class="fh-nav-item">
+                <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>
+                <span>マイ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== Screen 2.2: Confirmation Form =========== -->
+      <div class="screen-wrap">
+        <div class="screen-label">SCREEN 2.2 ── 重要</div>
+        <div class="screen-name">実施確認書 ── モバイル入力</div>
+        <div class="device-mobile">
+          <div class="sc-screen">
+            <!-- top -->
+            <div class="sc-top">
+              <div class="fr-back" style="font-size:12px;">
+                <svg class="ico sm" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </div>
+              <div class="sc-top-title">実施確認書</div>
+              <div style="font-family:var(--num); font-size:11px; color:var(--ink-3);">2/5</div>
+            </div>
+
+            <!-- progress -->
+            <div class="sc-progress-line"></div>
+
+            <!-- context -->
+            <div class="sc-context">
+              <div class="sc-context-name">あおぞらの家 ── ピアノで歌う 昭和歌謡</div>
+              <div class="sc-context-meta">2026年5月12日(火) 14:00-15:00</div>
+            </div>
+
+            <!-- scrollable form -->
+            <div class="sc-scroll">
+
+              <!-- 参加人数 -->
+              <div class="sc-field">
+                <div class="sc-field-label">参加人数</div>
+                <div class="sc-stepper">
+                  <button class="sc-step-btn">−</button>
+                  <div class="sc-step-val">8 <small>名</small></div>
+                  <button class="sc-step-btn">+</button>
+                </div>
+              </div>
+
+              <!-- 反応 -->
+              <div class="sc-field">
+                <div class="sc-field-label">参加者の反応は?</div>
+                <div class="sc-faces">
+                  <div class="sc-face">😟</div>
+                  <div class="sc-face">😐</div>
+                  <div class="sc-face">🙂</div>
+                  <div class="sc-face selected">😊</div>
+                  <div class="sc-face">🥰</div>
+                </div>
+              </div>
+
+              <!-- 写真 -->
+              <div class="sc-field">
+                <div class="sc-field-label">写真 <span class="optional">3枚まで・任意</span></div>
+                <div class="sc-photos">
+                  <div class="sc-photo filled"></div>
+                  <div class="sc-photo filled"></div>
+                  <div class="sc-photo">
+                    <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M9 6l1-2h4l1 2"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ひとこと -->
+              <div class="sc-field">
+                <div class="sc-field-label">ひとことコメント <span class="optional">任意</span></div>
+                <div class="sc-input-row">
+                  <textarea class="sc-input" rows="2" placeholder="例)『青い山脈』で皆さん大合唱でした..."></textarea>
+                  <div class="sc-mic">
+                    <svg class="ico" viewBox="0 0 24 24" stroke="white"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- submit -->
+            <div class="sc-submit">
+              <button class="btn btn-accent btn-block">送信する</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- notes -->
+    <div class="role-notes">
+      <div>
+        <h4>設計のポイント</h4>
+        <ul>
+          <li>大きな数字（時刻・金額）で「次に何があるか」「いくら稼いだか」を即座に</li>
+          <li>実施確認書はカード型で1項目=1動作。スクロール最小化</li>
+          <li>5段階評価は表情アイコンで視覚的に。文字を読まなくても選べる</li>
+          <li>音声入力ボタンは常設 ── 移動中・現場での実用性</li>
+        </ul>
+      </div>
+      <div>
+        <h4>業務との接続</h4>
+        <ul>
+          <li>実施確認書の送信で「実施完了」状態へ遷移、業務委託報告書を自動生成</li>
+          <li>写真・コメント・人数・満足度は将来の品質スコア（Track 02）の入力源</li>
+          <li>「新着依頼」は推薦エンジン（Track 02 / Q3）からpush</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ROLE 03: STAFF
+       ============================================================ -->
+  <section class="role-section">
+    <div class="role-header">
+      <div>
+        <div class="role-num">ROLE 03</div>
+        <div class="role-title">部門担当者</div>
+      </div>
+      <div class="role-meta">
+        <strong>想定デバイス</strong>　PC / 大型タブレット<br>
+        <strong>主な利用者</strong>　BCC内の運営担当・管理本部<br>
+        <strong>利用シーン</strong>　承認業務・全体状況の監視
+      </div>
+    </div>
+
+    <div class="screens-row">
+
+      <!-- =========== Screen 3.1: Staff Dashboard =========== -->
+      <div class="screen-wrap" style="width:100%;">
+        <div class="screen-label">SCREEN 3.1</div>
+        <div class="screen-name">ダッシュボード ── 全体状況</div>
+        <div class="device-tablet-l">
+          <div class="sd-screen">
+            <!-- top -->
+            <div class="sd-top">
+              <div class="sd-brand">
+                <div class="sd-brand-mark">B</div>
+                <div>
+                  <div class="sd-brand-name">レクサポ 管理コンソール</div>
+                  <div class="sd-brand-sub">BCC ヘルスケア</div>
+                </div>
+              </div>
+              <div class="sd-search">
+                <svg class="ico sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <span>施設・サポーター・依頼を検索...</span>
+              </div>
+              <div class="sd-top-right">
+                <div class="fh-icon-btn" style="width:30px; height:30px;">
+                  <svg class="ico sm" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/></svg>
+                </div>
+                <div class="avatar sm">山</div>
+              </div>
+            </div>
+
+            <!-- body -->
+            <div class="sd-body">
+              <!-- main -->
+              <div class="sd-main">
+                <div>
+                  <div class="sd-page-title">ダッシュボード</div>
+                  <div class="sd-page-meta">2026年5月 ・ 全施設・全サポーター</div>
+                </div>
+
+                <!-- KPIs -->
+                <div class="sd-kpis">
+                  <div class="sd-kpi">
+                    <div class="sd-kpi-label">今月実施</div>
+                    <div class="sd-kpi-row">
+                      <div class="sd-kpi-val">147</div>
+                      <div class="sd-kpi-delta">+12%</div>
+                    </div>
+                  </div>
+                  <div class="sd-kpi">
+                    <div class="sd-kpi-label">今月売上</div>
+                    <div class="sd-kpi-row">
+                      <div class="sd-kpi-val">¥2.84M</div>
+                      <div class="sd-kpi-delta">+8%</div>
+                    </div>
+                  </div>
+                  <div class="sd-kpi">
+                    <div class="sd-kpi-label">アクティブ施設</div>
+                    <div class="sd-kpi-row">
+                      <div class="sd-kpi-val">38</div>
+                      <div class="sd-kpi-delta">+3</div>
+                    </div>
+                  </div>
+                  <div class="sd-kpi">
+                    <div class="sd-kpi-label">アクティブサポーター</div>
+                    <div class="sd-kpi-row">
+                      <div class="sd-kpi-val">62</div>
+                      <div class="sd-kpi-delta">+5</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- chart -->
+                <div class="sd-chart">
+                  <div class="sd-chart-head">
+                    <div class="sd-chart-title">月次実施件数の推移</div>
+                    <div class="sd-chart-tabs">
+                      <span>3ヶ月</span>
+                      <span class="active">6ヶ月</span>
+                      <span>1年</span>
+                    </div>
+                  </div>
+                  <!-- simplified chart -->
+                  <svg viewBox="0 0 460 130" style="width:100%; height:auto;">
+                    <defs>
+                      <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#2D6B5E" stop-opacity="0.18"/>
+                        <stop offset="100%" stop-color="#2D6B5E" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- gridlines -->
+                    <line x1="30" y1="20" x2="450" y2="20" stroke="#F0EBDE" stroke-width="0.5" stroke-dasharray="2 2"/>
+                    <line x1="30" y1="60" x2="450" y2="60" stroke="#F0EBDE" stroke-width="0.5" stroke-dasharray="2 2"/>
+                    <line x1="30" y1="100" x2="450" y2="100" stroke="#F0EBDE" stroke-width="0.5"/>
+                    <!-- y labels -->
+                    <text x="20" y="24" font-size="9" fill="#8E887E" text-anchor="end" font-family="DM Sans">200</text>
+                    <text x="20" y="64" font-size="9" fill="#8E887E" text-anchor="end" font-family="DM Sans">100</text>
+                    <text x="20" y="104" font-size="9" fill="#8E887E" text-anchor="end" font-family="DM Sans">0</text>
+                    <!-- area -->
+                    <path d="M40 85 L110 78 L180 70 L250 60 L320 50 L390 38 L440 32 L440 100 L40 100 Z" fill="url(#grad)"/>
+                    <!-- line -->
+                    <path d="M40 85 L110 78 L180 70 L250 60 L320 50 L390 38 L440 32" stroke="#2D6B5E" stroke-width="1.5" fill="none"/>
+                    <!-- dots -->
+                    <circle cx="40" cy="85" r="2.5" fill="#2D6B5E"/>
+                    <circle cx="110" cy="78" r="2.5" fill="#2D6B5E"/>
+                    <circle cx="180" cy="70" r="2.5" fill="#2D6B5E"/>
+                    <circle cx="250" cy="60" r="2.5" fill="#2D6B5E"/>
+                    <circle cx="320" cy="50" r="2.5" fill="#2D6B5E"/>
+                    <circle cx="390" cy="38" r="2.5" fill="#2D6B5E"/>
+                    <circle cx="440" cy="32" r="3" fill="white" stroke="#2D6B5E" stroke-width="2"/>
+                    <!-- x labels -->
+                    <text x="40" y="118" font-size="9" fill="#8E887E" text-anchor="middle" font-family="DM Sans">12月</text>
+                    <text x="110" y="118" font-size="9" fill="#8E887E" text-anchor="middle" font-family="DM Sans">1月</text>
+                    <text x="180" y="118" font-size="9" fill="#8E887E" text-anchor="middle" font-family="DM Sans">2月</text>
+                    <text x="250" y="118" font-size="9" fill="#8E887E" text-anchor="middle" font-family="DM Sans">3月</text>
+                    <text x="320" y="118" font-size="9" fill="#8E887E" text-anchor="middle" font-family="DM Sans">4月</text>
+                    <text x="390" y="118" font-size="9" fill="#8E887E" text-anchor="middle" font-family="DM Sans">5月</text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- side: alerts -->
+              <div class="sd-side">
+                <h4>要対応</h4>
+
+                <div class="sd-alert amber">
+                  <div class="sd-alert-dot"></div>
+                  <div class="sd-alert-content">
+                    <div class="sd-alert-title">承認待ち</div>
+                    <div class="sd-alert-meta">レク登録 3件</div>
+                  </div>
+                  <div class="sd-alert-count">3</div>
+                </div>
+
+                <div class="sd-alert amber">
+                  <div class="sd-alert-dot"></div>
+                  <div class="sd-alert-content">
+                    <div class="sd-alert-title">未入金</div>
+                    <div class="sd-alert-meta">期日超過 2件</div>
+                  </div>
+                  <div class="sd-alert-count">2</div>
+                </div>
+
+                <div class="sd-alert">
+                  <div class="sd-alert-dot" style="background:var(--ink-3);"></div>
+                  <div class="sd-alert-content">
+                    <div class="sd-alert-title">トラブル報告</div>
+                    <div class="sd-alert-meta">対応中 1件</div>
+                  </div>
+                  <div class="sd-alert-count" style="color:var(--ink-2);">1</div>
+                </div>
+
+                <h4 style="margin-top:8px;">最近の活動</h4>
+                <div style="font-size:10px; color:var(--ink-3); line-height:1.7;">
+                  <div style="padding:6px 0; border-bottom:1px solid var(--rule-soft);">
+                    <strong style="color:var(--ink-2); font-weight:500;">田中さん</strong> が新しいレクを登録
+                    <div style="color:var(--ink-4); font-size:9px;">5分前</div>
+                  </div>
+                  <div style="padding:6px 0; border-bottom:1px solid var(--rule-soft);">
+                    <strong style="color:var(--ink-2); font-weight:500;">あおぞらの家</strong> が依頼を作成
+                    <div style="color:var(--ink-4); font-size:9px;">22分前</div>
+                  </div>
+                  <div style="padding:6px 0;">
+                    <strong style="color:var(--ink-2); font-weight:500;">佐藤さん</strong> が実施確認書を送信
+                    <div style="color:var(--ink-4); font-size:9px;">1時間前</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== Screen 3.2: Approval Queue =========== -->
+      <div class="screen-wrap" style="width:100%;">
+        <div class="screen-label">SCREEN 3.2</div>
+        <div class="screen-name">承認キュー ── レク登録</div>
+        <div class="device-tablet-l">
+          <div class="sq-screen">
+            <!-- top tabs -->
+            <div class="sq-tabs">
+              <div class="sq-tab active">
+                <span>レク登録</span>
+                <span class="count">3</span>
+              </div>
+              <div class="sq-tab">
+                <span>サポーター登録</span>
+                <span class="count">1</span>
+              </div>
+              <div class="sq-tab">
+                <span>例外対応</span>
+                <span class="count">2</span>
+              </div>
+            </div>
+
+            <!-- body -->
+            <div class="sq-body">
+              <!-- list -->
+              <div class="sq-list">
+                <div class="sq-filters">
+                  <div class="sq-filter active">すべて</div>
+                  <div class="sq-filter">自動承認可</div>
+                  <div class="sq-filter">要確認</div>
+                </div>
+
+                <div class="sq-item selected">
+                  <div class="avatar">田</div>
+                  <div class="sq-item-body">
+                    <div class="sq-item-top">
+                      <div class="sq-item-name">田中 美咲さん</div>
+                      <div class="sq-item-time">5分前</div>
+                    </div>
+                    <div class="sq-item-preview">ピアノ伴奏付き 季節の童謡・唱歌レクリエーション</div>
+                    <div class="sq-item-meta">
+                      <span class="sq-score">★ 4.8 ・ 32件</span>
+                      <span>音楽カテゴリ</span>
+                      <span class="pill teal" style="font-size:9px; padding:1px 6px;">自動承認可</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sq-item">
+                  <div class="avatar amber">山</div>
+                  <div class="sq-item-body">
+                    <div class="sq-item-top">
+                      <div class="sq-item-name">山田 健一さん</div>
+                      <div class="sq-item-time">28分前</div>
+                    </div>
+                    <div class="sq-item-preview">手芸：折り紙で季節の花を作る</div>
+                    <div class="sq-item-meta">
+                      <span class="sq-score">★ 4.5 ・ 12件</span>
+                      <span>工作カテゴリ</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sq-item">
+                  <div class="avatar gray">新</div>
+                  <div class="sq-item-body">
+                    <div class="sq-item-top">
+                      <div class="sq-item-name">佐藤 真理さん</div>
+                      <div class="sq-item-time">2時間前</div>
+                    </div>
+                    <div class="sq-item-preview">脳トレ：昔のCMソング・連想ゲーム</div>
+                    <div class="sq-item-meta">
+                      <span style="color:var(--ink-3);">★ - ・ 初回登録</span>
+                      <span class="pill warn" style="font-size:9px; padding:1px 6px;">要確認</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- detail panel -->
+              <div class="sq-detail">
+                <div class="sq-detail-head">
+                  <div class="avatar lg">田</div>
+                  <div>
+                    <div class="sq-detail-title">田中 美咲</div>
+                    <div class="sq-detail-sub">レク登録 ・ 5分前</div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="font-size:11px; color:var(--ink-3); margin-bottom:6px;">レク内容</div>
+                  <div class="sq-detail-content">
+                    ピアノ伴奏付きで、季節に合わせた童謡・唱歌を歌います。参加者の好きな曲リクエストにも対応。
+                  </div>
+                </div>
+
+                <dl class="sq-detail-rows">
+                  <div class="sq-detail-row"><dt>カテゴリ</dt><dd>音楽</dd></div>
+                  <div class="sq-detail-row"><dt>所要時間</dt><dd>60分</dd></div>
+                  <div class="sq-detail-row"><dt>報酬</dt><dd>¥12,000</dd></div>
+                  <div class="sq-detail-row"><dt>信頼スコア</dt><dd style="color:var(--teal-deep);">4.8 / 5.0</dd></div>
+                  <div class="sq-detail-row"><dt>過去実績</dt><dd>32件</dd></div>
+                </dl>
+
+                <div class="sq-actions">
+                  <button>差し戻し</button>
+                  <button class="approve">承認</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- notes -->
+    <div class="role-notes">
+      <div>
+        <h4>設計のポイント</h4>
+        <ul>
+          <li>KPIは4つに絞る ── 多すぎると判断が遅くなる</li>
+          <li>「要対応」を右ペインに常駐 ── ダッシュボードを開いた瞬間にアラート確認</li>
+          <li>承認キューはリスト + 詳細の2ペイン構造で、迷わず承認/差し戻しに到達</li>
+          <li>信頼スコア・過去実績を最前面に表示 ── 判断材料の即時提示</li>
+        </ul>
+      </div>
+      <div>
+        <h4>業務との接続</h4>
+        <ul>
+          <li>「自動承認可」のpillはTrack 02のスコアが基準を満たした場合に出現</li>
+          <li>Q3〜Q4で「自動承認可」は人手を介さず通過、人間レビューは「要確認」のみに</li>
+          <li>承認/差し戻しのデータはマッチング推薦エンジンの学習データに供給</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="foot">
+    <div>
+      <div class="foot-mark">健やかさは、めぐる。</div>
+      <div style="margin-top:6px;">レクサポ UI イメージ v1 ・ 仮説ベース</div>
+    </div>
+    <div style="text-align:right;">
+      <div>2026年5月</div>
+      <div>BCC ヘルスケア / 内部資料</div>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
