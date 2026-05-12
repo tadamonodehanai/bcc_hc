@@ -201,6 +201,11 @@
     color: var(--text-secondary);
     max-width: 680px;
   }
+  .section-lead strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .section.dark .section-lead strong { color: var(--accent-gold); }
 
   /* Challenge list */
   .challenge-list {
@@ -472,6 +477,32 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    position: relative;
+  }
+  .criteria-card.primary {
+    background: var(--bg-deep);
+    border-top-color: var(--accent-gold);
+    border-top-width: 4px;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(31, 72, 71, 0.18);
+  }
+  .criteria-card.primary .criteria-num { color: var(--accent-gold); }
+  .criteria-card.primary .criteria-name { color: var(--text-on-deep); }
+  .criteria-card.primary .criteria-q {
+    color: rgba(242, 236, 222, 0.88);
+    border-top-color: rgba(184, 146, 74, 0.3);
+  }
+  .criteria-mark {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 3px 8px;
+    vertical-align: middle;
+    margin-left: 4px;
+    font-weight: 400;
   }
   .criteria-num {
     font-family: var(--font-display);
@@ -591,6 +622,97 @@
   }
   .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
 
+  /* §00 Essence section */
+  .emph-warm { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+
+  .essence-block {
+    margin-top: 48px;
+    padding: 48px 44px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent-warm);
+  }
+  .essence-block.accent {
+    background: var(--bg-section);
+    border-left-color: var(--accent-deep);
+  }
+  .essence-block + .essence-block { margin-top: 24px; }
+  .essence-head {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .essence-block.accent .essence-tag { color: var(--accent-deep); }
+  .essence-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+  }
+  .essence-body {
+    font-size: 15px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .essence-body:last-child { margin-bottom: 0; }
+  .essence-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+  .essence-table {
+    margin: 24px 0;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .essence-row {
+    display: grid;
+    grid-template-columns: 140px 200px 1fr;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-row:last-child { border-bottom: none; }
+  .essence-row > span {
+    padding: 18px 20px;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    border-right: 1px solid var(--border-soft);
+  }
+  .essence-row > span:last-child { border-right: none; }
+  .essence-row-head > span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    background: var(--bg-section);
+  }
+  .essence-row .essence-col-label {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .essence-row.strategic .essence-col-label {
+    color: var(--accent-warm);
+  }
+  .essence-row.strategic {
+    background: rgba(184, 92, 61, 0.04);
+  }
+
   /* Print */
   @media print {
     .banner { position: static; }
@@ -617,6 +739,11 @@
     .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
     .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
     .pagenav-side.right { text-align: left; align-items: flex-start; }
+    .essence-block { padding: 32px 24px; }
+    .essence-title { font-size: 21px; }
+    .essence-row { grid-template-columns: 1fr; }
+    .essence-row > span { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    .essence-row > span:last-child { border-bottom: none; }
   }
 </style>
 </head>
@@ -625,7 +752,7 @@
 <div class="banner">
   <div class="banner-inner">
     <a href="index.html" class="banner-link">介護レク広場 14期戦略｜Document A</a>
-    <span class="banner-tag">v0.1 / 2026.05 / DRAFT</span>
+    <span class="banner-tag">v0.2 / 2026.05 / DRAFT</span>
   </div>
 </div>
 
@@ -638,8 +765,8 @@
         14期の<em>ロードマップ</em>。
       </h1>
       <p class="hero-subtitle">
-        介護レク広場を「素材を探す場」から、<br>
-        現場と業界をつなぐ事業へと再構築する。
+        15年積み上げた戦略資産を、もう一度働かせ直す。<br>
+        ＢＣＣの介護領域における独自性を、14期で再起動する。
       </p>
       <div class="hero-meta">
         <div class="hero-meta-item">
@@ -662,11 +789,66 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
+      <span class="section-number">§ 00　広場の本質</span>
+      <h2 class="section-title">広場は、ＢＣＣの<br>介護領域における<em class="emph-warm">独自性</em>である。</h2>
+    </div>
+    <p class="section-lead">
+      14期戦略を組み立てる前に、ひとつだけ確認しておくべき前提がある。介護レク広場は、ＢＣＣの介護領域における<strong>独自性そのもの</strong>であり、15年にわたってクライアントとの接点を生み出してきた<strong>戦略資産</strong>である。「広場があるからＢＣＣと繋がる」という関係性は、具体的な実例の積み重ねによって裏打ちされてきた。この事実を起点に置かないと、スリム化の議論は資産を毀損する方向に進みかねない。
+    </p>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">PART 01 — 価値の二層構造</span>
+        <h3 class="essence-title">広場の価値は、二つの層で存在している。</h3>
+      </div>
+      <p class="essence-body">
+        広場の価値は、これまで「ユーザーに届く直接価値」だけで語られがちだった。しかし15年の歴史を振り返ると、もうひとつの層がはっきりと存在している。ＢＣＣという事業会社にとっての、戦略的な価値である。
+      </p>
+      <div class="essence-table">
+        <div class="essence-row essence-row-head">
+          <span class="essence-col-label">層</span>
+          <span class="essence-col-target">受益者</span>
+          <span class="essence-col-content">価値の中身</span>
+        </div>
+        <div class="essence-row">
+          <span class="essence-col-label">直接価値</span>
+          <span class="essence-col-target">介護現場の個人ユーザー</span>
+          <span class="essence-col-content">素材、情報、レクのヒント、現場の負担軽減</span>
+        </div>
+        <div class="essence-row strategic">
+          <span class="essence-col-label">戦略価値</span>
+          <span class="essence-col-target">ＢＣＣ（事業会社として）</span>
+          <span class="essence-col-content">①営業の入り口　②実績ベースで語れるトーク素材　③顧客接点としての機能　④介護業界における立ち位置の証明</span>
+        </div>
+      </div>
+      <p class="essence-body">
+        これまでの議論は、直接価値の最大化に偏っていた。しかし広場の本当の貢献は、後者の戦略価値にこそある。両者は対立せず、並列で重要である。
+      </p>
+    </div>
+
+    <div class="essence-block accent">
+      <div class="essence-head">
+        <span class="essence-tag">PART 02 — 14期の中心テーマ</span>
+        <h3 class="essence-title">「資産がある」と<br>「資産が働いている」は、別である。</h3>
+      </div>
+      <p class="essence-body">
+        ここで、ひとつ大きな問いがある。15年積み上げた実績ベースの独自性は、確かに存在する。<strong>しかしそれが、現在の営業現場や対外発信において、武器として現役で機能しているかは別問題である。</strong>
+      </p>
+      <p class="essence-body">
+        この事業に必要なのは、新しい価値を足すことではない。既にある資産を、<strong>もう一度働かせ直すこと</strong>である。14期の中心テーマは、この問いへの答えを出すことになる。
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
       <span class="section-number">§ 01　現状認識</span>
       <h2 class="section-title">広場が抱える、<br>5つの構造的課題。</h2>
     </div>
     <p class="section-lead">
-      広場は立ち上げから15年、7万人の会員基盤と一定の業界認知を持つ一方で、事業としては5つの構造的課題を抱えている。これらは個別の問題ではなく、互いに連鎖して「次の手」を打ちにくくしている。
+      これらの課題はいずれも事業運営の現場で生まれた現実的な悩みである。ただし、§00 で述べた前提を共有した上で取り組む必要がある。広場はＢＣＣの戦略資産であり、スリム化の対象は「資産そのもの」ではなく「資産の働かせ方」である。広場は立ち上げから15年、7万人の会員基盤と一定の業界認知を持つ一方で、事業としては5つの構造的課題を抱えている。これらは個別の問題ではなく、互いに連鎖して「次の手」を打ちにくくしている。
     </p>
     <div class="challenge-list">
       <div class="challenge-item">
@@ -751,7 +933,7 @@
       <div class="shift-card">
         <span class="shift-tag">SHIFT 04 — Discipline</span>
         <span class="shift-title">まず価値を加える前に、<br>スリム化を経営する。</span>
-        <span class="shift-body">新しい機能を足す前に、現在ある資産を「残す・削る・磨く」で仕分ける。スリム化によって生まれた余力を、磨く対象に集中投資する。「やめる勇気」を経営判断として明文化する。</span>
+        <span class="shift-body">新しい機能を足す前に、現在ある資産を「残す・削る・磨く」で仕分ける。スリム化で生まれた余力は、磨く対象、そして「資産を働かせ直す」対象に集中投資する。削るのは"資産そのもの"ではなく、"資産を眠らせている運用の重さ"である。</span>
         <div class="shift-arrow">
           <span class="shift-from">足し算経営</span>
           <span class="shift-mark">→</span>
@@ -947,7 +1129,8 @@
       <h2 class="section-title">残す・削る・磨くは、<br>3つの基準で決める。</h2>
     </div>
     <p class="section-lead">
-      仕分けるフェーズで迷わないために、判断基準を先に合意しておく。コンテンツ・チャネル・キャンペーンなど、対象すべてに同じ3基準で○△×をつけることで、意思決定を情緒ではなく論理で進める。
+      仕分けるフェーズで迷わないために、判断基準を先に合意しておく。コンテンツ・チャネル・キャンペーンなど、対象すべてに同じ3基準で○△×をつけることで、意思決定を情緒ではなく論理で進める。<br><br>
+      <strong>3つの基準は同列ではない。ブランドベースを最も重く扱う。</strong>広場の存在意義はＢＣＣヘルスケアカンパニーへの戦略貢献にあり、これを毀損する判断は他の基準で正当化できない。
     </p>
     <div class="criteria-grid">
       <div class="criteria-card">
@@ -955,10 +1138,10 @@
         <span class="criteria-name">利用ベース</span>
         <span class="criteria-q">直近12ヶ月のアクティブ率と運用工数（コスト）が見合っているか。コストの割に動かない資産は、まず候補に挙げる。</span>
       </div>
-      <div class="criteria-card">
+      <div class="criteria-card primary">
         <span class="criteria-num">02</span>
-        <span class="criteria-name">ブランドベース</span>
-        <span class="criteria-q">ＢＣＣのヘルスケア事業全体の中で、広場が担う固有のポジションを強化するか。他事業と重複する機能か、独自価値か。</span>
+        <span class="criteria-name">ブランドベース　<span class="criteria-mark">★最重要</span></span>
+        <span class="criteria-q">ＢＣＣの介護領域の独自性を構成し、かつ営業・顧客接点として現役で機能しうるか。資産として持っているだけでは不十分で、武器として働く状態を作れるかを問う。</span>
       </div>
       <div class="criteria-card">
         <span class="criteria-num">03</span>
@@ -1026,7 +1209,7 @@
   <div class="container">
     <p class="footer-text">
       介護レク広場 14期戦略 ／ Document A — 事業の方向性と14期ロードマップ<br>
-      検討稿 v0.1 ／ 2026年5月 ／ 内部討議用
+      検討稿 v0.2 ／ 2026年5月 ／ 内部討議用
     </p>
   </div>
 </footer>

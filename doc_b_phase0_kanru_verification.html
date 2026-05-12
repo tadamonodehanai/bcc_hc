@@ -228,6 +228,9 @@
     gap: 24px;
     margin-top: 40px;
   }
+  .mission-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
   .mission-card {
     padding: 36px 32px;
     background: var(--bg-card);
@@ -235,10 +238,16 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    border-top: 3px solid var(--border-line);
   }
+  .mission-card.accent {
+    border-top-color: var(--accent-warm);
+    background: linear-gradient(to bottom, rgba(184, 92, 61, 0.04), var(--bg-card) 60%);
+  }
+  .mission-card.accent .mission-card-title { color: var(--accent-warm); }
   .mission-card-title {
     font-family: var(--font-display);
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--text-primary);
     line-height: 1.6;
@@ -284,6 +293,26 @@
   .domain-overview-card.money .dom-hyp { color: rgba(242, 236, 222, 0.8); }
   .domain-overview-card.money::after {
     content: "★ 最重要";
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    padding: 4px 8px;
+    border: 1px solid var(--accent-gold);
+  }
+  .domain-overview-card.strategic {
+    background: var(--bg-deep);
+    border-color: var(--bg-deep);
+    color: var(--text-on-deep);
+  }
+  .domain-overview-card.strategic .dom-tag { color: var(--accent-gold); }
+  .domain-overview-card.strategic .dom-name { color: var(--text-on-deep); }
+  .domain-overview-card.strategic .dom-hyp { color: rgba(242, 236, 222, 0.8); }
+  .domain-overview-card.strategic::after {
+    content: "★ 戦略要";
     position: absolute;
     top: 16px;
     right: 16px;
@@ -345,6 +374,39 @@
     border-color: var(--accent-gold);
   }
   .domain-detail.money .domain-decision-label { color: var(--accent-gold); }
+
+  /* Domain 06 - Strategic (暗緑系: 顧客接点・戦略資産) */
+  .domain-detail.strategic {
+    background: var(--bg-deep);
+    border-color: var(--bg-deep);
+    color: var(--text-on-deep);
+  }
+  .domain-detail.strategic .domain-head-name { color: var(--text-on-deep); }
+  .domain-detail.strategic .domain-head { border-color: rgba(184, 146, 74, 0.25); }
+  .domain-detail.strategic .domain-head-tag { color: var(--accent-gold); }
+  .domain-detail.strategic .domain-block-label { color: var(--accent-gold); }
+  .domain-detail.strategic .domain-list li { color: rgba(242, 236, 222, 0.9); }
+  .domain-detail.strategic .domain-list li::before { color: var(--accent-gold); }
+  .domain-detail.strategic .domain-list li strong { color: var(--accent-gold); }
+  .domain-detail.strategic .domain-hypothesis {
+    color: var(--text-on-deep);
+    background: rgba(184, 146, 74, 0.1);
+    border-color: var(--accent-gold);
+  }
+  .domain-detail.strategic .domain-hypothesis strong {
+    background: linear-gradient(transparent 60%, rgba(184, 146, 74, 0.3) 60%);
+    color: var(--accent-gold);
+  }
+  .domain-detail.strategic .domain-hypothesis-label { color: var(--accent-gold); }
+  .domain-detail.strategic .domain-decision {
+    background: rgba(184, 146, 74, 0.08);
+    border-color: rgba(184, 146, 74, 0.35);
+  }
+  .domain-detail.strategic .domain-decision-label { color: var(--accent-gold); }
+  .domain-detail.strategic .domain-decision-list li { color: rgba(242, 236, 222, 0.9); }
+  .domain-detail.strategic .domain-decision-list li .if { color: var(--accent-gold); }
+  .domain-detail.strategic .domain-decision-list li strong { color: var(--accent-gold); }
+  .domain-detail.strategic .domain-block-label::after { background: rgba(184, 146, 74, 0.3); }
 
   .domain-head {
     display: flex;
@@ -447,6 +509,29 @@
     margin-bottom: 12px;
     color: var(--text-primary);
   }
+  .domain-money-sub.primary {
+    border-left: 3px solid var(--accent-gold);
+  }
+  .domain-detail.money .domain-money-sub.primary {
+    background: rgba(184, 146, 74, 0.18);
+    border-color: rgba(184, 146, 74, 0.5);
+    border-left: 3px solid var(--accent-gold);
+  }
+  .domain-money-sub.primary strong {
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+  .domain-detail.money .domain-money-sub.primary strong {
+    color: var(--accent-gold);
+  }
+  .domain-hypothesis strong {
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.2) 60%);
+    padding: 0 2px;
+  }
+  .domain-detail.money .domain-hypothesis strong {
+    background: linear-gradient(transparent 60%, rgba(184, 146, 74, 0.3) 60%);
+  }
 
   .domain-decision {
     background: var(--bg-section);
@@ -511,6 +596,14 @@
     flex-direction: column;
     gap: 12px;
   }
+  .bridge-step.strategic {
+    background: var(--bg-deep);
+    border-top-color: var(--accent-gold);
+    color: var(--text-on-deep);
+  }
+  .bridge-step.strategic .bridge-step-num { color: var(--accent-gold); }
+  .bridge-step.strategic .bridge-step-title { color: var(--text-on-deep); }
+  .bridge-step.strategic .bridge-step-from { color: rgba(184, 146, 74, 0.85); border-top-color: rgba(184, 146, 74, 0.3); }
   .bridge-step-num {
     font-family: var(--font-mono);
     font-size: 10px;
@@ -644,7 +737,7 @@
     .hero-meta { grid-template-columns: 1fr; gap: 20px; }
     .section { padding: 60px 0; }
     .section-title { font-size: 26px; }
-    .mission-grid { grid-template-columns: 1fr; }
+    .mission-grid, .mission-grid-3 { grid-template-columns: 1fr; }
     .domain-overview-grid { grid-template-columns: 1fr; }
     .domain-detail { padding: 40px 24px; }
     .domain-head-name { font-size: 28px; }
@@ -662,7 +755,7 @@
 <div class="banner">
   <div class="banner-inner">
     <a href="index.html" class="banner-link">介護レク広場 14期戦略｜Document B</a>
-    <span class="banner-tag">v0.1 / 2026.05 / DRAFT</span>
+    <span class="banner-tag">v0.2 / 2026.05 / DRAFT</span>
   </div>
 </div>
 
@@ -709,7 +802,7 @@
     <p class="section-lead">
       Phase 0 は14期スタート前の観察期間。公式LINEの再開と並行して、4つの戦略的転換（Document A §02）を裏付ける証拠を集める。ここで得られたデータが、Phase 1（仕分ける）の意思決定材料になる。
     </p>
-    <div class="mission-grid">
+    <div class="mission-grid mission-grid-3">
       <div class="mission-card">
         <span class="mission-card-title">前提：判断は「証拠」で進める。</span>
         <span class="mission-card-body">「個人ユーザーが主」「業界に金はない」「無料が利用の前提」── これらは現時点ではすべて仮説。観るフェーズで仮説を検証または棄却することで、Phase 1以降の投資判断の精度を上げる。</span>
@@ -718,6 +811,10 @@
         <span class="mission-card-title">原則：単純有料化は最初から候補外。</span>
         <span class="mission-card-body">介護業界の支払い余力は薄い。広場の課金主体は「現場の個人」ではなく、「介護現場に届きたい第三者」または「施設が他経費科目で支出する仕組み」になる前提で、対価の出所を探索する。</span>
       </div>
+      <div class="mission-card accent">
+        <span class="mission-card-title">視点：直接価値と並行して、戦略価値も観る。</span>
+        <span class="mission-card-body">広場はＢＣＣの戦略資産でもある。観るフェーズでは「ユーザーへの価値」と並行して、「ＢＣＣヘルスケアカンパニーの営業・顧客接点としての機能」も検証する。資産は確かに存在する。問うべきは、それが現役で働いているかである。</span>
+      </div>
     </div>
   </div>
 </section>
@@ -725,11 +822,11 @@
 <section class="section deep">
   <div class="container">
     <div class="section-header">
-      <span class="section-number">§ 02　5つの測定ドメイン</span>
+      <span class="section-number">§ 02　6つの測定ドメイン</span>
       <h2 class="section-title">何を測れば、<br>仕分けが進むのか。</h2>
     </div>
     <p class="section-lead">
-      観るフェーズで検証すべき5つの仮説領域を、独立した「測定ドメイン」として並走させる。各ドメインは「仮説 → 測る指標 → 測定方法 → 仕分けへの接続」の同じ4要素で構成される。
+      観るフェーズで検証すべき6つの仮説領域を、独立した「測定ドメイン」として並走させる。各ドメインは「仮説 → 測る指標 → 測定方法 → 仕分けへの接続」の同じ4要素で構成される。
     </p>
     <div class="domain-overview-grid">
       <a href="#domain-01" class="domain-overview-card">
@@ -756,6 +853,11 @@
         <span class="dom-tag">05 — ASSET</span>
         <span class="dom-name">コンテンツ資産</span>
         <span class="dom-hyp">何が本当に効く素材か</span>
+      </a>
+      <a href="#domain-06" class="domain-overview-card strategic">
+        <span class="dom-tag">06 — CLIENT-INTERFACE</span>
+        <span class="dom-name">顧客接点としての価値</span>
+        <span class="dom-hyp">資産は存在する。働いているかは別問題。</span>
       </a>
     </div>
   </div>
@@ -861,11 +963,12 @@
       </div>
       <div class="domain-hypothesis">
         <span class="domain-hypothesis-label">仮説</span>
-        介護現場には直接の支払い余力は薄い。対価は「介護現場の個人にリーチしたい第三者」から取る構造が現実的。施設が出す場合も、レク予算ではなく「別科目」から拠出される仕組みが必要。
+        介護現場には直接の支払い余力は薄い。対価は「介護現場の個人にリーチしたい第三者」から取る構造が現実的。施設が出す場合も、レク予算ではなく「別科目」から拠出される仕組みが必要。<br>
+        加えて、広場はＢＣＣヘルスケアカンパニーの戦略資産であるため、<strong>カンパニー内部での貢献を会計的に位置づけ直す</strong>、または<strong>最低限の運用コストで戦略資産として維持する</strong>という選択肢もあり得る。
       </div>
 
       <div class="domain-block">
-        <div class="domain-block-label">測る指標（3つのお金の入り口を並行検証）</div>
+        <div class="domain-block-label">測る指標（4つのお金の入り口を並行検証）</div>
 
         <div class="domain-money-sub">
           <h4>A. 第三者からのスポンサー型</h4>
@@ -891,6 +994,16 @@
             <li>1施設あたり、年間で動かせる金額レンジ</li>
           </ul>
         </div>
+
+        <div class="domain-money-sub primary">
+          <h4>D. ヘルスケアカンパニーへの内部貢献として位置づけ直す</h4>
+          <ul class="domain-list">
+            <li>広場運営費を「マーケティング投資」「ブランド維持費」としてヘルスケアカンパニーの予算から拠出する仕組み</li>
+            <li>広場由来の案件売上の一部を、内部振替（インターナルトランスファー）として広場事業に還元する設計</li>
+            <li>戦略価値を会計的に可視化するKPI設計（広場経由案件比率、広場言及営業数、商談接点数 など）</li>
+            <li><strong>派生選択肢：最低限の運用コストで「戦略資産」として維持する</strong>。成長させずに、独自性とクライアント接点機能だけを維持する低コスト運用に振り切る道もある。</li>
+          </ul>
+        </div>
       </div>
 
       <div class="domain-block">
@@ -899,7 +1012,8 @@
           <li>メーカー・企業 5社へのヒアリング（「○○ができたら何円払えますか」型）</li>
           <li>施設管理者 5名への経費科目ヒアリング</li>
           <li>加算制度・補助金制度の制度調査（社内で1名アサイン）</li>
-          <li>ＢＣＣ社内、ヘルスケア事業部内のシナジー確認</li>
+          <li>ヘルスケアカンパニー内のシナジー確認とKPI設計（社長・営業責任者ヒアリング）</li>
+          <li>広場を「最低限維持運用」した場合の年間コスト試算</li>
         </ul>
       </div>
 
@@ -909,7 +1023,8 @@
           <li><span class="if">A成立 →</span><span>「協賛コンテンツ」「実証実験パッケージ」「タイアップ素材」として有料化対象を再定義。</span></li>
           <li><span class="if">B成立 →</span><span>EBR（科学的根拠付きレク）に本格投資、加算取得支援を事業化対象に。</span></li>
           <li><span class="if">C成立 →</span><span>施設長・経営者向けのROI提案資料を整備し、施設経由で間接課金。</span></li>
-          <li><span class="if">どれも厳しい →</span><span>ＢＣＣ社内のヘルスケア事業の販促・データ集積機能として広場を再定義。広場単独収益は諦める。</span></li>
+          <li><span class="if">D成立 →</span><span>広場の評価軸を「単独収益」から「ヘルスケアカンパニーへの貢献込み」に転換。経営合意とKPI設計が必須。あるいは最低限維持運用での戦略資産化に振り切る。</span></li>
+          <li><span class="if">どれも厳しい →</span><span>カンパニー内の販促・データ集積機能として広場を再定義し、最小コスト維持に切り替える。</span></li>
         </ul>
       </div>
     </div>
@@ -997,6 +1112,51 @@
         </ul>
       </div>
     </div>
+
+    <!-- Domain 06 - CLIENT-INTERFACE (strategic) -->
+    <div class="domain-detail strategic" id="domain-06">
+      <div class="domain-head">
+        <span class="domain-head-tag">DOMAIN 06 — CLIENT-INTERFACE</span>
+        <span class="domain-head-name">顧客接点としての価値</span>
+      </div>
+      <div class="domain-hypothesis">
+        <span class="domain-hypothesis-label">仮説（二段構え）</span>
+        <strong>仮説Ａ：</strong>広場は、ＢＣＣの介護領域における独自性を構成する戦略資産である。15年の蓄積、7万人会員、業界認知は本物の資産であり、これまで多数のクライアント接点を生み出してきた。<br><br>
+        <strong>仮説Ｂ：</strong>しかし、その戦略資産が現在の営業・対外発信の現場で武器として現役で機能している保証はない。資産を働かせる仕組みが、近年弱まっている可能性がある。14期の中心テーマの一つは、この<strong>資産の再起動</strong>である。
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測る指標</div>
+        <ul class="domain-list">
+          <li>過去3年で、広場が起点・経由となって生まれた取引・関係の実例リスト</li>
+          <li>現在進行中の取引のうち、「広場経由」と特定できる案件数</li>
+          <li>営業資料・提案書における広場への言及頻度（過去3年の変化）</li>
+          <li>失注案件・継続案件における広場の言及有無</li>
+          <li>ＢＣＣ社内（営業・ヘルスケアカンパニー）が広場をどの程度活用しているかの実態</li>
+          <li>競合（ベネッセ、TOPPAN）と比較したクライアントの認知（Phase 1以降の外部ヒアリングで補完）</li>
+        </ul>
+      </div>
+
+      <div class="domain-block">
+        <div class="domain-block-label">測定方法（観るフェーズでは社内ヒアリングに集中）</div>
+        <ul class="domain-list">
+          <li><strong>社長へのヒアリング：</strong>具体的実例の体系的な棚卸し（最優先）</li>
+          <li><strong>営業責任者へのヒアリング：</strong>広場が営業現場で果たしてきた役割と現状</li>
+          <li><strong>ヘルスケアカンパニー責任者へのヒアリング：</strong>カンパニー全体への貢献度合いの認識</li>
+          <li>過去3年の提案書・営業資料における広場言及の頻度調査（資料レビュー）</li>
+          <li>外部クライアントへのヒアリングはPhase 1以降に慎重に設計（クライアント関係を傷つけるリスクを避けるため）</li>
+        </ul>
+      </div>
+
+      <div class="domain-decision">
+        <span class="domain-decision-label">仕分けへの接続</span>
+        <ul class="domain-decision-list">
+          <li><span class="if">Ａ成立 × Ｂ成立 →</span><span>現状維持と微調整。戦略資産を継続稼働させながら、磨きをかける。</span></li>
+          <li><span class="if">Ａ成立 × Ｂ不成立 →</span><span>資産は眠っている状態。<strong>「再起動」が最重要テーマ</strong>。営業・対外発信の現場で武器として使える形に再装着する。Phase 2「磨く」の中心対象。</span></li>
+          <li><span class="if">Ａ不成立 →</span><span>前提が覆る。広場の戦略価値そのものを再定義し、Document A §00を書き直す。</span></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1004,10 +1164,10 @@
   <div class="container">
     <div class="section-header">
       <span class="section-number">§ 04　仕分けへのつなぎ</span>
-      <h2 class="section-title">観察データは、<br>3つの判断材料に変換される。</h2>
+      <h2 class="section-title">観察データは、<br>4つの判断材料に変換される。</h2>
     </div>
     <p class="section-lead">
-      5ドメインを並行で測ったあと、Phase 1（仕分ける）には3つの判断材料として渡される。観るフェーズの最後に、これらをまとめた「14期戦略書」を経営層に提出する。
+      6ドメインを並行で測ったあと、Phase 1（仕分ける）には4つの判断材料として渡される。観るフェーズの最後に、これらをまとめた「14期戦略書」を経営層に提出する。
     </p>
     <div class="bridge-frame">
       <div class="bridge-flow">
@@ -1026,6 +1186,11 @@
           <span class="bridge-step-title">何を残し、<br>何を削るのか。</span>
           <span class="bridge-step-from">FROM: D04 + D05</span>
         </div>
+        <div class="bridge-step strategic">
+          <span class="bridge-step-num">04 — 戦略価値の評価</span>
+          <span class="bridge-step-title">広場はカンパニーに<br>何を与えているか。</span>
+          <span class="bridge-step-from">FROM: D06</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1038,17 +1203,17 @@
       <h2 class="section-title">観るための準備に、<br>すぐ着手する。</h2>
     </div>
     <p class="section-lead">
-      観るフェーズを最大限活かすために、開始前に整えておくべきことを3つ並べる。LINE再開と同時に走らせる。
+      観るフェーズを最大限活かすために、開始前に整えておくべきことを5つ並べる。LINE再開と同時に走らせる。
     </p>
     <div class="nextactions">
       <div class="nextaction">
         <span class="nextaction-num">A.</span>
-        <span class="nextaction-title">5ドメインのテンプレートをスプレッドシート化、ヒアリングと集計を埋めていく作業環境を整える</span>
+        <span class="nextaction-title">6ドメインのテンプレートをスプレッドシート化、ヒアリングと集計を埋めていく作業環境を整える</span>
         <span class="nextaction-doc">Worksheet</span>
       </div>
       <div class="nextaction">
         <span class="nextaction-num">B.</span>
-        <span class="nextaction-title">Domain 03（マネタイズ構造）の3仮説 A/B/C それぞれの検証設問とヒアリングシナリオを設計</span>
+        <span class="nextaction-title">Domain 03（マネタイズ構造）の4仮説 A/B/C/D それぞれの検証設問とヒアリングシナリオを設計</span>
         <span class="nextaction-doc">Priority</span>
       </div>
       <div class="nextaction">
@@ -1060,6 +1225,11 @@
         <span class="nextaction-num">D.</span>
         <span class="nextaction-title">LINE運用12週間プランの実行と週次集計フォーマットを確定</span>
         <span class="nextaction-doc">Ongoing</span>
+      </div>
+      <div class="nextaction strategic">
+        <span class="nextaction-num">E.</span>
+        <span class="nextaction-title">社長・営業責任者・ヘルスケアカンパニー責任者へのヒアリングを最優先で実施し、広場の戦略価値の実例を体系的に棚卸しする</span>
+        <span class="nextaction-doc">Internal</span>
       </div>
     </div>
   </div>
@@ -1083,7 +1253,7 @@
   <div class="container">
     <p class="footer-text">
       介護レク広場 14期戦略 ／ Document B — 観るフェーズの5検証ドメイン<br>
-      検討稿 v0.1 ／ 2026年5月 ／ 内部討議用
+      検討稿 v0.2 ／ 2026年5月 ／ 内部討議用
     </p>
   </div>
 </footer>

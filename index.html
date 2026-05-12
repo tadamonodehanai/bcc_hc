@@ -400,17 +400,23 @@
   .principles {
     margin-top: 32px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 24px;
   }
   .principle {
     padding: 32px 28px;
     background: var(--bg-card);
     border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--border-line);
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
+  .principle.accent {
+    border-top-color: var(--accent-warm);
+    background: linear-gradient(to bottom, rgba(184, 92, 61, 0.05), var(--bg-card) 50%);
+  }
+  .principle.accent .principle-title { color: var(--accent-warm); }
   .principle-head {
     font-family: var(--font-mono);
     font-size: 10px;
@@ -420,7 +426,7 @@
   }
   .principle-title {
     font-family: var(--font-display);
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--text-primary);
     line-height: 1.6;
@@ -429,6 +435,12 @@
     font-size: 14px;
     color: var(--text-secondary);
     line-height: 2;
+  }
+  .principle-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
   }
 
   .footer { padding: 60px 0; text-align: center; }
@@ -460,7 +472,7 @@
 <div class="banner">
   <div class="banner-inner">
     <a href="index.html" class="banner-link">介護レク広場 14期戦略｜検討資料一覧</a>
-    <span class="banner-tag">INDEX / v0.1 / 2026.05</span>
+    <span class="banner-tag">INDEX / v0.2 / 2026.05</span>
   </div>
 </div>
 
@@ -498,10 +510,10 @@
   <div class="container">
     <div class="section-header">
       <span class="section-number">§ 01　プロジェクトの土台</span>
-      <h2 class="section-title">この事業を<br>「素敵な事業」にするための、<br>2つの原則。</h2>
+      <h2 class="section-title">この事業を<br>「素敵な事業」にするための、<br>3つの原則。</h2>
     </div>
     <p class="section-lead">
-      14期の戦略は、新しい機能を足すことから始めない。まず観察して、仕分けて、磨いて、最後に魅せる。すべての判断はこの順序を守り、2つの原則を貫く。
+      14期の戦略は、新しい機能を足すことから始めない。まず観察して、仕分けて、磨いて、最後に魅せる。すべての判断はこの順序を守り、3つの原則を貫く。
     </p>
     <div class="principles">
       <div class="principle">
@@ -512,7 +524,12 @@
       <div class="principle">
         <span class="principle-head">PRINCIPLE 02</span>
         <span class="principle-title">「個人の財布」から取らない。<br>対価の出所を業界外に求める。</span>
-        <span class="principle-body">介護業界に直接の支払い余力は薄い。広場の課金主体は、現場個人ではなく、「介護現場に届きたい第三者」または「施設の別経費科目」になる前提で設計する。</span>
+        <span class="principle-body">介護業界に直接の支払い余力は薄い。広場の課金主体は、現場個人ではなく、「介護現場に届きたい第三者」または「施設の別経費科目」、または「ヘルスケアカンパニー内部での貢献」を前提に設計する。</span>
+      </div>
+      <div class="principle accent">
+        <span class="principle-head">PRINCIPLE 03</span>
+        <span class="principle-title">「資産を持つこと」より、<br>「資産が働くこと」を問う。</span>
+        <span class="principle-body">広場はＢＣＣの介護領域における独自性であり、15年の実績がそれを裏打ちしている。しかし資産を持っているだけでは武器にならない。14期のテーマは、眠っている資産を<strong>もう一度働かせ直すこと</strong>にある。</span>
       </div>
     </div>
   </div>
@@ -572,22 +589,22 @@
         <span class="doc-tag">A</span>
         <div class="doc-body">
           <span class="doc-title">事業の方向性と14期ロードマップ</span>
-          <span class="doc-desc">現状認識、4つの戦略的転換、4フェーズ全体像、判断基準。最初に読むべき総論資料。</span>
+          <span class="doc-desc">広場の本質、現状認識、4つの戦略的転換、4フェーズ全体像、判断基準。最初に読むべき総論資料。</span>
         </div>
         <div class="doc-status">
           <span class="doc-status-tag">Open →</span>
-          <span class="doc-status-meta">v0.1 / 2026.05</span>
+          <span class="doc-status-meta">v0.2 / 2026.05</span>
         </div>
       </a>
       <a href="doc_b_phase0_kanru_verification.html" class="doc-item ready">
         <span class="doc-tag">B</span>
         <div class="doc-body">
-          <span class="doc-title">観るフェーズ — 5つの検証ドメイン</span>
-          <span class="doc-desc">Phase 0 の具体。ユーザー・価値・マネタイズ・チャネル・コンテンツの5領域の仮説と測定テンプレート。</span>
+          <span class="doc-title">観るフェーズ — 6つの検証ドメイン</span>
+          <span class="doc-desc">Phase 0 の具体。ユーザー・価値・マネタイズ・チャネル・コンテンツ・顧客接点の6領域の仮説と測定テンプレート。</span>
         </div>
         <div class="doc-status">
           <span class="doc-status-tag">Open →</span>
-          <span class="doc-status-meta">v0.1 / 2026.05</span>
+          <span class="doc-status-meta">v0.2 / 2026.05</span>
         </div>
       </a>
       <div class="doc-item planned">
@@ -663,7 +680,7 @@
   <div class="container">
     <p class="footer-text">
       介護レク広場 14期戦略 ／ 検討資料インデックス<br>
-      v0.1 ／ 2026年5月 ／ 内部討議用
+      v0.2 ／ 2026年5月 ／ 内部討議用
     </p>
   </div>
 </footer>
