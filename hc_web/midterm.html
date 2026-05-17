@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ヘルスケアカンパニー｜中期9本ロードマップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f4efe5;
+    --bg-soft: #ebe5d6;
+    --paper: #faf6ed;
+    --ink: #1c2330;
+    --ink-mid: #4a5160;
+    --ink-soft: #828896;
+    --hair: #d6cebb;
+    --hair-soft: #e4dcc8;
+    --hiraku: #2d6f63;
+    --hiraku-soft: #e5ede9;
+    --tsunagu: #b85534;
+    --tsunagu-soft: #f1e2da;
+    --todokeru: #a87a26;
+    --todokeru-soft: #f2e8d0;
+    --serif: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --sans: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+    --latin: "Cormorant Garamond", serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family: var(--sans);
+    background: var(--bg); color: var(--ink);
+    font-weight: 400; line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  body::before{
+    content:""; position:fixed;inset:0;pointer-events:none;z-index:200;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.08; mix-blend-mode: multiply;
+  }
+  .topnav{
+    position: sticky; top:0; z-index:100;
+    background: rgba(244,239,229,.92);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--hair);
+  }
+  .topnav-inner{
+    max-width: 1240px; margin: 0 auto;
+    padding: 14px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 32px;
+  }
+  .brand{ font-family: var(--serif); font-size: 14px; font-weight: 500; letter-spacing: 0.04em;}
+  .brand em{ font-family: var(--latin); font-style: italic; font-weight: 400; color: var(--ink-soft); margin-left: 6px;}
+  .nav-links{ display: flex; gap: 28px; font-size: 12px; letter-spacing: 0.06em;}
+  .nav-links a{
+    color: var(--ink-mid); text-decoration: none;
+    padding: 4px 0; border-bottom: 1px solid transparent;
+    transition: border-color .3s, color .3s;
+  }
+  .nav-links a:hover{ color: var(--ink); border-bottom-color: var(--ink);}
+  .wrap{ max-width: 1240px; margin: 0 auto; padding: 0 48px;}
+  section{ position: relative;}
+
+  /* Hero */
+  .hero{ padding: 140px 0 100px; border-bottom: 1px solid var(--hair);}
+  .hero-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;}
+  .hero-eyebrow{
+    font-family: var(--latin); font-style: italic;
+    color: var(--ink-soft);
+    font-size: 18px; letter-spacing: 0.04em;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow .sep{
+    display: inline-block; width: 32px; height: 1px;
+    background: var(--ink-soft); margin: 0 14px 6px;
+    vertical-align: middle;
+  }
+  .hero-back{
+    display: inline-block;
+    font-family: var(--latin); font-style: italic;
+    color: var(--ink-soft); text-decoration: none;
+    font-size: 13px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 2px;
+  }
+  .hero-back:hover{ color: var(--ink); border-bottom-color: var(--ink);}
+  .hero-title{
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(40px, 5.5vw, 76px);
+    line-height: 1.2; letter-spacing: 0.01em;
+  }
+  .hero-meta{
+    border-left: 1px solid var(--hair);
+    padding: 4px 0 4px 36px; margin-bottom: 8px;
+  }
+  .hero-meta dl{ display: grid; grid-template-columns: 8em 1fr; gap: 12px 24px;}
+  .hero-meta dt{
+    font-family: var(--latin); font-style: italic;
+    font-size: 13px; color: var(--ink-soft); letter-spacing: 0.05em;
+  }
+  .hero-meta dd{ font-size: 14px; color: var(--ink-mid); font-weight: 500;}
+  .hero-tagline{
+    margin-top: 48px;
+    font-family: var(--serif);
+    font-size: 20px; line-height: 1.9;
+    color: var(--ink-mid); max-width: 800px;
+  }
+  .hero-tagline strong{ color: var(--ink); font-weight: 500;}
+
+  /* Axis section */
+  .axis-section{
+    padding: 96px 0 24px;
+    border-top: 1px solid var(--hair);
+  }
+  .axis-section-head{
+    display: grid; grid-template-columns: 200px 1fr; gap: 48px;
+    align-items: end;
+    padding-bottom: 56px;
+  }
+  .axis-section-num{
+    font-family: var(--latin); font-style: italic;
+    font-size: 18px; color: var(--ink-soft); letter-spacing: 0.05em;
+  }
+  .axis-section-num .vrule{ display: block; width: 1px; height: 64px; margin: 16px 0 0 0;}
+  .axis-section.h .axis-section-num .vrule{ background: var(--hiraku);}
+  .axis-section.t .axis-section-num .vrule{ background: var(--tsunagu);}
+  .axis-section.d .axis-section-num .vrule{ background: var(--todokeru);}
+  .axis-section-title{
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.15; letter-spacing: 0.02em;
+  }
+  .axis-section.h .axis-section-title{ color: var(--hiraku);}
+  .axis-section.t .axis-section-title{ color: var(--tsunagu);}
+  .axis-section.d .axis-section-title{ color: var(--todokeru);}
+  .axis-section-sub{
+    margin-top: 12px;
+    font-family: var(--serif); font-size: 20px;
+    color: var(--ink); line-height: 1.6;
+  }
+  .axis-section-note{
+    margin-top: 24px; font-size: 14px; color: var(--ink-mid);
+    line-height: 1.95; max-width: 680px;
+  }
+  .axis-section-note strong{ color: var(--ink); font-weight: 500;}
+
+  /* Article card */
+  .article{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    padding: 56px 0;
+    border-top: 1px solid var(--hair-soft);
+  }
+  .article-num{ font-family: var(--latin); font-style: italic; font-size: 14px; color: var(--ink-soft);}
+  .article-num .big{
+    display: block; font-style: normal;
+    font-family: var(--serif); font-weight: 400;
+    font-size: 56px; color: var(--ink);
+    line-height: 1; margin-top: 4px;
+  }
+  .axis-section.h .article-num .big{ color: var(--hiraku);}
+  .axis-section.t .article-num .big{ color: var(--tsunagu);}
+  .axis-section.d .article-num .big{ color: var(--todokeru);}
+  .article-tag{
+    margin-top: 24px;
+    font-size: 11px; letter-spacing: 0.14em;
+    color: var(--ink-soft); text-transform: uppercase;
+  }
+  .article-mvv{
+    margin-top: 18px;
+    font-family: var(--serif); font-style: italic;
+    font-size: 13px; color: var(--ink-mid); line-height: 1.7;
+    padding-left: 14px; border-left: 2px solid currentColor;
+  }
+  .axis-section.h .article-mvv{ color: var(--hiraku);}
+  .axis-section.t .article-mvv{ color: var(--tsunagu);}
+  .axis-section.d .article-mvv{ color: var(--todokeru);}
+  .article-body h4{
+    font-family: var(--serif); font-weight: 700;
+    font-size: 30px; line-height: 1.4; letter-spacing: 0.01em;
+    margin-bottom: 14px;
+  }
+  .article-intent{
+    font-family: var(--serif); font-size: 17px; line-height: 1.85;
+    color: var(--ink); padding: 18px 22px; margin-bottom: 24px;
+    border-radius: 2px;
+  }
+  .axis-section.h .article-intent{ background: var(--hiraku-soft);}
+  .axis-section.t .article-intent{ background: var(--tsunagu-soft);}
+  .axis-section.d .article-intent{ background: var(--todokeru-soft);}
+  .article-why{
+    font-size: 15px; line-height: 2;
+    color: var(--ink-mid); margin-bottom: 28px;
+  }
+  .article-why strong{ color: var(--ink); font-weight: 500;}
+  .article-grid{
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    padding-top: 24px; border-top: 1px dashed var(--hair);
+  }
+  .article-grid dt{
+    font-family: var(--latin); font-style: italic;
+    font-size: 12px; color: var(--ink-soft);
+    letter-spacing: 0.05em; margin-bottom: 6px;
+  }
+  .article-grid dd{ font-size: 13px; line-height: 1.7; color: var(--ink);}
+  .article-grid dd .pri{ font-weight: 500;}
+  .article-grid dd .sec{ color: var(--ink-soft); display: block; margin-top: 2px; font-size: 12px;}
+
+  /* Note for company-wide articles */
+  .article.company-wide{ background: var(--paper); padding: 56px 48px; margin: 0 -48px;}
+  .article.company-wide::before{
+    content: "Company-wide Identity"; display: inline-block;
+    font-family: var(--latin); font-style: italic;
+    font-size: 12px; color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    position: absolute; right: 48px; top: 18px;
+  }
+
+  /* Closing section */
+  .closing{
+    margin: 96px 0;
+    padding: 72px 64px;
+    background: var(--ink); color: var(--bg);
+    position: relative; overflow: hidden;
+  }
+  .closing::before{
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='0.3'/%3E%3C/svg%3E");
+    opacity: 0.12; mix-blend-mode: screen; pointer-events: none;
+  }
+  .closing-inner{ position: relative; z-index: 1;
+    display: grid; grid-template-columns: 200px 1fr; gap: 48px;
+  }
+  .closing .sec-num{ color: rgba(255,255,255,0.5);
+    font-family: var(--latin); font-style: italic;
+    font-size: 64px; font-weight: 300; line-height: 1;
+  }
+  .closing .sec-num small{
+    display: block; font-size: 11px; letter-spacing: 0.18em;
+    font-family: var(--sans); font-style: normal;
+    color: rgba(255,255,255,0.5); margin-top: 18px; text-transform: uppercase;
+  }
+  .closing-title{
+    font-family: var(--serif); font-size: clamp(28px, 3vw, 40px);
+    font-weight: 700; line-height: 1.4; margin-bottom: 28px;
+  }
+  .closing-body p{
+    font-size: 15px; line-height: 2;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 18px; max-width: 760px;
+  }
+  .closing-body p strong{ color: #fff; font-weight: 500;}
+
+  /* Footer */
+  footer{
+    border-top: 1px solid var(--hair);
+    padding: 32px 48px;
+    font-size: 12px; color: var(--ink-soft);
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  footer em{ font-family: var(--latin); font-style: italic;}
+
+  /* Animations */
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(20px);}
+    to{ opacity:1; transform: translateY(0);}
+  }
+  .reveal{ opacity: 0;}
+  .reveal.in{ animation: fadeUp .9s cubic-bezier(.2,.7,.2,1) forwards;}
+
+  @media (max-width: 980px){
+    .wrap{ padding: 0 24px;}
+    .topnav-inner{ padding: 12px 24px; gap: 16px;}
+    .nav-links{ gap: 18px; font-size: 11px;}
+    .hero{ padding: 80px 0 64px;}
+    .hero-grid{ grid-template-columns: 1fr; gap: 40px;}
+    .axis-section-head, .article, .closing-inner{
+      grid-template-columns: 1fr; gap: 24px;
+    }
+    .article-grid{ grid-template-columns: 1fr; gap: 18px;}
+    .article.company-wide{ padding: 36px 24px; margin: 0 -24px;}
+    .closing{ padding: 48px 28px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">ヘルスケアカンパニー<em>Content Strategy / 2026</em></div>
+    <div class="nav-links">
+      <a href="index.html">← 初期</a>
+      <a href="#hiraku">ひらく</a>
+      <a href="#tsunagu">つなぐ</a>
+      <a href="#todokeru">届ける</a>
+      <a href="#closing">展開のしめ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal">
+        <a class="hero-back" href="index.html">← 初期9本ロードマップへ戻る</a>
+        <div class="hero-eyebrow">Phase 02<span class="sep"></span>Mid-term Roadmap</div>
+        <h1 class="hero-title">中期9本ロードマップ。</h1>
+      </div>
+      <div class="hero-meta reveal" style="animation-delay:.15s">
+        <dl>
+          <dt>Phase</dt><dd>02 / 3–6ヶ月</dd>
+          <dt>Scope</dt><dd>中期9本（積み上げ型）</dd>
+          <dt>Core</dt><dd>カンパニーとしての発信を成立させる</dd>
+          <dt>Prev</dt><dd>初期9本ロードマップ</dd>
+        </dl>
+      </div>
+    </div>
+    <p class="hero-tagline reveal" style="animation-delay:.3s">
+      初期9本で読まれ方の感触をつかんだあと、次に向かうべきは<strong>関係者の継続協力・カンパニー横断・連載化</strong>が必要な、重量のある9本。「ＢＣＣのヘルスケア」が、カンパニーとして発信できている状態に到達するためのフェーズ。
+    </p>
+  </div>
+</section>
+
+<!-- HIRAKU mid-term -->
+<section id="hiraku" class="axis-section h">
+  <div class="wrap">
+    <div class="axis-section-head">
+      <div class="axis-section-num">Axis 01 / Open up<span class="vrule"></span></div>
+      <div>
+        <h2 class="axis-section-title">ひらく</h2>
+        <p class="axis-section-sub">単発の開示から、継続ドキュメンタリーへ。</p>
+        <p class="axis-section-note">初期では「目線」を開いた。中期では<strong>「時間軸」</strong>を開く。導入から3ヶ月の密着、判断ログ、部門横断座談 ── どれも継続協力が前提のため、初期で関係性を作ったあとに動かす。</p>
+      </div>
+    </div>
+
+    <article class="article">
+      <div>
+        <div class="article-num">No.<span class="big">04</span></div>
+        <div class="article-tag">FORMAT / DOCUMENTARY</div>
+        <div class="article-mvv">時間の中で、何が起こったかをひらく。</div>
+      </div>
+      <div class="article-body">
+        <h4>介護DX伴走、3ヶ月密着。</h4>
+        <div class="article-intent">特定の1施設の導入プロセスを継続取材し、月1更新で連載化。事例ページとは別レイヤーの、ドキュメンタリー型の物語として読ませる。</div>
+        <p class="article-why">事例集の「Before / After」では落ちる、<strong>途中で起こったこと</strong>を開く。施設との継続的な合意形成が前提なので中期に置く。読者にとっては「自分の施設でも起こりそうな話」として強く接続する記事になる。</p>
+        <dl class="article-grid">
+          <div><dt>Primary Reader</dt><dd><span class="pri">介護施設運営者</span><span class="sec">副：自治体担当者</span></dd></div>
+          <div><dt>Format</dt><dd>月1更新 / 3〜4本連載</dd></div>
+          <div><dt>Resource</dt><dd>施設の継続協力（重）</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <article class="article">
+      <div>
+        <div class="article-num">No.<span class="big">05</span></div>
+        <div class="article-tag">FORMAT / RETROSPECTIVE</div>
+        <div class="article-mvv">支点を見つける、その判断を振り返る。</div>
+      </div>
+      <div class="article-body">
+        <h4>判断ログ、分岐点の選び方。</h4>
+        <div class="article-intent">過去の伴走支援で「なぜA案ではなくB案を選んだか」を、当時の担当者と振り返るシリーズ。事例の表面では見えない、意思決定の質を開示する。</div>
+        <p class="article-why">事例記事が「結果」を語るなら、これは<strong>「結果に至るまでの判断」</strong>を語る。Mission「支点を見つける」の最も直接的な体現記事。導入を検討する施設・自治体にとって、最も信頼形成に効く形式になる。</p>
+        <dl class="article-grid">
+          <div><dt>Primary Reader</dt><dd><span class="pri">介護施設運営者</span><span class="sec">副：自治体担当者</span></dd></div>
+          <div><dt>Format</dt><dd>過去事例の振り返り / 連載</dd></div>
+          <div><dt>Resource</dt><dd>担当者＋当時の顧客（中重）</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <article class="article company-wide">
+      <div>
+        <div class="article-num">No.<span class="big">06</span></div>
+        <div class="article-tag">FORMAT / ROUNDTABLE</div>
+        <div class="article-mvv">4つの現場の違いを、ひとつのテーブルで開く。</div>
+      </div>
+      <div class="article-body">
+        <h4>部門横断スタッフ座談会。</h4>
+        <div class="article-intent">介護施設担当・一般企業担当・自治体担当・個人向け担当が一堂に会する座談会。「現場が違うと、何が違うか」を語り合うことで、4つの顧客像をまたぐカンパニー全体の理念が言葉になる。</div>
+        <p class="article-why"><strong>IT営業カンパニーの「人物紹介」型インタビューとの、最大の差別化ポイント</strong>になる企画。一人称ではなく、複数の現場担当者の対話を通じて、カンパニーとしての一貫性を可視化する。中期フェーズの中で、最もアイデンティティ形成に効く1本。</p>
+        <dl class="article-grid">
+          <div><dt>Primary Reader</dt><dd><span class="pri">全セグメント</span><span class="sec">副：採用候補者</span></dd></div>
+          <div><dt>Format</dt><dd>座談会 / 大型1本</dd></div>
+          <div><dt>Resource</dt><dd>4部門の調整（重）</dd></div>
+        </dl>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- TSUNAGU mid-term -->
+<section id="tsunagu" class="axis-section t">
+  <div class="wrap">
+    <div class="axis-section-head">
+      <div class="axis-section-num">Axis 02 / Connect<span class="vrule"></span></div>
+      <div>
+        <h2 class="axis-section-title">つなぐ</h2>
+        <p class="axis-section-sub">立場の橋を、より多くの層に渡す。</p>
+        <p class="axis-section-note">初期では「企業 × 施設」「現場の感情」をつないだ。中期は<strong>自治体・住民・カンパニー横断</strong>まで対象を広げる。Concept「健やかさは、めぐる」のスケールが、ここで見えてくる。</p>
+      </div>
+    </div>
+
+    <article class="article">
+      <div>
+        <div class="article-num">No.<span class="big">04</span></div>
+        <div class="article-tag">FORMAT / FIELD REPORT</div>
+        <div class="article-mvv">企業と地域と住民、三者の交点をつなぐ。</div>
+      </div>
+      <div class="article-body">
+        <h4>リビングラボの、取材連載。</h4>
+        <div class="article-intent">自治体 × 企業 × 住民が交わる場を、継続取材。リビングラボの取り組みを「行政施策」ではなく「生活の中で何が起きたか」として記録する。</div>
+        <p class="article-why">1記事あたりの<strong>情報密度が高く、自治体読者の信頼を獲得する中核コンテンツ群</strong>になる。同時に、企業読者にとっては「自社商品が地域でどう使われるか」のイメージが具体化する記事として機能する。</p>
+        <dl class="article-grid">
+          <div><dt>Primary Reader</dt><dd><span class="pri">自治体担当者</span><span class="sec">副：一般企業</span></dd></div>
+          <div><dt>Format</dt><dd>現地レポート / 連載</dd></div>
+          <div><dt>Resource</dt><dd>自治体＋企業協力（重）</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <article class="article">
+      <div>
+        <div class="article-num">No.<span class="big">05</span></div>
+        <div class="article-tag">FORMAT / DIALOGUE</div>
+        <div class="article-mvv">分断が起きる「場所」を、三者で名指す。</div>
+      </div>
+      <div class="article-body">
+        <h4>三者対談、健やかさはどこで止まるか。</h4>
+        <div class="article-intent">自治体・施設・企業の3者で、Conceptに書かれた「健やかさが止まる場所」を議論する。理念を抽象論にせず、現実の課題地図として可視化する企画。</div>
+        <p class="article-why">Concept「健やかさは、めぐる」を、<strong>逆向き</strong>から検証する企画。「めぐらせる」前に「どこで止まっているか」を3者の視点で名指すことで、理念が現実に着地する。中期の中で、最もブランド理念を強化する1本。</p>
+        <dl class="article-grid">
+          <div><dt>Primary Reader</dt><dd><span class="pri">自治体担当者</span><span class="sec">副：一般企業／介護施設</span></dd></div>
+          <div><dt>Format</dt><dd>三者対談 / 大型1本</dd></div>
+          <div><dt>Resource</dt><dd>三者の調整（重）</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <article class="article company-wide">
+      <div>
+        <div class="article-num">No.<span class="big">06</span></div>
+        <div class="article-tag">FORMAT / DIALOGUE</div>
+        <div class="article-mvv">社内に分かれていたものを、つなぐ。</div>
+      </div>
+      <div class="article-body">
+        <h4>カンパニー横断対談、IT営業 × ヘルスケア。</h4>
+        <div class="article-intent">IT営業アウトソーシングカンパニーの担当者と、ヘルスケアの担当者が、「DX推進」という共通テーマで対談。社内で見えていなかった接点を可視化する。</div>
+        <p class="article-why">社外向け発信と、<strong>社内向けインターナルブランディングを兼ねる</strong>企画。ＢＣＣグループ全体としての物語をつくる起点。両カンパニーの読者層が違うため、片側だけでは届かない層にもリーチできる。</p>
+        <dl class="article-grid">
+          <div><dt>Primary Reader</dt><dd><span class="pri">一般企業</span><span class="sec">副：採用候補者／社内</span></dd></div>
+          <div><dt>Format</dt><dd>カンパニー横断対談</dd></div>
+          <div><dt>Resource</dt><dd>両カンパニー調整（重）</dd></div>
+        </dl>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- TODOKERU mid-term -->
+<section id="todokeru" class="axis-section d">
+  <div class="wrap">
+    <div class="axis-section-head">
+      <div class="axis-section-num">Axis 03 / Deliver<span class="vrule"></span></div>
+      <div>
+        <h2 class="axis-section-title">届ける</h2>
+        <p class="axis-section-sub">運用が回るまでの、設計と学びを届ける。</p>
+        <p class="axis-section-note">初期では「導入のための地図」を渡した。中期は<strong>導入後</strong>に焦点を移す。失敗と修正、学びのオンライン化、そして次の3年へのビジョン公開まで含む。</p>
+      </div>
+    </div>
+
+    <article class="article">
+      <div>
+        <div class="article-num">No.<span class="big">04</span></div>
+        <div class="article-tag">FORMAT / REPORT</div>
+        <div class="article-mvv">構想で終わらせない、その「終わり方」を見せる。</div>
+      </div>
+      <div class="article-body">
+        <h4>導入後6ヶ月、運用定着レポート。</h4>
+        <div class="article-intent">実装後に、何が回り、何が回らなかったかを、失敗と修正も含めて開く。導入事例ページでは見せない部分まで踏み込む。</div>
+        <p class="article-why">Mission「やり切る」に対して、<strong>最も誠実な記事</strong>になる。他社のDX事例との読後感の差を、決定的にここで作る。失敗を開示するためには社内の合意も必要で、リスクは小さくないが、それを越えた先に強いブランドがある。</p>
+        <dl class="article-grid">
+          <div><dt>Primary Reader</dt><dd><span class="pri">介護施設運営者</span><span class="sec">副：一般企業</span></dd></div>
+          <div><dt>Format</dt><dd>長文レポート / 1本</dd></div>
+          <div><dt>Resource</dt><dd>顧客＋社内合意（重）</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <article class="article">
+      <div>
+        <div class="article-num">No.<span class="big">05</span></div>
+        <div class="article-tag">FORMAT / DESIGN ESSAY</div>
+        <div class="article-mvv">学びを、デジタルで届ける設計を語る。</div>
+      </div>
+      <div class="article-body">
+        <h4>学びのオンライン化、設計論。</h4>
+        <div class="article-intent">高齢者健幸サポーターのeラーニング設計を例に、学びをデジタルで届ける設計論を語る。介護DXと教育を、ひとつの設計思想で接続する。</div>
+        <p class="article-why">介護DXと「学び」が<strong>同じ軸の上で動いている</strong>ことを、設計論として語り切る1本。教育コンテンツの発信を強化したい現場と、DX推進の文脈をひとつにつなぐ、足並みを揃える戦略の中核記事。</p>
+        <dl class="article-grid">
+          <div><dt>Primary Reader</dt><dd><span class="pri">介護関係者（個人）</span><span class="sec">副：自治体／企業教育担当</span></dd></div>
+          <div><dt>Format</dt><dd>設計論エッセイ / 1本</dd></div>
+          <div><dt>Resource</dt><dd>教育チーム協力（中重）</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <article class="article company-wide">
+      <div>
+        <div class="article-num">No.<span class="big">06</span></div>
+        <div class="article-tag">FORMAT / VISION</div>
+        <div class="article-mvv">届ける先を、3年先まで宣言する。</div>
+      </div>
+      <div class="article-body">
+        <h4>介護DXの、次の一手。</h4>
+        <div class="article-intent">導入が終わった施設の「その先」。ヘルスケアカンパニーがカンパニーとして、次の3年で何を提供するかの中期ビジョン公開。</div>
+        <p class="article-why">CEOまたはカンパニー長クラスの<strong>オピニオン記事として展開</strong>。これまでの記事の積み上げの上に、「だから、私たちはこう動く」を宣言する。中期フェーズの締めくくりであり、次のフェーズへの入口になる1本。</p>
+        <dl class="article-grid">
+          <div><dt>Primary Reader</dt><dd><span class="pri">全セグメント</span><span class="sec">副：パートナー候補／採用候補者</span></dd></div>
+          <div><dt>Format</dt><dd>オピニオン記事 / 大型1本</dd></div>
+          <div><dt>Resource</dt><dd>経営層合意（重）</dd></div>
+        </dl>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Closing -->
+<section id="closing">
+  <div class="wrap">
+    <div class="closing">
+      <div class="closing-inner">
+        <div class="sec-num">●<small>Closing</small></div>
+        <div>
+          <h2 class="closing-title">18本を経て、<br>「カンパニーとして」が立ち上がる。</h2>
+          <div class="closing-body">
+            <p>初期9本は、3軸が機能するかを<strong>軽い投資で検証する</strong>フェーズだった。中期9本は、カンパニーを横断し、関係者の継続協力を引き出し、ブランドの土台を厚くするフェーズ。</p>
+            <p>特に中期の中で<strong>「Company-wide Identity」</strong>とラベルした3本（部門横断座談・カンパニー横断対談・介護DX次の一手）は、すべてカンパニー全体のアイデンティティを言語化する役割を持つ。ここまで来て初めて「ひとつのカンパニーとして」の発信ができている状態になる。</p>
+            <p>その先、Phase 03（6ヶ月以降）では、コンテンツが自走しはじめる。読者からの反応、現場からの企画提案、外部メディアからの取材依頼。<strong>編集が「打ち手」から「対応」に変わる</strong>段階。そのとき、すでに18本の中に答えのほとんどが書かれている。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Healthcare Company <em>/ Content Strategy 2026 — Phase 02</em></div>
+  <div><a href="index.html" style="color:inherit;">← 初期9本ロードマップへ</a></div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);}
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal, .article, .closing').forEach((el,i)=>{
+    el.classList.add('reveal');
+    el.style.animationDelay = (i*0.04) + 's';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>
