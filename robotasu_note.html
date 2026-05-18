@@ -1,0 +1,1635 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>note運用・ブランディング方針|理学療法士 逢坂先生</title>
+<meta name="description" content="製造業・倉庫・介護施設に向けた、腰痛予防のためのnote運用設計とBtoB信頼形成の戦略ドキュメント。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Noto+Sans+JP:wght@300;400;500;700&family=Fraunces:opsz,wght,SOFT@9..144,300..800,0..100&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#16202C;            /* deep ink-navy */
+  --ink-2:#2A3645;
+  --ink-mute:#5D6A78;
+  --paper:#F4EFE6;          /* warm washi background */
+  --paper-2:#EAE3D6;
+  --line:#D6CDBE;
+  --white:#FFFFFF;
+  --shu:#C8432B;            /* vermilion accent (朱) */
+  --shu-soft:#E6BCB1;
+  --sage:#5D7C6E;           /* clinical calm */
+  --gold:#A8843A;
+  --mark:#F2E6A8;           /* highlight marker */
+
+  --serif:'Shippori Mincho B1', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --sans:'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --fr:'Fraunces', 'Times New Roman', serif;
+
+  --container: 1180px;
+  --gutter: clamp(20px, 4vw, 56px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  font-weight:400;
+  color:var(--ink);
+  background:var(--paper);
+  font-feature-settings:"palt" 1;
+  letter-spacing:.02em;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(rgba(22,32,44,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(22,32,44,0.018) 1px, transparent 1px);
+  background-size: 22px 22px, 7px 7px;
+  background-position: 0 0, 11px 11px;
+}
+img{max-width:100%;display:block}
+
+/* ============================================================
+   LAYOUT PRIMITIVES
+   ============================================================ */
+.wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.section{padding:clamp(80px,10vw,140px) 0;position:relative}
+.section + .section{border-top:1px solid var(--line)}
+.section--dark{background:var(--ink);color:var(--paper)}
+.section--dark hr.rule{background:rgba(244,239,230,.18)}
+
+.eyebrow{
+  font-family:var(--fr);
+  font-weight:500;
+  font-size:13px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--shu);
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+}
+.eyebrow::before{
+  content:"";
+  width:32px;height:1px;background:var(--shu);
+}
+.eyebrow .no{font-family:var(--fr);font-style:italic;color:var(--ink-mute);font-size:13px;letter-spacing:.18em}
+.section--dark .eyebrow{color:var(--shu-soft)}
+.section--dark .eyebrow::before{background:var(--shu-soft)}
+.section--dark .eyebrow .no{color:rgba(244,239,230,.55)}
+
+h1,h2,h3,h4{font-family:var(--serif);font-weight:700;letter-spacing:.04em;line-height:1.4}
+h2.h{
+  font-size:clamp(28px,3.5vw,44px);
+  margin:18px 0 8px;
+  letter-spacing:.08em;
+}
+h2.h em{font-style:normal;color:var(--shu)}
+.lead{
+  font-family:var(--sans);
+  font-size:clamp(15px,1.05vw,17px);
+  color:var(--ink-2);
+  max-width:62ch;
+  margin-top:22px;
+  line-height:1.95;
+}
+
+hr.rule{
+  border:none;height:1px;background:var(--line);
+  margin:48px 0;
+}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(244,239,230,.86);
+  backdrop-filter:saturate(160%) blur(8px);
+  -webkit-backdrop-filter:saturate(160%) blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.topbar .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.topbar .brand{
+  font-family:var(--serif);font-weight:700;font-size:16px;letter-spacing:.18em;
+}
+.topbar .brand small{
+  font-family:var(--fr);font-weight:500;font-style:italic;letter-spacing:.15em;
+  color:var(--shu);margin-left:10px;font-size:12px;
+}
+.topbar nav{display:flex;gap:22px}
+.topbar nav a{
+  font-size:12px;letter-spacing:.18em;color:var(--ink-mute);
+  text-decoration:none;font-weight:500;
+}
+.topbar nav a:hover{color:var(--ink)}
+.progress{
+  position:fixed;top:0;left:0;height:2px;background:var(--shu);
+  width:0%;z-index:60;transition:width .1s linear;
+}
+@media (max-width:780px){ .topbar nav{display:none} }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  padding:clamp(70px,9vw,120px) 0 clamp(80px,10vw,140px);
+  position:relative;overflow:hidden;
+}
+.hero .grid{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap:clamp(40px,6vw,90px);
+  align-items:end;
+}
+.hero h1{
+  font-size:clamp(40px,5.6vw,84px);
+  line-height:1.22;
+  letter-spacing:.06em;
+  margin:18px 0 0;
+}
+.hero h1 .br{display:block}
+.hero h1 .accent{
+  display:inline-block;
+  background:linear-gradient(transparent 62%, var(--mark) 62% 92%, transparent 92%);
+  padding:0 .1em;
+}
+.hero .subtitle{
+  font-family:var(--sans);font-weight:500;font-size:clamp(14px,1.2vw,17px);
+  color:var(--ink-2);margin-top:32px;line-height:2;
+  letter-spacing:.06em;
+}
+.hero .meta{
+  display:flex;gap:30px;margin-top:38px;
+  font-family:var(--fr);font-size:12px;letter-spacing:.22em;
+  color:var(--ink-mute);text-transform:uppercase;
+}
+.hero .meta span b{
+  display:block;font-family:var(--serif);font-weight:700;color:var(--ink);
+  font-size:14px;letter-spacing:.18em;text-transform:none;margin-top:4px;
+}
+.hero-side{
+  display:flex;flex-direction:column;gap:14px;
+}
+.pillar{
+  border:1px solid var(--line);
+  background:var(--white);
+  padding:24px 26px;
+  position:relative;
+  display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+}
+.pillar .lbl{
+  writing-mode:vertical-rl;
+  font-family:var(--fr);font-style:italic;font-size:11px;letter-spacing:.32em;
+  color:var(--shu);text-transform:uppercase;
+  border-right:1px solid var(--shu);padding-right:8px;
+}
+.pillar h3{font-size:20px;margin:0 0 4px;letter-spacing:.1em}
+.pillar p{margin:0;font-size:13.5px;color:var(--ink-mute);line-height:1.8}
+.pillar.alt{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pillar.alt .lbl{color:var(--shu-soft);border-color:var(--shu-soft)}
+.pillar.alt p{color:rgba(244,239,230,.7)}
+
+@media (max-width:880px){
+  .hero .grid{grid-template-columns:1fr}
+}
+
+/* Decorative numerals */
+.deco-num{
+  position:absolute;
+  font-family:var(--fr);font-style:italic;font-weight:300;
+  color:rgba(22,32,44,.045);
+  font-size:clamp(140px,22vw,300px);
+  line-height:.8;pointer-events:none;user-select:none;
+}
+.section--dark .deco-num{color:rgba(244,239,230,.045)}
+
+/* ============================================================
+   SECTION HEADER
+   ============================================================ */
+.sec-head{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,4vw,60px);
+  align-items:start;margin-bottom:clamp(40px,5vw,70px);
+}
+.sec-num{
+  font-family:var(--fr);font-style:italic;font-weight:300;
+  font-size:clamp(70px,8vw,110px);
+  line-height:.85;color:var(--ink);
+  letter-spacing:-.02em;
+}
+.sec-num .slash{color:var(--shu)}
+.sec-num small{
+  display:block;font-family:var(--fr);font-style:normal;font-weight:500;
+  font-size:11px;letter-spacing:.32em;color:var(--ink-mute);
+  text-transform:uppercase;margin-top:8px;
+}
+.section--dark .sec-num{color:var(--paper)}
+.section--dark .sec-num small{color:rgba(244,239,230,.55)}
+
+/* ============================================================
+   SECTION 1 — 全体方針 (3 columns)
+   ============================================================ */
+.aim-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;margin-top:24px;
+}
+.aim-card{
+  padding:32px 28px 30px;
+  background:var(--white);
+  border:1px solid var(--line);
+  position:relative;
+}
+.aim-card .n{
+  font-family:var(--fr);font-style:italic;font-weight:300;
+  font-size:42px;color:var(--shu);line-height:1;
+}
+.aim-card h3{font-size:19px;margin:14px 0 12px;letter-spacing:.08em}
+.aim-card p{margin:0;color:var(--ink-mute);font-size:14px;line-height:1.9}
+.callout{
+  margin-top:32px;
+  padding:22px 28px;
+  background:var(--ink);color:var(--paper);
+  font-size:14px;line-height:1.9;
+  display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;
+}
+.callout .key{
+  font-family:var(--fr);font-style:italic;font-size:12px;letter-spacing:.32em;
+  color:var(--shu-soft);text-transform:uppercase;
+}
+@media (max-width:780px){ .aim-grid{grid-template-columns:1fr} }
+
+/* ============================================================
+   SECTION 2 — ブランドの芯
+   ============================================================ */
+.promise{
+  background:var(--ink);
+  color:var(--paper);
+  padding:clamp(40px,5vw,64px) clamp(36px,4.5vw,60px);
+  display:grid;grid-template-columns:auto 1fr;gap:36px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.promise .stamp{
+  width:96px;height:96px;border-radius:50%;
+  background:var(--shu);color:var(--paper);
+  display:grid;place-items:center;
+  font-family:var(--serif);font-weight:700;font-size:20px;
+  letter-spacing:.1em;line-height:1.3;text-align:center;
+  flex-shrink:0;
+  box-shadow:0 0 0 6px rgba(200,67,43,.18);
+}
+.promise blockquote{
+  margin:0;font-family:var(--serif);font-weight:700;
+  font-size:clamp(22px,2.4vw,34px);line-height:1.7;letter-spacing:.08em;
+}
+.promise blockquote em{color:var(--shu-soft);font-style:normal}
+.three-up{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:34px;
+  border:1px solid var(--line);background:var(--white);
+}
+.three-up > div{padding:30px 28px;border-right:1px solid var(--line)}
+.three-up > div:last-child{border-right:none}
+.three-up h4{
+  font-size:17px;margin:0 0 10px;letter-spacing:.1em;
+  display:flex;align-items:center;gap:10px;
+}
+.three-up h4::before{
+  content:"";width:8px;height:8px;background:var(--shu);
+  display:inline-block;
+}
+.three-up p{margin:0;font-size:13.5px;color:var(--ink-mute);line-height:1.9}
+.tagline{
+  margin-top:24px;font-family:var(--serif);font-weight:500;
+  font-size:15px;color:var(--ink-2);letter-spacing:.1em;
+}
+.tagline::before{content:"”";font-size:32px;color:var(--shu);margin-right:6px;vertical-align:-12px}
+.tagline::after{content:"”";font-size:32px;color:var(--shu);margin-left:6px;vertical-align:-12px;display:inline-block;transform:rotate(180deg) translateY(-12px)}
+@media (max-width:780px){ .promise{grid-template-columns:1fr} .three-up{grid-template-columns:1fr} .three-up > div{border-right:none;border-bottom:1px solid var(--line)} .three-up > div:last-child{border-bottom:none} }
+
+/* ============================================================
+   SECTION 3 — ターゲット
+   ============================================================ */
+.target-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;
+}
+.tcard{
+  background:var(--white);
+  border:1px solid var(--line);
+  padding:36px 32px;
+  position:relative;
+}
+.tcard.primary{border-color:var(--shu);box-shadow:6px 6px 0 var(--shu)}
+.tcard .tag{
+  display:inline-block;font-family:var(--fr);font-size:11px;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--paper);
+  background:var(--ink);padding:5px 11px;
+}
+.tcard.primary .tag{background:var(--shu)}
+.tcard h3{font-size:22px;margin:18px 0 6px;letter-spacing:.08em}
+.tcard .roles{
+  font-family:var(--sans);font-size:13px;color:var(--ink-mute);
+  letter-spacing:.06em;margin-bottom:24px;
+}
+.tcard h4{
+  font-size:13px;letter-spacing:.22em;margin:0 0 14px;
+  color:var(--shu);text-transform:uppercase;
+  font-family:var(--fr);font-weight:500;
+}
+.tcard ul{margin:0;padding:0;list-style:none}
+.tcard li{
+  padding:10px 0 10px 22px;
+  font-size:14px;line-height:1.7;
+  border-bottom:1px dashed var(--line);
+  position:relative;
+}
+.tcard li:last-child{border-bottom:none}
+.tcard li::before{
+  content:"";position:absolute;left:0;top:18px;
+  width:10px;height:1px;background:var(--ink-mute);
+}
+.write-rule{
+  margin-top:36px;
+  padding:24px 28px;border-left:3px solid var(--shu);
+  background:var(--paper-2);
+  font-size:14.5px;line-height:1.9;
+}
+.write-rule b{font-family:var(--serif);font-weight:700;letter-spacing:.08em}
+@media (max-width:780px){ .target-grid{grid-template-columns:1fr} }
+
+/* ============================================================
+   SECTION 4 — noteの役割 / Funnel
+   ============================================================ */
+.funnel{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:14px;margin:28px 0 36px;
+}
+.fstep{
+  background:var(--white);border:1px solid var(--line);
+  padding:24px 18px 22px;
+  position:relative;text-align:left;
+  transition:transform .25s ease;
+}
+.fstep:hover{transform:translateY(-4px)}
+.fstep .step{
+  font-family:var(--fr);font-style:italic;font-size:12px;
+  letter-spacing:.28em;color:var(--shu);text-transform:uppercase;
+}
+.fstep h4{
+  font-size:19px;margin:8px 0 8px;letter-spacing:.1em;
+  color:var(--ink);
+}
+.fstep p{margin:0;font-size:12.5px;color:var(--ink-mute);line-height:1.7}
+.fstep::after{
+  content:"→";
+  position:absolute;right:-13px;top:50%;transform:translateY(-50%);
+  background:var(--paper);width:18px;height:18px;
+  display:grid;place-items:center;font-size:14px;color:var(--shu);
+  font-family:var(--fr);
+}
+.fstep:last-child::after{display:none}
+@media (max-width:880px){ .funnel{grid-template-columns:1fr 1fr} .fstep::after{display:none} }
+
+.box-dark{
+  background:var(--ink);color:var(--paper);
+  padding:36px 36px;display:grid;grid-template-columns:1fr auto;gap:30px;
+  align-items:center;
+}
+.box-dark p{margin:0;font-family:var(--serif);font-size:18px;line-height:1.85;letter-spacing:.08em}
+.box-dark p em{color:var(--shu-soft);font-style:normal}
+.box-dark .note{
+  font-family:var(--fr);font-style:italic;font-size:12px;letter-spacing:.22em;
+  color:rgba(244,239,230,.55);text-transform:uppercase;text-align:right;
+}
+
+/* ============================================================
+   SECTION 5 — 記事シリーズ設計
+   ============================================================ */
+.series{
+  border-top:1px solid var(--ink);
+}
+.srow{
+  display:grid;grid-template-columns:60px 200px 1fr 160px;
+  align-items:center;padding:24px 0;
+  border-bottom:1px solid var(--line);gap:24px;
+  transition:background .2s ease;
+}
+.srow:hover{background:var(--paper-2)}
+.srow .skey{
+  font-family:var(--fr);font-style:italic;font-weight:300;
+  font-size:34px;color:var(--shu);line-height:1;
+}
+.srow .stitle{
+  font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:.08em;
+}
+.srow .sdesc{font-size:14px;color:var(--ink-mute);line-height:1.8}
+.srow .srole{
+  font-family:var(--fr);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ink);background:var(--mark);padding:6px 10px;justify-self:start;
+  font-weight:500;
+}
+@media (max-width:880px){
+  .srow{grid-template-columns:auto 1fr;grid-template-rows:auto auto auto;}
+  .srow .skey{grid-row:1/3}
+  .srow .sdesc{grid-column:2}
+  .srow .srole{grid-column:2}
+}
+.guide{
+  margin-top:30px;padding:22px 28px;border:1px dashed var(--ink-2);
+  font-size:14px;line-height:1.85;color:var(--ink-2);
+}
+.guide b{font-family:var(--serif);letter-spacing:.06em;color:var(--ink)}
+
+/* ============================================================
+   SECTION 6 — 1本の記事テンプレート
+   ============================================================ */
+.template{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:14px;margin-top:24px;
+}
+.tplstep{
+  background:var(--white);border:1px solid var(--line);
+  padding:22px 16px;
+  position:relative;
+}
+.tplstep .n{
+  font-family:var(--fr);font-style:italic;font-size:36px;
+  font-weight:300;line-height:1;color:var(--shu);
+}
+.tplstep h4{font-size:14px;margin:14px 0 6px;letter-spacing:.06em}
+.tplstep p{margin:0;font-size:12px;color:var(--ink-mute);line-height:1.75}
+@media (max-width:880px){
+  .template{grid-template-columns:repeat(2,1fr)}
+}
+.key-note{
+  margin-top:30px;
+  padding:24px 30px;background:var(--ink);color:var(--paper);
+  display:flex;gap:18px;align-items:flex-start;
+}
+.key-note .tag{
+  font-family:var(--fr);font-style:italic;font-size:12px;letter-spacing:.32em;
+  color:var(--shu-soft);text-transform:uppercase;
+  border-right:1px solid var(--shu-soft);padding-right:18px;
+}
+.key-note p{margin:0;font-family:var(--serif);font-size:16px;line-height:1.9;letter-spacing:.06em}
+
+/* ============================================================
+   SECTION 7 — タイトル設計
+   ============================================================ */
+.title-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;
+  margin-top:12px;
+}
+.tcard2{
+  background:var(--white);border:1px solid var(--line);
+  padding:24px 26px;display:grid;grid-template-columns:auto 1fr;gap:18px;
+  align-items:start;
+}
+.tcard2 .ticon{
+  font-family:var(--fr);font-style:italic;font-weight:300;
+  font-size:38px;line-height:1;color:var(--shu);
+}
+.tcard2 .ttype{
+  font-family:var(--fr);font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--ink-mute);margin-bottom:6px;
+}
+.tcard2 h4{
+  font-size:16.5px;margin:0;line-height:1.7;letter-spacing:.06em;
+  font-family:var(--serif);font-weight:700;
+}
+.dodont{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px;
+}
+.dodont > div{padding:24px 26px;border:1px solid var(--line);background:var(--white)}
+.dodont .lbl{
+  font-family:var(--fr);font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.dodont .avoid .lbl{color:var(--shu)}
+.dodont .aim .lbl{color:var(--sage)}
+.dodont p{margin:0;font-family:var(--serif);font-weight:500;font-size:15px;line-height:1.85;letter-spacing:.06em}
+@media (max-width:780px){ .title-grid,.dodont{grid-template-columns:1fr} }
+
+/* ============================================================
+   SECTION 8 — 文体・トーン
+   ============================================================ */
+.tone-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  background:var(--white);border:1px solid var(--line);
+}
+.tone-grid > div{
+  padding:36px 36px;
+}
+.tone-grid > div:first-child{border-right:1px solid var(--line)}
+.tone-grid h4{
+  font-family:var(--fr);font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  margin:0 0 22px;font-weight:500;
+}
+.tone-grid .do h4{color:var(--sage)}
+.tone-grid .dont h4{color:var(--shu)}
+.tone-grid ul{margin:0;padding:0;list-style:none}
+.tone-grid li{
+  padding:12px 0 12px 26px;font-size:14px;line-height:1.8;
+  border-bottom:1px dashed var(--line);position:relative;
+}
+.tone-grid li:last-child{border-bottom:none}
+.tone-grid .do li::before{
+  content:"+";position:absolute;left:0;top:11px;
+  font-family:var(--fr);font-weight:500;color:var(--sage);font-size:18px;line-height:1;
+}
+.tone-grid .dont li::before{
+  content:"×";position:absolute;left:0;top:13px;
+  font-family:var(--fr);font-weight:500;color:var(--shu);font-size:16px;line-height:1;
+}
+.temperature{
+  margin-top:30px;padding:28px 32px;
+  border:1px solid var(--ink);
+  font-family:var(--serif);font-weight:500;font-size:17px;line-height:2;
+  letter-spacing:.08em;
+}
+.temperature em{color:var(--shu);font-style:normal;font-weight:700}
+@media (max-width:780px){
+  .tone-grid{grid-template-columns:1fr}
+  .tone-grid > div:first-child{border-right:none;border-bottom:1px solid var(--line)}
+}
+
+/* ============================================================
+   SECTION 9 — 業種別
+   ============================================================ */
+.industry{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+}
+.ic{
+  background:var(--white);border:1px solid var(--line);
+  padding:0;overflow:hidden;
+}
+.ic .head{
+  padding:24px 26px;color:var(--paper);
+  display:flex;align-items:baseline;justify-content:space-between;
+}
+.ic.manuf .head{background:#3D5468}
+.ic.warehouse .head{background:#7A4B36}
+.ic.care .head{background:#5D7C6E}
+.ic .head h3{font-size:22px;margin:0;letter-spacing:.12em}
+.ic .head .en{
+  font-family:var(--fr);font-style:italic;font-weight:300;
+  font-size:14px;letter-spacing:.18em;opacity:.7;
+}
+.ic .body{padding:24px 26px 22px}
+.ic .body h5{
+  font-family:var(--fr);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ink-mute);margin:0 0 10px;font-weight:500;
+}
+.ic .body ul{margin:0 0 18px;padding:0;list-style:none}
+.ic .body li{
+  font-size:13.5px;line-height:1.7;padding:6px 0 6px 16px;position:relative;
+}
+.ic .body li::before{
+  content:"";position:absolute;left:0;top:14px;width:8px;height:1px;background:var(--shu);
+}
+.ic .ex{
+  margin:14px -26px -22px;padding:18px 26px;
+  background:var(--paper-2);font-family:var(--serif);font-weight:500;
+  font-size:14.5px;line-height:1.75;letter-spacing:.06em;
+  border-top:1px solid var(--line);
+}
+.ic .ex::before{
+  content:"記事例";display:block;font-family:var(--fr);font-style:italic;
+  font-size:10.5px;letter-spacing:.32em;color:var(--shu);margin-bottom:6px;text-transform:uppercase;
+}
+@media (max-width:880px){ .industry{grid-template-columns:1fr} }
+
+/* ============================================================
+   SECTION 10 — プロフィール設計
+   ============================================================ */
+.profile-mock{
+  background:var(--white);border:1px solid var(--line);
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+}
+.profile-mock > div{padding:36px 36px}
+.profile-mock > div + div{border-left:1px solid var(--line)}
+.profile-mock h4{
+  font-family:var(--fr);font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--shu);margin:0 0 16px;font-weight:500;
+}
+.profile-text{
+  font-family:var(--serif);font-weight:500;font-size:17px;line-height:2;
+  letter-spacing:.08em;padding:24px;background:var(--paper-2);border-left:3px solid var(--shu);
+}
+.elem-list{margin:18px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--ink-mute)}
+.elem-list li{padding:7px 0 7px 18px;position:relative}
+.elem-list li::before{content:"·";position:absolute;left:5px;top:4px;color:var(--shu);font-size:20px;line-height:1}
+.fixed-title{
+  font-family:var(--serif);font-weight:700;font-size:16px;
+  line-height:1.8;letter-spacing:.06em;padding-bottom:16px;border-bottom:1px solid var(--line);
+}
+.fixed-list{margin:16px 0 0;padding:0;list-style:none;counter-reset:fl}
+.fixed-list li{
+  counter-increment:fl;
+  padding:8px 0 8px 32px;position:relative;font-size:14px;line-height:1.7;
+}
+.fixed-list li::before{
+  content:counter(fl,decimal-leading-zero);
+  position:absolute;left:0;top:8px;
+  font-family:var(--fr);font-style:italic;font-size:13px;color:var(--shu);
+  font-weight:500;
+}
+.cta-row{
+  margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);
+  font-size:13px;color:var(--ink-mute);
+}
+.cta-row b{color:var(--ink);font-family:var(--serif);letter-spacing:.06em}
+@media (max-width:780px){ .profile-mock{grid-template-columns:1fr} .profile-mock > div + div{border-left:none;border-top:1px solid var(--line)} }
+
+/* ============================================================
+   SECTION 11 — 8週カレンダー
+   ============================================================ */
+.calendar{
+  margin-top:10px;
+  border-top:2px solid var(--ink);
+}
+.cweek{
+  display:grid;grid-template-columns:80px 1.5fr 200px 180px;
+  gap:30px;padding:24px 0;align-items:center;
+  border-bottom:1px solid var(--line);
+  transition:background .2s ease;
+}
+.cweek:hover{background:var(--paper-2)}
+.cweek.head{font-family:var(--fr);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);padding:14px 0}
+.cweek.head .wn{color:var(--shu);font-family:var(--fr);font-size:11px;font-style:normal;font-weight:500;letter-spacing:.28em}
+.cweek .wn{
+  font-family:var(--fr);font-style:italic;font-weight:300;font-size:42px;
+  color:var(--shu);line-height:1;
+}
+.cweek .wn small{
+  display:block;font-family:var(--fr);font-style:normal;font-size:10px;
+  letter-spacing:.28em;color:var(--ink-mute);margin-top:6px;text-transform:uppercase;
+}
+.cweek .wtitle{
+  font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.6;letter-spacing:.06em;
+}
+.cweek .waim{font-size:13px;color:var(--ink-mute);letter-spacing:.06em}
+.cweek .wcta{
+  font-family:var(--fr);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ink);background:var(--mark);padding:7px 12px;justify-self:start;font-weight:500;
+}
+.after-month{
+  margin-top:34px;padding:24px 28px;
+  background:var(--ink);color:var(--paper);
+  display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
+}
+.after-month .tag{
+  font-family:var(--fr);font-style:italic;font-size:11px;letter-spacing:.28em;
+  color:var(--shu-soft);text-transform:uppercase;
+}
+.after-month p{margin:0;font-size:14px;line-height:1.85}
+@media (max-width:880px){
+  .cweek{grid-template-columns:60px 1fr;gap:16px;padding:18px 0}
+  .cweek .waim,.cweek .wcta{grid-column:2}
+  .cweek.head{display:none}
+}
+
+/* ============================================================
+   SECTION 12 — 問い合わせ導線
+   ============================================================ */
+.pipeline{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:14px;margin-top:12px;
+}
+.pstep{
+  background:var(--white);border:1px solid var(--line);
+  padding:22px 20px;position:relative;
+}
+.pstep .pn{
+  font-family:var(--fr);font-style:italic;font-size:12px;letter-spacing:.28em;
+  color:var(--shu);text-transform:uppercase;
+}
+.pstep h4{
+  font-family:var(--serif);font-weight:700;font-size:15.5px;
+  margin:8px 0 8px;letter-spacing:.06em;line-height:1.5;
+}
+.pstep p{margin:0;font-size:12.5px;color:var(--ink-mute);line-height:1.7}
+@media (max-width:880px){ .pipeline{grid-template-columns:1fr 1fr} }
+.cta-three{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px;
+}
+.ctab{
+  padding:24px 26px;background:var(--white);border:1px solid var(--line);
+}
+.ctab .weight{
+  font-family:var(--fr);font-style:italic;font-size:11px;letter-spacing:.28em;
+  color:var(--ink-mute);text-transform:uppercase;
+}
+.ctab h4{
+  font-family:var(--serif);font-weight:700;font-size:17px;margin:10px 0 0;
+  letter-spacing:.08em;
+}
+.ctab.light{background:var(--paper-2)}
+.ctab.mid{background:var(--ink-2);color:var(--paper)}
+.ctab.mid h4{color:var(--paper)} .ctab.mid .weight{color:var(--shu-soft)}
+.ctab.strong{background:var(--shu);color:var(--paper)}
+.ctab.strong h4{color:var(--paper)} .ctab.strong .weight{color:rgba(255,255,255,.8)}
+@media (max-width:780px){ .cta-three{grid-template-columns:1fr} }
+
+/* ============================================================
+   SECTION 13 — KPI
+   ============================================================ */
+.kpi{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:36px;
+}
+.rules{
+  background:var(--white);border:1px solid var(--line);padding:32px 36px;
+}
+.rules h4{
+  font-family:var(--fr);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--shu);margin:0 0 18px;font-weight:500;
+}
+.rules ul{margin:0;padding:0;list-style:none}
+.rules li{
+  padding:11px 0 11px 28px;font-size:14.5px;line-height:1.7;
+  border-bottom:1px dashed var(--line);position:relative;
+}
+.rules li:last-child{border-bottom:none}
+.rules li::before{
+  content:"";position:absolute;left:0;top:21px;width:16px;height:1px;background:var(--ink);
+}
+.kpilist{
+  background:var(--ink);color:var(--paper);padding:32px 36px;
+}
+.kpilist h4{
+  font-family:var(--fr);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--shu-soft);margin:0 0 18px;font-weight:500;
+}
+.kpilist .row{
+  display:grid;grid-template-columns:90px 1fr;gap:18px;
+  padding:13px 0;border-bottom:1px solid rgba(244,239,230,.12);align-items:baseline;
+}
+.kpilist .row:last-child{border-bottom:none}
+.kpilist .row .lab{
+  font-family:var(--serif);font-weight:700;font-size:14.5px;letter-spacing:.12em;
+}
+.kpilist .row .det{font-size:13px;color:rgba(244,239,230,.7);line-height:1.7}
+.most{
+  grid-column:1/-1;margin-top:0;padding:24px 28px;
+  background:var(--shu);color:var(--paper);
+  font-family:var(--serif);font-weight:500;font-size:16px;line-height:1.85;letter-spacing:.08em;
+  display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;
+}
+.most .lbl{font-family:var(--fr);font-style:italic;font-size:11px;letter-spacing:.28em;text-transform:uppercase;opacity:.9}
+@media (max-width:880px){ .kpi{grid-template-columns:1fr} }
+
+/* ============================================================
+   SECTION 14 — リスク管理
+   ============================================================ */
+.risk-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.risk{
+  background:var(--white);border-top:3px solid var(--shu);
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-left:1px solid var(--line);
+  padding:28px 30px;
+}
+.risk h4{
+  font-size:18px;margin:0 0 12px;letter-spacing:.08em;font-family:var(--serif);font-weight:700;
+}
+.risk h4::before{
+  content:"!";display:inline-grid;place-items:center;
+  width:22px;height:22px;background:var(--shu);color:var(--paper);
+  font-family:var(--fr);font-style:italic;font-weight:700;font-size:13px;
+  margin-right:12px;vertical-align:1px;
+}
+.risk p{margin:0;font-size:13.5px;color:var(--ink-mute);line-height:1.85}
+.principle{
+  margin-top:30px;padding:24px 30px;
+  background:var(--paper-2);border-left:3px solid var(--ink);
+  font-family:var(--serif);font-weight:500;font-size:15.5px;line-height:1.95;letter-spacing:.06em;
+}
+.principle em{font-style:normal;color:var(--shu);font-weight:700}
+@media (max-width:780px){ .risk-grid{grid-template-columns:1fr} }
+
+/* ============================================================
+   SECTION 15 — 勝ち筋
+   ============================================================ */
+.win{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border:1px solid rgba(244,239,230,.18);
+  background:transparent;
+}
+.win > div{
+  padding:38px 30px;border-right:1px solid rgba(244,239,230,.18);
+  transition:background .25s ease;
+}
+.win > div:last-child{border-right:none}
+.win > div:hover{background:rgba(244,239,230,.04)}
+.win .num{
+  font-family:var(--fr);font-style:italic;font-weight:300;font-size:60px;
+  color:var(--shu);line-height:.9;margin-bottom:18px;
+}
+.win h3{
+  font-size:20px;margin:0 0 14px;letter-spacing:.08em;color:var(--paper);
+}
+.win p{margin:0;font-size:13.5px;color:rgba(244,239,230,.7);line-height:1.85}
+@media (max-width:880px){ .win{grid-template-columns:1fr 1fr} }
+@media (max-width:560px){ .win{grid-template-columns:1fr} }
+
+.next{
+  margin-top:50px;padding:30px 34px;
+  border:1px solid rgba(244,239,230,.25);
+  display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
+}
+.next .lbl{
+  font-family:var(--fr);font-style:italic;font-size:12px;letter-spacing:.32em;
+  color:var(--shu-soft);text-transform:uppercase;padding-right:24px;
+  border-right:1px solid rgba(244,239,230,.25);
+}
+.next p{margin:0;font-family:var(--serif);font-weight:500;font-size:16px;line-height:1.85;letter-spacing:.08em;color:var(--paper)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  padding:60px 0 80px;background:var(--ink);color:rgba(244,239,230,.55);
+}
+footer .wrap{
+  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;
+}
+footer .brand-f{
+  font-family:var(--serif);font-weight:700;color:var(--paper);font-size:18px;letter-spacing:.16em;
+}
+footer .brand-f small{
+  display:block;font-family:var(--fr);font-style:italic;font-size:12px;letter-spacing:.18em;color:var(--shu-soft);margin-top:6px;
+}
+footer .meta{font-family:var(--fr);font-size:11px;letter-spacing:.28em;text-transform:uppercase}
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease, transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* selection */
+::selection{background:var(--mark);color:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">note戦略 <small>Brand Strategy ’26</small></div>
+    <nav>
+      <a href="#aim">方針</a>
+      <a href="#brand">ブランド</a>
+      <a href="#target">読者</a>
+      <a href="#funnel">役割</a>
+      <a href="#series">シリーズ</a>
+      <a href="#calendar">8週計画</a>
+      <a href="#kpi">KPI</a>
+      <a href="#win">勝ち筋</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <span class="eyebrow"><span class="no">Draft v1 / 2026</span></span>
+        <h1>
+          <span class="br">腰痛を、</span>
+          <span class="br"><span class="accent">根性論で</span></span>
+          <span class="br">終わらせない。</span>
+        </h1>
+        <p class="subtitle">
+          理学療法士 逢坂先生のためのBtoB向けnote運用・ブランディング方針。<br>
+          製造業・倉庫・介護施設など、<br>腰に負荷が集中する現場を救うための発信へ。
+        </p>
+        <div class="meta">
+          <span>For<b>逢坂先生</b></span>
+          <span>Document<b>運用設計書</b></span>
+          <span>Version<b>v1.0 / 2026</b></span>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="pillar">
+          <div class="lbl">Core</div>
+          <div>
+            <h3>ブランドの核</h3>
+            <p>腰痛を根性論で終わらせない</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="lbl">Target</div>
+          <div>
+            <h3>届ける相手</h3>
+            <p>安全衛生・現場責任者 / 施設長 / 経営層</p>
+          </div>
+        </div>
+        <div class="pillar alt">
+          <div class="lbl">Role</div>
+          <div>
+            <h3>noteの役割</h3>
+            <p>読まれるより、信頼される</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     01 全体方針
+============================================================ -->
+<section class="section" id="aim">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">01<small>Overall Aim</small></div>
+      <div>
+        <span class="eyebrow">全体方針<span class="no">/ The Aim</span></span>
+        <h2 class="h">この資料の目的</h2>
+        <p class="lead">逢坂先生のnoteを、BtoBの<em><strong>信頼形成・商談導線</strong></em>として機能させる。単なる情報発信ではなく、営業前に「この人は現場を分かっている」と思われる<strong>信頼資産</strong>として設計する。</p>
+      </div>
+    </div>
+
+    <div class="aim-grid reveal">
+      <div class="aim-card">
+        <div class="n">01</div>
+        <h3>発信の軸を固定する</h3>
+        <p>腰痛予防を“個人の努力”ではなく、作業設計・教育・労働安全の課題として語る。</p>
+      </div>
+      <div class="aim-card">
+        <div class="n">02</div>
+        <h3>記事シリーズを設計する</h3>
+        <p>製造業・倉庫・介護施設ごとに、管理者と現場スタッフの両方に届く型を作る。</p>
+      </div>
+      <div class="aim-card">
+        <div class="n">03</div>
+        <h3>問い合わせに接続する</h3>
+        <p>noteの読後に、研修・現場評価・安全教育の相談へ自然につなげる。</p>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <div class="key">Premise</div>
+      <div>note単体で完結させず、営業前に「この人は現場を分かっている」と思われる信頼資産にする。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     02 ブランドの芯
+============================================================ -->
+<section class="section" id="brand">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">02<small>Brand Core</small></div>
+      <div>
+        <span class="eyebrow">ブランド設計<span class="no">/ The Promise</span></span>
+        <h2 class="h">ブランドの芯</h2>
+        <p class="lead">逢坂先生が一貫して発信する“約束”を決める。タグライン、現場理解、専門知の翻訳、そして<strong>「続く仕組み」</strong>までを一本のブランドとして束ねる。</p>
+      </div>
+    </div>
+
+    <div class="promise reveal">
+      <div class="stamp">約束</div>
+      <blockquote>
+        腰痛を『本人の努力不足』で終わらせない。<br>
+        <em>現場で続く安全対策へ。</em>
+      </blockquote>
+    </div>
+
+    <div class="three-up reveal">
+      <div>
+        <h4>現場理解</h4>
+        <p>前かがみ・持ち上げ・ひねり・移乗など、現場の動きそのものを前提にする。</p>
+      </div>
+      <div>
+        <h4>専門知の翻訳</h4>
+        <p>理学療法士の知識を、安全衛生担当が社内説明に使える言葉へ。</p>
+      </div>
+      <div>
+        <h4>継続できる仕組み</h4>
+        <p>正しいだけでなく、忙しい現場でも3日坊主にならない設計へ。</p>
+      </div>
+    </div>
+
+    <p class="tagline reveal">腰に負担が集まる現場を、身体と仕組みの両面から変える。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     03 ターゲット
+============================================================ -->
+<section class="section" id="target">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">03<small>Audience</small></div>
+      <div>
+        <span class="eyebrow">ターゲット<span class="no">/ Who we write for</span></span>
+        <h2 class="h">誰に向けて書くか</h2>
+        <p class="lead">BtoBでは“現場の共感”と“管理者の意思決定”を<em>同時に</em>設計する。一次読者と二次読者、両方を一本の記事で射程に入れる。</p>
+      </div>
+    </div>
+
+    <div class="target-grid reveal">
+      <div class="tcard primary">
+        <span class="tag">Primary / 意思決定・導入側</span>
+        <h3>一次読者</h3>
+        <p class="roles">安全衛生担当 / 施設長 / 工場長 / 倉庫責任者 / 経営層</p>
+        <h4>知りたいこと</h4>
+        <ul>
+          <li>腰痛対策が定着しない理由</li>
+          <li>労災・離職・生産性への影響</li>
+          <li>何から改善すればよいか</li>
+          <li>研修や現場改善の導入イメージ</li>
+        </ul>
+      </div>
+      <div class="tcard">
+        <span class="tag">Secondary / 現場スタッフ</span>
+        <h3>二次読者</h3>
+        <p class="roles">介護職 / 倉庫作業者 / 製造ライン / 物流・配送 / 現場リーダー</p>
+        <h4>刺さること</h4>
+        <ul>
+          <li>“自分だけが悪い”と思わなくていい</li>
+          <li>今日の作業で変えられる小さなコツ</li>
+          <li>痛みを我慢し続けない判断基準</li>
+          <li>上司に相談しやすい言葉</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="write-rule reveal"><b>書き方の基本。</b>現場の言葉で入り、管理者が動ける意味づけで終える。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     04 noteの役割 / Funnel
+============================================================ -->
+<section class="section section--dark" id="funnel">
+  <span class="deco-num" style="top:40px;right:24px">04</span>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">04<small>Role of note</small></div>
+      <div>
+        <span class="eyebrow">運用方針<span class="no">/ Trust before sales</span></span>
+        <h2 class="h" style="color:var(--paper)">noteの役割</h2>
+        <p class="lead" style="color:rgba(244,239,230,.7);">単なる情報発信ではなく、商談前に<em style="color:var(--shu-soft);font-style:normal">信頼を蓄積する</em>メディアにする。読者は5段階の階段を上るように、認知から相談まで導かれる。</p>
+      </div>
+    </div>
+
+    <div class="funnel reveal">
+      <div class="fstep"><div class="step">Step 01</div><h4>認知</h4><p>腰痛・労働安全の課題に気づく</p></div>
+      <div class="fstep"><div class="step">Step 02</div><h4>共感</h4><p>現場を分かっている専門家だと感じる</p></div>
+      <div class="fstep"><div class="step">Step 03</div><h4>理解</h4><p>原因が“個人”だけでないことを腹落ち</p></div>
+      <div class="fstep"><div class="step">Step 04</div><h4>比較</h4><p>社内研修・現場評価の必要性が見える</p></div>
+      <div class="fstep"><div class="step">Step 05</div><h4>相談</h4><p>問い合わせ・面談・研修依頼へ</p></div>
+    </div>
+
+    <div class="box-dark reveal">
+      <p>noteは“読ませる媒体”ではなく、<br>逢坂先生に<em>相談する理由</em>を先につくる場所。</p>
+      <div class="note">記事末尾に<br>次のアクションを1つだけ</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     05 記事シリーズ設計
+============================================================ -->
+<section class="section" id="series">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">05<small>Content Series</small></div>
+      <div>
+        <span class="eyebrow">コンテンツ設計<span class="no">/ Five Roles</span></span>
+        <h2 class="h">記事シリーズ設計</h2>
+        <p class="lead">“各note”を役割別に分けると、継続運用と商談導線が作りやすい。5つの型を回すことで、毎月の記事の意図と狙いがぶれない。</p>
+      </div>
+    </div>
+
+    <div class="series reveal">
+      <div class="srow">
+        <div class="skey">A</div>
+        <div class="stitle">現場あるある</div>
+        <div class="sdesc">腰痛が多い現場に共通する動き・クセを解説</div>
+        <div class="srole">共感獲得</div>
+      </div>
+      <div class="srow">
+        <div class="skey">B</div>
+        <div class="stitle">誤解を解く</div>
+        <div class="sdesc">“姿勢を正すだけ”では変わらない理由を説明</div>
+        <div class="srole">専門性訴求</div>
+      </div>
+      <div class="srow">
+        <div class="skey">C</div>
+        <div class="stitle">職種別対策</div>
+        <div class="sdesc">製造・倉庫・介護など、現場ごとの対策を提示</div>
+        <div class="srole">検索・保存</div>
+      </div>
+      <div class="srow">
+        <div class="skey">D</div>
+        <div class="stitle">管理者向け</div>
+        <div class="sdesc">労災・離職・教育・仕組みとして腰痛を語る</div>
+        <div class="srole">BtoB導線</div>
+      </div>
+      <div class="srow">
+        <div class="skey">E</div>
+        <div class="stitle">事例・導入前教育</div>
+        <div class="sdesc">匿名事例・チェックリスト・研修イメージを共有</div>
+        <div class="srole">信頼深化</div>
+      </div>
+    </div>
+
+    <p class="guide reveal"><b>運用目安。</b>月4本なら A / B / C / D を1本ずつ。事例は月末か四半期に1本入れる。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     06 1本の記事テンプレート
+============================================================ -->
+<section class="section" id="template">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">06<small>Article Template</small></div>
+      <div>
+        <span class="eyebrow">記事構成<span class="no">/ 7-step format</span></span>
+        <h2 class="h">1本の記事テンプレート</h2>
+        <p class="lead">医療系noteは“正しい説明”だけでなく、<strong>読者が動ける流れ</strong>が重要。7つのブロックを順に並べると、共感→理解→行動の導線が一気に通る。</p>
+      </div>
+    </div>
+
+    <div class="template reveal">
+      <div class="tplstep"><div class="n">1</div><h4>冒頭3行</h4><p>現場の痛みをそのまま言語化する</p></div>
+      <div class="tplstep"><div class="n">2</div><h4>よくある誤解</h4><p>“腰が弱いから”などの単純化をほどく</p></div>
+      <div class="tplstep"><div class="n">3</div><h4>現場背景</h4><p>作業高さ・動線・人員・時間制約に触れる</p></div>
+      <div class="tplstep"><div class="n">4</div><h4>PT視点の解説</h4><p>専門用語を日常語に翻訳する</p></div>
+      <div class="tplstep"><div class="n">5</div><h4>今日の1アクション</h4><p>5分以内で変えられる行動に絞る</p></div>
+      <div class="tplstep"><div class="n">6</div><h4>管理者チェック</h4><p>職場として確認すべきポイントを3つ</p></div>
+      <div class="tplstep"><div class="n">7</div><h4>CTA</h4><p>チェックリスト / 相談 / 研修案内へ</p></div>
+    </div>
+
+    <div class="key-note reveal">
+      <div class="tag">Key</div>
+      <p>“理想の体の使い方”ではなく、<br>“現場で続く最小改善”として書く。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     07 タイトル設計
+============================================================ -->
+<section class="section" id="title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">07<small>Headlines</small></div>
+      <div>
+        <span class="eyebrow">編集ルール<span class="no">/ Title Design</span></span>
+        <h2 class="h">タイトル設計</h2>
+        <p class="lead">BtoBでは“読まれるタイトル”と“<strong>社内共有されるタイトル</strong>”を両立する。職種名・困りごと・読後の変化が一目で分かる形を狙う。</p>
+      </div>
+    </div>
+
+    <div class="title-grid reveal">
+      <div class="tcard2">
+        <div class="ticon">A</div>
+        <div>
+          <div class="ttype">Type / 職種 + 痛み</div>
+          <h4>介護現場で腰痛離職が起きる前に見るべき3つのサイン</h4>
+        </div>
+      </div>
+      <div class="tcard2">
+        <div class="ticon">B</div>
+        <div>
+          <div class="ttype">Type / よくある誤解</div>
+          <h4>倉庫の腰痛は“持ち上げ方”だけでは防げない</h4>
+        </div>
+      </div>
+      <div class="tcard2">
+        <div class="ticon">C</div>
+        <div>
+          <div class="ttype">Type / 管理者目線</div>
+          <h4>腰痛対策が定着しない職場に共通すること</h4>
+        </div>
+      </div>
+      <div class="tcard2">
+        <div class="ticon">D</div>
+        <div>
+          <div class="ttype">Type / 現場改善</div>
+          <h4>前かがみ作業をゼロにできない現場で、まず変えること</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="dodont reveal">
+      <div class="avoid">
+        <div class="lbl">Avoid</div>
+        <p>「腰痛予防について」<br>「正しい姿勢とは」</p>
+      </div>
+      <div class="aim">
+        <div class="lbl">Aim</div>
+        <p>現場名・困りごと・読後の変化が<br>一目で分かるタイトル。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     08 文体・トーン
+============================================================ -->
+<section class="section" id="tone">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">08<small>Voice & Tone</small></div>
+      <div>
+        <span class="eyebrow">ブランド表現<span class="no">/ Voice</span></span>
+        <h2 class="h">文体・トーン</h2>
+        <p class="lead">逢坂先生の文章は“<strong>専門家だけど、現場に寄り添う</strong>”が基本。医学的正しさだけでなく、現場で再現できる温度感を保つ。</p>
+      </div>
+    </div>
+
+    <div class="tone-grid reveal">
+      <div class="do">
+        <h4>+ やること</h4>
+        <ul>
+          <li>まず現場の言葉で入る</li>
+          <li>“本人のせい”にしない</li>
+          <li>専門用語は必ず言い換える</li>
+          <li>小さく変えられる提案にする</li>
+          <li>管理者が社内説明しやすい表現にする</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <h4>× 避けること</h4>
+        <ul>
+          <li>論文調だけで終わる</li>
+          <li>恐怖を煽って問い合わせに誘導する</li>
+          <li>“これで治る”と断定する</li>
+          <li>現場で不可能な理想論を書く</li>
+          <li>個別診断のように見える表現をする</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="temperature reveal">医学的には<em>正しい</em>。<br>でも、現場では<em>続かない</em>。<br>だから、こう変える。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     09 業種別
+============================================================ -->
+<section class="section" id="industry">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">09<small>By Industry</small></div>
+      <div>
+        <span class="eyebrow">業種別運用<span class="no">/ Three Fronts</span></span>
+        <h2 class="h">職種別コンテンツ方針</h2>
+        <p class="lead">業種ごとに“<strong>腰へ負荷が集まる瞬間</strong>”が違うため、記事も分ける。同じ腰痛でも“原因の言葉”を現場ごとに変える。</p>
+      </div>
+    </div>
+
+    <div class="industry reveal">
+      <div class="ic manuf">
+        <div class="head"><h3>製造業</h3><span class="en">Manufacturing</span></div>
+        <div class="body">
+          <h5>刺さる課題</h5>
+          <ul>
+            <li>前かがみ作業</li>
+            <li>立ちっぱなし</li>
+            <li>同じ動作の反復</li>
+            <li>作業台の高さ</li>
+          </ul>
+          <div class="ex">前かがみが仕事そのものの職場で、腰を守る考え方</div>
+        </div>
+      </div>
+      <div class="ic warehouse">
+        <div class="head"><h3>倉庫・物流</h3><span class="en">Logistics</span></div>
+        <div class="body">
+          <h5>刺さる課題</h5>
+          <ul>
+            <li>持ち上げ + ひねり</li>
+            <li>台車や棚の高さ</li>
+            <li>急ぎ作業</li>
+            <li>人員不足</li>
+          </ul>
+          <div class="ex">倉庫の腰痛は、重さよりも「ひねり」で増える</div>
+        </div>
+      </div>
+      <div class="ic care">
+        <div class="head"><h3>介護施設</h3><span class="en">Care</span></div>
+        <div class="body">
+          <h5>刺さる課題</h5>
+          <ul>
+            <li>移乗介助</li>
+            <li>中腰姿勢</li>
+            <li>夜勤疲労</li>
+            <li>我慢文化</li>
+          </ul>
+          <div class="ex">気合い介助が腰痛離職につながる前にできること</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     10 プロフィール
+============================================================ -->
+<section class="section" id="profile">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">10<small>Account Setup</small></div>
+      <div>
+        <span class="eyebrow">プロフィール<span class="no">/ First 5 seconds</span></span>
+        <h2 class="h">アカウント・プロフィール設計</h2>
+        <p class="lead">最初の5秒で“<strong>誰の、何の専門家か</strong>”が分かる状態にする。プロフィール文と固定記事を、入り口として最適化する。</p>
+      </div>
+    </div>
+
+    <div class="profile-mock reveal">
+      <div>
+        <h4>Profile / プロフィール文案</h4>
+        <p class="profile-text">
+          腰痛を根性論で終わらせない。<br>
+          製造業・倉庫・介護施設向けに、<br>
+          理学療法士の視点で“現場で続く”<br>
+          腰痛予防と労働安全を設計します。
+        </p>
+        <ul class="elem-list">
+          <li>理学療法士であること</li>
+          <li>対象業種</li>
+          <li>腰痛予防 + 労働安全</li>
+          <li>現場で続く改善</li>
+          <li>相談先への導線</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Pinned / 固定記事の役割</h4>
+        <p class="fixed-title">逢坂先生が、腰痛対策を『現場改善』として発信する理由</p>
+        <ol class="fixed-list">
+          <li>現場の腰痛は個人問題ではない</li>
+          <li>労働安全・離職・教育の課題である</li>
+          <li>逢坂先生が提供できる支援</li>
+          <li>相談・研修・現場評価への入口</li>
+        </ol>
+        <div class="cta-row"><b>CTA例</b> 現場腰痛リスクの相談 / 研修の導入相談</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     11 8週カレンダー
+============================================================ -->
+<section class="section" id="calendar">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">11<small>8-Week Launch</small></div>
+      <div>
+        <span class="eyebrow">投稿計画<span class="no">/ Launch Calendar</span></span>
+        <h2 class="h">8週間ローンチカレンダー</h2>
+        <p class="lead">最初の2か月で“<strong>逢坂先生の専門領域</strong>”を市場に覚えてもらう。毎週、狙いとCTAをワンセットで設計する。</p>
+      </div>
+    </div>
+
+    <div class="calendar reveal">
+      <div class="cweek head">
+        <div class="wn">Week</div>
+        <div>記事テーマ</div>
+        <div>狙い</div>
+        <div>CTA</div>
+      </div>
+      <div class="cweek"><div class="wn">01<small>Week</small></div><div class="wtitle">腰痛を根性論で終わらせない</div><div class="waim">ブランド宣言</div><div class="wcta">固定記事へ</div></div>
+      <div class="cweek"><div class="wn">02<small>Week</small></div><div class="wtitle">介護現場の腰痛離職サイン</div><div class="waim">施設長向け</div><div class="wcta">相談</div></div>
+      <div class="cweek"><div class="wn">03<small>Week</small></div><div class="wtitle">倉庫の腰痛は“ひねり”で増える</div><div class="waim">現場あるある</div><div class="wcta">チェックリスト</div></div>
+      <div class="cweek"><div class="wn">04<small>Week</small></div><div class="wtitle">前かがみ作業をゼロにできない現場で</div><div class="waim">製造業向け</div><div class="wcta">研修案内</div></div>
+      <div class="cweek"><div class="wn">05<small>Week</small></div><div class="wtitle">安全教育で姿勢だけ伝えても変わらない理由</div><div class="waim">誤解を解く</div><div class="wcta">資料DL</div></div>
+      <div class="cweek"><div class="wn">06<small>Week</small></div><div class="wtitle">腰痛対策が定着しない職場の共通点</div><div class="waim">管理者向け</div><div class="wcta">面談</div></div>
+      <div class="cweek"><div class="wn">07<small>Week</small></div><div class="wtitle">5分でできる腰痛リスク点検</div><div class="waim">保存・共有</div><div class="wcta">診断</div></div>
+      <div class="cweek"><div class="wn">08<small>Week</small></div><div class="wtitle">匿名事例: 小さな改善で変わった現場</div><div class="waim">信頼深化</div><div class="wcta">問い合わせ</div></div>
+    </div>
+
+    <div class="after-month reveal">
+      <div class="tag">After 2 months</div>
+      <p>以降は月4本運用 — 管理者向け1本 / 職種別1本 / 現場あるある1本 / 事例・チェックリスト1本。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     12 問い合わせ導線
+============================================================ -->
+<section class="section" id="pipeline">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">12<small>Inquiry Pipeline</small></div>
+      <div>
+        <span class="eyebrow">商談導線<span class="no">/ Soft to Strong</span></span>
+        <h2 class="h">問い合わせ導線設計</h2>
+        <p class="lead">記事ごとに売り込むのではなく、<strong>読者の課題段階に合わせて</strong>次の一歩を置く。CTAは軽・中・強の3階層を使い分ける。</p>
+      </div>
+    </div>
+
+    <div class="pipeline reveal">
+      <div class="pstep"><div class="pn">Stage 01</div><h4>note記事</h4><p>課題に気づく</p></div>
+      <div class="pstep"><div class="pn">Stage 02</div><h4>チェックリスト</h4><p>職場で確認する</p></div>
+      <div class="pstep"><div class="pn">Stage 03</div><h4>15分相談</h4><p>状況を整理する</p></div>
+      <div class="pstep"><div class="pn">Stage 04</div><h4>現場評価・研修</h4><p>具体策を導入する</p></div>
+      <div class="pstep"><div class="pn">Stage 05</div><h4>継続支援</h4><p>定着を測る</p></div>
+    </div>
+
+    <div class="callout reveal" style="margin-top:36px">
+      <div class="key">Ideal CTA</div>
+      <div>“買ってください”ではなく、<br>“まず現場の腰痛リスクを<strong style="color:var(--shu-soft)">一緒に確認しましょう</strong>”。</div>
+    </div>
+
+    <div class="cta-three reveal">
+      <div class="ctab light">
+        <div class="weight">Light</div>
+        <h4>軽いCTA <span style="font-family:var(--fr);font-style:italic;font-weight:400;color:var(--ink-mute);font-size:13px">— チェックリストを見る</span></h4>
+      </div>
+      <div class="ctab mid">
+        <div class="weight">Medium</div>
+        <h4>中間CTA <span style="font-family:var(--fr);font-style:italic;font-weight:400;color:var(--shu-soft);font-size:13px">— 研修資料・事例を見る</span></h4>
+      </div>
+      <div class="ctab strong">
+        <div class="weight">Strong</div>
+        <h4>強いCTA <span style="font-family:var(--fr);font-style:italic;font-weight:400;color:rgba(255,255,255,.85);font-size:13px">— 現場評価・研修を相談</span></h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     13 KPI
+============================================================ -->
+<section class="section" id="kpi">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">13<small>Operation & KPI</small></div>
+      <div>
+        <span class="eyebrow">運用管理<span class="no">/ Beyond Page Views</span></span>
+        <h2 class="h">運用ルールとKPI</h2>
+        <p class="lead">“ビュー数”だけを追わず、<strong>BtoBの信頼形成に効いているか</strong>を見る。最重要は「問い合わせの数」ではなく、「良い相談が来る記事テーマ」を発見すること。</p>
+      </div>
+    </div>
+
+    <div class="kpi reveal">
+      <div class="rules">
+        <h4>Monthly Rules / 月次運用ルール</h4>
+        <ul>
+          <li>月4本を基本にする</li>
+          <li>1本は必ず管理者向けにする</li>
+          <li>職種別記事を毎月入れる</li>
+          <li>記事末尾CTAは1つに絞る</li>
+          <li>X / LinkedIn へ短文化して再利用</li>
+          <li>反応があったテーマを翌月深掘り</li>
+        </ul>
+      </div>
+      <div class="kpilist">
+        <h4>What to Measure / 見るべきKPI</h4>
+        <div class="row"><div class="lab">認知</div><div class="det">ビュー / スキ / SNS反応</div></div>
+        <div class="row"><div class="lab">信頼</div><div class="det">保存 / 社内共有 / コメント</div></div>
+        <div class="row"><div class="lab">導線</div><div class="det">プロフィール遷移 / CTAクリック</div></div>
+        <div class="row"><div class="lab">商談</div><div class="det">相談数 / 研修依頼 / 紹介</div></div>
+        <div class="row"><div class="lab">質</div><div class="det">読者の職種・会社規模・課題感</div></div>
+      </div>
+    </div>
+
+    <div class="most reveal" style="margin-top:30px">
+      <div class="lbl">Most Important</div>
+      <div>“問い合わせの数”より、“<strong>良い相談が来る記事テーマ</strong>”を見つける。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     14 リスク
+============================================================ -->
+<section class="section" id="risk">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">14<small>Safety & Ethics</small></div>
+      <div>
+        <span class="eyebrow">リスク管理<span class="no">/ Guidelines</span></span>
+        <h2 class="h">安全・倫理ガイドライン</h2>
+        <p class="lead">医療・ヘルスケア発信では、<strong>信頼を守るための表現ルール</strong>が重要。3つの原則で、専門家としての信用を毀損しない発信を担保する。</p>
+      </div>
+    </div>
+
+    <div class="risk-grid reveal">
+      <div class="risk">
+        <h4>個別診断に見せない</h4>
+        <p>記事では一般的な予防・安全教育として扱う。「あなたの腰痛はこれが原因」と断定しない。</p>
+      </div>
+      <div class="risk">
+        <h4>危険サインを案内する</h4>
+        <p>強い痛み、しびれ、麻痺、発熱、排尿排便の異常などは、医療機関への相談を促す。</p>
+      </div>
+      <div class="risk">
+        <h4>事例は匿名化する</h4>
+        <p>施設名・個人・症状の詳細から特定されないよう配慮する。数値や成果は過度に盛らない。</p>
+      </div>
+    </div>
+
+    <p class="principle reveal">表現方針 — “治す”より、“<em>予防する・減らす・気づく・見直す</em>”。<br>労働安全の文脈では、過度な医学的断定を避ける。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     15 勝ち筋
+============================================================ -->
+<section class="section section--dark" id="win">
+  <span class="deco-num" style="bottom:60px;left:24px">15</span>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">15<small>Winning Formula</small></div>
+      <div>
+        <span class="eyebrow">まとめ<span class="no">/ The Four Lanes</span></span>
+        <h2 class="h" style="color:var(--paper)">逢坂先生の<em>勝ち筋</em></h2>
+        <p class="lead" style="color:rgba(244,239,230,.7)">4つを束ねたとき、noteは単なる発信ではなく、<strong>信頼資産</strong>として機能しはじめる。</p>
+      </div>
+    </div>
+
+    <div class="win reveal">
+      <div>
+        <div class="num">01</div>
+        <h3>腰痛を経営課題として語る</h3>
+        <p>労災・離職・教育・生産性に接続する。</p>
+      </div>
+      <div>
+        <div class="num">02</div>
+        <h3>現場の言葉で専門性を届ける</h3>
+        <p>理学療法士の知識を、管理者が使える言葉に翻訳する。</p>
+      </div>
+      <div>
+        <div class="num">03</div>
+        <h3>記事ごとに役割を分ける</h3>
+        <p>共感・専門性・職種別・管理者向け・事例で設計する。</p>
+      </div>
+      <div>
+        <div class="num">04</div>
+        <h3>noteから相談導線へつなぐ</h3>
+        <p>売り込みではなく、腰痛リスク確認の入口にする。</p>
+      </div>
+    </div>
+
+    <div class="next reveal">
+      <div class="lbl">Next Steps</div>
+      <p>固定記事 / 代表記事3本 / チェックリスト / 研修案内ページ — この4点を整えると、note→相談の動線が完成する。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="wrap">
+    <div class="brand-f">note運用・ブランディング方針<small>For 逢坂先生 / Draft v1 — 2026</small></div>
+    <div class="meta">Document · Strategy · v1.0</div>
+  </div>
+</footer>
+
+<script>
+// progress bar
+(function(){
+  var p = document.getElementById('progress');
+  function upd(){
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    p.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', upd, {passive:true});
+  upd();
+})();
+
+// reveal on scroll
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in')}); return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting){
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
+    });
+  }, {rootMargin:'0px 0px -10% 0px', threshold:0.04});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
