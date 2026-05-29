@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>介護DX生産性向上サポート | BCCヘルスケア</title>
+<meta name="description" content="ご相談から、定着まで。施設運営者の課題に伴走型で応える介護DXのワンストップ支援サービス。補助金活用・現場常駐サポート・継続フォローまで。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-base: #FFFFFF;
+  --bg-soft: #F4F8FB;
+  --bg-deep: #0F1E33;
+  --bg-deeper: #081424;
+  --text-primary: #0F1E33;
+  --text-body: #2A3A4E;
+  --text-muted: #5C6470;
+  --text-faint: #9DA4AE;
+  --text-on-dark: #E6EEF7;
+  --turq: #00C0D0;
+  --turq-mid: #5CD3DE;
+  --turq-light: #D5F2F5;
+  --turq-bg: #EBF8FA;
+  --orange: #FF6B3D;
+  --red: #E63946;
+  --green: #3DBE8B;
+  --purple: #6B5DD3;
+  --border: #E5EAF0;
+  --border-deep: #2D4661;
+  --shadow-sm: 0 1px 2px rgba(15, 30, 51, 0.04);
+  --shadow-md: 0 4px 16px rgba(15, 30, 51, 0.08);
+  --shadow-lg: 0 16px 48px rgba(15, 30, 51, 0.12);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --max-w: 1200px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+  color: var(--text-body);
+  background: var(--bg-base);
+  line-height: 1.8;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+
+/* ========== HEADER (簡素な親サイト風) ========== */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+}
+.site-header .container {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.site-logo {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 14px; letter-spacing: 0.18em;
+  color: var(--text-primary);
+}
+.site-logo span { color: var(--turq); }
+.header-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px;
+  background: var(--turq); color: white;
+  font-weight: 700; font-size: 13px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.header-cta:hover { background: #00A0AE; transform: translateY(-1px); }
+.header-cta::after { content: "→"; }
+
+/* ========== Common Section ========== */
+section { padding: 120px 0; position: relative; }
+.section-tag {
+  display: inline-block;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 11px; letter-spacing: 0.3em;
+  color: var(--turq);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.4;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.section-lead {
+  font-size: 16px; line-height: 2;
+  color: var(--text-muted);
+  max-width: 720px;
+}
+
+/* ========== HERO ========== */
+.hero {
+  padding: 100px 0 140px;
+  background:
+    radial-gradient(circle at 88% 15%, rgba(0, 192, 208, 0.10) 0%, transparent 35%),
+    radial-gradient(circle at 12% 90%, rgba(0, 192, 208, 0.05) 0%, transparent 40%),
+    linear-gradient(180deg, #FFFFFF 0%, #F4F8FB 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 11px; letter-spacing: 0.3em;
+  color: var(--turq);
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: ""; display: inline-block;
+  width: 32px; height: 2px; background: var(--turq);
+}
+.hero-title {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 900;
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+}
+.hero-title em {
+  font-style: normal;
+  color: var(--turq);
+  position: relative;
+  display: inline-block;
+}
+.hero-title em::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 4px;
+  height: 12px; background: var(--turq-light);
+  z-index: -1; border-radius: 4px;
+}
+.hero-sub {
+  font-size: 18px; line-height: 2;
+  color: var(--text-body);
+  margin-bottom: 48px;
+  max-width: 540px;
+}
+.hero-cta-group { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 18px 32px;
+  font-weight: 700; font-size: 15px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary {
+  background: var(--turq); color: white;
+  box-shadow: 0 8px 24px rgba(0, 192, 208, 0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0, 192, 208, 0.4); background: #00A8B6; }
+.btn-secondary {
+  background: white; color: var(--text-primary);
+  border: 1.5px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--turq); color: var(--turq); }
+.btn::after { content: "→"; transition: transform 0.2s; }
+.btn:hover::after { transform: translateX(4px); }
+
+.hero-visual {
+  position: relative;
+  aspect-ratio: 1 / 1.05;
+}
+.hero-stat-grid {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 24px;
+}
+.hero-stat {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+.hero-stat-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 36px;
+  line-height: 1; color: var(--turq);
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+.hero-stat-num small {
+  font-size: 16px; color: var(--text-muted); font-weight: 600;
+  margin-left: 2px;
+}
+.hero-stat-label {
+  font-size: 12px; color: var(--text-muted); font-weight: 600;
+  line-height: 1.5;
+}
+
+/* ========== ANXIETY ========== */
+.anxiety { background: white; }
+.anxiety-header { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: 80px; align-items: end; }
+.anxiety-quote {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 80px;
+  line-height: 1; color: var(--turq-light);
+  letter-spacing: -0.05em;
+}
+.anxiety-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.anxiety-card {
+  background: var(--bg-soft);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  position: relative;
+  transition: all 0.3s;
+}
+.anxiety-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  background: white;
+  border: 1px solid var(--turq-light);
+}
+.anxiety-card-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 14px;
+  color: var(--turq); letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+.anxiety-card-text {
+  font-weight: 700; font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+.anxiety-card-text small {
+  display: block;
+  font-weight: 400; font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px; line-height: 1.7;
+}
+
+.anxiety-footer {
+  margin-top: 64px;
+  padding: 40px 48px;
+  background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-deeper) 100%);
+  border-radius: var(--radius-lg);
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 32px; align-items: center;
+}
+.anxiety-footer-text {
+  color: var(--text-on-dark);
+  font-size: 19px; font-weight: 500; line-height: 1.7;
+}
+.anxiety-footer-text strong { color: var(--turq-mid); font-weight: 700; }
+
+/* ========== PROMISE ========== */
+.promise {
+  background: var(--bg-soft);
+  position: relative; overflow: hidden;
+}
+.promise::before {
+  content: ""; position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0, 192, 208, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.promise-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 64px;
+}
+.promise-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  position: relative;
+  border-top: 4px solid var(--turq);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+}
+.promise-card:hover {
+  transform: translateY(-4px); box-shadow: var(--shadow-md);
+}
+.promise-card:nth-child(2) { border-top-color: var(--orange); }
+.promise-card:nth-child(3) { border-top-color: var(--purple); }
+.promise-card:nth-child(4) { border-top-color: var(--green); }
+
+.promise-card-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 14px;
+  color: var(--text-faint);
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+}
+.promise-card-title {
+  font-weight: 900; font-size: 24px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.promise-card-title em { font-style: normal; color: var(--turq); }
+.promise-card:nth-child(2) .promise-card-title em { color: var(--orange); }
+.promise-card:nth-child(3) .promise-card-title em { color: var(--purple); }
+.promise-card:nth-child(4) .promise-card-title em { color: var(--green); }
+.promise-card-body {
+  font-size: 15px; line-height: 2;
+  color: var(--text-body);
+}
+
+/* ========== SCHEME ========== */
+.scheme { background: white; }
+.scheme-flow {
+  margin-top: 80px;
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 56px 48px;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.scheme-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1.3fr auto 1fr;
+  gap: 16px; align-items: center;
+}
+.scheme-card {
+  padding: 28px 24px;
+  border-radius: var(--radius-md);
+  position: relative;
+}
+.scheme-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 14px;
+  letter-spacing: 0.1em;
+  position: absolute;
+  top: 16px; right: 20px;
+}
+.scheme-entry .scheme-num { color: var(--turq); }
+.scheme-core .scheme-num { color: var(--turq-mid); }
+.scheme-entry { background: var(--turq-bg); border: 1.5px solid var(--turq); }
+.scheme-core {
+  background: var(--bg-deep); color: white;
+  padding: 36px 32px;
+  border-radius: var(--radius-md);
+}
+.scheme-out-stack { display: flex; flex-direction: column; gap: 14px; }
+.scheme-out {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px 16px 20px;
+  border-left: 4px solid var(--orange);
+  position: relative;
+}
+.scheme-out:nth-child(2) { border-left-color: var(--purple); }
+.scheme-out:nth-child(3) { border-left-color: var(--green); }
+.scheme-label {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 10px; letter-spacing: 0.25em;
+  margin-bottom: 12px;
+}
+.scheme-entry .scheme-label { color: var(--turq); }
+.scheme-core .scheme-label { color: var(--turq-mid); }
+.scheme-label-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  display: inline-block;
+}
+.scheme-entry .scheme-label-dot { background: var(--turq); }
+.scheme-core .scheme-label-dot { background: var(--turq); }
+
+.scheme-card-title {
+  font-weight: 900; font-size: 22px;
+  line-height: 1.35; color: var(--text-primary);
+  margin-bottom: 12px;
+}
+.scheme-core .scheme-card-title { color: white; font-size: 26px; }
+.scheme-card-desc {
+  font-size: 12.5px; line-height: 1.8;
+  color: var(--text-muted);
+}
+.scheme-core .scheme-card-desc { color: var(--turq-light); font-size: 13px; }
+
+.scheme-arrow {
+  font-family: 'Manrope', sans-serif;
+  color: #B0B8C1;
+  font-size: 20px;
+  position: relative;
+  width: 32px; text-align: center;
+}
+
+.scheme-out-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 16px;
+  color: var(--orange);
+  margin-right: 10px;
+}
+.scheme-out:nth-child(2) .scheme-out-num { color: var(--purple); }
+.scheme-out:nth-child(3) .scheme-out-num { color: var(--green); }
+.scheme-out-en {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 10px;
+  letter-spacing: 0.25em; color: var(--text-muted);
+}
+.scheme-out-jp {
+  font-weight: 800; font-size: 16px;
+  color: var(--text-primary);
+  margin-top: 8px; margin-bottom: 4px;
+}
+.scheme-out-sub {
+  font-size: 12px; color: var(--text-muted);
+}
+
+.scheme-outcome {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.scheme-outcome-label {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 11px; letter-spacing: 0.3em;
+  color: var(--turq);
+}
+.scheme-outcome-items {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  font-weight: 700; font-size: 16px;
+  color: var(--text-primary);
+}
+.scheme-outcome-items span {
+  padding: 6px 16px; background: var(--turq-bg);
+  border-radius: 999px; font-size: 14px;
+}
+
+/* ========== SERVICES ========== */
+.services { background: var(--bg-soft); }
+.services-grid {
+  margin-top: 64px;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.service-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  border-top: 4px solid var(--turq);
+  transition: all 0.3s;
+}
+.service-card:hover {
+  transform: translateY(-4px); box-shadow: var(--shadow-md);
+}
+.service-card:nth-child(2) { border-top-color: var(--bg-deep); }
+.service-card:nth-child(3) { border-top-color: var(--orange); }
+.service-card:nth-child(4) { border-top-color: var(--purple); }
+.service-card:nth-child(5) { border-top-color: var(--green); }
+.service-card:nth-child(6) { border-top-color: var(--red); background: linear-gradient(135deg, white 0%, #FDF2F3 100%); }
+
+.service-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 32px;
+  color: var(--turq); line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.service-card:nth-child(2) .service-num { color: var(--bg-deep); }
+.service-card:nth-child(3) .service-num { color: var(--orange); }
+.service-card:nth-child(4) .service-num { color: var(--purple); }
+.service-card:nth-child(5) .service-num { color: var(--green); }
+.service-card:nth-child(6) .service-num { color: var(--red); }
+.service-en {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 10px;
+  letter-spacing: 0.25em; color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.service-title {
+  font-weight: 800; font-size: 19px;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+.service-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.service-list li {
+  font-size: 13.5px; color: var(--text-body);
+  padding-left: 16px; position: relative;
+}
+.service-list li::before {
+  content: ""; position: absolute;
+  left: 0; top: 10px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--turq);
+}
+.service-card:nth-child(2) .service-list li::before { background: var(--bg-deep); }
+.service-card:nth-child(3) .service-list li::before { background: var(--orange); }
+.service-card:nth-child(4) .service-list li::before { background: var(--purple); }
+.service-card:nth-child(5) .service-list li::before { background: var(--green); }
+.service-card:nth-child(6) .service-list li::before { background: var(--red); }
+
+/* ========== SUPPORT (担保された支援体制) ========== */
+.support {
+  background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-deeper) 100%);
+  color: var(--text-on-dark);
+  position: relative;
+  overflow: hidden;
+}
+.support::before {
+  content: ""; position: absolute;
+  top: 10%; left: -300px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0, 192, 208, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.support::after {
+  content: ""; position: absolute;
+  bottom: 10%; right: -200px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(108, 93, 211, 0.10) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.support .section-tag { color: var(--turq-mid); }
+.support .section-title { color: white; }
+.support .section-lead { color: rgba(230, 238, 247, 0.85); }
+
+.support-grid {
+  margin-top: 80px;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.support-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 40px 36px;
+  position: relative; z-index: 1;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s;
+}
+.support-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--turq-mid);
+  transform: translateY(-4px);
+}
+.support-card-icon {
+  width: 56px; height: 56px;
+  background: var(--turq);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 22px; color: white;
+}
+.support-card-title {
+  font-weight: 900; font-size: 22px;
+  color: white;
+  line-height: 1.5; margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.support-card-body {
+  font-size: 14.5px; line-height: 2;
+  color: rgba(230, 238, 247, 0.78);
+}
+.support-card-tag {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 6px 14px;
+  background: rgba(0, 192, 208, 0.15);
+  color: var(--turq-mid);
+  border-radius: 999px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+/* ========== STEPS ========== */
+.steps { background: white; }
+.steps-track {
+  margin-top: 72px;
+  position: relative;
+}
+.steps-track::before {
+  content: ""; position: absolute;
+  left: 56px; top: 40px; bottom: 40px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--turq), var(--turq-light), var(--turq));
+}
+.step-item {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+  position: relative;
+  align-items: start;
+}
+.step-item:last-child { margin-bottom: 0; }
+.step-num {
+  background: white;
+  border: 2px solid var(--turq);
+  width: 112px; height: 112px;
+  border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+  box-shadow: var(--shadow-md);
+}
+.step-num-label {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 10px;
+  letter-spacing: 0.3em; color: var(--turq);
+  margin-bottom: 4px;
+}
+.step-num-digit {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 36px;
+  color: var(--text-primary);
+  line-height: 1; letter-spacing: -0.02em;
+}
+.step-content {
+  background: var(--bg-soft);
+  border-radius: var(--radius-md);
+  padding: 28px 32px;
+}
+.step-title {
+  font-weight: 900; font-size: 22px;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+.step-meta {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--turq);
+  margin-bottom: 14px;
+}
+.step-body {
+  font-size: 15px; line-height: 2;
+  color: var(--text-body);
+}
+.step-tags {
+  display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap;
+}
+.step-tag {
+  font-size: 11px; padding: 4px 12px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 999px; color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ========== PRODUCT CATEGORIES ========== */
+.products { background: var(--bg-soft); }
+.cat-grid {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.cat-tile {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.cat-tile:hover {
+  transform: translateY(-4px);
+  border-color: var(--turq);
+  box-shadow: var(--shadow-md);
+}
+.cat-tile:hover::after {
+  content: ""; position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px; background: var(--turq);
+}
+.cat-tile-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--turq);
+  margin-bottom: 16px;
+}
+.cat-tile-name {
+  font-weight: 800; font-size: 17px;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.cat-tile-en {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600; font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+}
+.products-note {
+  margin-top: 32px;
+  font-size: 12px; color: var(--text-faint);
+  font-style: italic;
+}
+
+/* ========== VOICE (実績・声) ========== */
+.voice { background: white; }
+.voice-grid {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.voice-card {
+  background: var(--bg-soft);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  position: relative;
+}
+.voice-quote-mark {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 56px;
+  color: var(--turq);
+  line-height: 0.7;
+  margin-bottom: 16px;
+  opacity: 0.4;
+}
+.voice-text {
+  font-size: 15px; line-height: 2;
+  color: var(--text-body);
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.voice-meta {
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+.voice-meta strong {
+  display: block; color: var(--text-primary);
+  font-weight: 700; font-size: 14px;
+  margin-bottom: 4px;
+}
+.voice-placeholder-note {
+  margin-top: 32px;
+  padding: 16px 24px;
+  background: var(--turq-bg);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ========== FAQ ========== */
+.faq { background: var(--bg-soft); }
+.faq-list {
+  margin-top: 56px;
+  max-width: 880px; margin-left: auto; margin-right: auto;
+}
+.faq-item {
+  background: white;
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: all 0.25s;
+}
+.faq-item[open] { border-color: var(--turq); box-shadow: var(--shadow-sm); }
+.faq-question {
+  padding: 24px 28px;
+  cursor: pointer;
+  list-style: none;
+  display: flex; align-items: center; gap: 16px;
+  font-weight: 700; font-size: 16px;
+  color: var(--text-primary);
+}
+.faq-question::-webkit-details-marker { display: none; }
+.faq-q-mark {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  background: var(--turq-bg);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; color: var(--turq);
+  font-size: 16px;
+}
+.faq-q-text { flex: 1; }
+.faq-q-icon {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  font-size: 20px; font-weight: 300;
+  transition: transform 0.3s;
+}
+.faq-item[open] .faq-q-icon { transform: rotate(45deg); color: var(--turq); }
+.faq-answer {
+  padding: 0 28px 28px 80px;
+  font-size: 14.5px; line-height: 2;
+  color: var(--text-body);
+}
+
+/* ========== CTA ========== */
+.cta {
+  background:
+    radial-gradient(circle at 75% 50%, rgba(0, 192, 208, 0.10) 0%, transparent 50%),
+    linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-deeper) 100%);
+  color: var(--text-on-dark);
+  position: relative;
+  overflow: hidden;
+}
+.cta-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.cta .section-tag { color: var(--turq-mid); }
+.cta-title {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 900;
+  font-size: clamp(32px, 4.5vw, 48px);
+  line-height: 1.4;
+  color: white;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.cta-title em { font-style: normal; color: var(--turq-mid); }
+.cta-lead {
+  font-size: 16px; line-height: 2;
+  color: rgba(230, 238, 247, 0.85);
+  margin-bottom: 40px;
+}
+.cta-assurance {
+  display: flex; gap: 24px; margin-bottom: 40px; flex-wrap: wrap;
+}
+.cta-assurance-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px;
+  color: var(--turq-mid);
+  font-weight: 600;
+}
+.cta-assurance-item::before {
+  content: "✓"; color: var(--turq);
+  font-weight: 800;
+}
+.cta-actions {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+}
+.cta-action-title {
+  font-weight: 900; font-size: 20px;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+.cta-buttons {
+  display: flex; flex-direction: column; gap: 14px;
+  margin-bottom: 28px;
+}
+.cta-btn-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 24px;
+  background: var(--turq);
+  border-radius: var(--radius-sm);
+  color: white;
+  text-decoration: none;
+  font-weight: 800; font-size: 16px;
+  transition: all 0.2s;
+}
+.cta-btn-row:hover { background: #00A8B6; transform: translateY(-1px); }
+.cta-btn-row.secondary {
+  background: white;
+  color: var(--text-primary);
+  border: 1.5px solid var(--border);
+}
+.cta-btn-row.secondary:hover { border-color: var(--turq); color: var(--turq); }
+.cta-btn-row-icon {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.cta-btn-row.secondary .cta-btn-row-icon {
+  background: var(--bg-soft);
+  color: var(--turq);
+}
+.cta-btn-row-text { flex: 1; }
+.cta-btn-row-text small { display: block; font-weight: 500; font-size: 11px; opacity: 0.85; margin-top: 2px; }
+.cta-btn-row.secondary .cta-btn-row-text small { color: var(--text-muted); }
+.cta-tel {
+  padding: 20px;
+  background: var(--bg-soft);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+.cta-tel-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px; letter-spacing: 0.3em;
+  color: var(--text-muted);
+  font-weight: 700; margin-bottom: 6px;
+}
+.cta-tel-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 28px;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.cta-tel-hours {
+  font-size: 11px; color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ========== FOOTER ========== */
+.site-footer {
+  background: var(--bg-deeper);
+  color: var(--text-faint);
+  padding: 60px 0 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-brand {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 16px;
+  color: white;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+.footer-brand span { color: var(--turq-mid); }
+.footer-desc {
+  font-size: 13px; line-height: 1.9;
+}
+.footer-col h4 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700; font-size: 11px;
+  letter-spacing: 0.25em;
+  color: white;
+  margin-bottom: 16px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { color: var(--text-faint); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--turq-mid); }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; justify-content: space-between; gap: 16px;
+  font-size: 12px; flex-wrap: wrap;
+}
+
+/* ========== Floating CTA ========== */
+.floating-cta {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--turq); color: white;
+  padding: 14px 24px;
+  border-radius: 999px;
+  box-shadow: 0 12px 32px rgba(0, 192, 208, 0.4);
+  font-weight: 800; font-size: 14px;
+  text-decoration: none;
+  z-index: 50;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: all 0.2s;
+}
+.floating-cta:hover { transform: translateY(-2px); background: #00A8B6; }
+.floating-cta::after { content: "→"; }
+
+/* ========== Scroll Reveal ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .hero-grid, .anxiety-header, .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+  .anxiety-grid, .services-grid, .voice-grid { grid-template-columns: repeat(2, 1fr); }
+  .promise-grid { grid-template-columns: 1fr; }
+  .support-grid { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .scheme-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .scheme-arrow { display: none; }
+  .anxiety-footer { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+  section { padding: 80px 0; }
+  .anxiety-grid, .services-grid, .voice-grid, .products-grid, .cat-grid { grid-template-columns: 1fr; }
+  .hero-26 { font-size: 48vw; right: -20px; }
+  .step-item { grid-template-columns: 80px 1fr; gap: 16px; }
+  .step-num { width: 80px; height: 80px; }
+  .step-num-digit { font-size: 28px; }
+  .steps-track::before { left: 40px; }
+  .floating-cta { bottom: 16px; right: 16px; padding: 12px 20px; font-size: 13px; }
+  .hero-cta-group { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container">
+    <a href="#" class="site-logo">BCC <span>HEALTHCARE</span></a>
+    <a href="#cta" class="header-cta">無料相談を申し込む</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow reveal">伴走型 介護DX サポート</div>
+        <h1 class="hero-title reveal">
+          介護DX、<br>
+          <em>何から始めますか？</em>
+        </h1>
+        <p class="hero-sub reveal">
+          ご相談から、定着まで。<br>
+          機器選び・補助金申請・現場定着まで、すべてワンストップで伴走する介護DXパートナーです。
+        </p>
+        <div class="hero-cta-group reveal">
+          <a href="#cta" class="btn btn-primary">無料で相談する</a>
+          <a href="#scheme" class="btn btn-secondary">サービスを見る</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-stat-grid">
+          <div class="hero-stat reveal">
+            <div class="hero-stat-num">60<small>＋</small></div>
+            <div class="hero-stat-label">取扱商材ラインナップ<br>幅広い選択肢で最適提案</div>
+          </div>
+          <div class="hero-stat reveal">
+            <div class="hero-stat-num">1<small>つ</small></div>
+            <div class="hero-stat-label">の窓口で全てが完結<br>複数業者調整は不要</div>
+          </div>
+          <div class="hero-stat reveal">
+            <div class="hero-stat-num">5<small>領域</small></div>
+            <div class="hero-stat-label">サービス領域を網羅<br>見守り〜業務改善まで</div>
+          </div>
+          <div class="hero-stat reveal">
+            <div class="hero-stat-num">∞<small></small></div>
+            <div class="hero-stat-label">導入後の継続フォロー<br>定着まで責任を持って</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANXIETY -->
+<section class="anxiety">
+  <div class="container">
+    <div class="anxiety-header">
+      <div>
+        <div class="section-tag reveal">— ANXIETY</div>
+        <h2 class="section-title reveal">
+          こんなお悩み、<br>ありませんか？
+        </h2>
+        <p class="section-lead reveal">
+          介護DXの「最初の一歩」で、多くの施設運営者・責任者が同じところでつまずいています。<br>
+          私たちは、その「最初の一歩」からご一緒します。
+        </p>
+      </div>
+      <div class="anxiety-quote reveal">"</div>
+    </div>
+
+    <div class="anxiety-grid">
+      <div class="anxiety-card reveal">
+        <div class="anxiety-card-num">01</div>
+        <div class="anxiety-card-text">
+          何から始めればいいのか、<br>分からない。
+          <small>DXと言われても、見守り？ 記録？ どこから手をつけるのが正解か、判断軸がない。</small>
+        </div>
+      </div>
+      <div class="anxiety-card reveal">
+        <div class="anxiety-card-num">02</div>
+        <div class="anxiety-card-text">
+          機器を入れたのに、<br>現場で使われていない。
+          <small>導入した見守り機器や記録ツールが、結局現場のスタッフに使いこなされていない。</small>
+        </div>
+      </div>
+      <div class="anxiety-card reveal">
+        <div class="anxiety-card-num">03</div>
+        <div class="anxiety-card-text">
+          補助金や助成金の制度が<br>複雑で、手が出ない。
+          <small>生産性向上推進体制加算、ICT補助金…制度名が多すぎて自施設に合うものがどれか分からない。</small>
+        </div>
+      </div>
+      <div class="anxiety-card reveal">
+        <div class="anxiety-card-num">04</div>
+        <div class="anxiety-card-text">
+          夜勤や腰痛による<br>離職を止めたい。
+          <small>夜勤負担と身体的負担で職員が疲弊している。離職を防ぎたいが、何が一番効くか分からない。</small>
+        </div>
+      </div>
+      <div class="anxiety-card reveal">
+        <div class="anxiety-card-num">05</div>
+        <div class="anxiety-card-text">
+          複数のメーカーに<br>聞いて回るのが大変。
+          <small>機器メーカー、回線業者、ソフトベンダー…別々にやり取りして、結局つなぎ込みでトラブル。</small>
+        </div>
+      </div>
+      <div class="anxiety-card reveal">
+        <div class="anxiety-card-num">06</div>
+        <div class="anxiety-card-text">
+          相談したくても、<br>どこに頼めばいいの？
+          <small>営業の押し売りは避けたい。フラットな立場で施設の事情を聞いてくれる相談先がほしい。</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="anxiety-footer reveal">
+      <div class="anxiety-footer-text">
+        ひとつでも当てはまったら、<br>
+        <strong>まず私たちにお話を聞かせてください。</strong>
+      </div>
+      <a href="#cta" class="btn btn-primary" style="background: var(--turq); white-space: nowrap;">無料で相談する</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROMISE -->
+<section class="promise">
+  <div class="container">
+    <div class="section-tag reveal">— OUR PROMISE</div>
+    <h2 class="section-title reveal">
+      すべて、お任せください。<br>
+      <span style="color: var(--turq);">私たち4つのお約束。</span>
+    </h2>
+    <p class="section-lead reveal">
+      導入前の「何していいか分からない」から、導入後の「定着しない」まで。<br>
+      ご相談から運用フォローまで、責任を持って伴走します。
+    </p>
+
+    <div class="promise-grid">
+      <div class="promise-card reveal">
+        <div class="promise-card-num">PROMISE 01</div>
+        <h3 class="promise-card-title">
+          まず<em>聞きます</em>。<br>
+          そこから一緒に考えます。
+        </h3>
+        <p class="promise-card-body">
+          「DXしたい」ではなく「何に困っているか」から伺います。施設の規模、職員の体制、入居者の特性、すでにある設備、補助金の活用余地。すべてを踏まえて、最初の一歩からご一緒に組み立てます。
+        </p>
+      </div>
+      <div class="promise-card reveal">
+        <div class="promise-card-num">PROMISE 02</div>
+        <h3 class="promise-card-title">
+          現場に<em>常駐</em>して、<br>定着まで伴走します。
+        </h3>
+        <p class="promise-card-body">
+          機器を納品して終わり、ではありません。専任の担当者が現場に通い、職員研修・運用フローの調整・トラブル対応まで対応。「使いこなせない」を、絶対に残しません。
+        </p>
+      </div>
+      <div class="promise-card reveal">
+        <div class="promise-card-num">PROMISE 03</div>
+        <h3 class="promise-card-title">
+          補助金・助成金、<br><em>申請からサポート</em>します。
+        </h3>
+        <p class="promise-card-body">
+          生産性向上推進体制加算、ICT導入補助金、地域医療介護総合確保基金。複雑な制度から自施設に最適なものを抽出し、申請書類の準備、スケジュール管理まで一気通貫でお手伝いします。
+        </p>
+      </div>
+      <div class="promise-card reveal">
+        <div class="promise-card-num">PROMISE 04</div>
+        <h3 class="promise-card-title">
+          導入後も<em>ずっと</em>、<br>お付き合いします。
+        </h3>
+        <p class="promise-card-body">
+          運用が始まってからこそ、本当の伴走です。定着状況の振り返り、追加導入の相談、職員の異動や制度改定への対応。長く頼っていただける、継続支援の体制を整えています。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEME -->
+<section class="scheme" id="scheme">
+  <div class="container">
+    <div class="section-tag reveal">— OUR SCHEME</div>
+    <h2 class="section-title reveal">
+      ご相談1回で、<br>全体が動き出します。
+    </h2>
+    <p class="section-lead reveal">
+      ハブとなる窓口が、施設の課題に応じて最適なチームを編成。複数の業者に個別に問い合わせる必要はありません。
+    </p>
+
+    <div class="scheme-flow reveal">
+      <div class="scheme-row">
+        <!-- ENTRY -->
+        <div class="scheme-card scheme-entry">
+          <div class="scheme-num">01</div>
+          <div class="scheme-label">
+            <span class="scheme-label-dot"></span>
+            <span>ENTRY</span>
+          </div>
+          <div class="scheme-card-title">ご相談窓口<br>案件整理</div>
+          <div class="scheme-card-desc">施設の課題感を伺い、論点と優先順位を整理します。</div>
+        </div>
+
+        <div class="scheme-arrow">→</div>
+
+        <!-- CORE -->
+        <div class="scheme-card scheme-core">
+          <div class="scheme-num">02</div>
+          <div class="scheme-label">
+            <span class="scheme-label-dot"></span>
+            <span>CORE / HUB</span>
+          </div>
+          <div class="scheme-card-title">複合ソリューション<br>統合・現地伴走</div>
+          <div class="scheme-card-desc">複数の機器・サービスを統合設計し、現場に常駐して定着まで伴走します。</div>
+        </div>
+
+        <div class="scheme-arrow">→</div>
+
+        <!-- OUTPUTS -->
+        <div class="scheme-out-stack">
+          <div class="scheme-out">
+            <div>
+              <span class="scheme-out-num">03</span>
+              <span class="scheme-out-en">OPERATIONS</span>
+            </div>
+            <div class="scheme-out-jp">業務改善・職員教育</div>
+            <div class="scheme-out-sub">DX定着とリスキリングを伴走</div>
+          </div>
+          <div class="scheme-out">
+            <div>
+              <span class="scheme-out-num">04</span>
+              <span class="scheme-out-en">EQUIPMENT</span>
+            </div>
+            <div class="scheme-out-jp">機器調達・人的支援</div>
+            <div class="scheme-out-sub">アシストスーツや見守り機器を提供</div>
+          </div>
+          <div class="scheme-out">
+            <div>
+              <span class="scheme-out-num">05</span>
+              <span class="scheme-out-en">NETWORK</span>
+            </div>
+            <div class="scheme-out-jp">通信インフラ整備</div>
+            <div class="scheme-out-sub">Wi-Fi・回線・IoT基盤の最適設計</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scheme-outcome">
+        <div class="scheme-outcome-label">OUTCOME</div>
+        <div class="scheme-outcome-items">
+          <span>加算取得</span>
+          <span>離職防止</span>
+          <span>業務効率化</span>
+          <span>DX定着</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="container">
+    <div class="section-tag reveal">— SERVICE MENU</div>
+    <h2 class="section-title reveal">
+      5領域＋パッケージで、<br>施設の課題に応えます。
+    </h2>
+    <p class="section-lead reveal">
+      単独サービスでも、組み合わせパッケージでも提供可能。施設要件に応じてカスタマイズします。
+    </p>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-en">MONITORING</div>
+        <div class="service-title">見守り・転倒予防</div>
+        <ul class="service-list">
+          <li>離床・転倒センサー</li>
+          <li>カメラ型見守り</li>
+          <li>AI転倒リスク可視化</li>
+          <li>夜勤負担軽減シナリオ</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <div class="service-en">RECORD & ICT</div>
+        <div class="service-title">記録・情報共有</div>
+        <ul class="service-list">
+          <li>介護ソフト連携</li>
+          <li>ケアプランデータ連携</li>
+          <li>ペーパーレス化</li>
+          <li>多職種コミュニケーション</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <div class="service-en">GRANT</div>
+        <div class="service-title">補助金・体制づくり</div>
+        <ul class="service-list">
+          <li>生産性向上推進体制加算</li>
+          <li>補助金・助成金申請</li>
+          <li>申請スケジュール管理</li>
+          <li>体制届出書類のサポート</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">04</div>
+        <div class="service-en">OPERATIONS</div>
+        <div class="service-title">業務改善・職員教育</div>
+        <ul class="service-list">
+          <li>業務フロー改善</li>
+          <li>DXリスキリング研修</li>
+          <li>現場定着支援</li>
+          <li>運用最適化コンサルティング</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">05</div>
+        <div class="service-en">EQUIPMENT</div>
+        <div class="service-title">機器・人的支援</div>
+        <ul class="service-list">
+          <li>アシストスーツ・パワーアシスト</li>
+          <li>移乗・移動支援</li>
+          <li>排泄・バイタル機器</li>
+          <li>機器選定コンサルティング</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">06</div>
+        <div class="service-en">PACKAGE</div>
+        <div class="service-title">課題別パッケージ</div>
+        <ul class="service-list">
+          <li>夜勤負担ゼロへ</li>
+          <li>腰痛離職ゼロへ</li>
+          <li>DX加算取得スターター</li>
+          <li>施設まるごとDX</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT (担保された支援体制) -->
+<section class="support">
+  <div class="container">
+    <div class="section-tag reveal">— GUARANTEED SUPPORT</div>
+    <h2 class="section-title reveal">
+      だから、安心して<br>お任せいただけます。
+    </h2>
+    <p class="section-lead reveal">
+      「ちゃんと面倒を見てもらえるか」── 一番気になるところです。<br>
+      私たちが、責任ある支援体制をご用意している理由をお伝えします。
+    </p>
+
+    <div class="support-grid">
+      <div class="support-card reveal">
+        <div class="support-card-icon">A</div>
+        <h3 class="support-card-title">専任担当者が、最初から最後までお付き合い</h3>
+        <p class="support-card-body">
+          ご相談時の担当者が、診断・提案・導入・定着・継続フォローまで一貫してお付き合いします。途中で人が変わって、また一から説明することはありません。施設の事情を熟知した「自分の担当者」がいる安心感を、現場へお届けします。
+        </p>
+        <div class="support-card-tag">継続性／信頼性</div>
+      </div>
+      <div class="support-card reveal">
+        <div class="support-card-icon">B</div>
+        <h3 class="support-card-title">5領域の専門家ネットワークが背中を支えます</h3>
+        <p class="support-card-body">
+          見守り、記録ICT、補助金、業務改善、機器・通信。それぞれの領域で実績を積んだパートナー企業と連携し、「この領域は別のところに聞いて」を排除。担当者経由で全領域の専門知見にアクセスできます。施設は1つの窓口だけで完結します。
+        </p>
+        <div class="support-card-tag">統合支援／ワンストップ</div>
+      </div>
+      <div class="support-card reveal">
+        <div class="support-card-icon">C</div>
+        <h3 class="support-card-title">補助金・加算は、申請から「結果」まで責任を持ちます</h3>
+        <p class="support-card-body">
+          制度の説明だけでは終わりません。書類準備、スケジュール管理、要件適合性チェック、申請後のフォローまで対応。生産性向上推進体制加算など複雑な要件の制度でも、施設の経営計画と紐付けて伴走します。
+        </p>
+        <div class="support-card-tag">補助金活用／加算取得</div>
+      </div>
+      <div class="support-card reveal">
+        <div class="support-card-icon">D</div>
+        <h3 class="support-card-title">「現場が動かない」を絶対に残しません</h3>
+        <p class="support-card-body">
+          機器導入後は、現場に通って職員研修と運用調整を実施。夜勤帯の使い方、記録のフロー、トラブル時の対応まで、現場の言葉で一つずつ整理します。「導入したのに使われない」を、私たちは経験させません。
+        </p>
+        <div class="support-card-tag">現場定着／運用最適化</div>
+      </div>
+      <div class="support-card reveal">
+        <div class="support-card-icon">E</div>
+        <h3 class="support-card-title">60を超える商材から、本当に必要なものだけ選びます</h3>
+        <p class="support-card-body">
+          見守り機器だけで13ブランド、介護ソフトで4種、アシストスーツで6種、通信インフラ・コミュニケーションロボットも含めて60商材以上のラインナップ。特定メーカーに偏らない中立的な立場で、施設の規模・職員体制・予算に本当に合うものをご提案します。
+        </p>
+        <div class="support-card-tag">商材中立／最適選定</div>
+      </div>
+      <div class="support-card reveal">
+        <div class="support-card-icon">F</div>
+        <h3 class="support-card-title">制度改定・人事異動にも、ずっと対応します</h3>
+        <p class="support-card-body">
+          介護報酬改定、加算要件の変更、施設長の交代、職員の入れ替わり。介護現場には常に変化が訪れます。一度きりの支援ではなく、変化のたびに相談いただける継続パートナーとして、長くお付き合いします。
+        </p>
+        <div class="support-card-tag">継続パートナー／長期支援</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps">
+  <div class="container">
+    <div class="section-tag reveal">— HOW WE WORK</div>
+    <h2 class="section-title reveal">
+      5つのステップで、<br>安心してスタートできます。
+    </h2>
+    <p class="section-lead reveal">
+      最初の30分の無料相談から、運用定着まで。一つひとつのステップで丁寧にお話しします。
+    </p>
+
+    <div class="steps-track">
+      <div class="step-item reveal">
+        <div class="step-num">
+          <div class="step-num-label">STEP</div>
+          <div class="step-num-digit">01</div>
+        </div>
+        <div class="step-content">
+          <div class="step-meta">所要 30分 / オンライン or 訪問</div>
+          <h3 class="step-title">無料ご相談</h3>
+          <p class="step-body">
+            「DXしたいけど、何から?」のレベルでまったく問題ありません。施設のお話を伺い、ざっくりとした方向性をご一緒に整理します。資料や図面のご用意は不要です。
+          </p>
+          <div class="step-tags">
+            <span class="step-tag">完全無料</span>
+            <span class="step-tag">準備不要</span>
+            <span class="step-tag">押し売りなし</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item reveal">
+        <div class="step-num">
+          <div class="step-num-label">STEP</div>
+          <div class="step-num-digit">02</div>
+        </div>
+        <div class="step-content">
+          <div class="step-meta">所要 1〜2週間 / 訪問あり</div>
+          <h3 class="step-title">施設診断・ヒアリング</h3>
+          <p class="step-body">
+            実際に施設を訪問し、現状の業務フロー、設備状況、職員体制、入居者特性を確認。同時に経営層・現場リーダーの双方からお話を伺い、課題の優先順位を明らかにします。
+          </p>
+          <div class="step-tags">
+            <span class="step-tag">現地訪問</span>
+            <span class="step-tag">経営層+現場ヒアリング</span>
+            <span class="step-tag">課題マップ作成</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item reveal">
+        <div class="step-num">
+          <div class="step-num-label">STEP</div>
+          <div class="step-num-digit">03</div>
+        </div>
+        <div class="step-content">
+          <div class="step-meta">所要 2〜3週間</div>
+          <h3 class="step-title">最適プラン・補助金スキーム提示</h3>
+          <p class="step-body">
+            診断結果をもとに、機器・サービス・運用の組み合わせ案を複数パターンご提示。あわせて活用可能な補助金・加算制度、申請スケジュール、概算費用、ROIをお示しします。
+          </p>
+          <div class="step-tags">
+            <span class="step-tag">複数プラン比較</span>
+            <span class="step-tag">補助金スキーム同時提示</span>
+            <span class="step-tag">ROI試算</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item reveal">
+        <div class="step-num">
+          <div class="step-num-label">STEP</div>
+          <div class="step-num-digit">04</div>
+        </div>
+        <div class="step-content">
+          <div class="step-meta">所要 1〜3ヶ月</div>
+          <h3 class="step-title">導入・現場常駐サポート</h3>
+          <p class="step-body">
+            プラン確定後、機器の発注・設置、ソフトの設定、ネットワークの整備、職員研修を並行で実施。導入期間中は専任担当者が現場に通い、運用立ち上げをしっかり支えます。
+          </p>
+          <div class="step-tags">
+            <span class="step-tag">専任担当者常駐</span>
+            <span class="step-tag">職員研修込み</span>
+            <span class="step-tag">並行スケジュール</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item reveal">
+        <div class="step-num">
+          <div class="step-num-label">STEP</div>
+          <div class="step-num-digit">05</div>
+        </div>
+        <div class="step-content">
+          <div class="step-meta">所要 継続 / 月1回〜のフォロー</div>
+          <h3 class="step-title">定着伴走・継続フォロー</h3>
+          <p class="step-body">
+            導入が「ゴール」ではありません。月次の定着レビュー、トラブル対応、追加導入や制度改定への対応など、長く頼っていただけるパートナーとして継続支援。施設の変化にあわせて、伴走を続けます。
+          </p>
+          <div class="step-tags">
+            <span class="step-tag">月次レビュー</span>
+            <span class="step-tag">継続コンサル</span>
+            <span class="step-tag">制度改定対応</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <div class="container">
+    <div class="section-tag reveal">— PRODUCT CATEGORIES</div>
+    <h2 class="section-title reveal">
+      幅広いカテゴリから、<br>本当に合うものを。
+    </h2>
+    <p class="section-lead reveal">
+      特定メーカーに偏らない中立的な立場で、施設要件に最適な組み合わせをご提案します。<br>
+      取り扱う商材カテゴリは以下の通りです。
+    </p>
+
+    <div class="cat-grid reveal">
+      <div class="cat-tile">
+        <div class="cat-tile-num">01</div>
+        <div class="cat-tile-name">見守り・センサー</div>
+        <div class="cat-tile-en">Monitoring / Sensor</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">02</div>
+        <div class="cat-tile-name">介護ソフト</div>
+        <div class="cat-tile-en">Care Software</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">03</div>
+        <div class="cat-tile-name">ウェアラブル</div>
+        <div class="cat-tile-en">Wearable Device</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">04</div>
+        <div class="cat-tile-name">インカム</div>
+        <div class="cat-tile-en">Intercom</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">05</div>
+        <div class="cat-tile-name">バイタル計測</div>
+        <div class="cat-tile-en">Vital</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">06</div>
+        <div class="cat-tile-name">排泄ケア</div>
+        <div class="cat-tile-en">Excretion Care</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">07</div>
+        <div class="cat-tile-name">移乗・アシストスーツ</div>
+        <div class="cat-tile-en">Assist Suits</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">08</div>
+        <div class="cat-tile-name">通信環境・Wi-Fi</div>
+        <div class="cat-tile-en">Network / Wi-Fi</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">09</div>
+        <div class="cat-tile-name">お掃除ロボット</div>
+        <div class="cat-tile-en">Cleaning Robot</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">10</div>
+        <div class="cat-tile-name">コミュニケーション</div>
+        <div class="cat-tile-en">Communication</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">11</div>
+        <div class="cat-tile-name">ナースコール</div>
+        <div class="cat-tile-en">Nurse Call</div>
+      </div>
+      <div class="cat-tile">
+        <div class="cat-tile-num">12</div>
+        <div class="cat-tile-name">介護DXサポート</div>
+        <div class="cat-tile-en">DX Support</div>
+      </div>
+    </div>
+    <p class="products-note">※ 各カテゴリ内に複数の商材ラインナップをご用意しています。詳細は無料相談にてお気軽にお問い合わせください。</p>
+  </div>
+</section>
+
+<!-- VOICE / CASES -->
+<section class="voice">
+  <div class="container">
+    <div class="section-tag reveal">— VOICE & CASES</div>
+    <h2 class="section-title reveal">
+      実際に伴走させていただいた、<br>施設の声。
+    </h2>
+    <p class="section-lead reveal">
+      DXは「結果」が大切です。実際にご利用いただいた施設様の声を、一部ご紹介します。
+    </p>
+
+    <div class="voice-grid">
+      <div class="voice-card reveal">
+        <div class="voice-quote-mark">"</div>
+        <p class="voice-text">
+          補助金の活用方法から教えていただき、結果的にコスト負担を大きく抑えて見守りシステムを導入できました。夜勤の負担が明らかに減っています。
+        </p>
+        <div class="voice-meta">
+          <strong>特別養護老人ホーム ○○園 様</strong>
+          施設長 / 入居定員80名
+        </div>
+      </div>
+      <div class="voice-card reveal">
+        <div class="voice-quote-mark">"</div>
+        <p class="voice-text">
+          「とりあえず入れてみる」ではなく、現場の声を丁寧に拾ってから機器を選んでくださったので、職員からも反発が出ませんでした。
+        </p>
+        <div class="voice-meta">
+          <strong>介護老人保健施設 △△ 様</strong>
+          事務長 / 入居定員120名
+        </div>
+      </div>
+      <div class="voice-card reveal">
+        <div class="voice-quote-mark">"</div>
+        <p class="voice-text">
+          記録のペーパーレス化とインカム導入を同時に進めていただき、職員の残業時間が月平均で15時間以上減りました。
+        </p>
+        <div class="voice-meta">
+          <strong>サービス付き高齢者向け住宅 □□ 様</strong>
+          管理者 / 入居定員50名
+        </div>
+      </div>
+    </div>
+
+    <p class="voice-placeholder-note reveal">
+      ※ こちらは構成イメージのサンプル文章です。実際の導入事例・お客様の声は、納品時に差し替え予定です。
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="section-tag reveal">— FAQ</div>
+    <h2 class="section-title reveal">
+      よくあるご質問
+    </h2>
+    <p class="section-lead reveal">
+      ご相談前によくいただくご質問をまとめました。ここにない疑問も、お気軽にお問い合わせください。
+    </p>
+
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-question">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">「DXに何をすればいいか分からない」段階でも、相談していいですか?</span>
+          <span class="faq-q-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          はい、もちろんです。むしろ「何をすればいいか分からない」段階こそ、私たちにご相談ください。「DXしたい」ではなく「何に困っているか」から伺います。資料の準備や事前の検討は一切不要です。30分の無料相談で、まずは方向性を一緒に整理します。
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-question">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">補助金は本当に取れるんですか?</span>
+          <span class="faq-q-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          施設の規模、業種、現在の体制、地域によって、活用できる制度は大きく異なります。生産性向上推進体制加算、ICT導入補助金、地域医療介護総合確保基金など、施設に最適な制度を抽出し、要件適合性をチェックした上で申請をサポートします。すべての施設で必ず取れるとは申し上げられませんが、活用余地は必ずお伝えします。
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-question">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">小規模な施設でも対応してもらえますか?</span>
+          <span class="faq-q-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          はい、対応可能です。グループホーム、サービス付き高齢者向け住宅、デイサービスなど、規模を問わずご相談ください。小規模だからこそ、機器投資の判断が経営に直結します。施設規模・予算に応じて、段階的な導入プランをご提案します。
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-question">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">現場の職員から反発が出ないか心配です。</span>
+          <span class="faq-q-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          多くの施設様が同じ不安を抱えていらっしゃいます。私たちは、機器の選定段階から現場リーダーに参加いただき、「現場の声から始まる」プロセスを大切にしています。導入時は職員研修・運用調整を丁寧に行い、夜勤帯やシフト変更などの実情に合わせて運用を組み上げます。「使いこなせない」を残さないことが、私たちの最大のお約束です。
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-question">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">既に他社の機器・ソフトを導入済みですが、連携できますか?</span>
+          <span class="faq-q-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          可能な限り既存資産を活かす方向でご提案します。介護ソフト、見守り機器、ナースコール、Wi-Fi環境などはメーカー間の連携可否を確認した上で、必要に応じて中継ツールや運用設計でカバーします。すべてを入れ替える必要はありません。
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-question">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">費用感はどれくらいですか?</span>
+          <span class="faq-q-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          選定する機器・サービス、施設規模、補助金活用の有無によって大きく異なります。たとえば見守りシステム単独の導入と、施設全体のDX設計では数十倍の幅が出ます。診断・プラン提示の段階で、複数パターンの概算費用とROI試算をお示しします。費用面で無理のない範囲から始められる構成も、必ず一案ご提示します。
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-question">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">導入後のサポート期間は決まっていますか?</span>
+          <span class="faq-q-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          基本のサポート期間は導入から1年間ですが、契約形態に応じて月次レビュー型の継続フォロー、年次の制度改定対応など、長期パートナーとしての関わり方をご用意しています。「導入したら終わり」ではなく、施設の変化にあわせて長くお付き合いするのが私たちのスタンスです。
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-question">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">個人情報や入居者データの取り扱いは大丈夫ですか?</span>
+          <span class="faq-q-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          介護記録・健康情報・入居者個人情報など、すべて個人情報保護法および関連ガイドラインに準拠して取り扱います。データを取り扱うシステムについては、適切なセキュリティ要件を満たした製品のみを採用し、運用面でも職員アクセス権限の設計までサポートします。
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <div class="section-tag reveal">— GET STARTED</div>
+        <h2 class="cta-title reveal">
+          まずは、<br>
+          お話を<em>聞かせて</em>ください。
+        </h2>
+        <p class="cta-lead reveal">
+          ご相談は完全無料、30分から。<br>
+          「DXしたいけど、何から?」のレベルでまったく問題ありません。<br>
+          現状を伺い、一緒に方向性を整理します。
+        </p>
+        <div class="cta-assurance reveal">
+          <div class="cta-assurance-item">完全無料相談</div>
+          <div class="cta-assurance-item">押し売りなし</div>
+          <div class="cta-assurance-item">事前準備不要</div>
+          <div class="cta-assurance-item">守秘義務厳守</div>
+        </div>
+      </div>
+
+      <div class="cta-actions reveal">
+        <h3 class="cta-action-title">お気軽にお問い合わせください</h3>
+        <div class="cta-buttons">
+          <a href="#" class="cta-btn-row">
+            <span class="cta-btn-row-icon">→</span>
+            <span class="cta-btn-row-text">
+              無料相談を申し込む
+              <small>オンライン or 訪問、ご都合に合わせて</small>
+            </span>
+          </a>
+          <a href="#" class="cta-btn-row secondary">
+            <span class="cta-btn-row-icon">↓</span>
+            <span class="cta-btn-row-text">
+              資料請求(無料)
+              <small>サービス詳細をPDFでお届け</small>
+            </span>
+          </a>
+        </div>
+        <div class="cta-tel">
+          <div class="cta-tel-label">TEL</div>
+          <div class="cta-tel-num">0120-XXX-XXX</div>
+          <div class="cta-tel-hours">平日 9:00〜18:00 / 土日祝休</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">BCC <span>HEALTHCARE</span></div>
+        <p class="footer-desc">
+          介護DX生産性向上サポートは、BCCヘルスケアビジネスカンパニーが提供する、施設運営者・責任者のための伴走型介護DXサービスです。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>SERVICE</h4>
+        <ul>
+          <li><a href="#scheme">全体スキーム</a></li>
+          <li><a href="#">サービスメニュー</a></li>
+          <li><a href="#">取扱商材</a></li>
+          <li><a href="#">導入の流れ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACT</h4>
+        <ul>
+          <li><a href="#cta">無料相談</a></li>
+          <li><a href="#cta">資料請求</a></li>
+          <li><a href="#">よくあるご質問</a></li>
+          <li><a href="#">運営会社</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 BCC Co., Ltd. Healthcare Business Company.</div>
+      <div>プライバシーポリシー / 利用規約</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating CTA -->
+<a href="#cta" class="floating-cta">無料相談</a>
+
+<script>
+// Scroll Reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
