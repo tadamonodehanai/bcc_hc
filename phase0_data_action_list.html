@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>観る・データ収集アクションリスト｜介護レク広場 14期戦略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    right: -40px;
+    width: 320px;
+    height: 320px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--accent-warm);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 64px;
+    max-width: 620px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep {
+    background: var(--bg-section);
+    border-top: none;
+  }
+  .section.dark {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-top: none;
+  }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead {
+    font-size: 16px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    max-width: 680px;
+  }
+  .section-lead strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .section.dark .section-lead strong { color: var(--accent-gold); }
+
+  /* Challenge list */
+  .challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 48px;
+  }
+  .challenge-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+  .challenge-item:last-child { border-bottom: 1px solid var(--border-soft); }
+  .challenge-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-warm);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .challenge-body { display: flex; flex-direction: column; gap: 8px; }
+  .challenge-title {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .challenge-note {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+  .challenge-note strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+
+  /* Shift grid - 認識転換 */
+  .shift-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border-soft);
+    margin-top: 48px;
+    border: 1px solid var(--border-soft);
+  }
+  .shift-card {
+    background: var(--bg-card);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 280px;
+  }
+  .shift-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .shift-title {
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .shift-arrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-top: 1px dashed var(--border-line);
+    margin-top: auto;
+  }
+  .shift-from, .shift-to {
+    font-family: var(--font-display);
+    font-size: 14px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .shift-from { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-to { color: var(--accent-deep); font-weight: 500; }
+  .shift-mark { font-family: var(--font-mono); color: var(--accent-warm); font-size: 14px; }
+  .shift-body {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-secondary);
+  }
+
+  /* Roadmap */
+  .roadmap-frame {
+    background: var(--bg-card);
+    border: 1px solid var(--border-line);
+    padding: 48px 36px;
+    margin-top: 24px;
+  }
+  .roadmap-zones {
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+    gap: 24px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+  .zone-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-line);
+  }
+  .zone-label.exec { color: var(--accent-warm); }
+
+  .phase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .phase-card {
+    padding: 24px 20px;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+  .phase-card.exec {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-color: var(--bg-deep);
+  }
+  .phase-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  .phase-card.exec .phase-tag { color: var(--accent-gold); }
+  .phase-verb {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+  .phase-card.exec .phase-verb { color: var(--text-on-deep); }
+  .phase-period {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    padding-top: 8px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-card.exec .phase-period { color: rgba(242, 236, 222, 0.7); border-color: rgba(184, 146, 74, 0.3); }
+  .phase-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+  .phase-card.exec .phase-desc { color: rgba(242, 236, 222, 0.85); }
+
+  /* Phase detail */
+  .phase-detail {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 56px;
+    padding: 56px 0;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-detail:last-child { border-bottom: 1px solid var(--border-soft); }
+  .phase-detail-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .phase-detail-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .phase-detail-verb {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin: 8px 0 12px;
+  }
+  .phase-detail-period {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .phase-detail-purpose {
+    font-family: var(--font-display);
+    font-size: 19px;
+    line-height: 1.9;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .phase-detail-section { margin-bottom: 24px; }
+  .phase-detail-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .phase-detail-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .phase-detail-list li {
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+  }
+  .phase-detail-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent-warm);
+    font-size: 12px;
+  }
+  .phase-detail-gate {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: var(--bg-section);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--accent-warm);
+  }
+  .phase-detail-gate strong {
+    color: var(--text-primary);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--font-display);
+  }
+
+  /* Criteria */
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .criteria-card {
+    background: var(--bg-card);
+    padding: 36px 28px;
+    border-top: 3px solid var(--accent-warm);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+  .criteria-card.primary {
+    background: var(--bg-deep);
+    border-top-color: var(--accent-gold);
+    border-top-width: 4px;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(31, 72, 71, 0.18);
+  }
+  .criteria-card.primary .criteria-num { color: var(--accent-gold); }
+  .criteria-card.primary .criteria-name { color: var(--text-on-deep); }
+  .criteria-card.primary .criteria-q {
+    color: rgba(242, 236, 222, 0.88);
+    border-top-color: rgba(184, 146, 74, 0.3);
+  }
+  .criteria-mark {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 3px 8px;
+    vertical-align: middle;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+  .criteria-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--accent-warm);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .criteria-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .criteria-q {
+    font-size: 13px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+    padding-top: 16px;
+    border-top: 1px solid var(--border-soft);
+    margin-top: 4px;
+  }
+
+  /* Next actions */
+  .nextactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 32px;
+  }
+  .nextaction {
+    padding: 32px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .nextaction-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-gold);
+    font-weight: 500;
+  }
+  .nextaction-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--text-on-deep);
+    line-height: 1.5;
+  }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--accent-gold);
+  }
+
+  /* Footer */
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* Page nav (between docs) */
+  .pagenav {
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-side.disabled { opacity: 0.35; pointer-events: none; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  /* §00 Essence section */
+  .emph-warm { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+
+  .essence-block {
+    margin-top: 48px;
+    padding: 48px 44px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent-warm);
+  }
+  .essence-block.accent {
+    background: var(--bg-section);
+    border-left-color: var(--accent-deep);
+  }
+  .essence-block + .essence-block { margin-top: 24px; }
+  .essence-head {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .essence-block.accent .essence-tag { color: var(--accent-deep); }
+  .essence-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+  }
+  .essence-body {
+    font-size: 15px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .essence-body:last-child { margin-bottom: 0; }
+  .essence-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+  .essence-table {
+    margin: 24px 0;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .essence-row {
+    display: grid;
+    grid-template-columns: 140px 200px 1fr;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-row:last-child { border-bottom: none; }
+  .essence-row > span {
+    padding: 18px 20px;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    border-right: 1px solid var(--border-soft);
+  }
+  .essence-row > span:last-child { border-right: none; }
+  .essence-row-head > span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    background: var(--bg-section);
+  }
+  .essence-row .essence-col-label {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .essence-row.strategic .essence-col-label {
+    color: var(--accent-warm);
+  }
+  .essence-row.strategic {
+    background: rgba(184, 92, 61, 0.04);
+  }
+
+  /* Print */
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    body { font-size: 12px; }
+    .hero-title { font-size: 42px; }
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-title { font-size: 38px; }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 28px; }
+    .shift-grid { grid-template-columns: 1fr; }
+    .phase-row { grid-template-columns: 1fr; }
+    .roadmap-zones { grid-template-columns: 1fr; }
+    .phase-detail { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+    .criteria-grid { grid-template-columns: 1fr; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+    .essence-block { padding: 32px 24px; }
+    .essence-title { font-size: 21px; }
+    .essence-row { grid-template-columns: 1fr; }
+    .essence-row > span { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    .essence-row > span:last-child { border-bottom: none; }
+  }
+
+
+  /* === action list additions === */
+  .seq{display:flex;gap:0;margin-top:30px;flex-wrap:wrap;}
+  .seq-item{flex:1;min-width:120px;padding:16px 14px;border:1px solid rgba(242,236,222,0.2);border-right:none;position:relative;}
+  .seq-item:last-child{border-right:1px solid rgba(242,236,222,0.2);}
+  .seq-stage{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;color:var(--accent-gold);}
+  .seq-name{font-family:var(--font-display);font-size:15px;color:var(--text-on-deep);margin-top:6px;line-height:1.4;}
+  .seq-item.core{background:rgba(184,92,61,0.18);border-color:rgba(184,92,61,0.4);}
+  .stage{background:var(--bg-card);border:1px solid var(--border-soft);border-left:3px solid var(--accent-warm);padding:30px 32px;margin-top:20px;}
+  .stage.core{border-left-color:var(--accent-deep);border-left-width:5px;box-shadow:0 2px 0 rgba(31,72,71,0.06);}
+  .stage-head{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;border-bottom:1px solid var(--border-soft);padding-bottom:16px;margin-bottom:20px;}
+  .stage-num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent-warm);text-transform:uppercase;white-space:nowrap;}
+  .stage.core .stage-num{color:var(--accent-deep);}
+  .stage-title{font-family:var(--font-display);font-size:21px;font-weight:600;color:var(--text-primary);line-height:1.4;}
+  .stage-badge{font-family:var(--font-mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#fff;background:var(--accent-deep);padding:3px 9px;border-radius:2px;}
+  .stage-purpose{flex-basis:100%;font-size:13.5px;color:var(--text-secondary);line-height:1.8;margin-top:2px;}
+  .stage-when{flex-basis:100%;font-family:var(--font-mono);font-size:11px;letter-spacing:0.05em;color:var(--accent-deep);margin-top:4px;}
+  .stage-when::before{content:"着手条件：";color:var(--text-muted);}
+  .check{list-style:none;display:flex;flex-direction:column;gap:13px;}
+  .check li{display:grid;grid-template-columns:18px 1fr;gap:13px;align-items:start;}
+  .ck-box{width:15px;height:15px;border:1.5px solid var(--accent-deep);border-radius:2px;margin-top:4px;}
+  .stage.core .ck-box{border-color:var(--accent-warm);}
+  .ck-text{font-size:14px;color:var(--text-primary);line-height:1.65;font-weight:500;}
+  .ck-meta{display:block;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-top:3px;letter-spacing:0.02em;}
+  .stage-domain{margin-top:20px;padding-top:13px;border-top:1px dashed var(--border-line);font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-warm);}
+  .stage-domain b{color:var(--text-muted);font-weight:400;}
+  .wcols{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;}
+  .wcol{flex:1;min-width:130px;border:1px solid rgba(242,236,222,0.25);padding:14px 16px;}
+  .wcol .wc-n{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;color:var(--accent-gold);}
+  .wcol .wc-t{font-family:var(--font-display);font-size:15px;color:var(--text-on-deep);margin-top:5px;}
+  @media(max-width:720px){.seq-item{min-width:45%;border-right:1px solid rgba(242,236,222,0.2);}.stage-title{font-size:18px;}}
+
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜観る・データ収集アクションリスト</a>
+    <span class="banner-tag">v0.1 / 2026.06 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-label">PHASE 0 — 観る ／ データ収集</span>
+    <h1 class="hero-title">材料を、<br>段階的に<em>積み上げる</em>。</h1>
+    <p class="hero-subtitle">Document Bの6ドメインを「証拠」で埋めるための、段階的アクションリスト。土台 → 核心 → 価値化 → 証拠 → 外部 → 統合の順に、同じワークシートへ積み上げていく。</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="hero-meta-label">Period</span><span class="hero-meta-value">2026.06 — 09<br>観察期</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">中心の数字</span><span class="hero-meta-value">7万人のうち<br>動いた実数</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">出力</span><span class="hero-meta-value">6ドメイン<br>検証レポート</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 00　進め方</span>
+      <h2 class="section-title">一度に揃えない。<br><span class="emph-warm">7段階</span>で積み上げる。</h2>
+    </div>
+    <p class="section-lead">各ステージは前段の上に積み上がり、同じワークシートに層を足していく。<strong>すべての中心はSTAGE 2の「実アクティブ数」。土台（STAGE 1）を集めたら、まずこの1数字を出す。</strong></p>
+    <div class="seq"><div class="seq-item"><span class="seq-stage">STAGE 0</span><span class="seq-name">集約環境を整える</span></div><div class="seq-item"><span class="seq-stage">STAGE 1</span><span class="seq-name">すぐ揃う定量</span></div><div class="seq-item core"><span class="seq-stage">STAGE 2</span><span class="seq-name">核心の数字を出す</span></div><div class="seq-item"><span class="seq-stage">STAGE 3</span><span class="seq-name">価値化の仕様を取る</span></div><div class="seq-item"><span class="seq-stage">STAGE 4</span><span class="seq-name">内部の証拠を棚卸す</span></div><div class="seq-item"><span class="seq-stage">STAGE 5</span><span class="seq-name">外部の支払い意思を探る</span></div><div class="seq-item"><span class="seq-stage">STAGE 6</span><span class="seq-name">統合して戦略書へ</span></div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　アクションリスト</span>
+      <h2 class="section-title">ステージごとに、<br>何を<span class="emph-warm">集めるか</span>。</h2>
+    </div>
+    <p class="section-lead">各項目は「アクション → 取得元 → アウトプット」。チェックを付けながら、上から順に進める。<strong>STAGE 0・1を今週着手するのが、すべての起点。</strong></p>
+    <div class="stage">
+      <div class="stage-head"><span class="stage-num">STAGE 0</span><span class="stage-title">集約環境を整える</span>
+        <span class="stage-purpose">集める前に「入れ物」を先に作る。あとは流し込むだけにする。</span><span class="stage-when">今すぐ</span></div>
+      <ul class="check"><li><span class="ck-box"></span><span><span class="ck-text">収集データの保管フォルダと命名規則を決める（01_mailmag / 02_ga4 …）</span><span class="ck-meta">担当決め → 共有フォルダ</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">全データの取得期間を「過去24ヶ月」に統一する</span><span class="ck-meta">→ 期間定義メモ</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">6ドメインのワークシート枠を用意（項目／取得元／現状値／気づき／仕分け接続）</span><span class="ck-meta">→ 集計シート</span></span></li></ul>
+      <div class="stage-domain">埋まるドメイン　<b>全ドメインの土台</b></div>
+    </div><div class="stage">
+      <div class="stage-head"><span class="stage-num">STAGE 1</span><span class="stage-title">すぐ揃う定量（8エクスポート）</span>
+        <span class="stage-purpose">既存ツールから一括で土台を集める。単月でなく24ヶ月の推移で。</span><span class="stage-when">STAGE 0 完了後すぐ・今週</span></div>
+      <ul class="check"><li><span class="ck-box"></span><span><span class="ck-text">メルマガ実績：配信数／開封率／クリック率／解除率／URL別クリック</span><span class="ck-meta">配信ツール → CSV</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">GA4：UU・セッション・PV・流入元・人気ページ・時間帯／デバイス・地域</span><span class="ck-meta">GA4 → エクスポート</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">Search Console：検索クエリ・流入キーワード</span><span class="ck-meta">SC → CSV</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">会員DB：月別新規・累計・ログイン履歴 ※STAGE 2の素材</span><span class="ck-meta">会員DB → CSV</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">素材DLログ：素材別／カテゴリ別DL数・リピートDL率</span><span class="ck-meta">DLログ → CSV</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">LINE：友だち／リーチ／ブロック／開封／回答数・回答率</span><span class="ck-meta">KPIシート（既存）</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">SNS×4：フォロワー推移・リーチ・エンゲージ・リンククリック・運用工数</span><span class="ck-meta">各アナリティクス</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">YouTube＋介護レクNews：再生・視聴維持・概要欄クリック／記事PV・読了・送客</span><span class="ck-meta">Studio・CMS</span></span></li></ul>
+      <div class="stage-domain">埋まるドメイン　<b>D04・D05・D02 の土台</b></div>
+    </div><div class="stage core">
+      <div class="stage-head"><span class="stage-num">STAGE 2</span><span class="stage-title">核心の数字を出す（実アクティブ数）</span><span class="stage-badge">核心</span>
+        <span class="stage-purpose">7万人のうち「動いている実数」を確定する。すべての材料の中心。</span><span class="stage-when">STAGE 1 の会員DB・DLログが揃ったら</span></div>
+      <ul class="check"><li><span class="ck-box"></span><span><span class="ck-text">「アクティブ」の定義を決める（例：直近12ヶ月にログイン or DL or LINE反応）</span><span class="ck-meta">→ 定義メモ</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">定義に沿って実アクティブ数・アクティブ率を算出</span><span class="ck-meta">→ 中心指標</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">休眠・離脱の分布を出す（最終接触からの経過月）</span><span class="ck-meta">→ 分布グラフ</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">語られる「7万人」との乖離度を1枚にまとめる</span><span class="ck-meta">→ 乖離サマリー</span></span></li></ul>
+      <div class="stage-domain">埋まるドメイン　<b>D06（事業の核心テーマ）</b></div>
+    </div><div class="stage">
+      <div class="stage-head"><span class="stage-num">STAGE 3</span><span class="stage-title">価値化の仕様を取る（LINEアンケート）</span>
+        <span class="stage-purpose">スポンサーに売れる「属性 × 実アクティブ」の仕様を集め始める。</span><span class="stage-when">LINEが回り、STAGE 2 のアクティブ層が見えたら</span></div>
+      <ul class="check"><li><span class="ck-box"></span><span><span class="ck-text">属性軸アンケート設計：役職／施設形態／地域／担当業務／関心テーマ／購買関与</span><span class="ck-meta">LINE → 月次取得</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">価値検証設問：時短分数／NPS／「月500円なら自費で使うか」</span><span class="ck-meta">LINEアンケート</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">月次マイクロアンケートに組み込み、3ヶ月かけて積み上げる</span><span class="ck-meta">→ 回答パネル</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">チャネル間の重複率（メール×LINE×会員の名寄せ）</span><span class="ck-meta">→ 重複率</span></span></li></ul>
+      <div class="stage-domain">埋まるドメイン　<b>D01・D02・D03-A の素材</b></div>
+    </div><div class="stage">
+      <div class="stage-head"><span class="stage-num">STAGE 4</span><span class="stage-title">内部の証拠を棚卸す（社内ヒアリング）</span>
+        <span class="stage-purpose">「すでに営業で効いている」実例を体系化する。最優先の定性。</span><span class="stage-when">STAGE 2 と並行で着手可</span></div>
+      <ul class="check"><li><span class="ck-box"></span><span><span class="ck-text">社長ヒアリング：15年で広場が起点・経由になった取引／関係の実例棚卸し</span><span class="ck-meta">最優先</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">営業責任者ヒアリング：商談での効果実感・「広場の話」→商談化率</span><span class="ck-meta">ヒアリング</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">ヘルスケアカンパニー責任者ヒアリング：内部貢献認識・内部振替の可能性</span><span class="ck-meta">ヒアリング</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">過去3年の提案書・営業資料での「7万人」言及頻度と文脈を調査</span><span class="ck-meta">資料調査</span></span></li></ul>
+      <div class="stage-domain">埋まるドメイン　<b>D06・D03-D</b></div>
+    </div><div class="stage">
+      <div class="stage-head"><span class="stage-num">STAGE 5</span><span class="stage-title">外部の支払い意思を探る（フィールド／制度）</span>
+        <span class="stage-purpose">「対価はどこから・いくら」を確かめる。</span><span class="stage-when">STAGE 3・4 の手応えを見てから</span></div>
+      <ul class="check"><li><span class="ck-box"></span><span><span class="ck-text">ユーザー深掘り 5〜8名：最後に使ったレク／無くなって困ること／併用理由</span><span class="ck-meta">個別ヒアリング</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">企業5社：個人介護職に届くなら何円払えるか</span><span class="ck-meta">ヒアリング</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">施設管理者5名：どの経費科目で・年間いくら動かせるか</span><span class="ck-meta">ヒアリング</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">加算・補助金（LIFE／科学的介護加算）との接続可否を制度調査</span><span class="ck-meta">社内1名アサイン</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">素材の専門家レビュー＋同業（介護アンテナ等）との相対評価</span><span class="ck-meta">内部レビュー</span></span></li></ul>
+      <div class="stage-domain">埋まるドメイン　<b>D01・D02・D03-A/B/C・D05</b></div>
+    </div><div class="stage">
+      <div class="stage-head"><span class="stage-num">STAGE 6</span><span class="stage-title">統合して戦略書へ（観るフェーズ総括）</span>
+        <span class="stage-purpose">6ドメインのデータを4つの判断材料に変換し、経営層へ渡す。</span><span class="stage-when">9月末・判断ゲート</span></div>
+      <ul class="check"><li><span class="ck-box"></span><span><span class="ck-text">6ドメイン検証レポートを作成</span><span class="ck-meta">→ レポート</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">4判断材料へ変換：事業再定義／収益の道筋／仕分け具体／戦略価値</span><span class="ck-meta">→ 判断材料</span></span></li><li><span class="ck-box"></span><span><span class="ck-text">14期戦略書を経営層へ提出</span><span class="ck-meta">→ 戦略書 / Phase 1へ</span></span></li></ul>
+      <div class="stage-domain">埋まるドメイン　<b>全ドメイン → Phase 1（仕分ける）</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　集約先</span>
+      <h2 class="section-title">すべては、<br>6ドメイン・<span class="emph-warm">ワークシート</span>へ。</h2>
+    </div>
+    <p class="section-lead">各ステージで集めた材料は、ドメインごとに同じ列構成で記入していく。これがDocument B §05アクションA（テンプレートのスプレッドシート化）の実体になる。</p>
+    <div class="wcols">
+      <div class="wcol"><span class="wc-n">COL 1</span><span class="wc-t">項目</span></div>
+      <div class="wcol"><span class="wc-n">COL 2</span><span class="wc-t">取得元</span></div>
+      <div class="wcol"><span class="wc-n">COL 3</span><span class="wc-t">現状値</span></div>
+      <div class="wcol"><span class="wc-n">COL 4</span><span class="wc-t">気づき</span></div>
+      <div class="wcol"><span class="wc-n">COL 5</span><span class="wc-t">仕分けへの接続</span></div>
+    </div>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="doc_b_phase0_kanru_verification.html" class="pagenav-side"><span class="pagenav-direction">← Prev</span><span class="pagenav-title">Document B<br>観るフェーズ 6検証ドメイン</span></a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <a href="line_execution_plan.html" class="pagenav-side right"><span class="pagenav-direction">Next →</span><span class="pagenav-title">LINE実行プラン<br>10倍ロードマップ</span></a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">介護レク広場 14期戦略 ／ 観るフェーズ データ収集アクションリスト<br>検討稿 v0.1 ／ 2026年6月 ／ 内部討議用</p>
+  </div>
+</footer>
+
+</body>
+</html>

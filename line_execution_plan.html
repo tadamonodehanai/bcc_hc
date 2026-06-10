@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE実行プラン｜介護レク広場 14期戦略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    right: -40px;
+    width: 320px;
+    height: 320px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--accent-warm);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 64px;
+    max-width: 620px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep {
+    background: var(--bg-section);
+    border-top: none;
+  }
+  .section.dark {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-top: none;
+  }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead {
+    font-size: 16px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    max-width: 680px;
+  }
+  .section-lead strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .section.dark .section-lead strong { color: var(--accent-gold); }
+
+  /* Challenge list */
+  .challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 48px;
+  }
+  .challenge-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+  .challenge-item:last-child { border-bottom: 1px solid var(--border-soft); }
+  .challenge-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-warm);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .challenge-body { display: flex; flex-direction: column; gap: 8px; }
+  .challenge-title {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .challenge-note {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+  .challenge-note strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+
+  /* Shift grid - 認識転換 */
+  .shift-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border-soft);
+    margin-top: 48px;
+    border: 1px solid var(--border-soft);
+  }
+  .shift-card {
+    background: var(--bg-card);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 280px;
+  }
+  .shift-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .shift-title {
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .shift-arrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-top: 1px dashed var(--border-line);
+    margin-top: auto;
+  }
+  .shift-from, .shift-to {
+    font-family: var(--font-display);
+    font-size: 14px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .shift-from { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-to { color: var(--accent-deep); font-weight: 500; }
+  .shift-mark { font-family: var(--font-mono); color: var(--accent-warm); font-size: 14px; }
+  .shift-body {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-secondary);
+  }
+
+  /* Roadmap */
+  .roadmap-frame {
+    background: var(--bg-card);
+    border: 1px solid var(--border-line);
+    padding: 48px 36px;
+    margin-top: 24px;
+  }
+  .roadmap-zones {
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+    gap: 24px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+  .zone-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-line);
+  }
+  .zone-label.exec { color: var(--accent-warm); }
+
+  .phase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .phase-card {
+    padding: 24px 20px;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+  .phase-card.exec {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-color: var(--bg-deep);
+  }
+  .phase-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  .phase-card.exec .phase-tag { color: var(--accent-gold); }
+  .phase-verb {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+  .phase-card.exec .phase-verb { color: var(--text-on-deep); }
+  .phase-period {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    padding-top: 8px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-card.exec .phase-period { color: rgba(242, 236, 222, 0.7); border-color: rgba(184, 146, 74, 0.3); }
+  .phase-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+  .phase-card.exec .phase-desc { color: rgba(242, 236, 222, 0.85); }
+
+  /* Phase detail */
+  .phase-detail {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 56px;
+    padding: 56px 0;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-detail:last-child { border-bottom: 1px solid var(--border-soft); }
+  .phase-detail-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .phase-detail-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .phase-detail-verb {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin: 8px 0 12px;
+  }
+  .phase-detail-period {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .phase-detail-purpose {
+    font-family: var(--font-display);
+    font-size: 19px;
+    line-height: 1.9;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .phase-detail-section { margin-bottom: 24px; }
+  .phase-detail-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .phase-detail-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .phase-detail-list li {
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+  }
+  .phase-detail-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent-warm);
+    font-size: 12px;
+  }
+  .phase-detail-gate {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: var(--bg-section);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--accent-warm);
+  }
+  .phase-detail-gate strong {
+    color: var(--text-primary);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--font-display);
+  }
+
+  /* Criteria */
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .criteria-card {
+    background: var(--bg-card);
+    padding: 36px 28px;
+    border-top: 3px solid var(--accent-warm);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+  .criteria-card.primary {
+    background: var(--bg-deep);
+    border-top-color: var(--accent-gold);
+    border-top-width: 4px;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(31, 72, 71, 0.18);
+  }
+  .criteria-card.primary .criteria-num { color: var(--accent-gold); }
+  .criteria-card.primary .criteria-name { color: var(--text-on-deep); }
+  .criteria-card.primary .criteria-q {
+    color: rgba(242, 236, 222, 0.88);
+    border-top-color: rgba(184, 146, 74, 0.3);
+  }
+  .criteria-mark {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 3px 8px;
+    vertical-align: middle;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+  .criteria-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--accent-warm);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .criteria-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .criteria-q {
+    font-size: 13px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+    padding-top: 16px;
+    border-top: 1px solid var(--border-soft);
+    margin-top: 4px;
+  }
+
+  /* Next actions */
+  .nextactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 32px;
+  }
+  .nextaction {
+    padding: 32px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .nextaction-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-gold);
+    font-weight: 500;
+  }
+  .nextaction-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--text-on-deep);
+    line-height: 1.5;
+  }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--accent-gold);
+  }
+
+  /* Footer */
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* Page nav (between docs) */
+  .pagenav {
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-side.disabled { opacity: 0.35; pointer-events: none; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  /* §00 Essence section */
+  .emph-warm { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+
+  .essence-block {
+    margin-top: 48px;
+    padding: 48px 44px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent-warm);
+  }
+  .essence-block.accent {
+    background: var(--bg-section);
+    border-left-color: var(--accent-deep);
+  }
+  .essence-block + .essence-block { margin-top: 24px; }
+  .essence-head {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .essence-block.accent .essence-tag { color: var(--accent-deep); }
+  .essence-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+  }
+  .essence-body {
+    font-size: 15px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .essence-body:last-child { margin-bottom: 0; }
+  .essence-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+  .essence-table {
+    margin: 24px 0;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .essence-row {
+    display: grid;
+    grid-template-columns: 140px 200px 1fr;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-row:last-child { border-bottom: none; }
+  .essence-row > span {
+    padding: 18px 20px;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    border-right: 1px solid var(--border-soft);
+  }
+  .essence-row > span:last-child { border-right: none; }
+  .essence-row-head > span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    background: var(--bg-section);
+  }
+  .essence-row .essence-col-label {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .essence-row.strategic .essence-col-label {
+    color: var(--accent-warm);
+  }
+  .essence-row.strategic {
+    background: rgba(184, 92, 61, 0.04);
+  }
+
+  /* Print */
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    body { font-size: 12px; }
+    .hero-title { font-size: 42px; }
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-title { font-size: 38px; }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 28px; }
+    .shift-grid { grid-template-columns: 1fr; }
+    .phase-row { grid-template-columns: 1fr; }
+    .roadmap-zones { grid-template-columns: 1fr; }
+    .phase-detail { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+    .criteria-grid { grid-template-columns: 1fr; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+    .essence-block { padding: 32px 24px; }
+    .essence-title { font-size: 21px; }
+    .essence-row { grid-template-columns: 1fr; }
+    .essence-row > span { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    .essence-row > span:last-child { border-bottom: none; }
+  }
+
+
+  /* === LINE plan additions === */
+  .formula-bar{margin:40px 0 4px;padding:30px 32px;background:var(--bg-deep);color:var(--text-on-deep);font-family:var(--font-display);font-size:21px;line-height:1.7;text-align:center;letter-spacing:0.02em;}
+  .formula-bar .op{color:var(--accent-gold);margin:0 8px;}
+  .formula-cap{font-family:var(--font-mono);font-size:10px;letter-spacing:0.25em;color:var(--text-muted);text-transform:uppercase;text-align:center;display:block;margin-bottom:24px;}
+  .mult-table{margin-top:8px;border:1px solid var(--border-soft);background:var(--bg-card);}
+  .mult-row{display:grid;grid-template-columns:1.5fr 0.9fr 0.9fr 0.7fr 2fr;border-bottom:1px solid var(--border-soft);}
+  .mult-row:last-child{border-bottom:none;}
+  .mult-row>span{padding:16px 18px;font-size:13.5px;line-height:1.7;color:var(--text-secondary);border-right:1px solid var(--border-soft);}
+  .mult-row>span:last-child{border-right:none;}
+  .mult-row-head>span{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-secondary);background:var(--bg-section);}
+  .mult-row .m-label{font-family:var(--font-display);font-size:15px;color:var(--text-primary);font-weight:500;}
+  .mult-row .m-now{color:var(--text-muted);font-family:var(--font-mono);}
+  .mult-row .m-goal{color:var(--accent-deep);font-weight:600;font-family:var(--font-mono);}
+  .mult-row .m-x{font-family:var(--font-mono);color:var(--accent-warm);font-weight:500;}
+  .mult-row.total{background:var(--bg-deep);}
+  .mult-row.total>span{color:var(--text-on-deep);border-right-color:rgba(242,236,222,0.15);font-family:var(--font-display);font-size:15px;}
+  .mult-row.total .m-x{color:var(--accent-gold);font-size:22px;font-weight:600;}
+  .lever-mult{font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;color:var(--accent-warm);text-transform:uppercase;padding:10px 0 0;border-top:1px dashed var(--border-line);margin-top:auto;}
+  .kpi-note{margin-top:32px;padding:20px 24px;background:var(--bg-section);border-left:3px solid var(--accent-gold);font-size:13.5px;line-height:1.9;color:var(--text-secondary);}
+  .kpi-note strong{color:var(--text-primary);font-weight:600;}
+  @media(max-width:720px){.formula-bar{font-size:15px;padding:20px;}.mult-row{grid-template-columns:1fr;}.mult-row>span{border-right:none;border-bottom:1px solid var(--border-soft);}}
+
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜LINE実行プラン</a>
+    <span class="banner-tag">v0.1 / 2026.06 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-label">PHASE 0 — 観る ／ 実行プラン</span>
+    <h1 class="hero-title">友だち1000人は、<em>通過点</em>。<br>狙うのは、回答と開封の<em>ゼロ一個</em>。</h1>
+    <p class="hero-subtitle">Web会員をLINEへ移し、ゼロパーティデータの品質を上げる。アンケート回答数と開封を一桁増やすための、低コスト実行プラン。</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="hero-meta-label">Period</span><span class="hero-meta-value">2026.06 — 09<br>観察期</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Phase</span><span class="hero-meta-value">PHASE 0「観る」<br>の中核アクション</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Goal</span><span class="hero-meta-value">友だち1000（通過点）<br>回答・開封 ×10</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 00　位置づけ</span>
+      <h2 class="section-title">これは新規施策ではなく、<br>ロードマップの<span class="emph-warm">背骨</span>である。</h2>
+    </div>
+    <p class="section-lead">Document Aの方向性と照らすと、このLINE施策は4つの戦略転換のうち2つに直結し、Phase 0「観る」の主要アクションそのものに当たる。<strong>方向性との齟齬はない。</strong></p>
+    <div class="essence-block">
+      <div class="essence-head"><span class="essence-tag">SHIFT 01 — Architecture</span><h3 class="essence-title">LINEは「フロー」の本体である。</h3></div>
+      <p class="essence-body">古いWebをストック資産として残し、<strong>LINEを行動データ収集と日常接点のフローとして新設する</strong>——友だち獲得とアンケートは、この分業の実装そのもの。</p>
+    </div>
+    <div class="essence-block">
+      <div class="essence-head"><span class="essence-tag">課題 05 — Active</span><h3 class="essence-title">「見えないアクティブ」を初めて測る。</h3></div>
+      <p class="essence-body">7万人のうち誰が動いているか分からない——この長年の課題に対し、<strong>LINEのリーチ数・回答数・アクティブ数が測定器</strong>として効く。</p>
+    </div>
+    <div class="essence-block accent">
+      <div class="essence-head"><span class="essence-tag">SHIFT 03 — Monetization</span><h3 class="essence-title">回答の品質が、来期の「商品」になる。</h3></div>
+      <p class="essence-body">業界外スポンサーに売れる価値の正体は<strong>「精度の高いアクティブ会員データ」</strong>。回答数・開封を一桁増やす作業は、来期マネタイズの在庫を仕込む作業でもある。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　因数分解</span>
+      <h2 class="section-title">「0を一つ増やす」を、<br>3つの<span class="emph-warm">掛け算</span>に分解する。</h2>
+    </div>
+    <p class="section-lead">10倍は、1つの要素を10倍にするのではない。3つを少しずつ伸ばして掛け合わせると届く。<strong>配信実績を見ると開封率はすでに約42%と高い。本当のレバーは①リーチ拡大と②回答率にある。</strong></p>
+    <div class="formula-bar"><span class="term">月間回答数</span><span class="op">＝</span>リーチ可能数<span class="op">×</span>開封率<span class="op">×</span>開封者あたり回答率</div>
+    <span class="formula-cap">現状値はKPIシートの実績から算出</span>
+    <div class="mult-table">
+      <div class="mult-row mult-row-head"><span>要素</span><span>現状</span><span>9月末 目標</span><span>倍率</span><span>主な打ち手</span></div>
+      <div class="mult-row"><span class="m-label">リーチ可能数</span><span class="m-now">422</span><span class="m-goal">800</span><span class="m-x">×1.9</span><span>友だち獲得 ＋ ブロック抑制</span></div>
+      <div class="mult-row"><span class="m-label">開封率（送信比）</span><span class="m-now">41.9%</span><span class="m-goal">55%</span><span class="m-x">×1.3</span><span>配信をLINEへ寄せ、配信設計を磨く</span></div>
+      <div class="mult-row"><span class="m-label">開封者あたり回答率</span><span class="m-now">6.9%</span><span class="m-goal">28%</span><span class="m-x">×4.1</span><span>マイクロアンケート ＋ 即時インセンティブ</span></div>
+      <div class="mult-row total"><span class="m-label" style="color:var(--text-on-deep)">合成倍率（回答数の伸び）</span><span></span><span></span><span class="m-x">×10.1</span><span style="color:rgba(242,236,222,0.85)">3要素の倍率の積でほぼ10倍に届く</span></div>
+    </div>
+    <div class="kpi-note" style="background:var(--bg-card);border-left-color:var(--accent-gold);color:var(--text-secondary)"><strong style="color:var(--accent-deep)">読みどころ：</strong>開封率の伸びしろは小さい（×1.3）。効くのは「リーチを倍に」「アンケート自体を答えたくなる体験に」の2点。ここに低コストの力を集中する。</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　打てる手</span>
+      <h2 class="section-title">SNS・メルマガ・内製LPだけで、<br>掛け算の各項を動かす。</h2>
+    </div>
+    <p class="section-lead">稼働できる低コストの3レバーを、因数分解のどこに効くかで配置する。<strong>現金コストはPRスタンプ以外ほぼゼロ。</strong></p>
+    <div class="shift-grid">
+      <div class="shift-card">
+        <span class="shift-tag">内製LP — 最重要</span>
+        <h3 class="shift-title">受け皿と、回答体験をつくる。</h3>
+        <p class="shift-body">①LINE登録LP（友だち獲得の受け皿）と、②アンケート回答LP（スマホ前提・1問1画面・進捗バー・回答後すぐ素材DL）。内製だから作り込みし放題。</p>
+        <span class="lever-mult">効く項：リーチ ＆ 回答率</span>
+      </div>
+      <div class="shift-card">
+        <span class="shift-tag">メルマガ — 移行装置</span>
+        <h3 class="shift-title">役割を「LINEへの橋」に振り切る。</h3>
+        <p class="shift-body">全号フッターに固定バナー＋月1の移行特集号。「メルマガでは届けきれない最新素材をLINEで毎月」と言い切る。回答取得の主戦場はLINEへ寄せる。</p>
+        <span class="lever-mult">効く項：リーチ</span>
+      </div>
+      <div class="shift-card">
+        <span class="shift-tag">SNS — 入口と拡散</span>
+        <h3 class="shift-title">“さわり”を撒いて、続きはLINEへ。</h3>
+        <p class="shift-body">季節レクのさわりを投稿し、続き／PDFはLINEで。既存の広場素材を1枚画像に再利用すればコスト最小で回せる。</p>
+        <span class="lever-mult">効く項：リーチ</span>
+      </div>
+      <div class="shift-card">
+        <span class="shift-tag">PRスタンプ — 8月・150</span>
+        <h3 class="shift-title">唯一の有料。拡散の起爆剤。</h3>
+        <p class="shift-body">投下と同時に下のウェルカム導線へ流し込む。スタンプ目当て層はブロックされやすいため、「もらって終わり」にさせない設計が前提。</p>
+        <span class="lever-mult">効く項：リーチ（要・質の担保）</span>
+      </div>
+    </div>
+    <div class="essence-block" style="margin-top:48px">
+      <div class="essence-head"><span class="essence-tag">仕組み 01 — Welcome</span><h3 class="essence-title">追加直後の数分が、開封率とブロックを決める。</h3></div>
+      <p class="essence-body">友だち追加 → 自動あいさつ → <strong>即DLできる素材1点</strong> → リッチメニュー案内 → 最初のマイクロアンケート1問。この導線の有無が、150人のスタンプ友だちが「リーチ」に積み上がるか「ブロック」に膨らむかを分ける。</p>
+    </div>
+    <div class="essence-block accent">
+      <div class="essence-head"><span class="essence-tag">仕組み 02 — Loop</span><h3 class="essence-title">月次マイクロアンケートが、ゼロパーティの心臓部。</h3></div>
+      <p class="essence-body">月1で1〜3問 → 回答者だけに限定素材 → <strong>結果の一部を見える化して還元</strong>。透明性が次回の回答率を押し上げ、回答率（×4.1）の現実性を支える。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 03　16週ロードマップ</span>
+      <h2 class="section-title">前半は温かい移行で土台を。<br>8月にスタンプを<span class="emph-warm">投下</span>する。</h2>
+    </div>
+    <p class="section-lead">数字は累計友だち目標。現在503人を起点に、9月末の1000人（通過点）へ向けた波形。<strong>前半で純度の高い移行を積み、8月の拡散ピークで上乗せする。</strong></p>
+    <div class="roadmap-frame">
+      <div class="roadmap-zones"><span class="zone-label">起点 503</span><span class="zone-label exec">実行（累計友だち目標）</span></div>
+      <div class="phase-row">
+        <div class="phase-card"><span class="phase-tag">6月後半</span><span class="phase-verb">560</span><span class="phase-period">土台づくり</span><p class="phase-desc">Webゲート設置・ウェルカム配信の仕込み／メルマガ移行特集①</p></div>
+        <div class="phase-card"><span class="phase-tag">7月</span><span class="phase-verb">700</span><span class="phase-period">移行を本格化</span><p class="phase-desc">メルマガ・SNS移行を継続／月次マイクロアンケート開始</p></div>
+        <div class="phase-card exec"><span class="phase-tag">8月</span><span class="phase-verb">880</span><span class="phase-period">拡散ピーク</span><p class="phase-desc">PRスタンプ投下（150）＋ウェルカム導線で質を担保／移行継続</p></div>
+        <div class="phase-card"><span class="phase-tag">9月</span><span class="phase-verb">1,000</span><span class="phase-period">判断ゲートへ</span><p class="phase-desc">オフライン・ラストプッシュ／3ヶ月レポートを戦略書へ接続</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 04　測定</span>
+      <h2 class="section-title">KPIシートに、品質と効率の<br>指標を<span class="emph-warm">足した</span>。</h2>
+    </div>
+    <p class="section-lead">9月末の判断ゲートでは「量」より「コスト効率」と「純度」が効く。既存のKPI管理シートに、以下を追加で反映済み（別添xlsx）。</p>
+    <div class="essence-table">
+      <div class="essence-row essence-row-head"><span>区分</span><span>追加KPI</span><span>用途</span></div>
+      <div class="essence-row"><span class="essence-col-label">獲得</span><span>到達可能数（リーチ）／ブロック率</span><span>表の1000に対する「届く実体」と移行の質の警告灯</span></div>
+      <div class="essence-row"><span class="essence-col-label">獲得</span><span>獲得単価 CPF（チャネル別）</span><span>低予算をどこへ寄せるかの配分根拠</span></div>
+      <div class="essence-row"><span class="essence-col-label">回答</span><span>開封者あたり回答率</span><span>アンケート体験そのものの質（×4.1の現実度）</span></div>
+      <div class="essence-row strategic"><span class="essence-col-label">回答</span><span>回答単価 CPR</span><span>「1回答＝いくら」をスポンサー提案の値付け根拠に</span></div>
+      <div class="essence-row"><span class="essence-col-label">アクティブ</span><span>月間アクティブ数</span><span>課題05への直接の答え</span></div>
+      <div class="essence-row"><span class="essence-col-label">戦略価値</span><span>取得属性データ件数</span><span>営業トーク素材・対外発信の在庫</span></div>
+    </div>
+    <div class="kpi-note"><strong>10倍ロードマップ・タブ</strong>を新設。リーチ・開封率・回答率の現状（実績連動）と9月末目標を入れると、<strong>合成倍率が自動で算出</strong>される。目標値を動かせば必要倍率がその場で更新される設計。</div>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="doc_a_direction_roadmap.html" class="pagenav-side"><span class="pagenav-direction">← Prev</span><span class="pagenav-title">Document A<br>事業の方向性と14期ロードマップ</span></a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <a href="doc_b_phase0_kanru_verification.html" class="pagenav-side right"><span class="pagenav-direction">Next →</span><span class="pagenav-title">Document B<br>観るフェーズ 検証テンプレート</span></a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">介護レク広場 14期戦略 ／ LINE実行プラン — Phase 0「観る」<br>検討稿 v0.1 ／ 2026年6月 ／ 内部討議用</p>
+  </div>
+</footer>
+
+</body>
+</html>

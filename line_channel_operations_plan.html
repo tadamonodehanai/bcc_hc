@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE誘導オペレーション・プラン｜介護レク広場 14期戦略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    right: -40px;
+    width: 320px;
+    height: 320px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--accent-warm);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 64px;
+    max-width: 620px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep {
+    background: var(--bg-section);
+    border-top: none;
+  }
+  .section.dark {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-top: none;
+  }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead {
+    font-size: 16px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    max-width: 680px;
+  }
+  .section-lead strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .section.dark .section-lead strong { color: var(--accent-gold); }
+
+  /* Challenge list */
+  .challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 48px;
+  }
+  .challenge-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+  .challenge-item:last-child { border-bottom: 1px solid var(--border-soft); }
+  .challenge-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-warm);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .challenge-body { display: flex; flex-direction: column; gap: 8px; }
+  .challenge-title {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .challenge-note {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+  .challenge-note strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+
+  /* Shift grid - 認識転換 */
+  .shift-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border-soft);
+    margin-top: 48px;
+    border: 1px solid var(--border-soft);
+  }
+  .shift-card {
+    background: var(--bg-card);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 280px;
+  }
+  .shift-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .shift-title {
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .shift-arrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-top: 1px dashed var(--border-line);
+    margin-top: auto;
+  }
+  .shift-from, .shift-to {
+    font-family: var(--font-display);
+    font-size: 14px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .shift-from { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-to { color: var(--accent-deep); font-weight: 500; }
+  .shift-mark { font-family: var(--font-mono); color: var(--accent-warm); font-size: 14px; }
+  .shift-body {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-secondary);
+  }
+
+  /* Roadmap */
+  .roadmap-frame {
+    background: var(--bg-card);
+    border: 1px solid var(--border-line);
+    padding: 48px 36px;
+    margin-top: 24px;
+  }
+  .roadmap-zones {
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+    gap: 24px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+  .zone-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-line);
+  }
+  .zone-label.exec { color: var(--accent-warm); }
+
+  .phase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .phase-card {
+    padding: 24px 20px;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+  .phase-card.exec {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-color: var(--bg-deep);
+  }
+  .phase-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  .phase-card.exec .phase-tag { color: var(--accent-gold); }
+  .phase-verb {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+  .phase-card.exec .phase-verb { color: var(--text-on-deep); }
+  .phase-period {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    padding-top: 8px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-card.exec .phase-period { color: rgba(242, 236, 222, 0.7); border-color: rgba(184, 146, 74, 0.3); }
+  .phase-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+  .phase-card.exec .phase-desc { color: rgba(242, 236, 222, 0.85); }
+
+  /* Phase detail */
+  .phase-detail {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 56px;
+    padding: 56px 0;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-detail:last-child { border-bottom: 1px solid var(--border-soft); }
+  .phase-detail-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .phase-detail-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .phase-detail-verb {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin: 8px 0 12px;
+  }
+  .phase-detail-period {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .phase-detail-purpose {
+    font-family: var(--font-display);
+    font-size: 19px;
+    line-height: 1.9;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .phase-detail-section { margin-bottom: 24px; }
+  .phase-detail-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .phase-detail-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .phase-detail-list li {
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+  }
+  .phase-detail-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent-warm);
+    font-size: 12px;
+  }
+  .phase-detail-gate {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: var(--bg-section);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--accent-warm);
+  }
+  .phase-detail-gate strong {
+    color: var(--text-primary);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--font-display);
+  }
+
+  /* Criteria */
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .criteria-card {
+    background: var(--bg-card);
+    padding: 36px 28px;
+    border-top: 3px solid var(--accent-warm);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+  .criteria-card.primary {
+    background: var(--bg-deep);
+    border-top-color: var(--accent-gold);
+    border-top-width: 4px;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(31, 72, 71, 0.18);
+  }
+  .criteria-card.primary .criteria-num { color: var(--accent-gold); }
+  .criteria-card.primary .criteria-name { color: var(--text-on-deep); }
+  .criteria-card.primary .criteria-q {
+    color: rgba(242, 236, 222, 0.88);
+    border-top-color: rgba(184, 146, 74, 0.3);
+  }
+  .criteria-mark {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 3px 8px;
+    vertical-align: middle;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+  .criteria-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--accent-warm);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .criteria-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .criteria-q {
+    font-size: 13px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+    padding-top: 16px;
+    border-top: 1px solid var(--border-soft);
+    margin-top: 4px;
+  }
+
+  /* Next actions */
+  .nextactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 32px;
+  }
+  .nextaction {
+    padding: 32px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .nextaction-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-gold);
+    font-weight: 500;
+  }
+  .nextaction-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--text-on-deep);
+    line-height: 1.5;
+  }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--accent-gold);
+  }
+
+  /* Footer */
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* Page nav (between docs) */
+  .pagenav {
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-side.disabled { opacity: 0.35; pointer-events: none; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  /* §00 Essence section */
+  .emph-warm { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+
+  .essence-block {
+    margin-top: 48px;
+    padding: 48px 44px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent-warm);
+  }
+  .essence-block.accent {
+    background: var(--bg-section);
+    border-left-color: var(--accent-deep);
+  }
+  .essence-block + .essence-block { margin-top: 24px; }
+  .essence-head {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .essence-block.accent .essence-tag { color: var(--accent-deep); }
+  .essence-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+  }
+  .essence-body {
+    font-size: 15px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .essence-body:last-child { margin-bottom: 0; }
+  .essence-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+  .essence-table {
+    margin: 24px 0;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .essence-row {
+    display: grid;
+    grid-template-columns: 140px 200px 1fr;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-row:last-child { border-bottom: none; }
+  .essence-row > span {
+    padding: 18px 20px;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    border-right: 1px solid var(--border-soft);
+  }
+  .essence-row > span:last-child { border-right: none; }
+  .essence-row-head > span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    background: var(--bg-section);
+  }
+  .essence-row .essence-col-label {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .essence-row.strategic .essence-col-label {
+    color: var(--accent-warm);
+  }
+  .essence-row.strategic {
+    background: rgba(184, 92, 61, 0.04);
+  }
+
+  /* Print */
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    body { font-size: 12px; }
+    .hero-title { font-size: 42px; }
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-title { font-size: 38px; }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 28px; }
+    .shift-grid { grid-template-columns: 1fr; }
+    .phase-row { grid-template-columns: 1fr; }
+    .roadmap-zones { grid-template-columns: 1fr; }
+    .phase-detail { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+    .criteria-grid { grid-template-columns: 1fr; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+    .essence-block { padding: 32px 24px; }
+    .essence-title { font-size: 21px; }
+    .essence-row { grid-template-columns: 1fr; }
+    .essence-row > span { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    .essence-row > span:last-child { border-bottom: none; }
+  }
+
+
+  /* === operator plan additions === */
+  .url-pill{display:inline-block;font-family:var(--font-mono);font-size:13px;color:var(--accent-deep);background:var(--bg-section);border:1px solid var(--border-line);padding:4px 12px;border-radius:2px;letter-spacing:0.02em;}
+  .op-card{background:var(--bg-card);border:1px solid var(--border-soft);border-top:3px solid var(--accent-warm);padding:36px 34px;margin-top:24px;}
+  .op-card.yt{border-top-color:#C0392B;}
+  .op-card-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;border-bottom:1px solid var(--border-soft);padding-bottom:18px;margin-bottom:24px;flex-wrap:wrap;}
+  .op-card-name{font-family:var(--font-display);font-size:23px;font-weight:600;color:var(--text-primary);}
+  .op-card-handle{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);margin-left:10px;}
+  .op-card-role{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;color:var(--accent-warm);text-transform:uppercase;}
+  .op-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px 36px;}
+  .op-sub-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-warm);margin-bottom:10px;display:block;}
+  .op-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+  .op-list li{padding-left:18px;position:relative;font-size:13.5px;line-height:1.8;color:var(--text-secondary);}
+  .op-list li::before{content:"▸";position:absolute;left:0;color:var(--accent-warm);font-size:11px;}
+  .op-list li strong{color:var(--text-primary);font-weight:600;background:linear-gradient(transparent 62%,rgba(184,92,61,0.16) 62%);padding:0 1px;}
+  .op-kpi{margin-top:22px;padding-top:16px;border-top:1px dashed var(--border-line);font-size:12.5px;color:var(--text-secondary);line-height:1.8;}
+  .op-kpi b{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;color:var(--accent-deep);text-transform:uppercase;}
+  .tmpl{background:var(--bg-deep);color:var(--text-on-deep);font-family:var(--font-mono);font-size:12.5px;line-height:1.9;padding:20px 22px;margin-top:10px;white-space:pre-wrap;border-left:3px solid var(--accent-gold);}
+  .tmpl-cap{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-warm);margin:26px 0 0;display:block;}
+  .gtable{margin-top:24px;border:1px solid var(--border-soft);background:var(--bg-card);font-size:13px;}
+  .gtable .gr{display:grid;border-bottom:1px solid var(--border-soft);}
+  .gtable .gr:last-child{border-bottom:none;}
+  .gtable .gr>span{padding:13px 16px;border-right:1px solid var(--border-soft);line-height:1.7;color:var(--text-secondary);}
+  .gtable .gr>span:last-child{border-right:none;}
+  .gtable .gh>span{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-secondary);background:var(--bg-section);}
+  .gtable .gc1{font-family:var(--font-display);font-size:14px;color:var(--text-primary);font-weight:500;}
+  .c5{grid-template-columns:1.1fr 0.8fr 1fr 1.3fr 1.6fr;}
+  .c4{grid-template-columns:1fr 1fr 1.2fr 1.6fr;}
+  .c3{grid-template-columns:0.7fr 1.3fr 1.6fr;}
+  .rhythm .gr{grid-template-columns:0.7fr 1fr 2.4fr;}
+  .day-list{counter-reset:day;display:flex;flex-direction:column;gap:0;margin-top:32px;}
+  .day-item{display:grid;grid-template-columns:64px 1fr;gap:28px;padding:26px 0;border-top:1px solid rgba(242,236,222,0.2);align-items:baseline;}
+  .day-item:last-child{border-bottom:1px solid rgba(242,236,222,0.2);}
+  .day-num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;color:var(--accent-gold);text-transform:uppercase;}
+  .day-body{display:flex;flex-direction:column;gap:6px;}
+  .day-title{font-family:var(--font-display);font-size:19px;color:var(--text-on-deep);line-height:1.5;}
+  .day-desc{font-size:13.5px;color:rgba(242,236,222,0.8);line-height:1.85;}
+  @media(max-width:720px){.op-grid{grid-template-columns:1fr;}.c5,.c4,.c3,.rhythm .gr{grid-template-columns:1fr;}.gtable .gr>span{border-right:none;border-bottom:1px solid var(--border-soft);}.gtable .gr>span:last-child{border-bottom:none;}.day-item{grid-template-columns:1fr;gap:6px;}}
+
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜LINE誘導オペレーション</a>
+    <span class="banner-tag">v0.1 / 2026.06 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-label">PHASE 0 — 実務オペレーション</span>
+    <h1 class="hero-title">チャネル別<br>LINE誘導<em>オペレーション</em></h1>
+    <p class="hero-subtitle">記事・素材を配信するオペレーターが、そのまま使うための実務プラン。各SNSから公式LINEへ誘導し、友だちと回答を増やす「次の一手」を具体化する。</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="hero-meta-label">公式LINE 誘導先</span><span class="hero-meta-value"><span class="url-pill">lin.ee/UuPY01A</span></span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">対象</span><span class="hero-meta-value">記事配信オペレーター<br>＋ SNS運用担当</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">原則</span><span class="hero-meta-value">1コンテンツを<br>全チャネルへ展開</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 00　共通ルール</span>
+      <h2 class="section-title">全投稿に効かせる、<br>3つの<span class="emph-warm">土台</span>。</h2>
+    </div>
+    <p class="section-lead">個別チャネルの前に、すべての投稿に共通する型を決める。<strong>この3つを最初に整えると、あとは投稿のたびにLINE友だちが積み上がる構造になる。</strong></p>
+
+    <div class="essence-block">
+      <div class="essence-head"><span class="essence-tag">土台 01 — 誘導先の統一</span><h3 class="essence-title">行き先は、いつも公式LINEひとつ。</h3></div>
+      <p class="essence-body">全チャネルの誘導先を <span class="url-pill">lin.ee/UuPY01A</span> に統一する。プロフィールのリンク、固定投稿、動画概要欄、記事末——<strong>「最新レクはLINEで」を合言葉に、置き場所をすべてLINEへ向ける。</strong></p>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head"><span class="essence-tag">土台 02 — 流入の計測</span><h3 class="essence-title">「どこから来たか」を、2段で取る。</h3></div>
+      <p class="essence-body">① Web・LPへ送るリンクには<strong>UTMパラメータ</strong>を付ける（下表）。② LINE追加直後のウェルカム1問目で<strong>「どこで友だち追加しましたか？」</strong>を聞く。この2段で、チャネル別の友だち獲得数をKPIシートのC欄に集計できる。</p>
+      <div class="gtable">
+        <div class="gr gh c4"><span>チャネル</span><span>utm_source</span><span>主な置き場所(utm_medium)</span><span>共通 utm_campaign</span></div>
+        <div class="gr c4"><span class="gc1">X</span><span>x</span><span>profile / post</span><span>line_friend</span></div>
+        <div class="gr c4"><span class="gc1">Instagram</span><span>instagram</span><span>bio / story / reel</span><span>line_friend</span></div>
+        <div class="gr c4"><span class="gc1">Facebook</span><span>facebook</span><span>post / page</span><span>line_friend</span></div>
+        <div class="gr c4"><span class="gc1">YouTube</span><span>youtube</span><span>description / endcard</span><span>line_friend</span></div>
+        <div class="gr c4"><span class="gc1">Webサイト</span><span>web</span><span>banner / article / popup</span><span>line_friend</span></div>
+      </div>
+    </div>
+
+    <div class="essence-block accent">
+      <div class="essence-head"><span class="essence-tag">土台 03 — 配信の型</span><h3 class="essence-title">新しい素材＝5チャネル分の投稿。</h3></div>
+      <p class="essence-body">素材・レクネタ・脳活・記事を1本作ったら、<strong>そのまま各チャネル用の投稿に展開する</strong>のを標準作業にする。1本のコンテンツが、Webの新着・Xの投稿・IGのカルーセル・FBのシェア・YouTubeの概要欄に同時に乗る。テンプレは §04 にある。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　チャネル一覧</span>
+      <h2 class="section-title">5つのチャネルの、<br>役割と<span class="emph-warm">現状</span>。</h2>
+    </div>
+    <p class="section-lead">それぞれ得意が違う。役割を分けて、全部の出口をLINEに集める。<strong>フォロワー数は最初の週にベースラインとして記入する（FB以外は要確認）。</strong></p>
+    <div class="gtable" style="border-color:rgba(242,236,222,0.2);background:rgba(242,236,222,0.04)">
+      <div class="gr gh c5" style="background:transparent"><span style="background:rgba(242,236,222,0.08);color:rgba(242,236,222,0.6)">チャネル</span><span style="background:rgba(242,236,222,0.08);color:rgba(242,236,222,0.6)">現状規模</span><span style="background:rgba(242,236,222,0.08);color:rgba(242,236,222,0.6)">得意</span><span style="background:rgba(242,236,222,0.08);color:rgba(242,236,222,0.6)">LINE導線の置き場所</span><span style="background:rgba(242,236,222,0.08);color:rgba(242,236,222,0.6)">役割</span></div>
+      <div class="gr c5" style="border-color:rgba(242,236,222,0.15)"><span class="gc1" style="color:var(--text-on-deep)">Webサイト</span><span style="color:rgba(242,236,222,0.8)">7万会員基盤</span><span style="color:rgba(242,236,222,0.8)">DL目的の来訪</span><span style="color:rgba(242,236,222,0.8)">トップバナー（既設）・記事末・DLページ</span><span style="color:rgba(242,236,222,0.8)">最有力の移行元</span></div>
+      <div class="gr c5" style="border-color:rgba(242,236,222,0.15)"><span class="gc1" style="color:var(--text-on-deep)">X</span><span style="color:rgba(242,236,222,0.8)">記入</span><span style="color:rgba(242,236,222,0.8)">高頻度・拡散</span><span style="color:rgba(242,236,222,0.8)">固定ポスト・各投稿末</span><span style="color:rgba(242,236,222,0.8)">毎日の入口</span></div>
+      <div class="gr c5" style="border-color:rgba(242,236,222,0.15)"><span class="gc1" style="color:var(--text-on-deep)">Instagram</span><span style="color:rgba(242,236,222,0.8)">記入</span><span style="color:rgba(242,236,222,0.8)">ビジュアル訴求</span><span style="color:rgba(242,236,222,0.8)">プロフィールリンク・ストーリーズ</span><span style="color:rgba(242,236,222,0.8)">素材の見せ場</span></div>
+      <div class="gr c5" style="border-color:rgba(242,236,222,0.15)"><span class="gc1" style="color:var(--text-on-deep)">Facebook</span><span style="color:rgba(242,236,222,0.8)">約4,076</span><span style="color:rgba(242,236,222,0.8)">施設管理層</span><span style="color:rgba(242,236,222,0.8)">投稿末・ページ紹介</span><span style="color:rgba(242,236,222,0.8)">記事の拡散</span></div>
+      <div class="gr c5"><span class="gc1" style="color:var(--text-on-deep)">YouTube</span><span style="color:rgba(242,236,222,0.8)">記入</span><span style="color:rgba(242,236,222,0.8)">体操・実演動画</span><span style="color:rgba(242,236,222,0.8)">概要欄トップ・終了画面</span><span style="color:rgba(242,236,222,0.8)">滞在の長い接点</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　チャネル別アクション</span>
+      <h2 class="section-title">各チャネルで、<br>具体的に<span class="emph-warm">何をするか</span>。</h2>
+    </div>
+    <p class="section-lead">「設置（初回1回だけ）」「毎回の投稿」「LINE誘導の一手」「見るKPI」の4点セット。<strong>設置を先に終わらせれば、毎回の作業は投稿だけになる。</strong></p>
+
+    <!-- Website -->
+    <div class="op-card">
+      <div class="op-card-head"><div><span class="op-card-name">Webサイト</span><span class="op-card-handle">kaigo-rec.com</span></div><span class="op-card-role">最有力の移行元</span></div>
+      <div class="op-grid">
+        <div><span class="op-sub-label">設置（初回）</span><ul class="op-list">
+          <li>トップの<strong>公式LINEバナー</strong>は既設。クリックを計測対象にする</li>
+          <li>素材DL完了ページに「<strong>最新素材はLINE友だち限定で先行配信</strong>」の導線を追加</li>
+          <li>特集記事テンプレの末尾に固定のLINE CTAブロックを差し込む</li>
+        </ul></div>
+        <div><span class="op-sub-label">毎回の投稿</span><ul class="op-list">
+          <li>新着素材・記事の公開時、記事末CTAが入っているか確認</li>
+          <li>月初の特集に「今月のLINE限定素材」枠を1つ用意</li>
+        </ul></div>
+        <div><span class="op-sub-label">LINE誘導の一手</span><ul class="op-list">
+          <li>人気素材ページに<strong>「LINEで毎週おすすめが届く」</strong>小バナー</li>
+          <li>ログイン後マイページにLINE連携の案内</li>
+        </ul></div>
+        <div><span class="op-sub-label">見るKPI</span><ul class="op-list">
+          <li>LINEバナー/CTAクリック数</li>
+          <li>web経由の友だち追加数（utm + ウェルカム1問目）</li>
+        </ul></div>
+      </div>
+      <div class="op-kpi"><b>KPIシート連携</b>　Cタブ「内製LP/Web」列へ週次で記入</div>
+    </div>
+
+    <!-- X -->
+    <div class="op-card">
+      <div class="op-card-head"><div><span class="op-card-name">X</span><span class="op-card-handle">@kaigo_rec</span></div><span class="op-card-role">毎日の入口・拡散</span></div>
+      <div class="op-grid">
+        <div><span class="op-sub-label">設置（初回）</span><ul class="op-list">
+          <li><strong>プロフィールに固定ポスト</strong>＝「最新レクはLINEで毎週配信」＋追加リンク</li>
+          <li>プロフィール文の1行目にLINE誘導を明記</li>
+        </ul></div>
+        <div><span class="op-sub-label">毎回の投稿（高頻度）</span><ul class="op-list">
+          <li>平日は<strong>「今日の脳活クイズ」</strong>を画像1枚で投稿、解答は広場へ</li>
+          <li>新着素材・レクネタは画像＋一言＋DLリンクで投稿</li>
+          <li>投稿末に固定の1行「最新はLINEで📲」</li>
+        </ul></div>
+        <div><span class="op-sub-label">LINE誘導の一手</span><ul class="op-list">
+          <li>クイズ系は<strong>「解答＋もっと解きたい人はLINEで」</strong>の型</li>
+          <li>反応の良い投稿を週1で引用ポストし再露出</li>
+        </ul></div>
+        <div><span class="op-sub-label">見るKPI</span><ul class="op-list">
+          <li>フォロワー数 / インプレッション</li>
+          <li>固定ポスト・リンクのクリック数</li>
+        </ul></div>
+      </div>
+      <div class="op-kpi"><b>KPIシート連携</b>　Cタブ「SNS」列へ（X分を内訳メモ）</div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="op-card">
+      <div class="op-card-head"><div><span class="op-card-name">Instagram</span><span class="op-card-handle">@kaigo_rec</span></div><span class="op-card-role">素材の見せ場</span></div>
+      <div class="op-grid">
+        <div><span class="op-sub-label">設置（初回）</span><ul class="op-list">
+          <li><strong>プロフィールのリンク</strong>をLINE（またはリンク集）に設定し常時LINEへ</li>
+          <li>ハイライトに「公式LINEとは」を1枠常設</li>
+        </ul></div>
+        <div><span class="op-sub-label">毎回の投稿</span><ul class="op-list">
+          <li>塗り絵・工作は<strong>完成イメージをカルーセル</strong>で魅せる</li>
+          <li>レク動画は<strong>リール</strong>に切り抜き（縦型・冒頭3秒勝負）</li>
+          <li>キャプション末に「プロフィールのリンクからLINEへ」</li>
+        </ul></div>
+        <div><span class="op-sub-label">LINE誘導の一手</span><ul class="op-list">
+          <li>ストーリーズで<strong>リンクスタンプ</strong>を使い直接LINEへ</li>
+          <li>「保存数」が伸びた投稿はLINE限定の追加版を予告</li>
+        </ul></div>
+        <div><span class="op-sub-label">見るKPI</span><ul class="op-list">
+          <li>フォロワー数 / リーチ / 保存数</li>
+          <li>プロフィールアクセス・リンクタップ</li>
+        </ul></div>
+      </div>
+      <div class="op-kpi"><b>KPIシート連携</b>　Cタブ「SNS」列へ（IG分を内訳メモ）</div>
+    </div>
+
+    <!-- Facebook -->
+    <div class="op-card">
+      <div class="op-card-head"><div><span class="op-card-name">Facebook</span><span class="op-card-handle">/kaigorec</span></div><span class="op-card-role">施設管理層への拡散</span></div>
+      <div class="op-grid">
+        <div><span class="op-sub-label">設置（初回）</span><ul class="op-list">
+          <li>ページ紹介・固定投稿にLINE誘導を設定</li>
+          <li>ページのアクションボタンを設定（可能なら「メッセージ/リンク」）</li>
+        </ul></div>
+        <div><span class="op-sub-label">毎回の投稿</span><ul class="op-list">
+          <li><strong>特集記事・レクネタをシェア</strong>（管理者が読む長文相性◎）</li>
+          <li>「現場でどう使うか」を一言添えて投稿</li>
+        </ul></div>
+        <div><span class="op-sub-label">LINE誘導の一手</span><ul class="op-list">
+          <li>記事投稿末に固定で「最新はLINEで📲」＋リンク</li>
+          <li>反応の良い投稿は施設向けの問いかけでコメント誘発</li>
+        </ul></div>
+        <div><span class="op-sub-label">見るKPI</span><ul class="op-list">
+          <li>フォロワー（現状 約4,076）/ エンゲージ</li>
+          <li>投稿リンクのクリック数</li>
+        </ul></div>
+      </div>
+      <div class="op-kpi"><b>KPIシート連携</b>　Cタブ「SNS」列へ（FB分を内訳メモ）</div>
+    </div>
+
+    <!-- YouTube -->
+    <div class="op-card yt">
+      <div class="op-card-head"><div><span class="op-card-name">YouTube</span><span class="op-card-handle">@kaigo_rec channel</span></div><span class="op-card-role">滞在の長い接点</span></div>
+      <div class="op-grid">
+        <div><span class="op-sub-label">設置（初回）</span><ul class="op-list">
+          <li><strong>概要欄テンプレの1行目</strong>を必ずLINE誘導に統一</li>
+          <li>チャンネル概要・バナーにLINE導線を追加</li>
+        </ul></div>
+        <div><span class="op-sub-label">毎回の投稿</span><ul class="op-list">
+          <li>体操・ゲーム動画の<strong>終了画面・カード</strong>でLINE案内</li>
+          <li>動画冒頭の口頭でも「概要欄のLINEから最新を」</li>
+          <li>長尺の見どころを<strong>ショート</strong>に切り出し回遊を作る</li>
+        </ul></div>
+        <div><span class="op-sub-label">LINE誘導の一手</span><ul class="op-list">
+          <li>人気動画の概要欄トップにLINE固定（在庫が効く）</li>
+          <li>コメント固定でもLINE案内</li>
+        </ul></div>
+        <div><span class="op-sub-label">見るKPI</span><ul class="op-list">
+          <li>登録者数 / 視聴回数</li>
+          <li>概要欄リンクのクリック数</li>
+        </ul></div>
+      </div>
+      <div class="op-kpi"><b>KPIシート連携</b>　Cタブ「SNS」列へ（YouTube分を内訳メモ）</div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 03　週次リズム</span>
+      <h2 class="section-title">1週間の、<br><span class="emph-warm">回し方</span>。</h2>
+    </div>
+    <p class="section-lead">毎週同じ順番で回す。<strong>金曜のKPI記入までを1セットにすると、数字が自動で溜まっていく。</strong></p>
+    <div class="gtable rhythm" style="border-color:rgba(242,236,222,0.2);background:rgba(242,236,222,0.04)">
+      <div class="gr gh" style="background:transparent;grid-template-columns:0.7fr 1fr 2.4fr"><span style="background:rgba(242,236,222,0.08);color:rgba(242,236,222,0.6)">曜日</span><span style="background:rgba(242,236,222,0.08);color:rgba(242,236,222,0.6)">主作業</span><span style="background:rgba(242,236,222,0.08);color:rgba(242,236,222,0.6)">内容</span></div>
+      <div class="gr" style="grid-template-columns:0.7fr 1fr 2.4fr;border-color:rgba(242,236,222,0.15)"><span class="gc1" style="color:var(--text-on-deep)">月</span><span style="color:rgba(242,236,222,0.85)">計画</span><span style="color:rgba(242,236,222,0.8)">今週の新着素材・記事を棚卸し → 各チャネルへの投下割りを決める</span></div>
+      <div class="gr" style="grid-template-columns:0.7fr 1fr 2.4fr;border-color:rgba(242,236,222,0.15)"><span class="gc1" style="color:var(--text-on-deep)">火〜木</span><span style="color:rgba(242,236,222,0.85)">配信</span><span style="color:rgba(242,236,222,0.8)">X＝毎日／IG・FB・YouTube＝曜日割りで投稿。すべてLINE CTA入り</span></div>
+      <div class="gr" style="grid-template-columns:0.7fr 1fr 2.4fr;border-color:rgba(242,236,222,0.15)"><span class="gc1" style="color:var(--text-on-deep)">金</span><span style="color:rgba(242,236,222,0.85)">計測</span><span style="color:rgba(242,236,222,0.8)">フォロワー・クリック・友だち追加数をKPIシートへ記入。反応の良い投稿をメモ</span></div>
+      <div class="gr" style="grid-template-columns:0.7fr 1fr 2.4fr"><span class="gc1" style="color:var(--text-on-deep)">月初</span><span style="color:rgba(242,236,222,0.85)">特別</span><span style="color:rgba(242,236,222,0.8)">月次マイクロアンケートをLINE配信／メルマガ移行特集号を配信</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 04　テンプレート</span>
+      <h2 class="section-title">コピペで使える、<br>投稿の<span class="emph-warm">型</span>。</h2>
+    </div>
+    <p class="section-lead">[ ] の部分を差し替えるだけ。<strong>毎回ゼロから書かず、この型に当てはめる。</strong></p>
+
+    <span class="tmpl-cap">X — 今日の脳活クイズ</span>
+    <div class="tmpl">【今日の脳活】[難読漢字]クイズ🧠
+「[漢字]」なんて読む？
+
+ヒントは[ヒント]
+答え＆もっと解きたい人は介護レク広場へ👇
+[素材URL]
+
+毎日の最新レクは公式LINEで📲
+lin.ee/UuPY01A
+#介護レク #高齢者レク #脳トレ #デイサービス</div>
+
+    <span class="tmpl-cap">Instagram — 新着素材（カルーセル）</span>
+    <div class="tmpl">🎨[6月の塗り絵「紫陽花」]ができました
+
+施設のレクにそのまま使える無料素材です。
+[難易度][使い方の一言]
+
+────────
+▶ プロフィールのリンクから無料DL
+▶ 最新素材は公式LINEで先行配信中📲
+@kaigo_rec
+#介護レクリエーション #塗り絵 #高齢者施設 #レク素材 #デイサービス</div>
+
+    <span class="tmpl-cap">YouTube — 概要欄テンプレ（1行目固定）</span>
+    <div class="tmpl">▼最新レクを公式LINEで毎週お届け（無料）
+lin.ee/UuPY01A
+
+────────
+介護レク広場は、高齢者向けレク素材・レクネタの無料サイトです。
+今回の動画：[手ぬぐい家事体操]
+そのほかの体操・ゲームはこちら → kaigo-rec.com/MSpecials/movie</div>
+
+    <span class="tmpl-cap">Facebook — 特集記事のシェア</span>
+    <div class="tmpl">【新着レクネタ】[絵手紙であじさい]を公開しました。
+
+[梅雨の時期にぴったり。準備が少なく、できあがりを飾って楽しめます。]
+記事はこちら → [記事URL]
+
+最新のレク情報は公式LINEでも配信中📲 lin.ee/UuPY01A</div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 05　今すぐやること</span>
+      <h2 class="section-title">最初の<span class="emph-warm">1週間</span>で、<br>土台を終わらせる。</h2>
+    </div>
+    <p class="section-lead">ここを終えれば、来週から「毎回の投稿」だけで友だちが積み上がる。<strong>順番どおりに片付ける。</strong></p>
+    <div class="day-list">
+      <div class="day-item"><span class="day-num">DAY 1</span><div class="day-body"><span class="day-title">全SNSの誘導先をLINEに統一</span><span class="day-desc">X固定ポスト・IGプロフィールリンク・FB固定・YouTube概要欄1行目を、すべて lin.ee/UuPY01A に。UTMの付与ルール（§00）も決める。</span></div></div>
+      <div class="day-item"><span class="day-num">DAY 2</span><div class="day-body"><span class="day-title">現状フォロワー数を記入（ベースライン）</span><span class="day-desc">X・IG・YouTubeの現在のフォロワー/登録者を確認し、KPIシートに記録。Facebookは約4,076が起点。</span></div></div>
+      <div class="day-item"><span class="day-num">DAY 3</span><div class="day-body"><span class="day-title">ウェルカム1問目をLINEに設定</span><span class="day-desc">友だち追加直後に「どこで知りましたか？」＋即DL素材1点。これがチャネル別の流入計測になる。</span></div></div>
+      <div class="day-item"><span class="day-num">DAY 4</span><div class="day-body"><span class="day-title">Xで脳活クイズの毎日投稿を開始</span><span class="day-desc">§04のテンプレで運用スタート。最も低コストで毎日の入口を作れる。</span></div></div>
+      <div class="day-item"><span class="day-num">DAY 5</span><div class="day-body"><span class="day-title">メルマガ移行特集①を配信</span><span class="day-desc">「メルマガでは届けきれない最新素材をLINEで毎月」。7万会員への最初の移行アナウンス。</span></div></div>
+    </div>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="line_execution_plan.html" class="pagenav-side"><span class="pagenav-direction">← Prev</span><span class="pagenav-title">LINE実行プラン<br>10倍ロードマップ</span></a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <a href="doc_b_phase0_kanru_verification.html" class="pagenav-side right"><span class="pagenav-direction">Next →</span><span class="pagenav-title">Document B<br>観るフェーズ 検証テンプレート</span></a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">介護レク広場 14期戦略 ／ LINE誘導オペレーション — Phase 0 実務プラン<br>検討稿 v0.1 ／ 2026年6月 ／ 内部討議用</p>
+  </div>
+</footer>
+
+</body>
+</html>
