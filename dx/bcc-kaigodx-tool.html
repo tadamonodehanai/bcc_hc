@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ＢＣＣ介護DX ツール（統合プロトタイプ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16223D;--navy2:#22324F;--teal:#0FA6B6;--teal-ink:#0A7C89;--teal-soft:#E2F4F6;
+  --bg:#EEF1F5;--panel:#FFF;--line:#E2E7EE;--line2:#EDF1F5;--ink:#1A2333;--sub:#5B687C;--muted:#8A95A6;
+  --ok:#1E9E6A;--okbg:#E4F5EC;--warn:#C9810A;--warnbg:#FBF0DC;--info:#2563C9;--infobg:#E5EEFB;
+  --radius:14px;--shadow:0 1px 2px rgba(22,34,61,.05),0 8px 24px rgba(22,34,61,.06);--shadow-lg:0 12px 40px rgba(22,34,61,.18);
+  --jp:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:var(--jp);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-feature-settings:"palt"1;letter-spacing:.01em}
+button,input,select,textarea{font-family:inherit;color:inherit}
+
+.shell{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+header.top{background:var(--navy);color:#fff;display:flex;align-items:center;gap:16px;padding:0 20px;height:60px;position:relative;z-index:40;flex:none}
+header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--teal),#3ad0dd 60%,transparent)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.brand .logo{width:29px;height:29px;border-radius:9px;background:linear-gradient(135deg,var(--teal),#36c9d6);display:grid;place-items:center;color:var(--navy);font-weight:900;font-size:15px}
+.brand b{font-size:15px}
+.modesw{display:flex;gap:4px;background:#0f1a30;padding:4px;border-radius:11px;margin-left:6px}
+.modesw button{border:none;background:transparent;color:#9fb0c9;font-weight:700;font-size:13px;padding:7px 15px;border-radius:8px;cursor:pointer;transition:.15s}
+.modesw button.on{background:var(--teal);color:#06303a}
+.top .spacer{flex:1}
+.proto-badge{font-size:11px;font-weight:700;color:#ffd9a8;border:1px solid rgba(255,200,140,.4);padding:4px 10px;border-radius:999px;letter-spacing:.04em}
+.me{display:flex;align-items:center;gap:8px;font-size:13px;color:#cdd6e4}
+.me .av{width:28px;height:28px;border-radius:50%;background:#39496b;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff}
+.writer{font-size:12px;background:#2c3c5b;color:#cdd9ea;padding:6px 11px;border-radius:999px;cursor:pointer;font-weight:600}
+.writer b{font-weight:700}
+#ctx-field{display:none}
+body[data-mode="field"] #ctx-office{display:none}
+body[data-mode="field"] #ctx-field{display:flex}
+
+.content{flex:1;position:relative;overflow:hidden}
+.modepane{display:none;height:100%}
+body[data-mode="office"] #office{display:flex}
+body[data-mode="field"] #field{display:flex}
+
+/* chips shared */
+.chip{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;letter-spacing:.02em}
+.ph{background:#eef1f6;color:#54627a}
+.ph.p0{background:#eef1f6;color:#64718a}.ph.p1{background:#e6eefb;color:#2c5bc0}.ph.p2{background:#efe9fb;color:#6b46c7}
+.ph.p3{background:#fbe9f2;color:#bd3e7e}.ph.p4{background:#fbeede;color:#bd7a1b}.ph.p5{background:#fbf6da;color:#9a8410}
+.ph.p6{background:#e4f5ec;color:#1c8c5e}.ph.p7{background:#f0ebe4;color:#8a6d49}
+.st{border:1px solid transparent}
+.st.none{background:#f0f2f6;color:#8a95a6}.st.req{background:var(--infobg);color:var(--info)}
+.st.wait{background:var(--warnbg);color:var(--warn)}.st.ok{background:var(--okbg);color:var(--ok)}
+.tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px}
+.t-yakin{background:#fdeaea;color:#c0392b}.t-mimamori{background:#e6eefb;color:#2c5bc0}.t-kiroku{background:#e4f5ec;color:#1c8c5e}
+.t-tsushin{background:#eef1f6;color:#5b687c}.t-koshi{background:#fbe9f2;color:#bd3e7e}.t-hojo{background:#fbeede;color:#bd7a1b}.t-kyoiku{background:#efe9fb;color:#6b46c7}
+
+/* ===== OFFICE ===== */
+#office{}
+aside.list{width:330px;flex:none;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
+.lhead{padding:16px 18px 12px}
+.lhead h2{font-size:13px;color:var(--sub);font-weight:700;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+.lhead h2 .n{background:var(--teal-soft);color:var(--teal-ink);font-size:11px;padding:1px 8px;border-radius:999px}
+.search{margin-top:11px;position:relative}
+.search input{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:9px 12px 9px 34px;font-size:13.5px;outline:none;transition:.15s}
+.search input:focus{border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px var(--teal-soft)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.fchip{font-size:11.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--sub);cursor:pointer;transition:.12s;font-weight:500}
+.fchip:hover{border-color:var(--teal)}.fchip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.rows{overflow-y:auto;flex:1;padding:4px 10px 16px}
+.row{padding:12px;border-radius:11px;cursor:pointer;transition:.13s;border:1px solid transparent;margin-bottom:2px}
+.row:hover{background:var(--line2)}.row.active{background:var(--teal-soft);border-color:#bfe6ea}
+.row .r1{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.row .nm{font-weight:700;font-size:14.5px}.row .r2{display:flex;align-items:center;gap:8px;margin-top:6px}.row .meta{font-size:12px;color:var(--muted)}
+main.detail{flex:1;overflow-y:auto;padding:24px 28px 60px}
+.back{display:none;align-items:center;gap:6px;background:none;border:none;color:var(--teal-ink);font-weight:700;font-size:13px;cursor:pointer;margin-bottom:12px}
+.dhead{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.dhead .title h1{font-size:25px;font-weight:900}
+.dhead .title .sub{color:var(--sub);font-size:13px;margin-top:5px;display:flex;gap:10px;flex-wrap:wrap}
+.dhead .spacer{flex:1}.dhead .acts{display:flex;gap:9px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:700;font-size:13px;padding:9px 15px;border-radius:10px;cursor:pointer;transition:.14s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.btn:hover{border-color:var(--teal);color:var(--teal-ink)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}.btn.primary:hover{background:var(--teal-ink);color:#fff}
+.btn.navy{background:var(--navy);border-color:var(--navy);color:#fff}.btn.navy:hover{background:var(--navy2);color:#fff}
+.btn.ghost{background:transparent}
+.grid{display:grid;grid-template-columns:1fr 380px;gap:18px;margin-top:20px}
+@media(max-width:1100px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px}
+.card h3{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:.07em;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.card h3 .edit{font-size:12px;color:var(--teal-ink);cursor:pointer;font-weight:700;letter-spacing:0}
+.kv{display:grid;grid-template-columns:96px 1fr;gap:10px 14px;font-size:14px}
+.kv .k{color:var(--muted);font-size:13px;padding-top:2px}.kv .v{font-weight:500}
+.kv input,.kv select,.kv textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13.5px;background:#fff;outline:none}
+.kv input:focus,.kv textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.status-row{display:flex;gap:10px;flex-wrap:wrap}
+.sel{position:relative}.sel label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:600}
+.sel select{appearance:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 30px 9px 12px;font-size:13.5px;font-weight:700;cursor:pointer;min-width:150px;outline:none}
+.sel select:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.sel::after{content:"";position:absolute;right:12px;bottom:14px;width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);pointer-events:none}
+.tl{position:relative;padding-left:6px}
+.tl .item{position:relative;padding:0 0 18px 22px;border-left:2px solid var(--line2)}
+.tl .item:last-child{border-left-color:transparent;padding-bottom:0}
+.tl .dot{position:absolute;left:-7px;top:2px;width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px solid var(--teal)}
+.tl .item.memo .dot{border-color:#c98bbf}
+.tl .ihead{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.tl .date{font-size:12px;color:var(--muted);font-weight:700}.tl .who{font-size:12px;color:var(--sub);font-weight:600}
+.tl .kind{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--teal-soft);color:var(--teal-ink)}
+.tl .kind.m{background:#f7e9f4;color:#a6519a}
+.tl .body{font-size:13.5px;line-height:1.7;margin-top:7px;color:#2a3344}
+.tl .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.empty{color:var(--muted);font-size:13px;padding:8px 0}
+@media(max-width:880px){
+  aside.list{width:100%}main.detail{padding:18px 16px 50px}.back{display:inline-flex}
+  #office.show-detail .list{display:none}#office:not(.show-detail) .detail{display:none}
+}
+
+/* ===== FIELD ===== */
+#field{justify-content:center;background:var(--bg)}
+.phone{width:100%;max-width:432px;height:100%;position:relative;display:flex;flex-direction:column;background:#fff;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.fscroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.fview{display:none;padding:18px 16px 110px}.fview.on{display:block;animation:fade .3s both}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.fh{font-size:13px;color:var(--sub);font-weight:700;letter-spacing:.05em;margin:4px 2px 12px;display:flex;align-items:center;justify-content:space-between}
+.fh .toggle{display:flex;gap:4px}
+.fh .toggle button{font-size:11.5px;border:1px solid var(--line);background:#fff;color:var(--sub);border-radius:999px;padding:4px 11px;font-weight:700;cursor:pointer}
+.fh .toggle button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.visit{display:flex;align-items:center;gap:12px;padding:15px;background:#fff;border:1px solid var(--line);border-radius:15px;margin-bottom:10px;cursor:pointer;transition:.14s}
+.visit:active{transform:scale(.985)}.visit:hover{border-color:var(--teal);box-shadow:var(--shadow)}
+.visit .ava{width:42px;height:42px;border-radius:12px;background:var(--teal-soft);color:var(--teal-ink);display:grid;place-items:center;font-weight:900;font-size:17px;flex:none}
+.visit .vi{flex:1;min-width:0}.visit .vn{font-weight:700;font-size:16px}.visit .vm{font-size:12px;color:var(--muted);margin-top:3px}
+.visit .arr{color:var(--muted);font-size:20px;font-weight:300}
+.cust{display:flex;align-items:center;gap:11px;background:var(--navy);color:#fff;border-radius:15px;padding:13px 15px;margin-bottom:14px}
+.cust .ava{width:38px;height:38px;border-radius:11px;background:#2c3c5b;color:#7fe3ee;display:grid;place-items:center;font-weight:900;font-size:15px}
+.cust .cn{font-weight:700;font-size:16px}.cust .cm{font-size:11.5px;color:#9fb0c9;margin-top:2px}
+.cust .badge{margin-left:auto;font-size:10.5px;background:#0f7c89;color:#d6f6fa;padding:4px 9px;border-radius:999px;font-weight:700}
+.kindseg{display:flex;gap:8px;background:#eef2f6;padding:5px;border-radius:13px;margin-bottom:16px}
+.kindseg button{flex:1;border:none;background:transparent;padding:10px;border-radius:9px;font-weight:700;font-size:14px;color:var(--sub);cursor:pointer;transition:.15s}
+.kindseg button.on{background:#fff;color:var(--navy);box-shadow:0 1px 4px rgba(22,34,61,.1)}
+.fnote{font-size:11.5px;color:var(--muted);margin:-6px 2px 14px}
+label.fl{display:block;font-size:12px;font-weight:700;color:var(--sub);margin:0 2px 7px}
+.req{color:var(--teal-ink);font-size:10px;margin-left:5px}
+.fblock{margin-bottom:18px}
+textarea,input.tx{width:100%;border:1.5px solid var(--line);border-radius:13px;padding:13px 14px;font-size:15px;outline:none;transition:.14s;background:#fff}
+textarea{min-height:130px;line-height:1.7;resize:vertical}
+textarea:focus,input.tx:focus{border-color:var(--teal);box-shadow:0 0 0 4px var(--teal-soft)}
+.mic{position:relative}.mic .hint{position:absolute;right:12px;bottom:11px;font-size:11px;color:var(--muted);pointer-events:none}
+.photos{display:flex;gap:9px;flex-wrap:wrap}
+.addphoto{width:74px;height:74px;border:1.5px dashed #c4cedb;border-radius:13px;display:grid;place-items:center;cursor:pointer;color:var(--teal-ink);background:#fafcfd;transition:.14s}
+.addphoto:hover{border-color:var(--teal);background:var(--teal-soft)}.addphoto span{font-size:10.5px;font-weight:700;margin-top:3px}
+.thumbwrap{position:relative}.thumb{width:74px;height:74px;border-radius:13px;object-fit:cover;border:1px solid var(--line)}
+.thumbwrap .del{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;border:2px solid #fff;font-size:13px;cursor:pointer;display:grid;place-items:center}
+.exp{border:1px solid var(--line);border-radius:13px;overflow:hidden;margin-bottom:18px}
+.exp .eh{padding:13px 15px;font-weight:700;font-size:13.5px;color:var(--sub);cursor:pointer;display:flex;align-items:center;justify-content:space-between;background:#fafcfd}
+.exp .eh .ar{transition:.2s;color:var(--muted)}.exp.open .eh .ar{transform:rotate(180deg)}
+.exp .ec{display:none;padding:4px 15px 16px;border-top:1px solid var(--line2)}.exp.open .ec{display:block}
+.sub-f{margin-top:14px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.ch{font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--sub);cursor:pointer;transition:.12s}
+.ch.on{background:var(--teal-soft);border-color:var(--teal);color:var(--teal-ink)}
+select.tx{appearance:none;font-weight:600;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23909bac' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center}
+.submitbar{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;background:linear-gradient(to top,#fff 70%,rgba(255,255,255,0));display:none}
+.phone.cap .submitbar{display:block}
+.submit{width:100%;border:none;background:var(--teal);color:#fff;font-size:16px;font-weight:700;padding:16px;border-radius:15px;cursor:pointer;transition:.14s;box-shadow:0 6px 18px rgba(15,166,182,.35)}
+.submit:active{transform:scale(.99)}
+.fback{background:none;border:none;color:var(--teal-ink);font-weight:700;font-size:13.5px;cursor:pointer;margin-bottom:12px;display:inline-flex;align-items:center;gap:5px}
+.done{text-align:center;padding:64px 24px}
+.done .okc{width:74px;height:74px;border-radius:50%;background:var(--okbg);color:var(--ok);display:grid;place-items:center;margin:0 auto 22px;font-size:38px;animation:pop .4s both}
+@keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1)}}
+.done h2{font-size:21px;font-weight:900}.done p{color:var(--sub);font-size:13.5px;margin-top:10px;line-height:1.7}
+.done .btns{margin-top:28px;display:flex;flex-direction:column;gap:11px}
+.done .b1{background:var(--navy);color:#fff;border:none;padding:15px;border-radius:14px;font-weight:700;font-size:15px;cursor:pointer}
+.done .b2{background:#fff;color:var(--teal-ink);border:1.5px solid var(--line);padding:14px;border-radius:14px;font-weight:700;font-size:14px;cursor:pointer}
+
+/* toast + modal */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:12px;font-size:13.5px;font-weight:700;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:.3s;z-index:60;display:flex;align-items:center;gap:9px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.toast .tk{color:#5ee0c0}
+.scrim{position:fixed;inset:0;background:rgba(20,28,46,.5);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.22s;z-index:50;display:grid;place-items:center;padding:18px}
+.scrim.show{opacity:1;pointer-events:auto}
+.modal{background:#fff;border-radius:18px;width:min(560px,100%);max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-lg);transform:translateY(12px) scale(.98);transition:.24s}
+.scrim.show .modal{transform:none}
+.modal .mh{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.modal .mh h3{font-size:16px;font-weight:900}.modal .mh .x{background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer}
+.modal .mb{padding:20px 22px;overflow-y:auto}
+.modal .seg{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap}
+.modal .seg button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 13px;font-size:13px;font-weight:700;cursor:pointer;color:var(--sub)}
+.modal .seg button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.field-m{margin-bottom:14px}.field-m label{display:block;font-size:11.5px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.field-m input,.field-m textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px;outline:none;resize:vertical}
+.field-m textarea{min-height:184px;line-height:1.7;font-family:var(--jp)}
+.field-m input:focus,.field-m textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.hint2{font-size:11.5px;color:var(--muted);margin:-6px 0 14px}
+.modal .mf{padding:16px 22px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+</style>
+</head>
+<body data-mode="office">
+<div class="shell">
+  <header class="top">
+    <div class="brand"><div class="logo">B</div><b>介護DX ツール</b></div>
+    <div class="modesw">
+      <button data-m="office" class="on">オペレーター</button>
+      <button data-m="field">現場メモ</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="proto-badge">PROTOTYPE</div>
+    <div class="me" id="ctx-office"><span>アシスタント</span><div class="av">A</div></div>
+    <div class="writer" id="ctx-field" onclick="pickWriter()">記入者 <b id="writerName">阿部</b> ▾</div>
+  </header>
+
+  <div class="content">
+    <!-- OFFICE -->
+    <div class="modepane" id="office">
+      <aside class="list">
+        <div class="lhead">
+          <h2>顧客カルテ <span class="n" id="count">0</span></h2>
+          <div class="search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input id="q" placeholder="施設名で検索…" autocomplete="off">
+          </div>
+          <div class="filters" id="filters"></div>
+        </div>
+        <div class="rows" id="rows"></div>
+      </aside>
+      <main class="detail" id="detail"></main>
+    </div>
+
+    <!-- FIELD -->
+    <div class="modepane" id="field">
+      <div class="phone" id="phone">
+        <div class="fscroll">
+          <section class="fview on" id="v-list">
+            <div class="fh">訪問先をえらぶ <div class="toggle"><button class="on" data-vf="today">今日</button><button data-vf="all">すべて</button></div></div>
+            <div id="visits"></div>
+          </section>
+          <section class="fview" id="v-capture">
+            <button class="fback" id="toList">← 訪問先</button>
+            <div class="cust" id="custHead"></div>
+            <div class="kindseg" id="kindSeg"><button class="on" data-kind="hearing">ヒアリング</button><button data-kind="memo">気づき</button></div>
+            <div class="fnote">📝 必須は最小。手書き写真・喋り・メモ、なんでもOK。</div>
+            <div id="formArea"></div>
+          </section>
+          <section class="fview" id="v-done">
+            <div class="done"><div class="okc">✓</div><h2>記録しました</h2><p id="doneMsg"></p>
+              <div class="btns"><button class="b1" id="againSame">同じ訪問先で続けて記録</button><button class="b2" id="toListDone">訪問先一覧へ</button></div></div>
+          </section>
+        </div>
+        <div class="submitbar"><button class="submit" id="submitBtn">送信して記録</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"><span class="tk">✓</span><span id="toastMsg"></span></div>
+
+<script>
+/* ===== 共有モックDB（本番は Azure Functions / Notion API） ===== */
+const TODAY="2026-06-16";
+const DB={
+  customers:[
+    {id:"c1",name:"さくら苑",type:"特養",beds:80,area:"大阪府",phase:"P1",status:"none",conf:"中",amount:"",grant:"ICT導入支援",owner:"阿部",note:"離床が多い棟から優先したい意向。",today:true,
+      timeline:[{kind:"log",date:"2026-06-10",who:"阿部",label:"ヒアリング",tags:["夜勤負担","見守り"],body:"離床が多い棟から試したいと主任。スマホ見守りだけでも見積もりを出すと前向き。検討：眠りSCAN / LASHIC。"},
+                {kind:"memo",date:"2026-06-12",who:"阿部",label:"家族の声",tags:[],body:"ご家族から電話。夜間の見守りを気にされている。"}]},
+    {id:"c2",name:"みどり園",type:"有料老人ホーム",beds:50,area:"堺市",phase:"P2",status:"req",conf:"中",amount:"300万円",grant:"",owner:"青木",note:"FAX運用が残存。",today:true,
+      timeline:[{kind:"log",date:"2026-06-11",who:"青木",label:"構成設計",tags:["記録効率","通信"],body:"紙記録のデジタル化に関心。まずNW整備が前提。検討：ケア樹 / ギガらくWi-Fi。"}]},
+    {id:"c3",name:"ひだまりの家",type:"グループホーム",beds:18,area:"高石市",phase:"P0",status:"none",conf:"低",amount:"",grant:"",owner:"阿部",note:"セミナーで接触。",today:false,
+      timeline:[{kind:"log",date:"2026-06-13",who:"阿部",label:"リード",tags:["補助金"],body:"既存はカスタム介護ソフト＝連携要検証（高石市事例の懸念）。"}]}
+  ],
+  recipients:{supplier:["（例）卸元A","（例）卸元B","エレコム"],internal:["専務","営業部長"]}
+};
+const api={
+  getCustomers:()=>structuredClone(DB.customers),
+  getCustomer:id=>structuredClone(DB.customers.find(c=>c.id===id)),
+  updateCustomer:(id,patch)=>{Object.assign(DB.customers.find(c=>c.id===id),patch);return true;},
+  draftMail:({type,customer})=>buildMail(type,customer),
+  getVisits:()=>structuredClone(DB.customers),
+  // POST /capture : customerId を使ってバックエンドが顧客リレーションを自動セット
+  submit:({customerId,entry})=>{DB.customers.find(c=>c.id===customerId).timeline.push(entry);return {ok:true};}
+};
+
+const PHASES={P0:"P0 リード",P1:"P1 ヒアリング",P2:"P2 構成設計",P3:"P3 見積",P4:"P4 提案",P5:"P5 受注",P6:"P6 導入",P7:"P7 運用"};
+const STATUS={none:"—",req:"依頼中",wait:"承認待ち",ok:"承認済"};
+const TAGCLASS={"夜勤負担":"t-yakin","見守り":"t-mimamori","記録効率":"t-kiroku","通信":"t-tsushin","腰痛":"t-koshi","補助金":"t-hojo","教育":"t-kyoiku"};
+const TYPES=["特養","老健","有料老人ホーム","グループホーム","サ高住","その他"],CONF=["高","中","低"],WRITERS=["阿部","青木","狭間","アシスタント"];
+
+/* ===== mode ===== */
+document.querySelector(".modesw").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+  document.querySelectorAll(".modesw button").forEach(x=>x.classList.toggle("on",x===b));
+  document.body.dataset.mode=b.dataset.m;};
+
+/* toast */
+let tt;function toast(m){const t=document.getElementById("toast");document.getElementById("toastMsg").textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2200);}
+
+/* ============ OFFICE ============ */
+let O={selected:"c1",q:"",filter:"all",editing:false};
+function renderFilters(){const o=[["all","すべて"],["P0","リード〜"],["P2","構成・見積"],["P4","提案以降"]];
+  document.getElementById("filters").innerHTML=o.map(([k,l])=>`<button class="fchip ${O.filter===k?"on":""}" data-f="${k}">${l}</button>`).join("");}
+function passF(c){if(O.filter==="all")return true;if(O.filter==="P0")return["P0","P1"].includes(c.phase);
+  if(O.filter==="P2")return["P2","P3"].includes(c.phase);if(O.filter==="P4")return["P4","P5","P6","P7"].includes(c.phase);return true;}
+function renderList(){const cs=api.getCustomers().filter(c=>c.name.includes(O.q)&&passF(c));
+  document.getElementById("count").textContent=cs.length;
+  document.getElementById("rows").innerHTML=cs.map(c=>`<div class="row ${c.id===O.selected?"active":""}" data-id="${c.id}">
+    <div class="r1"><span class="nm">${c.name}</span><span class="chip ph ${c.phase.toLowerCase()}">${PHASES[c.phase]}</span></div>
+    <div class="r2"><span class="meta">${c.type}・${c.beds}床</span><span class="meta">${c.area}</span><span class="meta">担当 ${c.owner}</span></div></div>`).join("")
+    ||`<div class="empty" style="padding:18px">該当なし</div>`;}
+function tlHtml(c){if(!c.timeline.length)return `<div class="empty">まだ記録がありません</div>`;
+  return `<div class="tl">`+c.timeline.map(t=>`<div class="item ${t.kind==='memo'?'memo':''}"><div class="dot"></div>
+    <div class="ihead"><span class="date">${t.date}</span><span class="kind ${t.kind==='memo'?'m':''}">${t.kind==='memo'?'メモ':'現場ログ'}・${t.label}</span><span class="who">${t.who}</span></div>
+    <div class="body">${t.body}</div>${t.tags.length?`<div class="tags">${t.tags.map(x=>`<span class="tag ${TAGCLASS[x]||''}">${x}</span>`).join("")}</div>`:""}</div>`).join("")+`</div>`;}
+function karte(c){if(O.editing){return `<div class="kv">
+  <div class="k">施設名</div><div class="v"><input id="f-name" value="${c.name}"></div>
+  <div class="k">業態</div><div class="v"><select id="f-type">${TYPES.map(t=>`<option ${t===c.type?"selected":""}>${t}</option>`).join("")}</select></div>
+  <div class="k">規模(床)</div><div class="v"><input id="f-beds" type="number" value="${c.beds}"></div>
+  <div class="k">自治体</div><div class="v"><input id="f-area" value="${c.area}"></div>
+  <div class="k">確度</div><div class="v"><select id="f-conf">${CONF.map(t=>`<option ${t===c.conf?"selected":""}>${t}</option>`).join("")}</select></div>
+  <div class="k">想定金額</div><div class="v"><input id="f-amount" value="${c.amount}" placeholder="例：300万円"></div>
+  <div class="k">補助金</div><div class="v"><input id="f-grant" value="${c.grant}"></div>
+  <div class="k">担当</div><div class="v"><input id="f-owner" value="${c.owner}"></div>
+  <div class="k">備考</div><div class="v"><textarea id="f-note" rows="2">${c.note}</textarea></div></div>`;}
+  return `<div class="kv"><div class="k">業態</div><div class="v">${c.type}</div><div class="k">規模</div><div class="v">${c.beds} 床</div>
+  <div class="k">自治体</div><div class="v">${c.area}</div><div class="k">確度</div><div class="v">${c.conf||"—"}</div>
+  <div class="k">想定金額</div><div class="v">${c.amount||"—"}</div><div class="k">補助金</div><div class="v">${c.grant||"—"}</div>
+  <div class="k">担当</div><div class="v">${c.owner}</div><div class="k">備考</div><div class="v">${c.note||"—"}</div></div>`;}
+function renderDetail(){const c=api.getCustomer(O.selected);
+  document.getElementById("detail").innerHTML=`<button class="back" id="back">← 一覧へ</button>
+    <div class="dhead"><div class="title"><h1>${c.name}</h1>
+      <div class="sub"><span>${c.type}</span><span>${c.beds}床</span><span>${c.area}</span><span>担当 ${c.owner}</span></div></div>
+      <div class="spacer"></div><div class="acts"><button class="btn" data-mail="supplier">見積依頼メール</button><button class="btn navy" data-mail="internal">承認メール</button></div></div>
+    <div class="card" style="margin-top:18px"><h3>フェーズ・ステータス</h3><div class="status-row">
+      <div class="sel"><label>フェーズ</label><select id="sel-phase">${Object.entries(PHASES).map(([k,v])=>`<option value="${k}" ${k===c.phase?"selected":""}>${v}</option>`).join("")}</select></div>
+      <div class="sel"><label>承認ステータス</label><select id="sel-status">${Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${k===c.status?"selected":""}>${v}</option>`).join("")}</select></div></div></div>
+    <div class="grid"><div class="card"><h3>タイムライン（現場ログ・メモ）</h3>${tlHtml(c)}</div>
+      <div class="card"><h3>カルテ情報 <span class="edit" id="editBtn">${O.editing?"保存する":"編集"}</span></h3>${karte(c)}</div></div>`;}
+function selectCustomer(id){O.selected=id;O.editing=false;renderList();renderDetail();document.getElementById("office").classList.add("show-detail");}
+function saveEdits(){const g=id=>document.getElementById(id).value;
+  api.updateCustomer(O.selected,{name:g("f-name"),type:g("f-type"),beds:+g("f-beds"),area:g("f-area"),conf:g("f-conf"),amount:g("f-amount"),grant:g("f-grant"),owner:g("f-owner"),note:g("f-note")});
+  O.editing=false;renderList();renderDetail();toast("カルテを更新しました");}
+function buildMail(group,c){const sign="\n\n――――――\nＢＣＣ株式会社 ヘルスケアビジネスカンパニー\n"+c.owner;
+  if(group==="supplier")return {to:DB.recipients.supplier,subject:`【見積依頼】${c.name} 様向け 機器一式`,
+    body:`お世話になっております。ＢＣＣの${c.owner}です。\n\n下記施設向けに、お見積もりをお願いいたします。\n\n■ 施設：${c.name}（${c.type}・${c.beds}床／${c.area}）\n■ 検討内容：タイムライン記載の検討商材一式\n■ 希望納期：（記入）\n\nよろしくお願いいたします。${sign}`};
+  const kind=c.phase>="P5"?"受注":"見積";
+  return {to:DB.recipients.internal,subject:`【${kind}承認のお願い】${c.name} 様`,
+    body:`お疲れさまです。${c.owner}です。\n\n下記案件の${kind}について、ご承認をお願いいたします。\n\n■ 施設：${c.name}（${c.type}・${c.beds}床／${c.area}）\n■ フェーズ：${PHASES[c.phase]}\n■ 想定金額：${c.amount||"（記入）"}\n■ 補助金：${c.grant||"—"}\n\nよろしくお願いいたします。${sign}`};}
+function openMail(group){const c=api.getCustomer(O.selected);const m=api.draftMail({type:group,customer:c});const toList=m.to.slice();
+  document.getElementById("modal").innerHTML=`<div class="mh"><h3>${group==='supplier'?'見積依頼メールの起票':'承認メールの起票'}</h3><button class="x" id="mx">×</button></div>
+    <div class="mb"><div class="seg" id="seg">${toList.map((t,i)=>`<button class="${i===0?'on':''}" data-to="${t}">${t}</button>`).join("")}</div>
+    <div class="hint2">宛先を選び、本文を確認 → Outlookで下書き、またはコピー。</div>
+    <div class="field-m"><label>件名</label><input id="m-sub" value="${m.subject.replace(/"/g,'&quot;')}"></div>
+    <div class="field-m"><label>本文（編集可）</label><textarea id="m-body">${m.body}</textarea></div></div>
+    <div class="mf"><button class="btn ghost" id="m-copy">本文をコピー</button><button class="btn primary" id="m-open">Outlookで下書きを開く</button></div>`;
+  document.getElementById("seg").onclick=e=>{const b=e.target.closest("button");if(!b)return;[...document.querySelectorAll("#seg button")].forEach(x=>x.classList.remove("on"));b.classList.add("on");};
+  document.getElementById("mx").onclick=closeModal;
+  document.getElementById("m-copy").onclick=()=>{navigator.clipboard?.writeText(document.getElementById("m-body").value);toast("本文をコピーしました");};
+  document.getElementById("m-open").onclick=()=>{const s=encodeURIComponent(document.getElementById("m-sub").value),b=encodeURIComponent(document.getElementById("m-body").value);
+    window.location.href=`mailto:?subject=${s}&body=${b}`;toast("Outlookの下書きを起動しました");};
+  document.getElementById("scrim").classList.add("show");}
+function closeModal(){document.getElementById("scrim").classList.remove("show");}
+
+document.getElementById("rows").onclick=e=>{const r=e.target.closest(".row");if(r)selectCustomer(r.dataset.id);};
+document.getElementById("filters").onclick=e=>{const b=e.target.closest(".fchip");if(b){O.filter=b.dataset.f;renderFilters();renderList();}};
+document.getElementById("q").oninput=e=>{O.q=e.target.value;renderList();};
+document.getElementById("detail").onclick=e=>{
+  if(e.target.id==="editBtn"){O.editing?saveEdits():(O.editing=true,renderDetail());return;}
+  if(e.target.id==="back"){document.getElementById("office").classList.remove("show-detail");return;}
+  const mb=e.target.closest("[data-mail]");if(mb)openMail(mb.dataset.mail);};
+document.getElementById("detail").onchange=e=>{
+  if(e.target.id==="sel-phase"){api.updateCustomer(O.selected,{phase:e.target.value});renderList();renderDetail();toast("フェーズを更新しました");}
+  if(e.target.id==="sel-status"){api.updateCustomer(O.selected,{status:e.target.value});renderDetail();toast("ステータスを更新しました");}};
+document.getElementById("scrim").onclick=e=>{if(e.target.id==="scrim")closeModal();};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+
+/* ============ FIELD ============ */
+let F={writer:"阿部",vf:"today",cust:null,kind:"hearing",photos:[],expanded:false,f:{mode:"",residents:[],issues:[],next:"",phase:"",headline:"",memokind:""}};
+function fshow(v){document.querySelectorAll("#field .fview").forEach(x=>x.classList.remove("on"));document.getElementById(v).classList.add("on");
+  document.getElementById("phone").classList.toggle("cap",v==="v-capture");document.querySelector(".fscroll").scrollTop=0;}
+function renderVisits(){const list=api.getVisits().filter(c=>F.vf==="all"||c.today);
+  document.getElementById("visits").innerHTML=list.map(c=>`<div class="visit" data-id="${c.id}"><div class="ava">${c.name.slice(0,1)}</div>
+    <div class="vi"><div class="vn">${c.name}</div><div class="vm">${c.type}・${c.beds}床・${c.area}</div></div>
+    <span class="chip ph ${c.phase.toLowerCase()}">${PHASES[c.phase]}</span><span class="arr">›</span></div>`).join("")
+    ||`<div class="fnote" style="padding:20px 2px">今日の訪問先がありません。「すべて」から選べます。</div>`;}
+function resetF(){F.photos=[];F.expanded=false;F.f={mode:"",residents:[],issues:[],next:"",phase:"",headline:"",memokind:""};}
+function openCapture(id){F.cust=api.getVisits().find(c=>c.id===id);resetF();F.kind="hearing";
+  document.querySelectorAll("#kindSeg button").forEach(b=>b.classList.toggle("on",b.dataset.kind==="hearing"));
+  document.getElementById("custHead").innerHTML=`<div class="ava">${F.cust.name.slice(0,1)}</div><div><div class="cn">${F.cust.name}</div><div class="cm">${F.cust.type}・${F.cust.area}</div></div><span class="badge">この訪問先に記録</span>`;
+  renderForm();fshow("v-capture");}
+function chipRow(items,sel,multi){return `<div class="chips">`+items.map(x=>{const on=multi?sel.includes(x):sel===x;return `<button type="button" class="ch ${on?'on':''}" data-x="${x}">${x}</button>`;}).join("")+`</div>`;}
+function renderForm(){const a=document.getElementById("formArea");
+  if(F.kind==="hearing"){a.innerHTML=`
+    <div class="fblock"><label class="fl">メモ<span class="req">＊どちらか必須</span></label>
+      <div class="mic"><textarea id="f-memo" placeholder="ヒアリングの要点。手書きは写真で、話しながらはマイク入力でOK。"></textarea><span class="hint">🎤 音声入力OK</span></div></div>
+    <div class="fblock"><label class="fl">写真<span class="req">＊どちらか必須</span></label><div class="photos" id="photos"></div></div>
+    <div class="exp ${F.expanded?'open':''}" id="exp"><div class="eh" id="expH">詳しく入力（任意）<span class="ar">▾</span></div><div class="ec">
+      <div class="sub-f"><label class="fl">フェーズ</label><select class="tx" id="f-phase">${["",...Object.keys(PHASES)].map(k=>`<option value="${k}" ${F.f.phase===k?"selected":""}>${k?PHASES[k]:"（未設定）"}</option>`).join("")}</select></div>
+      <div class="sub-f"><label class="fl">モード</label>${chipRow(["提案","要望"],F.f.mode,false)}</div>
+      <div class="sub-f"><label class="fl">入居者タイプ</label>${chipRow(["寝たきり中心","動き回る","混在"],F.f.residents,true)}</div>
+      <div class="sub-f"><label class="fl">課題タグ</label>${chipRow(["夜勤負担","見守り","記録効率","通信","腰痛","補助金","教育"],F.f.issues,true)}</div>
+      <div class="sub-f"><label class="fl">ネクストアクション</label><input class="tx" id="f-next" placeholder="例：見守り機器のデモ日程調整" value="${F.f.next}"></div></div></div>`;}
+  else{a.innerHTML=`
+    <div class="fblock"><label class="fl">見出し<span class="req">＊必須</span></label><input class="tx" id="f-head" placeholder="ひとことで（例：ご家族から夜間見守りの相談）" value="${F.f.headline}"></div>
+    <div class="fblock"><label class="fl">詳細</label><div class="mic"><textarea id="f-detail" placeholder="気づき・電話・雑談から拾った一言など。喋ってOK。"></textarea><span class="hint">🎤 音声入力OK</span></div></div>
+    <div class="fblock"><label class="fl">種別</label>${chipRow(["電話","家族の声","雑談","気づき","その他"],F.f.memokind,false)}</div>
+    <div class="fblock"><label class="fl">写真</label><div class="photos" id="photos"></div></div>`;}
+  renderPhotos();bindForm();}
+function renderPhotos(){const p=document.getElementById("photos");if(!p)return;
+  p.innerHTML=F.photos.map((u,i)=>`<div class="thumbwrap"><img class="thumb" src="${u}"><div class="del" data-i="${i}">×</div></div>`).join("")
+    +`<label class="addphoto"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg><span>写真</span><input type="file" accept="image/*" capture="environment" multiple hidden id="photoInput"></label>`;
+  document.getElementById("photoInput").onchange=e=>{[...e.target.files].forEach(f=>F.photos.push(URL.createObjectURL(f)));renderPhotos();};
+  p.querySelectorAll(".del").forEach(d=>d.onclick=()=>{F.photos.splice(+d.dataset.i,1);renderPhotos();});}
+function bindForm(){const exp=document.getElementById("exp");if(exp)document.getElementById("expH").onclick=()=>{F.expanded=!F.expanded;exp.classList.toggle("open");};
+  document.querySelectorAll("#formArea .chips").forEach(row=>{row.onclick=e=>{const b=e.target.closest(".ch");if(!b)return;
+    const lbl=row.closest(".sub-f,.fblock").querySelector(".fl").textContent;const x=b.dataset.x;
+    if(lbl.startsWith("モード"))F.f.mode=F.f.mode===x?"":x;else if(lbl.startsWith("入居者"))tog(F.f.residents,x);
+    else if(lbl.startsWith("課題"))tog(F.f.issues,x);else if(lbl.startsWith("種別"))F.f.memokind=F.f.memokind===x?"":x;
+    [...row.children].forEach(c=>c.classList.toggle("on",isOn(lbl,c.dataset.x)));};});}
+function tog(a,x){const i=a.indexOf(x);i>=0?a.splice(i,1):a.push(x);}
+function isOn(l,x){if(l.startsWith("モード"))return F.f.mode===x;if(l.startsWith("入居者"))return F.f.residents.includes(x);if(l.startsWith("課題"))return F.f.issues.includes(x);if(l.startsWith("種別"))return F.f.memokind===x;return false;}
+function submitCapture(){const c=F.cust;let entry,msg;
+  if(F.kind==="hearing"){const memo=(document.getElementById("f-memo")?.value||"").trim();
+    if(!memo&&F.photos.length===0){flashBtn("メモか写真を入れてください");return;}
+    let body=memo||"（写真のみ）";if(F.f.next)body+=`\nNEXT：${F.f.next}`;if(F.photos.length)body+=`（写真${F.photos.length}枚）`;
+    entry={kind:"log",date:TODAY,who:F.writer,label:F.f.mode?("ヒアリング・"+F.f.mode):"ヒアリング",tags:F.f.issues.slice(),body};
+    msg=`${c.name} の現場ログに記録しました。オペレーター側のタイムラインに自動で出ます。`;}
+  else{const head=(document.getElementById("f-head")?.value||"").trim();if(!head){flashBtn("見出しを入れてください");return;}
+    const det=document.getElementById("f-detail")?.value||"";let body=head+(det?`\n${det}`:"");if(F.photos.length)body+=`（写真${F.photos.length}枚）`;
+    entry={kind:"memo",date:TODAY,who:F.writer,label:F.f.memokind||"気づき",tags:[],body};
+    msg=`${c.name} の顧客メモに記録しました。`;}
+  api.submit({customerId:c.id,entry});
+  if(O.selected===c.id)renderDetail();   // オフィス側が同じ顧客を開いていれば即反映
+  document.getElementById("doneMsg").textContent=msg;fshow("v-done");}
+let fbT;function flashBtn(m){const b=document.getElementById("submitBtn");b.textContent=m;b.style.background="#c0392b";clearTimeout(fbT);fbT=setTimeout(()=>{b.textContent="送信して記録";b.style.background="";},1700);}
+function pickWriter(){const i=WRITERS.indexOf(F.writer);F.writer=WRITERS[(i+1)%WRITERS.length];document.getElementById("writerName").textContent=F.writer;}
+
+document.getElementById("visits").onclick=e=>{const v=e.target.closest(".visit");if(v)openCapture(v.dataset.id);};
+document.querySelector("#v-list .toggle").onclick=e=>{const b=e.target.closest("button");if(!b)return;F.vf=b.dataset.vf;
+  document.querySelectorAll("#v-list .toggle button").forEach(x=>x.classList.toggle("on",x===b));renderVisits();};
+document.getElementById("kindSeg").onclick=e=>{const b=e.target.closest("button");if(!b)return;F.kind=b.dataset.kind;
+  document.querySelectorAll("#kindSeg button").forEach(x=>x.classList.toggle("on",x===b));renderForm();};
+document.getElementById("toList").onclick=()=>fshow("v-list");
+document.getElementById("submitBtn").onclick=submitCapture;
+document.getElementById("againSame").onclick=()=>{resetF();F.kind="hearing";document.querySelectorAll("#kindSeg button").forEach(b=>b.classList.toggle("on",b.dataset.kind==="hearing"));renderForm();fshow("v-capture");};
+document.getElementById("toListDone").onclick=()=>{renderVisits();fshow("v-list");};
+
+/* init */
+renderFilters();renderList();renderDetail();renderVisits();fshow("v-list");
+</script>
+</body>
+</html>
