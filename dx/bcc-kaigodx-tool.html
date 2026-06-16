@@ -132,6 +132,8 @@ main.detail{flex:1;overflow-y:auto;padding:24px 28px 60px}
 .visit .ava{width:42px;height:42px;border-radius:12px;background:var(--teal-soft);color:var(--teal-ink);display:grid;place-items:center;font-weight:900;font-size:17px;flex:none}
 .visit .vi{flex:1;min-width:0}.visit .vn{font-weight:700;font-size:16px}.visit .vm{font-size:12px;color:var(--muted);margin-top:3px}
 .visit .arr{color:var(--muted);font-size:20px;font-weight:300}
+.newbtn{width:100%;border:1.5px dashed #b9c6d6;background:#fafcfd;color:var(--teal-ink);font-weight:700;font-size:14px;padding:13px;border-radius:14px;cursor:pointer;margin-bottom:14px;transition:.14s}
+.newbtn:hover{border-color:var(--teal);background:var(--teal-soft)}
 .cust{display:flex;align-items:center;gap:11px;background:var(--navy);color:#fff;border-radius:15px;padding:13px 15px;margin-bottom:14px}
 .cust .ava{width:38px;height:38px;border-radius:11px;background:#2c3c5b;color:#7fe3ee;display:grid;place-items:center;font-weight:900;font-size:15px}
 .cust .cn{font-weight:700;font-size:16px}.cust .cm{font-size:11.5px;color:#9fb0c9;margin-top:2px}
@@ -232,7 +234,18 @@ select.tx{appearance:none;font-weight:600;background:#fff url("data:image/svg+xm
         <div class="fscroll">
           <section class="fview on" id="v-list">
             <div class="fh">訪問先をえらぶ <div class="toggle"><button class="on" data-vf="today">今日</button><button data-vf="all">すべて</button></div></div>
+            <button class="newbtn" id="newVisit">＋ 新規訪問先を登録</button>
             <div id="visits"></div>
+          </section>
+          <section class="fview" id="v-new">
+            <button class="fback" id="newBack">← 訪問先</button>
+            <div class="fh">新規訪問先の登録</div>
+            <div class="fnote">施設名だけでOK。詳細はあとでオフィス側でも追記できます。</div>
+            <div class="fblock"><label class="fl">施設名<span class="req">＊必須</span></label><input class="tx" id="n-name" placeholder="例：あおぞら苑"></div>
+            <div class="fblock"><label class="fl">業態</label><select class="tx" id="n-type"><option>特養</option><option>老健</option><option>有料老人ホーム</option><option>グループホーム</option><option>サ高住</option><option>その他</option></select></div>
+            <div class="fblock"><label class="fl">規模(床)</label><input class="tx" id="n-beds" type="number" placeholder="例：60"></div>
+            <div class="fblock"><label class="fl">自治体</label><input class="tx" id="n-area" placeholder="例：大阪市"></div>
+            <button class="submit" id="newSubmit" style="margin-top:6px">登録して記録へ</button>
           </section>
           <section class="fview" id="v-capture">
             <button class="fback" id="toList">← 訪問先</button>
@@ -277,7 +290,9 @@ const api={
   draftMail:({type,customer})=>buildMail(type,customer),
   getVisits:()=>structuredClone(DB.customers),
   // POST /capture : customerId を使ってバックエンドが顧客リレーションを自動セット
-  submit:({customerId,entry})=>{DB.customers.find(c=>c.id===customerId).timeline.push(entry);return {ok:true};}
+  submit:({customerId,entry})=>{DB.customers.find(c=>c.id===customerId).timeline.push(entry);return {ok:true};},
+  // POST /customers : 新規顧客カルテを作成（本番はNotionにページ作成）
+  createCustomer:(d)=>{const id="c"+Date.now();DB.customers.push({id,name:d.name,type:d.type||"その他",beds:+d.beds||0,area:d.area||"",phase:"P0",status:"none",conf:"",amount:"",grant:"",owner:d.owner||"",note:"",today:true,timeline:[]});return id;}
 };
 
 const PHASES={P0:"P0 リード",P1:"P1 ヒアリング",P2:"P2 構成設計",P3:"P3 見積",P4:"P4 提案",P5:"P5 受注",P6:"P6 導入",P7:"P7 運用"};
@@ -441,6 +456,12 @@ document.getElementById("toList").onclick=()=>fshow("v-list");
 document.getElementById("submitBtn").onclick=submitCapture;
 document.getElementById("againSame").onclick=()=>{resetF();F.kind="hearing";document.querySelectorAll("#kindSeg button").forEach(b=>b.classList.toggle("on",b.dataset.kind==="hearing"));renderForm();fshow("v-capture");};
 document.getElementById("toListDone").onclick=()=>{renderVisits();fshow("v-list");};
+document.getElementById("newVisit").onclick=()=>{["n-name","n-beds","n-area"].forEach(i=>document.getElementById(i).value="");document.getElementById("n-type").selectedIndex=0;fshow("v-new");};
+document.getElementById("newBack").onclick=()=>fshow("v-list");
+document.getElementById("newSubmit").onclick=()=>{const name=document.getElementById("n-name").value.trim();
+  if(!name){const b=document.getElementById("newSubmit");b.textContent="施設名を入れてください";b.style.background="#c0392b";setTimeout(()=>{b.textContent="登録して記録へ";b.style.background="";},1700);return;}
+  const id=api.createCustomer({name,type:document.getElementById("n-type").value,beds:document.getElementById("n-beds").value,area:document.getElementById("n-area").value,owner:F.writer});
+  renderList();toast(`${name} を登録しました`);openCapture(id);};
 
 /* init */
 renderFilters();renderList();renderDetail();renderVisits();fshow("v-list");
