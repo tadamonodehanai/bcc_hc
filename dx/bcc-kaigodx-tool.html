@@ -38,6 +38,16 @@ header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3p
 #ctx-field{display:none}
 body[data-mode="field"] #ctx-office{display:none}
 body[data-mode="field"] #ctx-field{display:flex}
+@media(max-width:520px){
+  header.top{padding:0 12px;gap:9px}
+  .brand b{display:none}
+  .proto-badge{display:none}
+  .modesw{margin-left:0}
+  .modesw button{padding:7px 12px;font-size:12.5px}
+  .me span{display:none}
+  .writer{padding:6px 10px}
+  .writer .wl{display:none}
+}
 
 .content{flex:1;position:relative;overflow:hidden}
 .modepane{display:none;height:100%}
@@ -208,7 +218,7 @@ select.tx{appearance:none;font-weight:600;background:#fff url("data:image/svg+xm
     <div class="spacer"></div>
     <div class="proto-badge">PROTOTYPE</div>
     <div class="me" id="ctx-office"><span>アシスタント</span><div class="av">A</div></div>
-    <div class="writer" id="ctx-field" onclick="pickWriter()">記入者 <b id="writerName">阿部</b> ▾</div>
+    <div class="writer" id="ctx-field" onclick="pickWriter()"><span class="wl">記入者 </span><b id="writerName">阿部</b> ▾</div>
   </header>
 
   <div class="content">
