@@ -1,0 +1,163 @@
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Shippori+Mincho+B1:wght@400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Anton&display=swap');
+:root{
+  --ink:#15181F; --royal:#1C5DC4; --teal:#12A9BE; --sky:#2E7BE8;
+  --cream:#EFE7D5; --canvas:#EAE1CD;
+  --flow:linear-gradient(115deg,#2E7BE8 0%,#17B0CE 55%,#5FDCE4 100%);
+  --meg:conic-gradient(from 210deg at 50% 50%,#1C5DC4,#17A9C9,#46D2DB,#1C5DC4);
+  --soft:linear-gradient(135deg,#F5FAFD 0%,#ECF7F8 55%,#F3F7F2 100%);
+  --card:#FFFFFF; --bd:#E6EDF2; --mut:#7C8794;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#DDE7EC;font-family:"Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased;}
+.sheet{width:1200px;margin:0 auto;padding:42px 42px 50px;background:var(--soft);}
+.sheet+.sheet{margin-top:26px;}
+.top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;}
+.tt .b{font-family:"Cormorant Garamond";font-style:italic;font-weight:700;font-size:30px;color:var(--ink);}
+.tt .b span{font-weight:700;}
+.tt .s{font-family:"Anton";font-size:12px;letter-spacing:.34em;color:var(--teal);margin-top:4px;}
+.idx{font-family:"Anton";font-size:12px;letter-spacing:.3em;color:var(--mut);padding-bottom:5px;}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:15px;}
+.c{background:var(--card);border:.5px solid var(--bd);border-radius:16px;position:relative;overflow:hidden;
+  box-shadow:0 12px 30px -22px rgba(20,40,80,.4);}
+.lab{position:absolute;top:13px;left:15px;font-family:"Anton";font-size:10px;letter-spacing:.24em;color:#9AA6B2;z-index:4;}
+
+/* lockups — Care EQUAL size to Meguri */
+.meg{font-family:"Playfair Display";font-weight:400;line-height:.92;letter-spacing:.005em;}
+.car{font-family:"Cormorant Garamond";font-style:italic;font-weight:700;line-height:.9;}
+.grad{background:var(--meg);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.grain{position:relative;}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background-image:var(--grain);background-size:150px 150px;opacity:.55;mix-blend-mode:overlay;z-index:1;}
+
+/* ===== SHEET 1 : LOGO ===== */
+.hero{grid-column:span 7;min-height:290px;display:flex;align-items:center;justify-content:center;background:#fff;}
+.hero .lk{text-align:center;}
+.hero .meg{font-size:92px;color:var(--ink);display:block;}
+.hero .car{font-size:92px;color:var(--teal);display:block;margin-top:-6px;}
+
+.gradcell{grid-column:span 5;min-height:290px;display:flex;align-items:center;justify-content:center;
+  background:var(--flow);}
+.gradcell .meg,.gradcell .car{font-size:60px;color:#fff;}
+.gradcell .lk{display:flex;align-items:baseline;gap:.16em;position:relative;z-index:2;}
+.gradcell .lab{color:rgba(255,255,255,.8);}
+
+.oneline{grid-column:span 5;min-height:210px;display:flex;align-items:center;justify-content:center;background:#fff;}
+.oneline .lk{display:flex;align-items:baseline;gap:.16em;}
+.oneline .meg{font-size:52px;color:var(--ink);}
+.oneline .car{font-size:52px;}
+
+.symbol{grid-column:span 3;min-height:210px;display:flex;align-items:center;justify-content:center;background:#fff;}
+.ring{width:132px;height:132px;border-radius:50%;background:var(--meg);
+  -webkit-mask:radial-gradient(circle,transparent 52%,#000 53%);mask:radial-gradient(circle,transparent 52%,#000 53%);
+  display:flex;align-items:center;justify-content:center;position:relative;}
+.ring::after{content:"M";position:absolute;font-family:"Playfair Display";font-weight:500;font-size:46px;
+  color:var(--royal);-webkit-mask:none;mask:none;}
+.symbol .lab{color:#9AA6B2;}
+
+.badge{grid-column:span 4;min-height:210px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#EAF6F8,#F3FBFC);}
+.emb{position:relative;width:186px;height:186px;display:flex;align-items:center;justify-content:center;}
+.emb .ering{position:absolute;inset:0;border-radius:50%;background:var(--meg);
+  -webkit-mask:radial-gradient(circle,transparent 52%,#000 53%);mask:radial-gradient(circle,transparent 52%,#000 53%);}
+.emb .lk{position:relative;z-index:2;text-align:center;}
+.emb .lk .meg{font-size:24px;color:var(--ink);display:block;}
+.emb .lk .car{font-size:24px;color:var(--teal);display:block;margin-top:-3px;}
+.badge .lab{color:#9AA6B2;}
+
+/* ===== SHEET 2 : NOVELTY ===== */
+.tote{grid-column:span 4;min-height:270px;background:linear-gradient(135deg,#EAF6F8,#F4FBFC);
+  display:flex;align-items:center;justify-content:center;}
+.tote .bag{width:170px;height:180px;background:var(--canvas);border-radius:6px;position:relative;margin-top:34px;
+  box-shadow:0 20px 34px -18px rgba(60,50,30,.5);display:flex;align-items:center;justify-content:center;}
+.tote .bag::before,.tote .bag::after{content:"";position:absolute;top:-46px;width:16px;height:70px;
+  border:9px solid var(--canvas);border-bottom:none;border-radius:40px 40px 0 0;background:transparent;}
+.tote .bag::before{left:34px;} .tote .bag::after{right:34px;}
+.tote .bag .lk{transform:rotate(-90deg);text-align:center;}
+.tote .bag .meg{font-size:32px;display:block;} .tote .bag .car{font-size:32px;display:block;margin-top:-5px;}
+.tote .lab{color:#9AA6B2;}
+
+.tee{grid-column:span 4;min-height:270px;background:linear-gradient(135deg,#F3F8FB,#EAF4F6);
+  display:flex;align-items:center;justify-content:center;}
+.tee .shirt{width:210px;height:190px;background:#fff;
+  clip-path:polygon(30% 6%,42% 0,50% 7%,58% 0,70% 6%,100% 20%,90% 38%,78% 30%,78% 100%,22% 100%,22% 30%,10% 38%,0 20%);
+  box-shadow:0 20px 34px -20px rgba(30,60,90,.5);display:flex;align-items:flex-start;justify-content:center;padding-top:52px;}
+.tee .shirt .lk{text-align:center;}
+.tee .shirt .meg{font-size:19px;color:var(--ink);display:block;}
+.tee .shirt .car{font-size:19px;color:var(--teal);display:block;margin-top:-3px;}
+.tee .lab{color:#9AA6B2;}
+
+.bottle{grid-column:span 4;min-height:270px;background:linear-gradient(135deg,#EAF6F8,#F4FBFC);
+  display:flex;align-items:center;justify-content:center;}
+.bottle .btl{width:82px;height:214px;background:#fff;border-radius:16px 16px 22px 22px;position:relative;
+  box-shadow:0 18px 34px -18px rgba(30,60,90,.5);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.bottle .btl .cap{position:absolute;top:0;left:0;right:0;height:38px;background:var(--ink);border-radius:16px 16px 6px 6px;}
+.bottle .btl .lip{position:absolute;top:-11px;left:50%;transform:translateX(-50%);width:34px;height:13px;background:var(--ink);border-radius:6px 6px 0 0;}
+.bottle .btl .band{position:absolute;left:0;right:0;top:38px;bottom:0;background:var(--flow);opacity:.13;}
+.bottle .btl .lk{position:relative;z-index:2;transform:rotate(-90deg);white-space:nowrap;}
+.bottle .btl .meg{font-size:19px;color:var(--ink);} .bottle .btl .car{font-size:19px;color:var(--teal);}
+.bottle .lab{color:#9AA6B2;}
+
+.cans{grid-column:span 6;min-height:240px;background:#fff;display:flex;align-items:center;justify-content:center;gap:30px;}
+.can{position:relative;width:116px;height:116px;display:flex;align-items:center;justify-content:center;}
+.can .cring{position:absolute;inset:0;border-radius:50%;background:var(--meg);
+  -webkit-mask:radial-gradient(circle,transparent 52%,#000 53%);mask:radial-gradient(circle,transparent 52%,#000 53%);}
+.can .m{position:relative;z-index:2;font-family:"Playfair Display";font-weight:500;font-size:54px;line-height:1;transform:translateY(-4px);}
+.cans .lab{color:#9AA6B2;}
+
+.stk{grid-column:span 6;min-height:240px;background:linear-gradient(135deg,#EAF6F8,#F4FBFC);
+  display:flex;align-items:center;justify-content:center;gap:18px;}
+.s1{background:#fff;border-radius:30px;padding:14px 24px;box-shadow:0 12px 22px -10px rgba(30,60,90,.4);transform:rotate(-7deg);}
+.s1 .meg{font-size:24px;color:var(--ink);} .s1 .car{font-size:24px;color:var(--teal);}
+.s2{width:96px;height:96px;border-radius:50%;background:var(--flow);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 22px -10px rgba(28,93,196,.5);transform:rotate(6deg);}
+.s2 .t{font-family:"Shippori Mincho B1";font-weight:600;font-size:22px;color:#fff;position:relative;z-index:2;}
+.s3{background:var(--ink);border-radius:26px;padding:12px 20px;box-shadow:0 12px 22px -10px rgba(0,0,0,.4);transform:rotate(4deg);}
+.s3 .meg{font-size:20px;color:#fff;} .s3 .car{font-size:20px;color:#7FE3EC;}
+.stk .lab{color:#9AA6B2;}
+</style>
+
+<!-- ================= SHEET 1 : LOGO ================= -->
+<div class="sheet" id="logo">
+  <div class="top">
+    <div class="tt"><div class="b">Meguri&nbsp;<span style="font-style:italic">Care</span></div><div class="s">LOGO SYSTEM</div></div>
+    <div class="idx">めぐるグラデーション</div>
+  </div>
+  <div class="grid">
+    <div class="c hero"><span class="lab">PRIMARY LOCKUP</span>
+      <div class="lk"><span class="meg">Meguri</span><span class="car">Care</span></div></div>
+    <div class="c gradcell grain"><span class="lab">GRADIENT</span>
+      <div class="lk"><span class="meg">Meguri</span><span class="car">Care</span></div></div>
+    <div class="c oneline"><span class="lab">ONE-LINE</span>
+      <div class="lk"><span class="meg">Meguri</span><span class="car grad">Care</span></div></div>
+    <div class="c symbol"><span class="lab">SYMBOL · めぐる</span><div class="ring"></div></div>
+    <div class="c badge"><span class="lab">EMBLEM</span>
+      <div class="emb"><div class="ering"></div><div class="lk"><span class="meg">Meguri</span><span class="car">Care</span></div></div></div>
+  </div>
+</div>
+
+<!-- ================= SHEET 2 : NOVELTY ================= -->
+<div class="sheet" id="nov">
+  <div class="top">
+    <div class="tt"><div class="b">Meguri&nbsp;<span style="font-style:italic">Care</span></div><div class="s">NOVELTY</div></div>
+    <div class="idx">SERVICE BRAND GOODS</div>
+  </div>
+  <div class="grid">
+    <div class="c tote"><span class="lab">TOTE BAG</span>
+      <div class="bag"><div class="lk"><span class="meg grad">Meguri</span><span class="car grad">Care</span></div></div></div>
+    <div class="c tee"><span class="lab">T-SHIRT</span>
+      <div class="shirt"><div class="lk"><span class="meg">Meguri</span><span class="car">Care</span></div></div></div>
+    <div class="c bottle"><span class="lab">TUMBLER BOTTLE</span>
+      <div class="btl"><div class="lip"></div><div class="cap"></div><div class="band grain"></div><div class="lk"><span class="meg">Meguri</span> <span class="car">Care</span></div></div></div>
+    <div class="c cans"><span class="lab">PIN BADGES</span>
+      <div class="can"><div class="cring"></div><span class="m" style="color:#1C5DC4">M</span></div>
+      <div class="can"><div class="cring"></div><span class="m" style="color:#15181F">M</span></div>
+      <div class="can"><div class="cring"></div><span class="m" style="color:#BFC6D0">M</span></div></div>
+    <div class="c stk"><span class="lab">STICKERS</span>
+      <div class="s1"><span class="meg">Meguri</span> <span class="car">Care</span></div>
+      <div class="s2 grain"><span class="t">めぐる</span></div>
+      <div class="s3"><span class="meg">Meguri</span> <span class="car">Care</span></div></div>
+  </div>
+</div>
