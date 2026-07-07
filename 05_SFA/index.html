@@ -1,0 +1,123 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BCC ヘルスケア SFA — プロトタイプ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1E33;--navy-2:#17273f;
+    --teal:#00A9B8;--teal-bright:#00C0D0;--teal-wash:#E3F6F8;--teal-wash-2:#CDEEF1;
+    --ground:#F5F7F8;--panel:#FFFFFF;--ink:#132133;--ink-soft:#455065;--ink-faint:#8A93A3;--muted:#6B7484;
+    --line:#E2E7EC;--line-strong:#CDD5DD;
+    --orange:#FF6B3D;--purple:#6B5DD3;--green:#3DBE8B;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(15,30,51,.05),0 10px 30px rgba(15,30,51,.07);
+    --jp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif;
+    --en:"Manrope",var(--jp);
+  }
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:var(--jp);color:var(--ink);background:var(--ground);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .num{font-family:var(--en);font-variant-numeric:tabular-nums}
+  a{color:inherit;text-decoration:none}
+
+  .hero{background:var(--navy);color:#EAF1F6;border-bottom:3px solid var(--teal-bright)}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px}
+  .hero .wrap{padding-top:40px;padding-bottom:36px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--en);font-weight:800;font-size:15px;letter-spacing:.01em}
+  .brand .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--teal-bright),#4de0ec);
+    display:grid;place-items:center;color:var(--navy);font-weight:800;font-size:16px}
+  .flag{font-size:10.5px;letter-spacing:.09em;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px;color:#CFE3EC;font-family:var(--en);font-weight:600;margin-left:6px}
+  h1{font-size:30px;margin:22px 0 8px;letter-spacing:.01em;line-height:1.3}
+  h1 .accent{color:var(--teal-bright)}
+  .lede{color:#B9CBD8;font-size:14.5px;margin:0;max-width:640px}
+
+  main .wrap{padding-top:34px;padding-bottom:56px}
+  .sec-label{font-size:11px;font-weight:800;letter-spacing:.09em;color:var(--muted);font-family:var(--en);margin:0 0 14px}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .12s,box-shadow .12s,border-color .12s}
+  .card:hover{transform:translateY(-2px);border-color:var(--teal);box-shadow:0 14px 38px rgba(15,30,51,.12)}
+  .card .ico{width:46px;height:46px;border-radius:12px;background:var(--teal-wash);border:1px solid var(--teal-wash-2);
+    display:grid;place-items:center;font-size:22px}
+  .card .step{font-family:var(--en);font-size:11px;font-weight:800;color:var(--teal);letter-spacing:.05em}
+  .card h2{margin:0;font-size:18px}
+  .card p{margin:0;font-size:13px;color:var(--ink-soft);flex:1}
+  .card .open{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;margin-top:4px;
+    background:var(--teal);color:#fff;font-weight:700;font-size:13px;padding:9px 16px;border-radius:9px;font-family:inherit}
+  .card:hover .open{background:#0693a1}
+  .card .open .ar{font-family:var(--en)}
+
+  .note{margin-top:14px;font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+  .note b{color:var(--ink-soft)}
+
+  .about{margin-top:34px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow)}
+  .about h3{margin:0 0 14px;font-size:15px}
+  .points{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px}
+  .point{display:flex;gap:11px}
+  .point .dot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none}
+  .point b{display:block;font-size:13.5px}
+  .point span{font-size:12.5px;color:var(--ink-soft)}
+  .taglist{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+  .t{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--ground);color:var(--ink-soft)}
+  .t.sf{background:#DEEBFF;color:#1f5fbf;border-color:#c6ddfb}
+  .t.zac{background:#E9E4FB;color:#5a49c0;border-color:#d6ccf5}
+  .t.pp{background:var(--teal-wash);color:#067884;border-color:var(--teal-wash-2)}
+
+  .foot{margin-top:30px;font-size:11.5px;color:var(--ink-faint);text-align:center;line-height:1.7}
+
+  @media(max-width:680px){.cards{grid-template-columns:1fr}.points{grid-template-columns:1fr}h1{font-size:24px}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand"><span class="logo">B</span>BCC ヘルスケア SFA<span class="flag">PROTOTYPE</span></div>
+    <h1>ヘルスケア営業基盤（SFA）<span class="accent"> プロトタイプ</span></h1>
+    <p class="lede">顧客マスタ・Salesforce・ZAC を全社共通の土台にし、その上で部門ごとの業務アプリが「変数」として乗るハブ型SFA。社内レビュー用のクリックデモです。</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="sec-label">画面を開く</p>
+    <div class="cards">
+      <a class="card" href="customers.html">
+        <div class="ico">🏢</div>
+        <div class="step">STEP 1 ・ 入口はこちら</div>
+        <h2>顧客一覧</h2>
+        <p>約5,000件を想定した顧客マスタ。部門スイッチャーでパイプライン・与件・顧客種別が切り替わります。CSVインポート／名刺追加の導線も確認できます。行をクリックすると顧客カルテへ。</p>
+        <span class="open">開く <span class="ar">→</span></span>
+      </a>
+      <a class="card" href="account.html">
+        <div class="ico">🏥</div>
+        <div class="step">STEP 2 ・ 詳細</div>
+        <h2>顧客カルテ</h2>
+        <p>法人-施設の階層、担当者、案件・提案・取引・活動を集約。中央カラムは「部門スコープ切替」で、複数部門を横断（並行）表示／単一部門に絞込のどちらも可能です。</p>
+        <span class="open">開く <span class="ar">→</span></span>
+      </a>
+    </div>
+    <div class="note">💡 <span><b>レビューの進め方：</b>「顧客一覧」から入り、上部の部門タブ（全社／DX／マーケ／教育／委託）を切り替え → 気になる行をクリックして「顧客カルテ」へ。カルテ上部の部門スコープも切り替えてみてください。</span></div>
+
+    <div class="about">
+      <h3>このプロトタイプで確認できること</h3>
+      <div class="points">
+        <div class="point"><span class="dot" style="background:var(--teal)"></span><div><b>部門＝変数</b><span>DX・マーケティング・教育・委託で、パイプライン・与件・顧客の種類が変わる（部門は今後追加）</span></div></div>
+        <div class="point"><span class="dot" style="background:var(--green)"></span><div><b>複数部門の同時関与</b><span>1顧客がDX＋教育など複数部門にまたがる。横断（並行）表示と部門絞込を両立</span></div></div>
+        <div class="point"><span class="dot" style="background:var(--orange)"></span><div><b>大量顧客の取り込み</b><span>既存約5,000件のCSVインポート（重複判定）と、名刺OCRからの新規追加</span></div></div>
+        <div class="point"><span class="dot" style="background:var(--purple)"></span><div><b>ハブ型の外部連携</b><span>Salesforce（商談）・ZAC（販売管理/請求）・提案システムを1つの顧客に集約</span></div></div>
+      </div>
+      <div class="taglist">
+        <span class="t sf">Salesforce 連携</span>
+        <span class="t zac">ZAC 連携</span>
+        <span class="t pp">提案システム 連携</span>
+        <span class="t">部門アプリ（DX/教育/…）</span>
+      </div>
+    </div>
+
+    <div class="foot">
+      BCC株式会社 ヘルスケアビジネスカンパニー ｜ SFA基盤 プロトタイプ（社内レビュー用）<br>
+      ※ 表示データはすべてダミーです。フォントはオンライン時のみ Zen Kaku Gothic New / Manrope を使用（オフライン時は端末標準フォント）。
+    </div>
+  </div>
+</main>

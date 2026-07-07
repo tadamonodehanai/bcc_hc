@@ -1,0 +1,680 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BCC ヘルスケア SFA — 顧客・組織カルテ（プロトタイプ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1E33;          /* brand navy */
+    --navy-2:#17273f;
+    --teal:#00A9B8;          /* brand turquoise (text-safe) */
+    --teal-bright:#00C0D0;   /* brand turquoise */
+    --teal-wash:#E3F6F8;
+    --teal-wash-2:#CDEEF1;
+    --ground:#F5F7F8;
+    --panel:#FFFFFF;
+    --ink:#132133;
+    --ink-soft:#455065;
+    --ink-faint:#8A93A3;
+    --muted:#6B7484;
+    --line:#E2E7EC;
+    --line-strong:#CDD5DD;
+    --orange:#FF6B3D;  --orange-wash:#FFEBE2;
+    --red:#E63946;     --red-wash:#FCE4E6;
+    --purple:#6B5DD3;  --purple-wash:#ECEAFA;
+    --green:#3DBE8B;   --green-wash:#E3F5EC;
+    --amber:#D9930A;   --amber-wash:#FBF0D9;
+    --radius:12px;
+    --radius-sm:9px;
+    --shadow:0 1px 2px rgba(15,30,51,.05), 0 8px 24px rgba(15,30,51,.06);
+    --shadow-sm:0 1px 2px rgba(15,30,51,.06);
+    --jp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,system-ui,sans-serif;
+    --en:"Manrope",var(--jp);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:var(--jp);color:var(--ink);background:var(--ground);
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  .num{font-family:var(--en);font-variant-numeric:tabular-nums}
+  a{color:inherit}
+  button{font-family:inherit}
+
+  /* ---------------- top bar ---------------- */
+  header.top{background:var(--navy);color:#EAF1F6;position:sticky;top:0;z-index:40;
+    border-bottom:3px solid var(--teal-bright)}
+  .top-in{display:flex;align-items:center;gap:14px;height:58px;padding:0 22px}
+  .brand{display:flex;align-items:baseline;gap:9px;font-family:var(--en);font-weight:800;letter-spacing:.01em}
+  .brand .logo{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--teal-bright),#4de0ec);
+    align-self:center;display:grid;place-items:center;color:var(--navy);font-weight:800;font-size:13px}
+  .brand .sub{font-family:var(--jp);font-weight:500;color:#9FB6C6;font-size:12px;letter-spacing:.02em}
+  .top-search{margin-left:14px;flex:1;max-width:420px;position:relative}
+  .top-search input{width:100%;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.16);
+    background:rgba(255,255,255,.08);color:#EAF1F6;padding:0 12px 0 32px;font-size:13px;font-family:inherit}
+  .top-search input::placeholder{color:#9FB6C6}
+  .top-search .ic{position:absolute;left:10px;top:8px;opacity:.7}
+  .top-spacer{flex:1}
+  .flag{font-size:10.5px;letter-spacing:.09em;background:rgba(255,255,255,.12);
+    padding:4px 10px;border-radius:999px;color:#CFE3EC;font-family:var(--en);font-weight:600}
+  .top-user{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#CFE0EA}
+  .avatar{width:28px;height:28px;border-radius:50%;background:#2c3f57;display:grid;place-items:center;
+    font-size:12px;font-weight:700;color:#CFE3EC;font-family:var(--en)}
+
+  /* ---------------- shell ---------------- */
+  .shell{display:flex;min-height:calc(100vh - 58px)}
+  nav.rail{width:76px;flex:none;background:var(--navy-2);color:#B9C6D4;padding:12px 0;
+    display:flex;flex-direction:column;gap:2px;position:sticky;top:58px;height:calc(100vh - 58px)}
+  .rail a{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 4px;
+    font-size:10.5px;color:#93A3B5;text-decoration:none;border-left:3px solid transparent}
+  .rail a .ri{width:22px;height:22px;opacity:.85}
+  .rail a:hover{color:#EAF1F6;background:rgba(255,255,255,.04)}
+  .rail a.on{color:#fff;border-left-color:var(--teal-bright);background:rgba(0,192,208,.10)}
+  .rail a.on .ri{opacity:1}
+
+  main{flex:1;min-width:0;padding:20px 26px 60px}
+  .crumbs{font-size:12px;color:var(--muted);display:flex;gap:7px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+  .crumbs a{color:var(--teal);text-decoration:none}
+  .crumbs .sep{color:var(--ink-faint)}
+
+  /* ---------------- account header ---------------- */
+  .acct-head{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:18px 20px;margin-bottom:16px}
+  .ah-top{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+  .ah-badge{width:54px;height:54px;flex:none;border-radius:14px;background:var(--teal-wash);
+    display:grid;place-items:center;color:var(--teal);border:1px solid var(--teal-wash-2)}
+  .ah-title h1{margin:0;font-size:21px;letter-spacing:.01em}
+  .ah-corp{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+  .ah-corp b{color:var(--ink-soft);font-weight:700}
+  .ah-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+  .tag{font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+  .tag.type{background:var(--teal-wash);color:#067884;border-color:var(--teal-wash-2)}
+  .tag.stage{background:var(--green-wash);color:#1f7d57;border-color:#bfe6d3}
+  .tag.owner{background:#EEF1F5;color:var(--ink-soft);border-color:var(--line-strong)}
+  .tag.dept{background:var(--teal-wash);color:#067884;border-color:var(--teal-wash-2)}
+  .tag.rank{background:var(--navy);color:#EAF1F6}
+  .ah-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+  .btn{appearance:none;border:1px solid var(--line-strong);background:var(--panel);color:var(--ink-soft);
+    font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:9px;cursor:pointer;white-space:nowrap}
+  .btn:hover{background:var(--ground);border-color:var(--teal)}
+  .btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+  .btn.primary:hover{background:#0693a1}
+
+  /* KPI tiles */
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}
+  .kpi{border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px;background:#fbfcfd}
+  .kpi .k-label{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .kpi .k-val{font-family:var(--en);font-weight:800;font-size:20px;margin-top:3px;letter-spacing:-.01em}
+  .kpi .k-val small{font-size:11px;font-weight:600;color:var(--muted);margin-left:3px}
+  .kpi .k-sub{font-size:11px;color:var(--ink-faint);margin-top:1px}
+  .src{display:inline-block;font-size:9.5px;font-family:var(--en);font-weight:700;letter-spacing:.03em;
+    padding:1px 6px;border-radius:5px;vertical-align:middle}
+  .src.sf{background:#DEEBFF;color:#1f5fbf}
+  .src.zac{background:#E9E4FB;color:#5a49c0}
+  .src.pp{background:var(--teal-wash);color:#067884}
+
+  /* ---------------- layout columns ---------------- */
+  .grid{display:grid;grid-template-columns:280px 1fr 300px;gap:16px;align-items:start}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+  .card + .card{margin-top:14px}
+  .card h3{margin:0;font-size:13px;letter-spacing:.01em;padding:12px 15px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:8px}
+  .card h3 .cnt{margin-left:auto;font-family:var(--en);font-size:11px;font-weight:700;color:var(--muted);
+    background:var(--ground);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+  .card .body{padding:13px 15px}
+
+  /* profile list */
+  .plist{display:flex;flex-direction:column;gap:0}
+  .prow{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+  .prow:last-child{border-bottom:0}
+  .prow .lab{color:var(--muted);flex:none}
+  .prow .val{text-align:right;font-weight:600;color:var(--ink)}
+
+  /* facility hierarchy tree */
+  .tree{font-size:12.5px}
+  .tree .corp{display:flex;align-items:center;gap:8px;font-weight:700;padding:4px 0}
+  .tree .corp .ci{width:18px;height:18px;color:var(--purple)}
+  .tree ul{list-style:none;margin:4px 0 0;padding:0 0 0 9px;border-left:2px solid var(--line)}
+  .tree li{position:relative;padding:5px 0 5px 14px}
+  .tree li::before{content:"";position:absolute;left:0;top:15px;width:10px;height:2px;background:var(--line)}
+  .tree li .fname{font-weight:600}
+  .tree li .ftype{font-size:10.5px;color:var(--muted);margin-left:5px}
+  .tree li.cur{background:var(--teal-wash);border-radius:7px;padding-left:10px;margin-left:-2px}
+  .tree li.cur .fname{color:#067884}
+  .tree li.cur::before{background:var(--teal)}
+  .tree li .here{font-size:9.5px;font-family:var(--en);font-weight:700;color:#fff;background:var(--teal);
+    border-radius:5px;padding:1px 6px;margin-left:6px}
+
+  /* tabs */
+  .tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);padding:0 6px;background:#fbfcfd;
+    border-radius:var(--radius) var(--radius) 0 0;overflow-x:auto}
+  .tabs button{appearance:none;border:0;background:none;cursor:pointer;white-space:nowrap;
+    padding:13px 15px 11px;font-size:13px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent}
+  .tabs button .b{font-family:var(--en);font-size:10.5px;font-weight:700;background:var(--ground);
+    border:1px solid var(--line);border-radius:999px;padding:0 6px;margin-left:6px;color:var(--ink-soft)}
+  .tabs button:hover{color:var(--ink)}
+  .tabs button.on{color:var(--teal);border-bottom-color:var(--teal)}
+  .tabs button.on .b{background:var(--teal-wash);border-color:var(--teal-wash-2);color:#067884}
+  .tabwrap{background:var(--panel);border:1px solid var(--line);border-top:0;
+    border-radius:0 0 var(--radius) var(--radius);box-shadow:var(--shadow-sm)}
+  .pane{display:none;padding:14px 16px}
+  .pane.on{display:block}
+  .pane-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;flex-wrap:wrap;gap:8px}
+  .pane-hd h4{margin:0;font-size:13.5px}
+  .pane-hd .note{font-size:11.5px;color:var(--muted)}
+
+  /* opportunity rows */
+  .opp{border:1px solid var(--line);border-radius:10px;padding:12px 13px;margin-bottom:10px;background:#fff;
+    display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:center}
+  .opp:hover{border-color:var(--teal);box-shadow:var(--shadow-sm)}
+  .opp .o-name{font-weight:700;font-size:13.5px}
+  .opp .o-meta{font-size:11.5px;color:var(--muted);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .opp .o-amt{font-family:var(--en);font-weight:800;font-size:16px;text-align:right}
+  .opp .o-amt small{display:block;font-size:10.5px;font-weight:600;color:var(--muted)}
+  .pill{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px}
+  .pill.exit{background:var(--purple-wash);color:#4b3fb0}
+  .pill.dx{background:var(--teal-wash);color:#067884}
+  .pill.edu{background:var(--green-wash);color:#1f7d57}
+  .oppgroup{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.04em;margin:2px 0 9px;display:flex;align-items:center;gap:8px}
+  .oppgroup .gl{width:9px;height:9px;border-radius:50%}
+  .oppgroup .gn{font-family:var(--en);font-weight:700;color:var(--ink-faint);background:var(--ground);border:1px solid var(--line);border-radius:999px;padding:0 7px;font-size:10px}
+  /* ---- department scope switcher (parallel / single) ---- */
+  .scopebar{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .scopebar .scope-label{font-size:11px;font-weight:700;color:var(--muted)}
+  .scopebar button{appearance:none;border:1px solid var(--line-strong);background:var(--panel);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+  .scopebar button .d{width:8px;height:8px;border-radius:50%}
+  .scopebar button:hover{border-color:var(--teal);color:var(--ink)}
+  .scopebar button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .scopebar .par{margin-left:auto;font-size:11px;color:var(--ink-faint)}
+  .deptsection{margin-bottom:4px}
+  .deptsection + .deptsection{margin-top:14px}
+  .deptsection.hidden{display:none}
+  .deptsection .dhdr{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.04em;margin:2px 0 10px}
+  .deptsection .dhdr .gl{width:9px;height:9px;border-radius:50%}
+  .deptsection .dhdr .gn{font-family:var(--en);font-weight:700;color:var(--ink-faint);background:var(--ground);border:1px solid var(--line);border-radius:999px;padding:0 7px;font-size:10px}
+  .tabwrap.single .deptsection .dhdr{display:none}
+  .stagebar{grid-column:1/-1;display:flex;gap:3px;margin-top:4px}
+  .stagebar .s{flex:1;height:5px;border-radius:3px;background:var(--line)}
+  .stagebar .s.done{background:var(--teal)}
+  .stagebar .s.now{background:var(--teal-bright)}
+  .stage-lab{grid-column:1/-1;display:flex;justify-content:space-between;font-size:9.5px;color:var(--ink-faint);margin-top:3px}
+  .conf{font-family:var(--en);font-weight:700}
+  .conf.hi{color:var(--green)} .conf.mid{color:var(--amber)} .conf.lo{color:var(--muted)}
+
+  /* generic data table */
+  table.dt{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.dt th{text-align:left;font-size:11px;color:var(--muted);font-weight:600;padding:7px 10px;
+    border-bottom:1px solid var(--line);white-space:nowrap}
+  table.dt td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+  table.dt tr:last-child td{border-bottom:0}
+  table.dt tr:hover td{background:#fafcfc}
+  .chip{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .chip.g{background:var(--green-wash);color:#1f7d57}
+  .chip.a{background:var(--amber-wash);color:#8a5c07}
+  .chip.b{background:#E7EDF4;color:var(--ink-soft)}
+  .chip.o{background:var(--orange-wash);color:#c04a22}
+
+  /* activity timeline */
+  .tl{position:relative;padding-left:20px}
+  .tl::before{content:"";position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:var(--line)}
+  .tl .ev{position:relative;padding:0 0 15px}
+  .tl .ev .dot{position:absolute;left:-19px;top:2px;width:14px;height:14px;border-radius:50%;
+    border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line-strong)}
+  .tl .ev.visit .dot{background:var(--teal)} .tl .ev.visit .dot{box-shadow:0 0 0 1.5px var(--teal)}
+  .tl .ev.mail .dot{background:var(--purple);box-shadow:0 0 0 1.5px var(--purple)}
+  .tl .ev.call .dot{background:var(--orange);box-shadow:0 0 0 1.5px var(--orange)}
+  .tl .ev.sys .dot{background:var(--ink-faint);box-shadow:0 0 0 1.5px var(--ink-faint)}
+  .tl .ev .when{font-size:11px;color:var(--muted);font-family:var(--en);font-weight:600}
+  .tl .ev .head{font-weight:700;font-size:13px;margin:1px 0 2px}
+  .tl .ev .desc{font-size:12px;color:var(--ink-soft)}
+  .tl .ev .by{font-size:11px;color:var(--ink-faint);margin-top:2px}
+
+  /* right column */
+  .contact{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);align-items:flex-start}
+  .contact:last-child{border-bottom:0}
+  .contact .cav{width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;
+    font-size:12px;font-weight:700;font-family:var(--en);color:#fff}
+  .contact .cn{font-weight:700;font-size:13px}
+  .contact .cr{font-size:11.5px;color:var(--muted)}
+  .contact .cbadge{font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .cbadge.dm{background:var(--red-wash);color:#c02535}
+  .cbadge.key{background:var(--teal-wash);color:#067884}
+  .contact .cx{margin-left:auto;font-size:11px;color:var(--muted);text-align:right;white-space:nowrap}
+
+  .todo{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);align-items:flex-start}
+  .todo:last-child{border-bottom:0}
+  .todo .cb{width:16px;height:16px;flex:none;border:2px solid var(--line-strong);border-radius:5px;margin-top:2px}
+  .todo .tt{font-weight:600;font-size:12.5px}
+  .todo .td{font-size:11px;color:var(--muted);display:flex;gap:8px;margin-top:1px;align-items:center}
+  .due{font-family:var(--en);font-weight:700}
+  .due.soon{color:var(--orange)} .due.over{color:var(--red)}
+
+  /* integration sync */
+  .sync{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .sync:last-child{border-bottom:0}
+  .sync .slogo{width:30px;height:30px;flex:none;border-radius:8px;display:grid;place-items:center;
+    font-family:var(--en);font-weight:800;font-size:11px;color:#fff}
+  .sync .sname{font-weight:700;font-size:12.5px}
+  .sync .sid{font-size:10.5px;color:var(--muted);font-family:var(--en)}
+  .sync .sstat{margin-left:auto;text-align:right;font-size:10.5px}
+  .dotok{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:4px}
+  .dotwarn{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);margin-right:4px}
+
+  .prod{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--line);
+    border-radius:9px;margin-bottom:8px;font-size:12.5px}
+  .prod .pcat{font-size:10px;font-weight:700;color:var(--muted);font-family:var(--en);letter-spacing:.03em}
+  .prod .pn{font-weight:700}
+  .prod .pv{font-size:11px;color:var(--muted)}
+  .prod .pmeta{margin-left:auto;text-align:right;font-size:11px;color:var(--ink-faint)}
+
+  .foot{margin-top:22px;font-size:11px;color:var(--ink-faint);text-align:center}
+
+  @media(max-width:1180px){ .grid{grid-template-columns:1fr} .kpis{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:640px){ nav.rail{display:none} main{padding:16px 14px 50px} .top-search{display:none} }
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><span class="logo">B</span>BCC&nbsp;SFA<span class="sub">ヘルスケア営業基盤</span></div>
+    <div class="top-search">
+      <span class="ic">🔍</span>
+      <input placeholder="法人・施設・担当者・案件を検索…">
+    </div>
+    <div class="top-spacer"></div>
+    <span class="flag">PROTOTYPE</span>
+    <div class="top-user"><span>阿部</span><span class="avatar">AB</span></div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail">
+    <a href="#"><span class="ri">🏠</span>ホーム</a>
+    <a href="customers.html" class="on"><span class="ri">🏢</span>顧客</a>
+    <a href="#"><span class="ri">📈</span>案件</a>
+    <a href="#"><span class="ri">📋</span>活動</a>
+    <a href="#"><span class="ri">📄</span>提案</a>
+    <a href="#"><span class="ri">📊</span>レポート</a>
+    <a href="#"><span class="ri">⚙️</span>連携</a>
+  </nav>
+
+  <main>
+    <div class="crumbs">
+      <a href="customers.html">← 顧客一覧</a><span class="sep">›</span>
+      <a href="customers.html">社会福祉法人 みどりの丘会</a><span class="sep">›</span>
+      <span>特別養護老人ホーム みどりの丘</span>
+    </div>
+
+    <!-- ============ ACCOUNT HEADER ============ -->
+    <section class="acct-head">
+      <div class="ah-top">
+        <div class="ah-badge">🏥</div>
+        <div class="ah-title">
+          <h1>特別養護老人ホーム みどりの丘</h1>
+          <p class="ah-corp">運営：<b>社会福祉法人 みどりの丘会</b>　／　法人内 4 施設　／　埼玉県さいたま市見沼区</p>
+          <div class="ah-tags">
+            <span class="tag type">介護・医療施設｜特養</span>
+            <span class="tag stage">● 既存顧客・拡大フェーズ</span>
+            <span class="tag rank">重点ランク A</span>
+            <span class="tag dept">関与部門：介護・医療DX（主管）・教育</span>
+            <span class="tag owner">主担当：阿部 / 出口：ロボタスネット・エレコム</span>
+          </div>
+        </div>
+        <div class="ah-actions">
+          <button class="btn">＋ 活動を記録</button>
+          <button class="btn">提案を作成</button>
+          <button class="btn primary">案件を追加</button>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="k-label">取引累計 <span class="src zac">ZAC</span></div>
+          <div class="k-val num">¥6.8<small>M</small></div>
+          <div class="k-sub">2件受注 / 直近 2026-05</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">進行中パイプライン <span class="src sf">SF</span></div>
+          <div class="k-val num">¥11.6<small>M</small></div>
+          <div class="k-sub">3案件 / 加重見込 ¥6.1M</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">導入済み商材</div>
+          <div class="k-val num">3<small>件</small></div>
+          <div class="k-sub">12カテゴリ中 3カテゴリ</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">提案実績 <span class="src pp">提案</span></div>
+          <div class="k-val num">3<small>件</small></div>
+          <div class="k-sub">採用1 / 検討中1 / 見送1</div>
+        </div>
+        <div class="kpi">
+          <div class="k-label">最終接触</div>
+          <div class="k-val num">4<small>日前</small></div>
+          <div class="k-sub">2026-07-03 訪問</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3-COLUMN GRID ============ -->
+    <div class="grid">
+
+      <!-- LEFT: profile + hierarchy -->
+      <div class="col-left">
+        <div class="card">
+          <h3>🏢 組織プロファイル</h3>
+          <div class="body">
+            <div class="plist">
+              <div class="prow"><span class="lab">施設種別</span><span class="val">特養（従来型＋ユニット）</span></div>
+              <div class="prow"><span class="lab">入所定員</span><span class="val num">80 床</span></div>
+              <div class="prow"><span class="lab">短期入所</span><span class="val num">10 床</span></div>
+              <div class="prow"><span class="lab">職員数</span><span class="val num">92 名</span></div>
+              <div class="prow"><span class="lab">開設</span><span class="val num">2011 年</span></div>
+              <div class="prow"><span class="lab">所在地</span><span class="val">埼玉県さいたま市見沼区</span></div>
+              <div class="prow"><span class="lab">法人内順位</span><span class="val">基幹施設（本部併設）</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🌳 法人・施設ツリー <span class="cnt">4</span></h3>
+          <div class="body">
+            <div class="tree">
+              <div class="corp"><span class="ci">🏛️</span>社会福祉法人 みどりの丘会</div>
+              <ul>
+                <li class="cur"><span class="fname">みどりの丘</span><span class="ftype">特養 80床</span><span class="here">表示中</span></li>
+                <li><span class="fname">みどりの郷</span><span class="ftype">老健 100床</span></li>
+                <li><span class="fname">みどりレジデンス</span><span class="ftype">サ高住 60戸</span></li>
+                <li><span class="fname">デイサービスみどり</span><span class="ftype">通所 定員40</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🔌 外部連携ステータス</h3>
+          <div class="body">
+            <div class="sync">
+              <div class="slogo" style="background:#1f5fbf">SF</div>
+              <div><div class="sname">Salesforce</div><div class="sid">Acct 001A8x…4Qk</div></div>
+              <div class="sstat"><div><span class="dotok"></span>同期済</div><div style="color:var(--ink-faint)">5分前</div></div>
+            </div>
+            <div class="sync">
+              <div class="slogo" style="background:#5a49c0">ZAC</div>
+              <div><div class="sname">ZAC 販売管理</div><div class="sid">取引先 C-10432</div></div>
+              <div class="sstat"><div><span class="dotok"></span>同期済</div><div style="color:var(--ink-faint)">1時間前</div></div>
+            </div>
+            <div class="sync">
+              <div class="slogo" style="background:#00A9B8">提</div>
+              <div><div class="sname">提案システム</div><div class="sid">提案 3件連携</div></div>
+              <div class="sstat"><div><span class="dotwarn"></span>1件未同期</div><div style="color:var(--ink-faint)">再同期</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🤝 パートナー関与</h3>
+          <div class="body" style="display:flex;flex-direction:column;gap:8px">
+            <div class="prod" style="margin:0"><span class="pcat">HUB</span><div><div class="pn">BCC / ロボタスネット</div><div class="pv">統合設計・現場伴走</div></div><span class="pill exit" style="margin-left:auto">主管</span></div>
+            <div class="prod" style="margin:0"><span class="pcat">EXIT</span><div><div class="pn">エレコム</div><div class="pv">ネットワーク領域</div></div><span class="chip b" style="margin-left:auto">案件参加</span></div>
+            <div class="prod" style="margin:0"><span class="pcat">LEAD</span><div><div class="pn">PLUS（スマート介護）</div><div class="pv">送客起点</div></div><span class="chip b" style="margin-left:auto">初回送客</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER: tabbed detail -->
+      <div class="col-center">
+        <div class="scopebar" id="scopebar">
+          <span class="scope-label">部門スコープ</span>
+          <button data-s="all" class="on">横断（並行）</button>
+          <button data-s="dx"><span class="d" style="background:#00A9B8"></span>介護・医療DX</button>
+          <button data-s="edu"><span class="d" style="background:#3DBE8B"></span>教育</button>
+          <span class="par" id="scopehint">横断：関与する全部門を並行表示中</span>
+        </div>
+        <div class="tabs" id="tabs">
+          <button class="on" data-t="opps">案件パイプライン<span class="b">4</span></button>
+          <button data-t="acts">活動ログ<span class="b">12</span></button>
+          <button data-t="props">提案履歴<span class="b">3</span></button>
+          <button data-t="prods">導入商材<span class="b">3</span></button>
+          <button data-t="deals">取引・請求<span class="b">2</span></button>
+        </div>
+        <div class="tabwrap">
+
+          <!-- OPPS -->
+          <div class="pane on" id="opps">
+            <div class="pane-hd"><h4>案件パイプライン</h4><span class="note">関与部門ごとにステージ・与件が異なる（Salesforce と双方向同期）</span></div>
+
+            <div class="deptsection" data-dept="dx">
+              <div class="dhdr"><span class="gl" style="background:#00A9B8"></span>介護・医療DX <span class="gn">3件</span></div>
+              <div class="opp">
+                <div>
+                  <div class="o-name">見守りセンサー 全床導入（80床）</div>
+                  <div class="o-meta"><span class="pill dx">DX</span><span>ステージ：<b>見積</b></span><span class="pill exit">出口：ロボタスネット</span><span>次アクション 7/9</span></div>
+                </div>
+                <div class="o-amt num">¥8.4M<small>確度 <span class="conf hi">70%</span></small></div>
+                <div class="stagebar"><span class="s done"></span><span class="s done"></span><span class="s done"></span><span class="s now"></span><span class="s"></span><span class="s"></span></div>
+                <div class="stage-lab"><span>リード</span><span>ヒアリング</span><span>提案</span><span>見積</span><span>導入</span><span>定着</span></div>
+              </div>
+              <div class="opp">
+                <div>
+                  <div class="o-name">介護記録ソフト 更改</div>
+                  <div class="o-meta"><span class="pill dx">DX</span><span>ステージ：<b>提案</b></span><span class="pill exit">出口：ロボタスネット</span><span>次アクション 7/15</span></div>
+                </div>
+                <div class="o-amt num">¥3.2M<small>確度 <span class="conf mid">40%</span></small></div>
+                <div class="stagebar"><span class="s done"></span><span class="s done"></span><span class="s now"></span><span class="s"></span><span class="s"></span><span class="s"></span></div>
+                <div class="stage-lab"><span>リード</span><span>ヒアリング</span><span>提案</span><span>見積</span><span>導入</span><span>定着</span></div>
+              </div>
+              <div class="opp">
+                <div>
+                  <div class="o-name">館内ネットワーク再構築</div>
+                  <div class="o-meta"><span class="pill dx">DX</span><span>ステージ：<b>ヒアリング</b></span><span class="pill exit">出口：エレコム</span><span>次アクション 7/22</span></div>
+                </div>
+                <div class="o-amt num">¥—<small>確度 <span class="conf lo">20%</span></small></div>
+                <div class="stagebar"><span class="s done"></span><span class="s now"></span><span class="s"></span><span class="s"></span><span class="s"></span><span class="s"></span></div>
+                <div class="stage-lab"><span>リード</span><span>ヒアリング</span><span>提案</span><span>見積</span><span>導入</span><span>定着</span></div>
+              </div>
+            </div>
+
+            <div class="deptsection" data-dept="edu">
+              <div class="dhdr"><span class="gl" style="background:#3DBE8B"></span>教育 <span class="gn">1件</span></div>
+              <div class="opp">
+                <div>
+                  <div class="o-name">レクサポ 支援者マッチング（月2回）</div>
+                  <div class="o-meta"><span class="pill edu">教育</span><span>ステージ：<b>マッチング</b></span><span>与件：対象フロア 2</span><span>次アクション 7/11</span></div>
+                </div>
+                <div class="o-amt num">¥0.4M<small>月額</small></div>
+                <div class="stagebar"><span class="s" style="background:#3DBE8B"></span><span class="s" style="background:#3DBE8B"></span><span class="s" style="background:#6fd6ab"></span><span class="s"></span><span class="s"></span></div>
+                <div class="stage-lab"><span>問合せ</span><span>申込</span><span>マッチング</span><span>実施</span><span>フォロー</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTS -->
+          <div class="pane" id="acts">
+            <div class="pane-hd"><h4>活動ログ</h4><span class="note">部門をまたいだ接触の時系列（横断で並行、部門で絞込）</span></div>
+            <div class="deptsection" data-dept="dx">
+              <div class="dhdr"><span class="gl" style="background:#00A9B8"></span>介護・医療DX</div>
+              <div class="tl">
+                <div class="ev visit"><div class="dot"></div><div class="when">2026-07-03（木）</div>
+                  <div class="head">訪問｜見守りセンサー デモ実施</div>
+                  <div class="desc">施設長・介護主任同席。夜間見守りのデモ、80床導入の見積提示を約束。デモ機は 7/17 まで貸出。</div>
+                  <div class="by">記録：阿部</div></div>
+                <div class="ev mail"><div class="dot"></div><div class="when">2026-06-20（金）</div>
+                  <div class="head">メール｜記録ソフト更改の比較資料を送付</div>
+                  <div class="desc">現行「ほのぼの」との機能比較表を送付。事務長より返信あり、7月に社内検討予定。</div>
+                  <div class="by">記録：阿部</div></div>
+                <div class="ev call"><div class="dot"></div><div class="when">2026-06-11（水）</div>
+                  <div class="head">架電｜補助金スケジュールの確認</div>
+                  <div class="desc">ICT導入補助金の申請時期をヒアリング。次年度当初での申請意向を確認。</div>
+                  <div class="by">記録：阿部</div></div>
+                <div class="ev sys"><div class="dot"></div><div class="when">2026-04-15（火）</div>
+                  <div class="head">システム｜PLUS より初回送客</div>
+                  <div class="desc">スマート介護経由で問い合わせ。特養・夜勤負担軽減ニーズとして起票。</div>
+                  <div class="by">Salesforce 連携</div></div>
+              </div>
+            </div>
+            <div class="deptsection" data-dept="edu">
+              <div class="dhdr"><span class="gl" style="background:#3DBE8B"></span>教育</div>
+              <div class="tl">
+                <div class="ev visit"><div class="dot" style="background:#3DBE8B;box-shadow:0 0 0 1.5px #3DBE8B"></div><div class="when">2026-07-01（火）</div>
+                  <div class="head">訪問｜レクサポ 支援者マッチングの現場調整</div>
+                  <div class="desc">対象フロア2件でのレク実施枠を確認。支援者2名の候補を提示、7月中旬から実施予定。</div>
+                  <div class="by">記録：西原</div></div>
+                <div class="ev sys"><div class="dot" style="background:#3DBE8B;box-shadow:0 0 0 1.5px #3DBE8B"></div><div class="when">2026-06-05（金）</div>
+                  <div class="head">システム｜教育アプリで支援者を仮マッチング</div>
+                  <div class="desc">レクサポ支援者マッチングアプリ側で、地域・得意分野から支援者2名を自動サジェスト。</div>
+                  <div class="by">教育アプリ連携</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROPS -->
+          <div class="pane" id="props">
+            <div class="pane-hd"><h4>提案履歴</h4><span class="note">提案システム連携</span></div>
+            <div class="deptsection" data-dept="dx">
+              <div class="dhdr"><span class="gl" style="background:#00A9B8"></span>介護・医療DX <span class="gn">3件</span></div>
+              <table class="dt">
+                <thead><tr><th>提案名</th><th>構成領域</th><th>概算</th><th>状態</th><th>作成日</th></tr></thead>
+                <tbody>
+                  <tr><td><b>見守り＋記録ICT 統合提案</b></td><td>見守り / 記録ICT / 補助金</td><td class="num">¥11.6M</td><td><span class="chip a">検討中</span></td><td class="num">2026-05-28</td></tr>
+                  <tr><td><b>夜勤負担軽減パッケージ</b></td><td>見守り / 機器・人的</td><td class="num">¥8.4M</td><td><span class="chip g">採用</span></td><td class="num">2026-05-10</td></tr>
+                  <tr><td><b>ネットワーク基盤刷新</b></td><td>ネットワーク</td><td class="num">¥2.8M</td><td><span class="chip b">見送り</span></td><td class="num">2026-03-02</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="deptsection" data-dept="edu">
+              <div class="dhdr"><span class="gl" style="background:#3DBE8B"></span>教育 <span class="gn">1件</span></div>
+              <table class="dt">
+                <thead><tr><th>提案名</th><th>構成領域</th><th>概算</th><th>状態</th><th>作成日</th></tr></thead>
+                <tbody>
+                  <tr><td><b>レクサポ 導入提案（月2回プラン）</b></td><td>レクリエーション支援</td><td class="num">¥0.4M/月</td><td><span class="chip g">採用</span></td><td class="num">2026-05-30</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- PRODS -->
+          <div class="pane" id="prods">
+            <div class="pane-hd"><h4>導入商材・サービス</h4><span class="note">商材マスタ / サービスと紐付け</span></div>
+            <div class="deptsection" data-dept="dx">
+              <div class="dhdr"><span class="gl" style="background:#00A9B8"></span>介護・医療DX <span class="gn">3件</span></div>
+              <div class="prod"><span class="pcat">COMM</span><div><div class="pn">インカム（Buddycom）</div><div class="pv">職員間コミュニケーション</div></div><span class="pmeta">2026-05 導入<br>ロボタスネット</span></div>
+              <div class="prod"><span class="pcat">CARE_SW</span><div><div class="pn">介護記録ソフト（ほのぼの）</div><div class="pv">※他社導入・更改検討中</div></div><span class="pmeta">既設<br>—</span></div>
+              <div class="prod"><span class="pcat">NETWORK</span><div><div class="pn">館内 Wi-Fi 整備</div><div class="pv">全館 AP 12台</div></div><span class="pmeta">2025-11 導入<br>エレコム</span></div>
+            </div>
+            <div class="deptsection" data-dept="edu">
+              <div class="dhdr"><span class="gl" style="background:#3DBE8B"></span>教育 <span class="gn">1件</span></div>
+              <div class="prod"><span class="pcat">REC</span><div><div class="pn">レクサポ（支援者マッチング）</div><div class="pv">月2回・対象フロア2</div></div><span class="pmeta">2026-06 稼働<br>教育部門</span></div>
+            </div>
+          </div>
+
+          <!-- DEALS -->
+          <div class="pane" id="deals">
+            <div class="pane-hd"><h4>取引・請求</h4><span class="note">ZAC 販売管理と同期（部門横断で1社の取引を集約）</span></div>
+            <div class="deptsection" data-dept="dx">
+              <div class="dhdr"><span class="gl" style="background:#00A9B8"></span>介護・医療DX <span class="gn">2件</span></div>
+              <table class="dt">
+                <thead><tr><th>プロジェクト</th><th>受注額</th><th>状態</th><th>請求進捗</th><th>納品</th></tr></thead>
+                <tbody>
+                  <tr><td><b>インカム導入 一式</b><br><span style="font-size:10.5px;color:var(--muted)">P-10432-02</span></td><td class="num">¥1.2M</td><td><span class="chip g">進行中</span></td><td class="num">2/2回 請求済</td><td class="num">2026-05-20</td></tr>
+                  <tr><td><b>館内Wi-Fi 整備</b><br><span style="font-size:10.5px;color:var(--muted)">P-10432-01</span></td><td class="num">¥2.8M</td><td><span class="chip b">完了</span></td><td class="num">検収・入金済</td><td class="num">2025-11-30</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="deptsection" data-dept="edu">
+              <div class="dhdr"><span class="gl" style="background:#3DBE8B"></span>教育 <span class="gn">1件</span></div>
+              <table class="dt">
+                <thead><tr><th>プロジェクト</th><th>受注額</th><th>状態</th><th>請求進捗</th><th>納品</th></tr></thead>
+                <tbody>
+                  <tr><td><b>レクサポ 月額サービス</b><br><span style="font-size:10.5px;color:var(--muted)">P-10432-03</span></td><td class="num">¥0.4M/月</td><td><span class="chip g">継続中</span></td><td class="num">毎月末 請求</td><td class="num">2026-06〜</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT: contacts + todo -->
+      <div class="col-right">
+        <div class="card">
+          <h3>👥 担当者 <span class="cnt">4</span></h3>
+          <div class="body">
+            <div class="contact">
+              <div class="cav" style="background:#c02535">田</div>
+              <div><div class="cn">田中 理事長<span class="cbadge dm">決裁</span></div><div class="cr">社会福祉法人 理事長</div></div>
+              <div class="cx">最終接触<br>5/10</div>
+            </div>
+            <div class="contact">
+              <div class="cav" style="background:#00A9B8">佐</div>
+              <div><div class="cn">佐藤 施設長<span class="cbadge key">キーマン</span></div><div class="cr">みどりの丘 施設長</div></div>
+              <div class="cx">最終接触<br>7/3</div>
+            </div>
+            <div class="contact">
+              <div class="cav" style="background:#6B5DD3">鈴</div>
+              <div><div class="cn">鈴木 事務長</div><div class="cr">窓口・稟議担当</div></div>
+              <div class="cx">最終接触<br>6/20</div>
+            </div>
+            <div class="contact">
+              <div class="cav" style="background:#3DBE8B">山</div>
+              <div><div class="cn">山本 介護主任</div><div class="cr">現場キーマン</div></div>
+              <div class="cx">最終接触<br>7/3</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>✅ 次アクション <span class="cnt">3</span></h3>
+          <div class="body">
+            <div class="todo"><div class="cb"></div><div><div class="tt">見守り見積のフォロー架電</div><div class="td"><span class="due over">期限 7/9（明後日）</span><span>阿部</span></div></div></div>
+            <div class="todo"><div class="cb"></div><div><div class="tt">デモ機の返却手配</div><div class="td"><span class="due soon">期限 7/17</span><span>ロボタスネット</span></div></div></div>
+            <div class="todo"><div class="cb"></div><div><div class="tt">記録ソフト 社内検討の結果確認</div><div class="td"><span class="due">期限 7/31</span><span>阿部</span></div></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>💡 インサイト</h3>
+          <div class="body" style="font-size:12px;color:var(--ink-soft)">
+            <p style="margin:0 0 8px">・法人内 <b>4施設</b> 中、横展開は <b>みどりの郷（老健）</b> が有望。見守りセンサー横展開の余地。</p>
+            <p style="margin:0 0 8px">・記録ソフト更改は <b>ICT導入補助金</b> の申請時期に合わせると受注確度が上がる。</p>
+            <p style="margin:0">・最終接触から <b>4日</b>、パイプライン健全。ヘルススコア <b style="color:var(--green)">78 / 100</b>。</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="foot">BCC ヘルスケア SFA — 顧客・組織カルテ プロトタイプ　｜　Salesforce（商談）× ZAC（販売管理）× 提案システム を統合するハブ基盤　｜　※ 表示データはダミー</div>
+  </main>
+</div>
+
+<script>
+  const tabs = document.getElementById('tabs');
+  const panes = document.querySelectorAll('.pane');
+  tabs.addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on', x===b));
+    panes.forEach(p=>p.classList.toggle('on', p.id===b.dataset.t));
+  });
+
+  /* ---- department scope: parallel (all) vs single ---- */
+  const scopebar = document.getElementById('scopebar');
+  const tabwrap = document.querySelector('.tabwrap');
+  const scopehint = document.getElementById('scopehint');
+  const HINTS = {
+    all:'横断：関与する全部門を並行表示中',
+    dx:'介護・医療DX に絞り込み中',
+    edu:'教育 に絞り込み中'
+  };
+  scopebar.addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    const s = b.dataset.s;
+    scopebar.querySelectorAll('button').forEach(x=>x.classList.toggle('on', x===b));
+    tabwrap.classList.toggle('single', s!=='all');
+    document.querySelectorAll('.deptsection').forEach(sec=>{
+      const d = sec.dataset.dept;
+      sec.classList.toggle('hidden', !(s==='all' || d===s || d==='common'));
+    });
+    scopehint.textContent = HINTS[s] || '';
+  });
+</script>
