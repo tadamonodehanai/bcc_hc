@@ -1,0 +1,1404 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>エイジレスセンター 予約システム プロトタイプ</title>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#F6F7F5;
+    --panel:#FFFFFF;
+    --ink:#1C2826;
+    --ink-soft:#4A5956;
+    --ink-faint:#8494900;
+    --muted:#6C7A77;
+    --line:#DBE1DE;
+    --line-strong:#C3CDC9;
+    --teal:#0E6E70;
+    --teal-dark:#0A5254;
+    --teal-wash:#E4F0EF;
+    --teal-wash-2:#D2E7E5;
+    --amber:#C46A1B;
+    --amber-wash:#FBEEDD;
+    --good:#2E7D5B;
+    --good-wash:#E2F1E9;
+    --warn:#B9832A;
+    --warn-wash:#F8EFD8;
+    --crit:#C0392B;
+    --crit-wash:#F8E4E1;
+    --radius:10px;
+    --shadow:0 1px 2px rgba(28,40,38,.06), 0 6px 20px rgba(28,40,38,.06);
+    --font: "Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Meiryo",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0}
+  #app{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--ground);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ---------- top bar ---------- */
+  header.top{
+    background:var(--teal-dark);
+    color:#EAF4F3;
+    border-bottom:3px solid var(--amber);
+  }
+  header.top .wrap{display:flex;align-items:center;gap:14px;height:60px}
+  .brand{display:flex;align-items:baseline;gap:10px;font-weight:700;letter-spacing:.02em}
+  .brand .sub{font-weight:500;color:#A9CFCD;font-size:12.5px}
+  .top-spacer{flex:1}
+  .admin-link{
+    appearance:none;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);
+    color:#EAF4F3;font-family:inherit;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:8px;cursor:pointer
+  }
+  .admin-link:hover{background:rgba(255,255,255,.18)}
+  .admin-link:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .prototype-flag{
+    font-size:11px;letter-spacing:.08em;background:rgba(255,255,255,.14);
+    padding:4px 10px;border-radius:999px;color:#DCEDEC
+  }
+
+  /* ---------- entrance switch (horizontal) ---------- */
+  nav.switch{background:var(--panel);border-bottom:1px solid var(--line)}
+  nav.switch .wrap{display:flex;flex-wrap:nowrap;gap:0}
+  .tab{
+    appearance:none;border:0;background:none;font-family:inherit;cursor:pointer;white-space:nowrap;
+    padding:13px 22px 11px;font-size:14px;font-weight:600;color:var(--muted);
+    border-bottom:3px solid transparent;display:inline-flex;align-items:center;gap:9px
+  }
+  .tab .dot{width:9px;height:9px;border-radius:50%;background:currentColor;opacity:.45;flex:none}
+  .tab b{font-weight:700}
+  .tab[aria-selected="true"]{color:var(--teal);border-bottom-color:var(--teal)}
+  .tab[aria-selected="true"] .dot{opacity:1}
+  .tab:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;border-radius:4px}
+  .tab small{font-weight:500;color:var(--ink-faint);font-size:11.5px}
+  @media(max-width:560px){ .tab small{display:none} .tab{padding:13px 15px 11px} }
+
+  main{padding:22px 0 60px}
+  .panel-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+  .panel-intro h1{font-size:19px;margin:0 0 3px;letter-spacing:.01em;text-wrap:balance}
+  .panel-intro p{margin:0;color:var(--muted);font-size:13px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+  /* ---------- date bar ---------- */
+  .datebar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .datebar .navbtn{
+    appearance:none;border:1px solid var(--line-strong);background:var(--panel);border-radius:8px;
+    width:34px;height:34px;font-size:16px;cursor:pointer;color:var(--ink-soft);line-height:1
+  }
+  .datebar .navbtn:hover{background:var(--teal-wash);border-color:var(--teal)}
+  .datebar .today{font-size:16px;font-weight:700}
+  .datebar .today .dow{color:var(--amber);margin-left:6px;font-size:14px}
+  .datebar .hint{margin-left:auto;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .legend{display:inline-flex;align-items:center;gap:6px}
+  .legend .sw{width:16px;height:12px;border-radius:3px;border:1px solid rgba(0,0,0,.08)}
+  .sw.confirmed{background:var(--teal-wash-2);border-color:var(--teal)}
+  .sw.tentative{background:repeating-linear-gradient(45deg,var(--amber-wash),var(--amber-wash) 5px,#fff 5px,#fff 9px);border-color:var(--amber)}
+  .sw.internal{background:var(--good-wash);border-color:var(--good)}
+
+  /* ---------- closed-day banner ---------- */
+  .closed-note{border-radius:9px;padding:10px 14px;font-size:13px;margin-bottom:12px;border:1px solid}
+  .closed-note.soft{background:var(--warn-wash);border-color:#E4C878;color:#7c5a12}
+  .closed-note.hard{background:var(--crit-wash);border-color:#E7B3AC;color:#8f2a20}
+  .closed-note b{font-weight:700}
+
+  /* ---------- board grid ---------- */
+  .board-scroll{overflow-x:auto}
+  table.board{border-collapse:collapse;width:100%;min-width:820px;background:var(--panel);font-size:12.5px}
+  table.board th,table.board td{border:1px solid var(--line);padding:0}
+  table.board thead th{
+    position:sticky;top:0;z-index:3;background:var(--teal);color:#fff;font-weight:600;
+    padding:9px 6px;text-align:center;vertical-align:middle;line-height:1.25
+  }
+  table.board thead th .cap{display:block;font-size:10.5px;color:#BFE0DE;font-weight:500;margin-top:2px}
+  table.board thead th.timehead{background:var(--teal-dark);width:66px;position:sticky;left:0;z-index:4}
+  .timecell{
+    background:#F0F3F2;color:var(--ink-soft);font-weight:600;text-align:center;white-space:nowrap;
+    position:sticky;left:0;z-index:2;width:66px;font-size:11.5px;padding:0 4px
+  }
+  .timecell.hourtop{border-top:2px solid var(--line-strong)}
+  tr.hourrow td{border-top:2px solid var(--line-strong)}
+  .slot{height:26px;position:relative;cursor:pointer;transition:background .12s}
+  .slot:hover{background:var(--teal-wash)}
+  .slot:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+  .slot.occupied{cursor:default}
+  .slot.occupied:hover{background:inherit}
+  .slot.afterbiz{background:repeating-linear-gradient(135deg,#FBFAF6,#FBFAF6 7px,#F4F1E8 7px,#F4F1E8 8px)}
+  .slot.afterbiz:hover{background:var(--teal-wash)}
+  .slot.nobook{cursor:default;background:#F4F4F4}
+  .slot.nobook:hover{background:#F4F4F4}
+  tr.bizline td{border-top:2px dashed var(--amber)}
+  .timecell.bizmark{color:var(--amber)}
+  .timecell .bizlb{display:block;font-size:9px;font-weight:700;color:var(--amber);letter-spacing:.02em}
+  .bk{
+    position:absolute;left:2px;right:2px;top:1px;bottom:1px;border-radius:5px;
+    padding:3px 6px;overflow:hidden;font-size:11px;line-height:1.25;border:1px solid;
+    display:flex;flex-direction:column;justify-content:center
+  }
+  .bk .g{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bk .m{font-size:10px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bk.confirmed{background:var(--teal-wash-2);border-color:var(--teal);color:var(--teal-dark)}
+  .bk.tentative{background:repeating-linear-gradient(45deg,var(--amber-wash),var(--amber-wash) 6px,#fff 6px,#fff 11px);border-color:var(--amber);color:#8a4a12}
+  .bk.internal{background:var(--good-wash);border-color:var(--good);color:#1f5a41}
+  .bk .tag{align-self:flex-start;font-size:9px;font-weight:700;padding:0 5px;border-radius:999px;margin-bottom:1px}
+  .tag.t-kari{background:var(--amber);color:#fff}
+  .tag.t-nai{background:var(--good);color:#fff}
+
+  /* ---------- external booking flow ---------- */
+  .flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:18px;align-items:start}
+  @media(max-width:860px){.flow{grid-template-columns:1fr}}
+  .form-card{padding:18px 18px 20px}
+  .form-card h2,.result-card h2{font-size:14px;margin:0 0 3px;display:flex;align-items:center;gap:8px}
+  .form-card h2 .step,.result-card h2 .step{
+    width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:12px;
+    display:grid;place-items:center;font-weight:700;flex:none
+  }
+  .form-card > p.lead{margin:0 0 16px;color:var(--muted);font-size:12.5px}
+  .field{margin-bottom:14px}
+  .field > label{display:block;font-size:12.5px;font-weight:600;margin-bottom:6px;color:var(--ink-soft)}
+  .field > label .opt{font-weight:500;color:var(--ink-faint);font-size:11px;margin-left:6px}
+  select,input[type=text],input[type=number],input[type=date],input[type=time]{
+    width:100%;font-family:inherit;font-size:13.5px;padding:9px 10px;border:1px solid var(--line-strong);
+    border-radius:8px;background:#fff;color:var(--ink)
+  }
+  select:focus,input:focus{outline:2px solid var(--teal);outline-offset:-1px;border-color:var(--teal)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .checks{display:flex;flex-direction:column;gap:8px}
+  .chk{display:flex;align-items:flex-start;gap:9px;font-size:13px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:#fff}
+  .chk:hover{border-color:var(--teal);background:var(--teal-wash)}
+  .chk input{margin-top:2px;accent-color:var(--teal);width:16px;height:16px}
+  .chk .cx{display:block}
+  .chk .cx small{display:block;color:var(--muted);font-size:11px;font-weight:400}
+  .chk:has(input:checked){border-color:var(--teal);background:var(--teal-wash)}
+
+  /* result */
+  .result-card{padding:0;overflow:hidden}
+  .result-head{padding:16px 18px 14px;border-bottom:1px solid var(--line)}
+  .result-body{padding:16px 18px 18px}
+  .empty-state{padding:40px 24px;text-align:center;color:var(--ink-faint)}
+  .empty-state .big{font-size:34px;margin-bottom:8px;opacity:.5}
+  .rec{border:1.5px solid var(--teal);border-radius:10px;overflow:hidden;margin-bottom:14px}
+  .rec-top{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--teal-wash)}
+  .rec-top .badge{font-size:10.5px;font-weight:700;color:#fff;background:var(--teal);padding:3px 9px;border-radius:999px}
+  .rec-top .rname{font-size:16px;font-weight:700;color:var(--teal-dark)}
+  .rec-top .rcap{margin-left:auto;font-size:12px;color:var(--muted)}
+  .rec-body{padding:10px 14px 12px;font-size:12.5px;background:#fff}
+  .rec-why{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px}
+  .rec-why li{display:flex;gap:8px;align-items:flex-start;color:var(--ink-soft)}
+  .rec-why li::before{content:"›";color:var(--teal);font-weight:800;flex:none}
+  .addon{border-color:var(--amber)}
+  .addon .rec-top{background:var(--amber-wash)}
+  .addon .badge{background:var(--amber)}
+  .addon .rname{color:#8a4a12}
+
+  .warnbox{display:flex;gap:10px;padding:11px 13px;border-radius:9px;font-size:12.5px;margin-bottom:12px;border:1px solid}
+  .warnbox .ic{flex:none;font-weight:800}
+  .warnbox.warn{background:var(--warn-wash);border-color:#E4C878;color:#7c5a12}
+  .warnbox.crit{background:var(--crit-wash);border-color:#E7B3AC;color:#8f2a20}
+  .warnbox.ok{background:var(--good-wash);border-color:#B4DCC7;color:#1f5a41}
+  .warnbox b{font-weight:700}
+
+  .fee-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+  .fee-table td{padding:6px 4px;border-bottom:1px solid var(--line)}
+  .fee-table td.amt{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .fee-table tr.total td{border-bottom:0;border-top:2px solid var(--line-strong);font-weight:700;padding-top:8px}
+  .fee-note{font-size:11px;color:var(--amber);margin-top:6px;display:flex;gap:5px;align-items:center}
+
+  .actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .btn{appearance:none;border:0;font-family:inherit;font-size:13.5px;font-weight:700;padding:11px 18px;border-radius:9px;cursor:pointer}
+  .btn.primary{background:var(--teal);color:#fff}
+  .btn.primary:hover{background:var(--teal-dark)}
+  .btn.ghost{background:#fff;color:var(--teal);border:1px solid var(--teal)}
+  .btn.ghost:hover{background:var(--teal-wash)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .override-note{font-size:11.5px;color:var(--muted);margin-top:9px;line-height:1.5}
+
+  /* toast */
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;
+    box-shadow:0 8px 30px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:.25s;z-index:50;
+    display:flex;align-items:center;gap:10px;max-width:90vw
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast .tk{color:#7FE0C4;font-weight:800}
+
+  /* ---------- view toggle (day / month) ---------- */
+  .viewtoggle{display:inline-flex;background:#EAEFED;border-radius:9px;padding:3px;gap:2px}
+  .viewtoggle button{appearance:none;border:0;background:none;font-family:inherit;font-size:13px;font-weight:600;
+    padding:7px 16px;border-radius:7px;cursor:pointer;color:var(--muted)}
+  .viewtoggle button[aria-pressed="true"]{background:#fff;color:var(--teal-dark);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .viewtoggle button:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+
+  /* ---------- month calendar ---------- */
+  .monthbar{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .monthbar .mlabel{font-size:18px;font-weight:700;min-width:150px}
+  .monthbar .win{margin-left:auto;font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .cal-dow{background:var(--teal-dark);color:#fff;text-align:center;padding:8px 0;font-size:12px;font-weight:600}
+  .cal-dow.sun{color:#F5C0B8}.cal-dow.sat{color:#B7D8E8}
+  .cal-cell{background:#fff;min-height:96px;padding:6px 6px 5px;display:flex;flex-direction:column;gap:3px;cursor:pointer;position:relative;transition:background .12s}
+  .cal-cell:hover{background:var(--teal-wash)}
+  .cal-cell:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+  .cal-cell.blank{background:#FAFBFB;cursor:default}
+  .cal-cell.blank:hover{background:#FAFBFB}
+  .cal-cell .dn{font-size:12.5px;font-weight:700;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .cal-cell.sun .dn{color:#C0392B}.cal-cell.sat .dn{color:#2A6E92}
+  .cal-cell.today{box-shadow:inset 0 0 0 2px var(--amber)}
+  .cal-cell.today .dn::after{content:"今日";font-size:9px;background:var(--amber);color:#fff;padding:1px 5px;border-radius:999px;margin-left:5px;font-weight:700}
+  .cal-cell.closed{background:repeating-linear-gradient(45deg,#F1F1F1,#F1F1F1 6px,#fff 6px,#fff 12px);cursor:default}
+  .cal-cell.closed:hover{background:repeating-linear-gradient(45deg,#F1F1F1,#F1F1F1 6px,#fff 6px,#fff 12px)}
+  .cal-cell.closed[data-date]{cursor:pointer}
+  .cal-cell.closed[data-date]:hover{box-shadow:inset 0 0 0 2px var(--teal-wash-2)}
+  .cal-cell.closed .closed-lb{font-size:10px;color:#B9832A;font-weight:700}
+  .cal-cell.outwin{background:#F7F8F8;cursor:default;opacity:.6}
+  .cal-cell.outwin:hover{background:#F7F8F8}
+  .cal-cell.outwin .outwin-lb{font-size:9.5px;color:#B0B8B5}
+  .cchip{font-size:10px;line-height:1.35;padding:1px 5px;border-radius:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:3px solid}
+  .cchip.confirmed{background:var(--teal-wash);border-color:var(--teal);color:var(--teal-dark)}
+  .cchip.tentative{background:var(--amber-wash);border-color:var(--amber);color:#8a4a12}
+  .cchip.internal{background:var(--good-wash);border-color:var(--good);color:#1f5a41}
+  .cchip.cancelled{background:#f2f2f2;border-color:#ccc;color:#aaa;text-decoration:line-through}
+  .cmore{font-size:10px;color:var(--muted);font-weight:600;margin-top:auto}
+  .cal-count{position:absolute;top:5px;right:6px;font-size:10px;font-weight:800;color:#fff;background:var(--teal);min-width:16px;height:16px;border-radius:999px;display:grid;place-items:center;padding:0 4px}
+
+  /* ---------- admin / master ---------- */
+  .admin-head{display:flex;align-items:center;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+  .admin-head h1{font-size:19px;margin:0}
+  .backlink{appearance:none;border:1px solid var(--line-strong);background:#fff;font-family:inherit;font-size:13px;
+    font-weight:600;color:var(--teal);padding:8px 14px;border-radius:8px;cursor:pointer}
+  .backlink:hover{background:var(--teal-wash)}
+  .admin-note{font-size:12.5px;color:var(--muted);margin:0 0 18px}
+  .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+  @media(max-width:800px){.admin-grid{grid-template-columns:1fr}}
+  .acard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px 18px}
+  .acard.full{grid-column:1/-1}
+  .acard h2{font-size:14px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+  .acard h2 .ni{width:24px;height:24px;border-radius:6px;background:var(--teal-wash);color:var(--teal-dark);display:grid;place-items:center;font-size:12px;font-weight:800}
+  .acard .desc{font-size:12px;color:var(--muted);margin:0 0 14px}
+  .aset{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-size:13px}
+  .aset label{width:130px;font-weight:600;color:var(--ink-soft);flex:none}
+  .aset input[type=time],.aset input[type=number]{width:120px}
+  .aset .unit{color:var(--muted);font-size:12px}
+  .dowpick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .dowpick label{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-soft);background:#fff}
+  .dowpick label:has(input:checked){background:var(--crit-wash);border-color:var(--crit);color:var(--crit)}
+  .dowpick input{position:absolute;opacity:0;pointer-events:none}
+  .atoggle{display:flex;align-items:center;gap:11px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:#FAFBFB;font-size:13px;cursor:pointer;margin-bottom:6px}
+  .atoggle:has(input:checked){border-color:var(--teal);background:var(--teal-wash)}
+  .atoggle input{width:17px;height:17px;accent-color:var(--teal)}
+  .atoggle .sub{display:block;color:var(--muted);font-size:11.5px;font-weight:400}
+  table.master{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.master th{background:#F0F3F2;text-align:left;padding:8px 8px;font-weight:700;color:var(--ink-soft);border-bottom:1px solid var(--line)}
+  table.master td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+  table.master input[type=number]{width:66px}
+  table.master input[type=text]{width:100%;min-width:90px}
+  .statepill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px}
+  .statepill.on{background:var(--good-wash);color:#1f5a41}
+  .statepill.off{background:#eee;color:#999}
+  .rulelist{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink-soft);line-height:1.9}
+  .rulelist b{color:var(--teal-dark)}
+  .adminsave{display:flex;gap:10px;align-items:center;margin-top:18px}
+  .adminsave .msg{font-size:12.5px;color:var(--good);font-weight:600;opacity:0;transition:.2s}
+  .adminsave .msg.show{opacity:1}
+
+  /* ---------- detail drawer ---------- */
+  .scrim{position:fixed;inset:0;background:rgba(20,30,28,.42);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+  .scrim.show{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;right:0;height:100%;width:440px;max-width:92vw;background:var(--panel);
+    box-shadow:-10px 0 40px rgba(20,30,28,.18);transform:translateX(100%);transition:transform .24s ease;
+    z-index:41;display:flex;flex-direction:column
+  }
+  .drawer.show{transform:translateX(0)}
+  .drawer-head{padding:16px 18px 14px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:12px}
+  .drawer-head .rm{font-size:12px;color:var(--muted);margin:0 0 3px}
+  .drawer-head h3{margin:0;font-size:18px;letter-spacing:.01em}
+  .drawer-head .x{margin-left:auto;appearance:none;border:0;background:none;font-size:24px;line-height:1;color:var(--muted);cursor:pointer;padding:0 2px}
+  .drawer-head .x:hover{color:var(--ink)}
+  .status-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;margin-top:4px}
+  .status-badge.tentative{background:var(--amber-wash);color:#8a4a12}
+  .status-badge.confirmed{background:var(--teal-wash-2);color:var(--teal-dark)}
+  .status-badge.internal{background:var(--good-wash);color:#1f5a41}
+  .status-badge.cancelled{background:#EEE;color:#8a8a8a}
+
+  /* stepper */
+  .stepper{display:flex;align-items:center;gap:0;padding:14px 18px;background:#F4F7F6;border-bottom:1px solid var(--line)}
+  .stepper .st{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;position:relative}
+  .stepper .st .cir{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;background:#fff;border:2px solid var(--line-strong);color:var(--muted);z-index:2}
+  .stepper .st .lb{font-size:11px;color:var(--muted);font-weight:600}
+  .stepper .st::before{content:"";position:absolute;top:13px;left:-50%;width:100%;height:2px;background:var(--line-strong);z-index:1}
+  .stepper .st:first-child::before{display:none}
+  .stepper .st.done .cir{background:var(--teal);border-color:var(--teal);color:#fff}
+  .stepper .st.done .lb{color:var(--teal-dark)}
+  .stepper .st.done::before{background:var(--teal)}
+  .stepper .st.current .cir{background:var(--amber);border-color:var(--amber);color:#fff;box-shadow:0 0 0 4px var(--amber-wash)}
+  .stepper .st.current .lb{color:#8a4a12}
+  .stepper.is-cancelled .st .cir{background:#eee;border-color:#ddd;color:#bbb}
+  .stepper.is-cancelled .st .lb{color:#bbb}
+
+  .drawer-body{padding:16px 18px 10px;overflow-y:auto;flex:1}
+  .dsect{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--teal);text-transform:none;
+    margin:20px 0 11px;padding-bottom:5px;border-bottom:1.5px solid var(--teal-wash-2);display:flex;align-items:center;gap:7px}
+  .dsect:first-child{margin-top:2px}
+  .dsect .ico{width:16px;height:16px;display:grid;place-items:center;background:var(--teal-wash);border-radius:4px;font-size:10px}
+  .dfield{margin-bottom:13px}
+  .dsegmented{display:flex;gap:6px}
+  .dseg{flex:1;text-align:center;font-size:12.5px;padding:8px 4px;border:1px solid var(--line-strong);border-radius:7px;cursor:pointer;background:#fff;color:var(--ink-soft)}
+  .dseg input{position:absolute;opacity:0;pointer-events:none}
+  .dseg:has(input:checked){border-color:var(--teal);background:var(--teal-wash);color:var(--teal-dark);font-weight:700}
+  .dchecks{display:flex;flex-direction:column;gap:7px}
+  .dchk{display:flex;align-items:center;gap:9px;font-size:12.5px;padding:8px 10px;border:1px solid var(--line);border-radius:7px;cursor:pointer;background:#fff}
+  .dchk:has(input:checked){border-color:var(--teal);background:var(--teal-wash)}
+  .dchk input{accent-color:var(--teal);width:15px;height:15px}
+  .dchk .sm{color:var(--muted);font-size:11px;margin-left:auto}
+  .agewarn{font-size:11px;color:var(--crit);margin-top:5px;display:none}
+  .agewarn.show{display:block}
+  .dfield label{display:block;font-size:11.5px;font-weight:700;color:var(--ink-faint);letter-spacing:.02em;margin-bottom:5px;text-transform:none}
+  .drow2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .drawer .time-edit{display:flex;align-items:center;gap:8px}
+  .drawer .time-edit span{color:var(--muted)}
+  .cancel-banner{background:var(--crit-wash);border:1px solid #E7B3AC;color:#8f2a20;padding:9px 12px;border-radius:8px;font-size:12.5px;margin-bottom:14px;font-weight:600}
+
+  .drawer-foot{padding:13px 18px;border-top:1px solid var(--line);display:flex;gap:9px;flex-wrap:wrap;background:#fff}
+  .drawer-foot .btn{padding:10px 15px;font-size:13px}
+  .btn.danger{background:#fff;color:var(--crit);border:1px solid var(--crit)}
+  .btn.danger:hover{background:var(--crit-wash)}
+  .btn.confirm{background:var(--good);color:#fff}
+  .btn.confirm:hover{background:#256b4c}
+  .foot-spacer{flex:1}
+
+  .bk.cancelled{background:repeating-linear-gradient(45deg,#f0f0f0,#f0f0f0 5px,#fff 5px,#fff 9px);border-color:#ccc;color:#aaa;text-decoration:line-through}
+
+  .hidden{display:none !important}
+  .footnote{margin-top:26px;font-size:11.5px;color:var(--ink-faint);line-height:1.7;border-top:1px solid var(--line);padding-top:14px}
+  .footnote b{color:var(--muted)}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div id="app">
+  <header class="top">
+    <div class="wrap">
+      <div class="brand">
+        <span>エイジレスセンター 予約管理<span class="sub">　ATC / 部屋予約システム</span></span>
+      </div>
+      <div class="top-spacer"></div>
+      <button class="admin-link" id="adminOpen">⚙ 管理者専用</button>
+      <span class="prototype-flag">プロトタイプ</span>
+    </div>
+  </header>
+
+  <nav class="switch" role="tablist" aria-label="入口の切り替え">
+    <button class="tab" id="tab-internal" role="tab" aria-selected="true" aria-controls="view-internal">
+      <span class="dot"></span><b>内部スタッフ用</b><small>空き状況ボード（施設表）</small>
+    </button>
+    <button class="tab" id="tab-external" role="tab" aria-selected="false" aria-controls="view-external">
+      <span class="dot"></span><b>外部予約 受付</b><small>条件から おすすめ部屋</small>
+    </button>
+  </nav>
+
+  <main>
+    <!-- ============ INTERNAL BOARD ============ -->
+    <section class="wrap" id="view-internal" role="tabpanel" aria-labelledby="tab-internal">
+      <div class="panel-intro">
+        <div>
+          <h1 id="internalTitle">空き状況ボード</h1>
+          <p id="internalLede">紙の施設表と同じ「部屋 × 時間」の一覧。全員が同じ画面を見るので、二重予約が起きません。</p>
+        </div>
+        <div class="viewtoggle" role="group" aria-label="表示の切り替え">
+          <button id="vt-day" aria-pressed="true">日（ボード）</button>
+          <button id="vt-month" aria-pressed="false">月（カレンダー）</button>
+        </div>
+      </div>
+
+      <!-- DAY / BOARD -->
+      <div id="boardView">
+      <div class="datebar">
+        <button class="navbtn" id="prevDay" aria-label="前の日">‹</button>
+        <span class="today num"><span id="dateLabel">2026年7月7日</span><span class="dow" id="dowLabel">（火）</span></span>
+        <button class="navbtn" id="nextDay" aria-label="次の日">›</button>
+        <div class="hint">
+          <span class="legend"><span class="sw confirmed"></span>本予約</span>
+          <span class="legend"><span class="sw tentative"></span>仮予約</span>
+          <span class="legend"><span class="sw internal"></span>内部利用</span>
+          <span>空きマスをクリックで登録</span>
+        </div>
+      </div>
+
+      <div class="closed-note" id="boardBanner" style="display:none"></div>
+
+      <div class="card board-scroll">
+        <table class="board">
+          <thead><tr id="boardHead"></tr></thead>
+          <tbody id="boardBody"></tbody>
+        </table>
+      </div>
+
+      <p class="footnote">
+        <b>この画面で解決すること：</b> 現状「予約簿に直接書けてしまい、林さん・草刈さんを通さず部屋が押さえられる」問題に対し、
+        だれが登録しても即座に全員へ反映され、同じ部屋・時間は二重に登録できません（登録済みマスはロック）。
+        仮予約は斜線で区別し、確定すると実線に変わります。
+      </p>
+      </div><!-- /boardView -->
+
+      <!-- MONTH / CALENDAR -->
+      <div id="monthView" class="hidden">
+        <div class="monthbar">
+          <button class="navbtn" id="prevMonth" aria-label="前の月">‹</button>
+          <span class="mlabel num" id="monthLabel">2026年7月</span>
+          <button class="navbtn" id="nextMonth" aria-label="次の月">›</button>
+          <div class="win">
+            <span class="legend"><span class="sw confirmed"></span>本予約</span>
+            <span class="legend"><span class="sw tentative"></span>仮予約</span>
+            <span>予約は<b style="color:var(--teal-dark)" id="winLabel">半年先</b>まで／月曜休館</span>
+          </div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <p class="footnote">
+          <b>この画面で解決すること：</b> 日をまたぐ予約や先の予定を月単位で俯瞰できます。
+          予約は半年先まで受付（それ以降は薄く表示し受付対象外）、月曜は休館として登録できません。
+          日付をクリックすると、その日の「空き状況ボード」に切り替わります。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ EXTERNAL FLOW ============ -->
+    <section class="wrap hidden" id="view-external" role="tabpanel" aria-labelledby="tab-external">
+      <div class="panel-intro">
+        <div>
+          <h1>外部予約の受付</h1>
+          <p>電話・メールで聞いた条件を入れると、割当ルールに沿って「おすすめの部屋」を提案します。最終判断は人が上書きできます。</p>
+        </div>
+      </div>
+
+      <div class="flow">
+        <!-- form -->
+        <div class="card form-card">
+          <h2><span class="step">1</span>利用条件を入力</h2>
+          <p class="lead">聞き取った内容を、わかる範囲で入れてください。入れるたび右側のおすすめが更新されます。</p>
+
+          <div class="field">
+            <label for="f-group">団体名 <span class="opt">任意・常連は呼び出し可</span></label>
+            <input type="text" id="f-group" list="regulars" placeholder="例）〇〇小学校　※過去の団体を選ぶと条件が入ります">
+            <datalist id="regulars"></datalist>
+          </div>
+
+          <div class="field">
+            <label for="f-purpose">利用目的</label>
+            <select id="f-purpose">
+              <option value="見学">施設見学</option>
+              <option value="セミナー">セミナー利用</option>
+              <option value="会議">会議室利用</option>
+              <option value="部屋貸し">部屋貸し（外部）</option>
+              <option value="卓球">卓球（外部）</option>
+              <option value="エコプラザ">エコプラザ利用</option>
+              <option value="全室">イベント関連 全室使用</option>
+            </select>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="f-head">人数</label>
+              <input type="number" id="f-head" min="1" max="300" value="35" class="num">
+            </div>
+            <div class="field">
+              <label for="f-date">利用日</label>
+              <input type="date" id="f-date" value="2026-07-07">
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="f-start">開始</label>
+              <input type="time" id="f-start" value="10:15" step="900" class="num">
+            </div>
+            <div class="field">
+              <label for="f-end">終了</label>
+              <input type="time" id="f-end" value="12:15" step="900" class="num">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-fee">料金区分</label>
+            <select id="f-fee">
+              <option value="free" selected>無料（施設予約・基本はこちら）</option>
+              <option value="paid">有料（部屋貸し）</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>付帯の条件</label>
+            <div class="checks">
+              <label class="chk"><input type="checkbox" id="f-training"><span class="cx">研修も一緒に行う<small>研修付きの見学は展示イベントホールが望ましい</small></span></label>
+              <label class="chk"><input type="checkbox" id="f-lecturer"><span class="cx">外部講師が来る<small>控室として B会議室 を追加で確保</small></span></label>
+              <label class="chk"><input type="checkbox" id="f-exhibit"><span class="cx">展示も行う<small>多目的ルーム(H2) を追加で確保</small></span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- result -->
+        <div class="card result-card">
+          <div class="result-head">
+            <h2><span class="step">2</span>おすすめの部屋</h2>
+          </div>
+          <div class="result-body" id="recBody"></div>
+        </div>
+      </div>
+
+      <p class="footnote">
+        <b>設計方針：</b> 割当ルールは「強制」ではなく「提案＋警告」です。定員オーバーや先約がある場合も赤／黄で知らせるだけで、
+        スタッフが別室に上書きして予約を成立させられます（＝「機械的に条件が合わなくても人の手でどうにかしたい」に対応）。
+        料金は仮の数値です（実際の料金体系は要確認）。
+      </p>
+    </section>
+
+    <!-- ============ ADMIN / MASTER ============ -->
+    <section class="wrap hidden" id="view-admin">
+      <div class="admin-head">
+        <h1>管理者専用 ― マスタ・設定</h1>
+        <button class="backlink" id="adminBack">← 予約画面に戻る</button>
+      </div>
+      <p class="admin-note">施設の基本ルール（利用時間・休館日・部屋・料金・割当ルール）をここで管理します。<b>時間と休館日の設定は、変更するとボード／カレンダーに反映されます</b>（プロトタイプ）。</p>
+
+      <div class="admin-grid">
+        <!-- 利用時間 -->
+        <div class="acard">
+          <h2><span class="ni">時</span>利用時間の設定</h2>
+          <p class="desc">営業は17時までですが、施設は21時まで利用できます。ボードの時間軸はここで決まります。</p>
+          <div class="aset"><label>施設 開始</label><input type="time" id="as-open" step="900" class="num"></div>
+          <div class="aset"><label>施設 終了</label><input type="time" id="as-close" step="900" class="num"><span class="unit">施設が使える最終</span></div>
+          <div class="aset"><label>営業終了</label><input type="time" id="as-biz" step="900" class="num"><span class="unit">受付対応の目安（点線で表示）</span></div>
+        </div>
+
+        <!-- 休館日 -->
+        <div class="acard">
+          <h2><span class="ni">休</span>休館日・予約範囲</h2>
+          <p class="desc">休館の曜日を選びます。休館日でも内部利用の登録を許可するかを切り替えられます。</p>
+          <label style="font-size:12px;font-weight:700;color:var(--ink-soft)">休館する曜日</label>
+          <div class="dowpick" id="as-dow" style="margin-top:7px"></div>
+          <label class="atoggle"><input type="checkbox" id="as-allowClosed"><span>休館日でも予約できる<span class="sub">内部利用を想定。外部予約は受け付けません。</span></span></label>
+          <div class="aset" style="margin-top:12px"><label>予約可能な先</label><input type="number" id="as-ahead" min="1" max="24" class="num"><span class="unit">ヶ月先まで（既定6＝半年）</span></div>
+        </div>
+
+        <!-- 部屋マスタ -->
+        <div class="acard full">
+          <h2><span class="ni">室</span>部屋マスタ</h2>
+          <p class="desc">部屋の定員・設備・料金・有効/無効を管理します。定員と料金は割当ロジックと料金表に使われます。</p>
+          <div style="overflow-x:auto">
+            <table class="master" id="masterTable"></table>
+          </div>
+        </div>
+
+        <!-- 料金 -->
+        <div class="acard">
+          <h2><span class="ni">円</span>料金・区分</h2>
+          <p class="desc">料金区分の既定値です。</p>
+          <ul class="rulelist">
+            <li><b>施設予約（見学・セミナー等）</b>：基本 <b>無料</b></li>
+            <li><b>部屋貸し（外部）</b>：有料・<b>前払い・返金なし</b></li>
+            <li>室別の金額は「部屋マスタ」で設定</li>
+            <li>バス駐車（3,000円/日）は <b>ATC管理事務所</b>が別管理（対象外）</li>
+          </ul>
+        </div>
+
+        <!-- 割当ルール -->
+        <div class="acard">
+          <h2><span class="ni">割</span>部屋の割当ルール（参考）</h2>
+          <p class="desc">外部受付の「おすすめ部屋」に使われる現在のルールです。</p>
+          <ul class="rulelist">
+            <li>基本は <b>D → H2</b> の順で提案（受付から近い）</li>
+            <li>人数は各室の<b>定員</b>に合わせる</li>
+            <li>研修付き見学 → <b>展示イベントホール</b></li>
+            <li>セミナー＋外部講師 → <b>B会議室</b>を控室に追加</li>
+            <li>セミナー＋展示 → <b>多目的ルーム(H2)</b>を追加</li>
+            <li>競合時は <b>内部・全館イベントを優先</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="adminsave">
+        <button class="btn primary" id="adminSave">設定を保存して反映</button>
+        <button class="btn ghost" id="adminReset">既定に戻す</button>
+        <span class="msg" id="adminMsg">✓ 保存しました（ボード／カレンダーに反映）</span>
+      </div>
+
+      <p class="footnote">
+        <b>この画面の位置づけ：</b> ヘッダ右上「⚙ 管理者専用」からの管理者向けメニューです。実運用では権限のあるスタッフのみアクセスできる想定。
+        ここで基本ルールを一元管理し、日々の受付画面（内部ボード／外部受付）はそのルールに従って動きます。
+      </p>
+    </section>
+  </main>
+
+  <!-- ============ DETAIL DRAWER ============ -->
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dwTitle">
+    <div class="drawer-head">
+      <div>
+        <p class="rm" id="dwRoom">部屋</p>
+        <h3 id="dwTitle">予約詳細</h3>
+        <span class="status-badge" id="dwBadge">仮予約</span>
+      </div>
+      <button class="x" id="dwClose" aria-label="閉じる">×</button>
+    </div>
+
+    <div class="stepper" id="dwStepper">
+      <div class="st" data-step="tentative"><span class="cir">1</span><span class="lb">仮予約</span></div>
+      <div class="st" data-step="confirmed"><span class="cir">2</span><span class="lb">本予約（確定）</span></div>
+      <div class="st" data-step="done"><span class="cir">✓</span><span class="lb">利用完了</span></div>
+    </div>
+
+    <div class="drawer-body">
+      <div class="cancel-banner hidden" id="dwCancelBanner">この予約はキャンセルされています。</div>
+
+      <div class="dsect"><span class="ico">団</span>団体・代表者</div>
+      <div class="dfield">
+        <label>団体名</label>
+        <input type="text" id="dw-group" placeholder="団体名">
+      </div>
+      <div class="drow2">
+        <div class="dfield"><label>人数</label><input type="number" id="dw-head" class="num" min="0"></div>
+        <div class="dfield"><label>組数</label><input type="number" id="dw-groups" class="num" min="0"></div>
+      </div>
+      <div class="drow2">
+        <div class="dfield"><label>代表者</label><input type="text" id="dw-booker" placeholder="お名前"></div>
+        <div class="dfield"><label>性別</label>
+          <div class="dsegmented" id="dw-gender">
+            <label class="dseg"><input type="radio" name="gender" value="男">男</label>
+            <label class="dseg"><input type="radio" name="gender" value="女">女</label>
+            <label class="dseg"><input type="radio" name="gender" value="">―</label>
+          </div>
+        </div>
+      </div>
+      <div class="drow2">
+        <div class="dfield"><label>分類（自由メモ）</label><input type="text" id="dw-category" placeholder="学校／福祉／企業 など"></div>
+        <div class="dfield"><label>年代</label>
+          <select id="dw-age">
+            <option value="">―</option><option>10代</option><option>20〜50代</option>
+            <option>60代以上</option><option>70代以上</option>
+          </select>
+        </div>
+      </div>
+      <p class="agewarn" id="dw-agewarn">⚠ 高齢者体験は60代以上に勧めない運用のため要注意。</p>
+
+      <div class="dsect"><span class="ico">℡</span>連絡先</div>
+      <div class="drow2">
+        <div class="dfield"><label>電話番号</label><input type="text" id="dw-tel" class="num" placeholder="06-0000-0000"></div>
+        <div class="dfield"><label>緊急連絡先</label><input type="text" id="dw-emergency" class="num" placeholder="当日つながる番号"></div>
+      </div>
+      <div class="dfield"><label>メール</label><input type="text" id="dw-email" placeholder="mail@example.jp"></div>
+
+      <div class="dsect"><span class="ico">枠</span>予約枠</div>
+      <div class="drow2">
+        <div class="dfield"><label>利用日</label><input type="date" id="dw-date"></div>
+        <div class="dfield"><label>受付日</label><input type="date" id="dw-recv"></div>
+      </div>
+      <div class="dfield">
+        <label>利用時間（15分単位で変更できます）</label>
+        <div class="time-edit">
+          <input type="time" id="dw-start" step="900" class="num">
+          <span>〜</span>
+          <input type="time" id="dw-end" step="900" class="num">
+        </div>
+      </div>
+      <div class="drow2">
+        <div class="dfield"><label>部屋</label><select id="dw-room"></select></div>
+        <div class="dfield"><label>目的</label>
+          <select id="dw-purpose">
+            <option>見学</option><option>セミナー</option><option>会議</option>
+            <option>部屋貸し</option><option>卓球</option><option>エコプラザ</option>
+            <option>内部行事</option><option>その他</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="dsect"><span class="ico">受</span>受付メモ</div>
+      <div class="dfield">
+        <label>交通手段</label>
+        <div class="dsegmented" id="dw-transport">
+          <label class="dseg"><input type="radio" name="transport" value="電車">電車</label>
+          <label class="dseg"><input type="radio" name="transport" value="バス">バス</label>
+          <label class="dseg"><input type="radio" name="transport" value="">未定</label>
+        </div>
+      </div>
+      <div class="dchecks">
+        <label class="dchk"><input type="checkbox" id="dw-busPark">バス駐車場の予約が必要<span class="sm">→ATC管理事務所を案内</span></label>
+        <label class="dchk"><input type="checkbox" id="dw-surveyTold">見学後アンケート（必須）を伝えた</label>
+        <label class="dchk"><input type="checkbox" id="dw-shitami">下見・下見見学あり</label>
+        <label class="dchk"><input type="checkbox" id="dw-locker">ロッカー案内</label>
+        <label class="dchk"><input type="checkbox" id="dw-overseas">来場のきっかけ（海外）</label>
+      </div>
+      <div class="dfield" style="margin-top:11px"><label>エキスポットを何で知ったか</label><input type="text" id="dw-knownFrom" placeholder="HP／紹介／リピーター など"></div>
+
+      <div class="dsect"><span class="ico">備</span>備考</div>
+      <div class="dfield">
+        <input type="text" id="dw-note" placeholder="車椅子、確定連絡待ち、設営 など">
+      </div>
+    </div>
+
+    <div class="drawer-foot" id="dwFoot"></div>
+  </aside>
+
+  <div class="toast" id="toast"><span class="tk" id="toastMark">✓</span><span id="toastMsg"></span></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- master data ----------
+  const ROOMS = [
+    {id:"D",   name:"D",            full:"ガイダンスルーム", cap:80,  fee:8000, equip:"椅子・モニター"},
+    {id:"H2",  name:"H2",           full:"多目的ルーム",     cap:30,  fee:5000, equip:"椅子"},
+    {id:"HALL",name:"展示ホール",    full:"展示イベントホール",cap:40,  fee:12000,equip:"椅子・デスク・モニター"},
+    {id:"LIB", name:"ライブラリー",  full:"ライブラリー",     cap:20,  fee:4000, equip:"椅子6・デスク3・モニター"},
+    {id:"B",   name:"B会議室",       full:"B会議室",          cap:20,  fee:4000, equip:"椅子10・デスク6"},
+    {id:"LOG", name:"ログ跡",        full:"ログ跡／吹き抜け", cap:200, fee:0,    equip:"設備なし・立ちスペース"},
+  ];
+  const R = Object.fromEntries(ROOMS.map(r=>[r.id,r]));
+  // default fill priority: D → H2 → HALL → LIB → B → LOG （受付から近いDを優先）
+  const PRIORITY = ["D","H2","HALL","LIB","B","LOG"];
+
+  // admin-configurable settings（管理画面から変更）
+  const settings = {
+    openTime:"09:00",              // 施設 利用可能 開始
+    closeTime:"21:00",             // 施設 利用可能 終了（施設は21時まで）
+    bizCloseTime:"17:00",          // 営業終了（受付対応の目安）
+    closedDow:[1],                 // 休館曜日（0=日〜6=土, 既定は月=1）
+    allowClosedDayBooking:true,    // 休館日でも予約できる（内部利用を想定）
+    bookAheadMonths:6,             // 予約可能な先の月数（半年）
+  };
+
+  // sample bookings (shared ledger). t in "HH:MM"
+  let seq = 100;
+  const uid = ()=> "bk"+(++seq);
+  const bookings = [
+    {id:uid(), date:"2026-07-07", room:"D",   group:"民生委員 視察団", head:22, groups:2, start:"10:15", end:"11:45", type:"confirmed", purpose:"見学", booker:"田中 一郎", gender:"男", tel:"06-6615-0001", email:"tanaka@minsei.example.jp", emergency:"090-1111-2222", recv:"2026-05-20", category:"民生委員視察", age:"60代以上", transport:"バス", busPark:true, surveyTold:true, shitami:false, locker:false, overseas:false, knownFrom:"紹介", note:"車椅子2名あり"},
+    {id:uid(), date:"2026-07-07", room:"HALL",group:"〇〇小学校 3年", head:38, groups:1, start:"13:00", end:"15:00", type:"confirmed", purpose:"見学", booker:"佐藤 花子", gender:"女", tel:"06-6100-2222", email:"sato@school.example.jp", emergency:"", recv:"2026-04-10", category:"学校団体", age:"10代", transport:"バス", busPark:true, surveyTold:true, shitami:true, locker:true, overseas:false, knownFrom:"HP", note:"研修あり"},
+    {id:uid(), date:"2026-07-07", room:"B",   group:"内部：定例ミーティング", head:8, groups:1, start:"09:00", end:"10:00", type:"internal", purpose:"内部行事", booker:"草刈", gender:"", tel:"", email:"", emergency:"", recv:"", category:"", age:"", transport:"", busPark:false, surveyTold:false, shitami:false, locker:false, overseas:false, knownFrom:"", note:""},
+    {id:uid(), date:"2026-07-07", room:"H2",  group:"△△福祉会", head:18, groups:1, start:"14:00", end:"16:00", type:"tentative", purpose:"見学", booker:"鈴木 次郎", gender:"男", tel:"090-1234-5678", email:"", emergency:"", recv:"2026-06-30", category:"福祉団体", age:"70代以上", transport:"電車", busPark:false, surveyTold:false, shitami:false, locker:false, overseas:false, knownFrom:"リピーター", note:"3日以内に確定連絡もらう"},
+    {id:uid(), date:"2026-07-07", room:"LIB", group:"卓球サークル", head:12, groups:1, start:"15:30", end:"17:00", type:"confirmed", purpose:"卓球", booker:"山本 三郎", gender:"男", tel:"080-9999-0000", email:"yamamoto@example.jp", emergency:"", recv:"2026-06-01", category:"サークル", age:"60代以上", transport:"電車", busPark:false, surveyTold:false, shitami:false, locker:false, overseas:false, knownFrom:"", note:""},
+    {id:uid(), date:"2026-07-15", room:"D",   group:"健康フェスタ実行委員会", head:60, groups:1, start:"10:15", end:"16:00", type:"tentative", purpose:"セミナー", booker:"奥田", gender:"", tel:"06-0000-0000", email:"", emergency:"", recv:"2026-06-15", category:"イベント", age:"", transport:"", busPark:false, surveyTold:false, shitami:false, locker:false, overseas:false, knownFrom:"", note:"設営あり"},
+    {id:uid(), date:"2026-07-22", room:"HALL",group:"海外視察団（台湾）", head:25, groups:1, start:"13:30", end:"15:30", type:"confirmed", purpose:"見学", booker:"Lin", gender:"", tel:"", email:"lin@example.tw", emergency:"", recv:"2026-05-02", category:"海外視察", age:"", transport:"バス", busPark:true, surveyTold:true, shitami:false, locker:false, overseas:true, knownFrom:"海外の紹介", note:"英語対応・モニターでDVD説明"},
+  ];
+  const REGULARS = [
+    {name:"〇〇小学校 3年", purpose:"見学", head:38, training:true},
+    {name:"民生委員 視察団", purpose:"見学", head:22, training:false},
+    {name:"△△デイサービス", purpose:"見学", head:15, training:false},
+    {name:"健康フェスタ実行委員会", purpose:"セミナー", head:60, lecturer:true, exhibit:true},
+  ];
+
+  // ---------- helpers ----------
+  const pad=n=>(n<10?"0":"")+n;
+  const toMin=t=>{const[a,b]=t.split(":").map(Number);return a*60+b;};
+  const fmtYen=n=>"¥"+n.toLocaleString("ja-JP");
+  const DOW=["日","月","火","水","木","金","土"];
+  // fixed reference date to avoid Date.now dependency
+  const refToday = new Date(2026,6,7);           // 「今日」= 2026-07-07
+  let viewDate = new Date(2026,6,7);
+  const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+  const dateOnly=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  function windowEndDate(){ const e=dateOnly(refToday); e.setMonth(e.getMonth()+settings.bookAheadMonths); return e; }
+  function windowEndLabel(){ const e=windowEndDate(); return e.getFullYear()+"年"+(e.getMonth()+1)+"月"+e.getDate()+"日"; }
+  function inWindow(d){ const x=dateOnly(d); return x>=dateOnly(refToday) && x<=windowEndDate(); }
+  function isClosed(d){ return settings.closedDow.includes(d.getDay()); }
+
+  function overlaps(aS,aE,bS,bE){return toMin(aS)<toMin(bE)&&toMin(bS)<toMin(aE);}
+  function conflictsFor(room,date,start,end){
+    return bookings.filter(b=>b.room===room&&b.date===date&&b.type!=="cancelled"&&overlaps(start,end,b.start,b.end));
+  }
+
+  // ================= INTERNAL BOARD =================
+  const STEP=15;
+  function renderBoard(){
+    document.getElementById("dateLabel").textContent =
+      viewDate.getFullYear()+"年"+(viewDate.getMonth()+1)+"月"+viewDate.getDate()+"日";
+    document.getElementById("dowLabel").textContent = "（"+DOW[viewDate.getDay()]+"）";
+    const date=iso(viewDate);
+    const SLOT_START=toMin(settings.openTime), SLOT_END=toMin(settings.closeTime), BIZ=toMin(settings.bizCloseTime);
+
+    // closed-day banner
+    const closed=isClosed(viewDate);
+    const banner=document.getElementById("boardBanner");
+    if(closed){
+      banner.className="closed-note "+(settings.allowClosedDayBooking?"soft":"hard");
+      banner.innerHTML = settings.allowClosedDayBooking
+        ? `本日（${DOW[viewDate.getDay()]}曜）は<b>休館日</b>です。外部予約は受け付けませんが、<b>内部利用の登録は可能</b>です。`
+        : `本日（${DOW[viewDate.getDay()]}曜）は<b>休館日</b>のため予約できません（管理画面で変更できます）。`;
+      banner.style.display="block";
+    } else banner.style.display="none";
+
+    const head=document.getElementById("boardHead");
+    head.innerHTML='<th class="timehead">時間</th>'+ROOMS.map(r=>
+      `<th>${r.name}<span class="cap">定員${r.cap}</span></th>`).join("");
+
+    const body=document.getElementById("boardBody");
+    let rows="";
+    const canBook = !closed || settings.allowClosedDayBooking;
+    // occupancy map: for each room, which slot index starts a booking / is covered
+    const dayBk=bookings.filter(b=>b.date===date);
+    for(let m=SLOT_START;m<SLOT_END;m+=STEP){
+      const hh=Math.floor(m/60), mm=m%60;
+      const isHour=mm===0;
+      const afterBiz = m>=BIZ;
+      const label = mm===0? `${pad(hh)}:00` : (mm===30? `${pad(hh)}:30` : "");
+      rows+=`<tr class="${isHour?'hourrow':''} ${m===BIZ?'bizline':''}">`;
+      rows+=`<td class="timecell ${isHour?'hourtop':''} ${m===BIZ?'bizmark':''}">${label}${m===BIZ?'<span class="bizlb">営業終了</span>':''}</td>`;
+      for(const r of ROOMS){
+        const starting=dayBk.find(b=>b.room===r.id && toMin(b.start)===m);
+        const covered =dayBk.find(b=>b.room===r.id && toMin(b.start)<m && toMin(b.end)>m);
+        if(starting){
+          const span=Math.round((toMin(starting.end)-toMin(starting.start))/STEP);
+          const tag = starting.type==="tentative"?'<span class="tag t-kari">仮</span>'
+                    : starting.type==="internal"?'<span class="tag t-nai">内部</span>':'';
+          rows+=`<td class="slot occupied" rowspan="${span}" data-id="${starting.id}" tabindex="0" role="button" aria-label="${starting.group} の予約詳細">
+            <div class="bk ${starting.type}">${tag}
+              <span class="g">${starting.group}</span>
+              <span class="m num">${starting.start}–${starting.end}・${starting.head}名</span>
+            </div></td>`;
+        } else if(covered){
+          // covered by rowspan above -> render nothing
+        } else if(canBook){
+          rows+=`<td class="slot ${afterBiz?'afterbiz':''}" tabindex="0" data-room="${r.id}" data-min="${m}" role="button" aria-label="${r.name} ${pad(hh)}:${pad(mm)} 空き"></td>`;
+        } else {
+          rows+=`<td class="slot nobook ${afterBiz?'afterbiz':''}"></td>`;
+        }
+      }
+      rows+="</tr>";
+    }
+    body.innerHTML=rows;
+
+    body.querySelectorAll(".slot:not(.occupied):not(.nobook)").forEach(el=>{
+      el.addEventListener("click",()=>quickAdd(el));
+      el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();quickAdd(el);}});
+    });
+    body.querySelectorAll(".slot.occupied").forEach(el=>{
+      el.addEventListener("click",()=>openDetail(el.dataset.id));
+      el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetail(el.dataset.id);}});
+    });
+  }
+  function quickAdd(el){
+    const room=el.dataset.room, m=+el.dataset.min;
+    const t=pad(Math.floor(m/60))+":"+pad(m%60);
+    const end=pad(Math.floor((m+60)/60))+":"+pad((m+60)%60);
+    // open the drawer in "new" mode with the clicked slot pre-filled (time is editable)
+    openDetail(null,{room, date:iso(viewDate), start:t, end});
+  }
+  document.getElementById("prevDay").onclick=()=>{viewDate.setDate(viewDate.getDate()-1);renderBoard();};
+  document.getElementById("nextDay").onclick=()=>{viewDate.setDate(viewDate.getDate()+1);renderBoard();};
+
+  // ================= DETAIL DRAWER =================
+  const dw = {
+    root:document.getElementById("drawer"), scrim:document.getElementById("scrim"),
+    room:document.getElementById("dw-room"),
+  };
+  // room options
+  dw.room.innerHTML = ROOMS.map(r=>`<option value="${r.id}">${r.name}（${r.full}）</option>`).join("");
+  let editingId=null;   // null => new booking
+
+  function dwSet(id,v){document.getElementById(id).value = v==null?"":v;}
+  function dwGet(id){return document.getElementById(id).value;}
+  function dwSetChk(id,v){document.getElementById(id).checked = !!v;}
+  function dwGetChk(id){return document.getElementById(id).checked;}
+  function dwSetRadio(name,v){
+    const rs=dw.root.querySelectorAll('input[name="'+name+'"]');
+    rs.forEach(r=>{r.checked = (r.value===(v||""));});
+  }
+  function dwGetRadio(name){
+    const r=dw.root.querySelector('input[name="'+name+'"]:checked');
+    return r?r.value:"";
+  }
+  function updateAgeWarn(){
+    const a=dwGet("dw-age");
+    document.getElementById("dw-agewarn").classList.toggle("show", a==="60代以上"||a==="70代以上");
+  }
+
+  function openDetail(id, presets){
+    const isNew = !id;
+    editingId = id;
+    const b = isNew ? Object.assign({group:"",booker:"",head:"",groups:"",gender:"",tel:"",email:"",emergency:"",
+                     date:iso(viewDate),recv:iso(refToday),start:"10:15",end:"11:15",room:"D",purpose:"見学",
+                     category:"",age:"",transport:"",busPark:false,surveyTold:false,shitami:false,locker:false,
+                     overseas:false,knownFrom:"",note:"",type:"tentative"}, presets||{})
+                    : bookings.find(x=>x.id===id);
+
+    document.getElementById("dwRoom").textContent = R[b.room].full;
+    document.getElementById("dwTitle").textContent = isNew ? "新規の仮予約" : (b.group||"（無題）");
+    dwSet("dw-group",b.group); dwSet("dw-booker",b.booker); dwSet("dw-head",b.head);
+    dwSet("dw-groups",b.groups); dwSet("dw-category",b.category); dwSet("dw-age",b.age||"");
+    dwSetRadio("gender",b.gender);
+    dwSet("dw-tel",b.tel); dwSet("dw-email",b.email); dwSet("dw-emergency",b.emergency);
+    dwSet("dw-date",b.date); dwSet("dw-recv",b.recv);
+    dwSet("dw-start",b.start); dwSet("dw-end",b.end);
+    dw.room.value=b.room; dwSet("dw-purpose",b.purpose||"見学");
+    dwSetRadio("transport",b.transport);
+    dwSetChk("dw-busPark",b.busPark); dwSetChk("dw-surveyTold",b.surveyTold);
+    dwSetChk("dw-shitami",b.shitami); dwSetChk("dw-locker",b.locker); dwSetChk("dw-overseas",b.overseas);
+    dwSet("dw-knownFrom",b.knownFrom); dwSet("dw-note",b.note);
+    updateAgeWarn();
+
+    paintStatus(b.type);
+    paintFoot(b.type, isNew);
+    document.getElementById("dwCancelBanner").classList.toggle("hidden", b.type!=="cancelled");
+
+    dw.scrim.classList.add("show"); dw.root.classList.add("show");
+    document.getElementById("dw-group").focus();
+  }
+
+  function paintStatus(type){
+    const badge=document.getElementById("dwBadge");
+    const map={tentative:["仮予約","tentative"],confirmed:["本予約（確定）","confirmed"],
+               internal:["内部利用","internal"],cancelled:["キャンセル済み","cancelled"]};
+    const [label,cls]=map[type]||map.tentative;
+    badge.textContent=label; badge.className="status-badge "+cls;
+
+    const stepper=document.getElementById("dwStepper");
+    stepper.classList.toggle("is-cancelled", type==="cancelled");
+    const order={tentative:0,confirmed:1,internal:1,cancelled:-1};
+    const cur=order[type];
+    stepper.querySelectorAll(".st").forEach((st,i)=>{
+      st.classList.remove("done","current");
+      if(type==="cancelled")return;
+      if(i<cur) st.classList.add("done");
+      else if(i===cur) st.classList.add("current");
+    });
+    // internal bookings skip 仮→本; treat as confirmed-like
+    if(type==="internal"){
+      const sts=stepper.querySelectorAll(".st");
+      sts[0].classList.add("done"); sts[0].classList.remove("current");
+      sts[1].classList.add("current");
+    }
+  }
+
+  function paintFoot(type,isNew){
+    const foot=document.getElementById("dwFoot");
+    let h="";
+    if(isNew){
+      h=`<button class="btn primary" id="dw-create">仮予約で登録</button>
+         <div class="foot-spacer"></div>
+         <button class="btn ghost" id="dw-cancelEdit">やめる</button>`;
+    } else if(type==="tentative"){
+      h=`<button class="btn confirm" id="dw-confirm">本予約に確定</button>
+         <button class="btn primary" id="dw-save">変更を保存</button>
+         <div class="foot-spacer"></div>
+         <button class="btn danger" id="dw-cancel">キャンセル</button>`;
+    } else if(type==="confirmed"||type==="internal"){
+      h=`<button class="btn primary" id="dw-save">変更を保存</button>
+         <button class="btn ghost" id="dw-revert">仮予約に戻す</button>
+         <div class="foot-spacer"></div>
+         <button class="btn danger" id="dw-cancel">キャンセル</button>`;
+    } else { // cancelled
+      h=`<button class="btn ghost" id="dw-restore">仮予約に戻す</button>
+         <div class="foot-spacer"></div>
+         <button class="btn danger" id="dw-delete">削除する</button>`;
+    }
+    foot.innerHTML=h;
+    const on=(id,fn)=>{const e=document.getElementById(id); if(e)e.onclick=fn;};
+    on("dw-create",()=>saveNew());
+    on("dw-cancelEdit",closeDrawer);
+    on("dw-save",()=>saveEdit(null));
+    on("dw-confirm",()=>saveEdit("confirmed","本予約に確定しました"));
+    on("dw-revert",()=>saveEdit("tentative","仮予約に戻しました"));
+    on("dw-cancel",()=>saveEdit("cancelled","予約をキャンセルしました"));
+    on("dw-restore",()=>saveEdit("tentative","仮予約に戻しました"));
+    on("dw-delete",()=>{ const i=bookings.findIndex(x=>x.id===editingId); if(i>=0)bookings.splice(i,1);
+      closeDrawer(); renderBoard(); toast("予約を削除しました"); });
+  }
+
+  function collect(){
+    return {group:dwGet("dw-group")||"（無題）", booker:dwGet("dw-booker"),
+      head:parseInt(dwGet("dw-head")||"0",10), groups:dwGet("dw-groups"),
+      gender:dwGetRadio("gender"), category:dwGet("dw-category"), age:dwGet("dw-age"),
+      tel:dwGet("dw-tel"), email:dwGet("dw-email"), emergency:dwGet("dw-emergency"),
+      date:dwGet("dw-date"), recv:dwGet("dw-recv"),
+      start:dwGet("dw-start"), end:dwGet("dw-end"), room:dw.room.value, purpose:dwGet("dw-purpose"),
+      transport:dwGetRadio("transport"), busPark:dwGetChk("dw-busPark"), surveyTold:dwGetChk("dw-surveyTold"),
+      shitami:dwGetChk("dw-shitami"), locker:dwGetChk("dw-locker"), overseas:dwGetChk("dw-overseas"),
+      knownFrom:dwGet("dw-knownFrom"), note:dwGet("dw-note")};
+  }
+  document.getElementById("dw-age").addEventListener("change",updateAgeWarn);
+  function timeValid(c){ return c.start && c.end && toMin(c.end)>toMin(c.start); }
+
+  function saveNew(){
+    const c=collect();
+    if(!timeValid(c)){toast("終了は開始より後にしてください","!");return;}
+    const conf=conflictsFor(c.room,c.date,c.start,c.end);
+    if(conf.length){toast(R[c.room].name+" は先約あり（"+conf[0].group+"）","!");return;}
+    bookings.push(Object.assign({id:uid(),type:"tentative"},c));
+    closeDrawer(); renderBoard(); toast((c.group)+" を仮予約で登録しました");
+  }
+  function saveEdit(newType, msg){
+    const b=bookings.find(x=>x.id===editingId); if(!b)return;
+    const c=collect();
+    if(!timeValid(c)){toast("終了は開始より後にしてください","!");return;}
+    // conflict check against OTHERS in same room/time
+    const conf=bookings.filter(x=>x.id!==b.id && x.room===c.room && x.date===c.date
+                 && x.type!=="cancelled" && overlaps(c.start,c.end,x.start,x.end));
+    if(conf.length && (newType!=="cancelled")){toast(R[c.room].name+" は先約あり（"+conf[0].group+"）","!");return;}
+    Object.assign(b,c); if(newType) b.type=newType;
+    paintStatus(b.type); paintFoot(b.type,false);
+    document.getElementById("dwTitle").textContent=b.group;
+    document.getElementById("dwCancelBanner").classList.toggle("hidden", b.type!=="cancelled");
+    renderBoard();
+    toast(msg || "変更を保存しました");
+    if(newType==="cancelled"||newType) { /* keep drawer open to show new state */ }
+  }
+
+  function closeDrawer(){ dw.scrim.classList.remove("show"); dw.root.classList.remove("show"); }
+  document.getElementById("dwClose").onclick=closeDrawer;
+  dw.scrim.onclick=closeDrawer;
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeDrawer(); });
+
+  // ================= MONTH CALENDAR =================
+  let calMonth = new Date(2026,6,1);   // first day of shown month
+  const MONTHW = ["日","月","火","水","木","金","土"];
+  function renderMonth(){
+    document.getElementById("monthLabel").textContent =
+      calMonth.getFullYear()+"年"+(calMonth.getMonth()+1)+"月";
+    document.getElementById("winLabel").textContent = "半年先（"+windowEndLabel()+"）";
+    const grid=document.getElementById("calGrid");
+    let html = MONTHW.map((d,i)=>`<div class="cal-dow ${i===0?'sun':i===6?'sat':''}">${d}</div>`).join("");
+
+    const y=calMonth.getFullYear(), mo=calMonth.getMonth();
+    const first=new Date(y,mo,1), lead=first.getDay();
+    const dim=new Date(y,mo+1,0).getDate();
+
+    for(let i=0;i<lead;i++) html+=`<div class="cal-cell blank"></div>`;
+    for(let d=1;d<=dim;d++){
+      const cur=new Date(y,mo,d), ds=iso(cur), dow=cur.getDay();
+      const dowCls=dow===0?'sun':dow===6?'sat':'';
+      const closed=isClosed(cur), out=!inWindow(cur);
+      const dayBk=bookings.filter(b=>b.date===ds).sort((a,b)=>toMin(a.start)-toMin(b.start));
+      const isToday = ds===iso(refToday);
+
+      let cls="cal-cell "+dowCls;
+      if(isToday) cls+=" today";
+      if(closed) cls+=" closed"; else if(out) cls+=" outwin";
+
+      let inner=`<span class="dn">${d}</span>`;
+      if(out){
+        inner+=`<span class="outwin-lb">受付範囲外</span>`;
+      } else {
+        if(closed) inner+=`<span class="closed-lb">休館</span>`;
+        if(dayBk.length) inner=`<span class="cal-count">${dayBk.length}</span>`+inner;
+        const show=dayBk.slice(0,3);
+        show.forEach(b=>{ inner+=`<span class="cchip ${b.type}">${b.start} ${b.group}</span>`; });
+        if(dayBk.length>3) inner+=`<span class="cmore">＋${dayBk.length-3}件</span>`;
+      }
+      const clickable = !out && (!closed || settings.allowClosedDayBooking);
+      html+=`<div class="${cls}" ${clickable?`tabindex="0" role="button" data-date="${ds}" aria-label="${cur.getMonth()+1}月${d}日 予約${dayBk.length}件"`:''}>${inner}</div>`;
+    }
+    grid.innerHTML=html;
+    grid.querySelectorAll(".cal-cell[data-date]").forEach(el=>{
+      const go=()=>{ const [Y,M,D]=el.dataset.date.split("-").map(Number);
+        viewDate=new Date(Y,M-1,D); renderBoard(); setView("day"); };
+      el.addEventListener("click",go);
+      el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
+    });
+  }
+  document.getElementById("prevMonth").onclick=()=>{calMonth.setMonth(calMonth.getMonth()-1);renderMonth();};
+  document.getElementById("nextMonth").onclick=()=>{calMonth.setMonth(calMonth.getMonth()+1);renderMonth();};
+
+  // view toggle
+  function setView(which){
+    const day=which==="day";
+    document.getElementById("vt-day").setAttribute("aria-pressed",day);
+    document.getElementById("vt-month").setAttribute("aria-pressed",!day);
+    document.getElementById("boardView").classList.toggle("hidden",!day);
+    document.getElementById("monthView").classList.toggle("hidden",day);
+    document.getElementById("internalTitle").textContent = day?"空き状況ボード":"月間カレンダー";
+    document.getElementById("internalLede").textContent = day
+      ? "紙の施設表と同じ「部屋 × 時間」の一覧。全員が同じ画面を見るので、二重予約が起きません。"
+      : "月単位で予約の埋まり具合を俯瞰。日付をクリックすると、その日のボードに切り替わります。";
+    if(!day){ calMonth=new Date(viewDate.getFullYear(),viewDate.getMonth(),1); renderMonth(); }
+  }
+  document.getElementById("vt-day").onclick=()=>setView("day");
+  document.getElementById("vt-month").onclick=()=>setView("month");
+
+  // ================= EXTERNAL RECOMMENDATION =================
+  const el=id=>document.getElementById(id);
+  function readForm(){
+    return {
+      group:el("f-group").value.trim(),
+      purpose:el("f-purpose").value,
+      head:parseInt(el("f-head").value||"0",10),
+      date:el("f-date").value,
+      start:el("f-start").value,
+      end:el("f-end").value,
+      training:el("f-training").checked,
+      lecturer:el("f-lecturer").checked,
+      exhibit:el("f-exhibit").checked,
+      fee:el("f-fee").value,
+    };
+  }
+
+  // core allocation logic derived from hearing answers
+  function recommend(f){
+    const why=[];
+    let primaryId;
+
+    if(f.purpose==="全室"){
+      return {primary:null, allRooms:true, addons:[], why:["イベント全室使用のため、全部屋を確保します。"]};
+    }
+    if(f.purpose==="卓球"){
+      primaryId = f.head>40 ? "LOG" : "HALL";
+      why.push("卓球は広い空間が必要なため "+R[primaryId].name+" を提案。");
+    } else if(f.purpose==="会議"){
+      primaryId = f.head<=20 ? "B" : "H2";
+      why.push("会議利用のため "+R[primaryId].name+" を提案。");
+    } else if(f.purpose==="エコプラザ"){
+      primaryId = "H2";
+      why.push("エコプラザ利用。エイジレスと同時利用になる場合があります。");
+    } else if(f.purpose==="見学" && f.training){
+      primaryId="HALL";
+      why.push("研修を含む見学のため、展示イベントホールが望ましい。");
+    } else {
+      // default: fill D → H2 by capacity, 受付から近い順
+      primaryId = PRIORITY.find(id=>R[id].cap>=f.head && id!=="LOG") || "LOG";
+      if(primaryId==="D") why.push("受付から案内しやすい D を最優先で提案（定員"+R.D.cap+"）。");
+      else why.push("人数 "+f.head+"名 に合う "+R[primaryId].name+" を提案（定員"+R[primaryId].cap+"）。");
+    }
+
+    // capacity note
+    if(f.head>R[primaryId].cap){
+      why.push("※ 人数が定員を超えています。分割か別室をご検討ください。");
+    }
+
+    // add-ons
+    const addons=[];
+    if((f.purpose==="セミナー"||f.training) && f.lecturer){
+      addons.push({id:"B", reason:"外部講師の控室として B会議室 を追加確保。"});
+    }
+    if((f.purpose==="セミナー"||f.training) && f.exhibit){
+      addons.push({id:"H2", reason:"展示スペースとして 多目的ルーム(H2) を追加確保。"});
+    }
+    return {primary:primaryId, allRooms:false, addons, why};
+  }
+
+  function renderRec(){
+    const f=readForm();
+    const body=el("recBody");
+    if(!f.head||!f.start||!f.end||toMin(f.end)<=toMin(f.start)){
+      body.innerHTML=`<div class="empty-state"><div class="big">◔</div>
+        人数と時間を入れると、おすすめの部屋が表示されます。</div>`;
+      return;
+    }
+    const rec=recommend(f);
+    let html="";
+
+    // half-year booking window check
+    if(f.date){
+      const [Y,M,D]=f.date.split("-").map(Number);
+      const fd=new Date(Y,M-1,D);
+      if(!inWindow(fd)){
+        html+=`<div class="warnbox warn"><span class="ic">!</span><div>
+          この日付は<b>受付範囲外</b>です。予約は半年先（${windowEndLabel()}）まで、当日以降が対象です。</div></div>`;
+      } else if(isClosed(fd)){
+        html+=`<div class="warnbox crit"><span class="ic">✕</span><div>
+          <b>${DOW[fd.getDay()]}曜は休館</b>です。外部予約は受け付けていません（内部利用のみ）。別の日をご案内ください。</div></div>`;
+      }
+    }
+
+    // conflict / status banner
+    const targetIds = rec.allRooms ? ROOMS.map(r=>r.id)
+                      : [rec.primary, ...rec.addons.map(a=>a.id)].filter(Boolean);
+    let conflictRooms=[];
+    targetIds.forEach(id=>{ if(conflictsFor(id,f.date,f.start,f.end).length) conflictRooms.push(id); });
+
+    if(conflictRooms.length){
+      const names=conflictRooms.map(id=>R[id].name).join("・");
+      html+=`<div class="warnbox crit"><span class="ic">✕</span><div>
+        <b>${names}</b> はこの時間に先約があります。別室に切り替えるか、担当者で調整してください。</div></div>`;
+    } else if(rec.primary && f.head>R[rec.primary].cap){
+      html+=`<div class="warnbox warn"><span class="ic">!</span><div>
+        人数が定員を超えています。部屋の分割・複数室の利用をご検討ください。</div></div>`;
+    } else {
+      html+=`<div class="warnbox ok"><span class="ic">✓</span><div>この時間は空いています。おすすめ通りに確保できます。</div></div>`;
+    }
+
+    // recommendation cards
+    if(rec.allRooms){
+      html+=`<div class="rec"><div class="rec-top"><span class="badge">全室</span>
+        <span class="rname">全部屋を確保</span></div>
+        <div class="rec-body"><ul class="rec-why"><li>イベント関連の全室使用のため、6室すべてを押さえます。</li></ul></div></div>`;
+    } else if(rec.primary){
+      const r=R[rec.primary], conf=conflictsFor(rec.primary,f.date,f.start,f.end).length>0;
+      html+=`<div class="rec"><div class="rec-top">
+        <span class="badge">おすすめ</span><span class="rname">${r.name}</span>
+        <span class="rcap num">定員 ${r.cap}／${r.equip}</span></div>
+        <div class="rec-body"><ul class="rec-why">${rec.why.map(w=>`<li>${w}</li>`).join("")}
+        ${conf?'<li style="color:var(--crit)">この部屋は先約あり。上書き注意。</li>':''}</ul></div></div>`;
+    }
+    rec.addons.forEach(a=>{
+      const r=R[a.id];
+      html+=`<div class="rec addon"><div class="rec-top">
+        <span class="badge">追加</span><span class="rname">${r.name}</span>
+        <span class="rcap num">定員 ${r.cap}</span></div>
+        <div class="rec-body"><ul class="rec-why"><li>${a.reason}</li></ul></div></div>`;
+    });
+
+    // fee
+    let feeRooms = rec.allRooms ? ROOMS.slice() : targetIds.map(id=>R[id]);
+    if(f.fee==="free"){
+      html+=`<table class="fee-table"><tbody>`;
+      feeRooms.forEach(r=>{ html+=`<tr><td>${r.name}</td><td class="amt">無料</td></tr>`; });
+      html+=`<tr class="total"><td>料金</td><td class="amt">無料（施設予約）</td></tr></tbody></table>`;
+      html+=`<div class="fee-note" style="color:var(--good)">✓ 施設予約のため料金はかかりません。</div>`;
+    } else {
+      const total = feeRooms.reduce((s,r)=>s+r.fee,0);
+      html+=`<table class="fee-table"><tbody>`;
+      feeRooms.forEach(r=>{ html+=`<tr><td>${r.name}</td><td class="amt num">${fmtYen(r.fee)}</td></tr>`; });
+      html+=`<tr class="total"><td>合計（前払い・返金なし）</td><td class="amt num">${fmtYen(total)}</td></tr></tbody></table>`;
+      html+=`<div class="fee-note">※ 料金は仮の数値です。実際の料金体系は要確認。</div>`;
+    }
+
+    // actions
+    html+=`<div class="actions">
+      <button class="btn primary" id="doBook">この内容で 仮予約する</button>
+      <button class="btn ghost" id="doOverride">別の部屋に変更…</button></div>
+      <p class="override-note">「別の部屋に変更」を押すと、条件に合わなくても手動で任意の部屋を選べます（人の判断を優先）。</p>`;
+
+    body.innerHTML=html;
+
+    el("doBook").onclick=()=>{
+      if(conflictRooms.length){toast("先約があるため、別室に変更してください","!");return;}
+      const ids = rec.allRooms?ROOMS.map(r=>r.id):targetIds;
+      ids.forEach(id=>bookings.push({date:f.date,room:id,group:(f.group||"（外部・仮）")+"（仮）",head:f.head,start:f.start,end:f.end,type:"tentative"}));
+      toast((f.group||"外部予約")+" を仮予約に登録しました（ボードに反映）");
+      if(f.date===iso(viewDate)) renderBoard();
+    };
+    el("doOverride").onclick=()=>{
+      const opts=ROOMS.map((r,i)=>`${i+1}: ${r.name}（定員${r.cap}）`).join("\n");
+      const pick=prompt("手動で部屋を選びます。番号を入力：\n"+opts);
+      const idx=parseInt(pick,10)-1;
+      if(idx>=0&&idx<ROOMS.length){
+        const id=ROOMS[idx].id;
+        bookings.push({date:f.date,room:id,group:(f.group||"（外部・仮）")+"（仮）",head:f.head,start:f.start,end:f.end,type:"tentative"});
+        toast(R[id].name+" に手動で仮予約しました");
+        if(f.date===iso(viewDate)) renderBoard();
+      }
+    };
+  }
+
+  // regulars datalist + auto-fill
+  const dl=document.getElementById("regulars");
+  dl.innerHTML=REGULARS.map(r=>`<option value="${r.name}">`).join("");
+  el("f-group").addEventListener("change",()=>{
+    const r=REGULARS.find(x=>x.name===el("f-group").value);
+    if(!r)return;
+    el("f-purpose").value=r.purpose;
+    el("f-head").value=r.head;
+    el("f-training").checked=!!r.training;
+    el("f-lecturer").checked=!!r.lecturer;
+    el("f-exhibit").checked=!!r.exhibit;
+    toast(r.name+" の前回条件を読み込みました");
+    renderRec();
+  });
+  // 部屋貸しを選んだら料金区分を「有料」に寄せる（他は無料が既定）
+  el("f-purpose").addEventListener("change",()=>{
+    el("f-fee").value = el("f-purpose").value==="部屋貸し" ? "paid" : "free";
+  });
+  ["f-purpose","f-head","f-date","f-start","f-end","f-training","f-lecturer","f-exhibit","f-group","f-fee"]
+    .forEach(id=>el(id).addEventListener("input",renderRec));
+
+  // ---------- tabs ----------
+  let lastTab="internal";
+  function selectTab(which){
+    lastTab=which;
+    const ti=document.getElementById("tab-internal"), te=document.getElementById("tab-external");
+    const vi=document.getElementById("view-internal"), ve=document.getElementById("view-external");
+    const internal=which==="internal";
+    ti.setAttribute("aria-selected",internal); te.setAttribute("aria-selected",!internal);
+    vi.classList.toggle("hidden",!internal); ve.classList.toggle("hidden",internal);
+  }
+  document.getElementById("tab-internal").onclick=()=>selectTab("internal");
+  document.getElementById("tab-external").onclick=()=>selectTab("external");
+
+  // ---------- admin / master ----------
+  const DOWJP=["日","月","火","水","木","金","土"];
+  function fillAdminInputs(){
+    document.getElementById("as-open").value=settings.openTime;
+    document.getElementById("as-close").value=settings.closeTime;
+    document.getElementById("as-biz").value=settings.bizCloseTime;
+    document.getElementById("as-allowClosed").checked=settings.allowClosedDayBooking;
+    document.getElementById("as-ahead").value=settings.bookAheadMonths;
+    document.getElementById("as-dow").innerHTML=DOWJP.map((d,i)=>
+      `<label><input type="checkbox" value="${i}" ${settings.closedDow.includes(i)?"checked":""}>${d}</label>`).join("");
+  }
+  function renderMaster(){
+    document.getElementById("masterTable").innerHTML=
+      `<thead><tr><th>略称</th><th>正式名称</th><th>定員</th><th>料金(円)</th><th>設備</th><th>状態</th></tr></thead><tbody>`+
+      ROOMS.map(r=>`<tr data-id="${r.id}">
+        <td><b>${r.name}</b></td><td>${r.full}</td>
+        <td><input type="number" class="num m-cap" value="${r.cap}" min="0"></td>
+        <td><input type="number" class="num m-fee" value="${r.fee}" min="0"></td>
+        <td><input type="text" class="m-eq" value="${r.equip}"></td>
+        <td><span class="statepill on">有効</span></td>
+      </tr>`).join("")+`</tbody>`;
+  }
+  function openAdmin(){
+    fillAdminInputs(); renderMaster();
+    document.querySelector("nav.switch").style.display="none";
+    document.getElementById("view-internal").classList.add("hidden");
+    document.getElementById("view-external").classList.add("hidden");
+    document.getElementById("view-admin").classList.remove("hidden");
+    window.scrollTo(0,0);
+  }
+  function closeAdmin(){
+    document.getElementById("view-admin").classList.add("hidden");
+    document.querySelector("nav.switch").style.display="";
+    selectTab(lastTab);
+  }
+  document.getElementById("adminOpen").onclick=openAdmin;
+  document.getElementById("adminBack").onclick=closeAdmin;
+  document.getElementById("adminSave").onclick=()=>{
+    settings.openTime=document.getElementById("as-open").value||"09:00";
+    settings.closeTime=document.getElementById("as-close").value||"21:00";
+    settings.bizCloseTime=document.getElementById("as-biz").value||"17:00";
+    settings.allowClosedDayBooking=document.getElementById("as-allowClosed").checked;
+    settings.bookAheadMonths=Math.max(1,parseInt(document.getElementById("as-ahead").value||"6",10));
+    settings.closedDow=[...document.querySelectorAll("#as-dow input:checked")].map(x=>+x.value);
+    document.querySelectorAll("#masterTable tbody tr").forEach(tr=>{
+      const r=R[tr.dataset.id];
+      r.cap=parseInt(tr.querySelector(".m-cap").value||"0",10);
+      r.fee=parseInt(tr.querySelector(".m-fee").value||"0",10);
+      r.equip=tr.querySelector(".m-eq").value;
+    });
+    renderBoard();
+    const m=document.getElementById("adminMsg"); m.classList.add("show"); setTimeout(()=>m.classList.remove("show"),2200);
+    toast("設定を保存し、画面に反映しました");
+  };
+  document.getElementById("adminReset").onclick=()=>{
+    Object.assign(settings,{openTime:"09:00",closeTime:"21:00",bizCloseTime:"17:00",closedDow:[1],allowClosedDayBooking:true,bookAheadMonths:6});
+    fillAdminInputs(); toast("既定値に戻しました");
+  };
+
+  // ---------- toast ----------
+  let toastTimer;
+  function toast(msg,mark){
+    const t=document.getElementById("toast");
+    document.getElementById("toastMsg").textContent=msg;
+    const m=document.getElementById("toastMark"); m.textContent=mark||"✓";
+    m.style.color = mark==="!" ? "var(--amber)" : "#7FE0C4";
+    t.classList.add("show"); clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>t.classList.remove("show"),2600);
+  }
+
+  // ---------- init ----------
+  renderBoard();
+  renderRec();
+})();
+</script>
+
+</body>
+</html>
