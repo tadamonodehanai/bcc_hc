@@ -1,0 +1,46 @@
+<svg width="760" height="620" viewBox="0 0 760 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="97" y1="70" x2="651" y2="523" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EAF8FF"/>
+      <stop offset="1" stop-color="#FFF1E8"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="86" y1="97" x2="617" y2="455" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4E8DFF"/>
+      <stop offset="1" stop-color="#67D8EA"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="760" height="620" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="30" stdDeviation="30" flood-color="#0A234E" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect x="90" y="72" width="580" height="476" rx="38" fill="url(#g1)"/>
+  <g filter="url(#shadow)">
+    <rect x="110" y="102" width="540" height="420" rx="32" fill="white"/>
+  </g>
+  <rect x="142" y="142" width="180" height="224" rx="24" fill="#F4F8FB"/>
+  <circle cx="232" cy="203" r="46" fill="#DFF2FF"/>
+  <path d="M228 180C245 180 258 193 258 210V236H198V210C198 193 211 180 228 180Z" fill="#2E72FF"/>
+  <circle cx="228" cy="167" r="24" fill="#FFD7C2"/>
+  <rect x="171" y="255" width="114" height="14" rx="7" fill="#C9D6E6"/>
+  <rect x="171" y="281" width="82" height="10" rx="5" fill="#D6E3F0"/>
+  <rect x="171" y="307" width="96" height="10" rx="5" fill="#D6E3F0"/>
+  <rect x="352" y="142" width="260" height="132" rx="24" fill="#F7FBFF"/>
+  <text x="380" y="175" fill="#657187" font-size="14" font-family="Arial, Helvetica, sans-serif">Check overview</text>
+  <rect x="381" y="195" width="84" height="84" rx="22" fill="#EEF5FF"/>
+  <path d="M405 236L422 217L437 233L457 209" stroke="url(#g2)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="490" y="198" width="92" height="10" rx="5" fill="#D6E3F0"/>
+  <rect x="490" y="221" width="77" height="10" rx="5" fill="#D6E3F0"/>
+  <rect x="490" y="244" width="104" height="10" rx="5" fill="#D6E3F0"/>
+  <rect x="352" y="294" width="260" height="170" rx="24" fill="#0A234E"/>
+  <rect x="380" y="334" width="44" height="88" rx="16" fill="#67D8EA" opacity="0.92"/>
+  <rect x="437" y="309" width="44" height="113" rx="16" fill="#2E72FF"/>
+  <rect x="494" y="351" width="44" height="71" rx="16" fill="#FF8F5B"/>
+  <rect x="551" y="322" width="44" height="100" rx="16" fill="#A5B8D6"/>
+  <text x="381" y="324" fill="#FFFFFF" font-size="15" font-family="Arial, Helvetica, sans-serif">Visible insights</text>
+  <rect x="155" y="394" width="167" height="92" rx="22" fill="#FFF8F4"/>
+  <circle cx="191" cy="429" r="18" fill="#FFD7C2"/>
+  <path d="M191 451C207 451 221 464 221 481V486H161V481C161 464 175 451 191 451Z" fill="#FF8F5B"/>
+  <rect x="230" y="416" width="64" height="9" rx="4.5" fill="#F1CAB6"/>
+  <rect x="230" y="437" width="52" height="9" rx="4.5" fill="#F5D8C8"/>
+  <circle cx="620" cy="123" r="40" fill="#E7F7FB"/>
+  <circle cx="105" cy="503" r="32" fill="#FFF1E8"/>
+</svg>

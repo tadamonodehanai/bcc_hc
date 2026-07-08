@@ -1,0 +1,33 @@
+<svg width="1160" height="620" viewBox="0 0 1160 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1160" height="620" rx="40" fill="#F7FBFF"/>
+  <rect x="28" y="28" width="1104" height="564" rx="32" fill="white"/>
+  <text x="72" y="92" fill="#091936" font-size="34" font-family="Arial, Helvetica, sans-serif">働く人と雇う人、双方にとって意味のある見える化</text>
+  <text x="72" y="124" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">評価 → 見える化 → 改善提案まで、一つの流れとして設計</text>
+
+  <rect x="72" y="174" width="286" height="170" rx="28" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <rect x="438" y="174" width="286" height="170" rx="28" fill="#091936"/>
+  <rect x="804" y="174" width="286" height="170" rx="28" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <text x="106" y="216" fill="#2E72FF" font-size="16" font-family="Arial, Helvetica, sans-serif">STEP 1</text>
+  <text x="106" y="256" fill="#091936" font-size="30" font-family="Arial, Helvetica, sans-serif">評価</text>
+  <text x="106" y="292" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">身体機能・認知機能・</text>
+  <text x="106" y="320" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">作業遂行能力・作業負荷</text>
+
+  <text x="472" y="216" fill="#9ED8FF" font-size="16" font-family="Arial, Helvetica, sans-serif">STEP 2</text>
+  <text x="472" y="256" fill="white" font-size="30" font-family="Arial, Helvetica, sans-serif">見える化</text>
+  <text x="472" y="292" fill="rgba(255,255,255,0.82)" font-size="18" font-family="Arial, Helvetica, sans-serif">結果を把握するだけでなく、</text>
+  <text x="472" y="320" fill="rgba(255,255,255,0.82)" font-size="18" font-family="Arial, Helvetica, sans-serif">優先順位の高い論点を明確にする</text>
+
+  <text x="838" y="216" fill="#2E72FF" font-size="16" font-family="Arial, Helvetica, sans-serif">STEP 3</text>
+  <text x="838" y="256" fill="#091936" font-size="30" font-family="Arial, Helvetica, sans-serif">改善提案</text>
+  <text x="838" y="292" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">運動指導・作業改善・</text>
+  <text x="838" y="320" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">環境整備・補助具活用</text>
+
+  <rect x="72" y="392" width="490" height="146" rx="26" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <rect x="598" y="392" width="492" height="146" rx="26" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <text x="106" y="434" fill="#091936" font-size="28" font-family="Arial, Helvetica, sans-serif">働く人にとって</text>
+  <text x="106" y="470" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">自分の身体の状態が分かる</text>
+  <text x="106" y="498" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">無理のない働き方や配慮の検討につながる</text>
+  <text x="632" y="434" fill="#091936" font-size="28" font-family="Arial, Helvetica, sans-serif">雇う人にとって</text>
+  <text x="632" y="470" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">離職・安全衛生・健康経営の施策に活かせる</text>
+  <text x="632" y="498" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">高齢人材活用と現場改善の優先順位が整理しやすい</text>
+</svg>

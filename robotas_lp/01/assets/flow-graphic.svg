@@ -1,0 +1,24 @@
+<svg width="640" height="300" viewBox="0 0 640 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="300" rx="32" fill="#F7FBFF"/>
+  <rect x="42" y="121" width="98" height="58" rx="20" fill="#FFFFFF"/>
+  <rect x="161" y="121" width="98" height="58" rx="20" fill="#FFFFFF"/>
+  <rect x="280" y="121" width="98" height="58" rx="20" fill="#FFFFFF"/>
+  <rect x="399" y="121" width="98" height="58" rx="20" fill="#FFFFFF"/>
+  <rect x="518" y="121" width="80" height="58" rx="20" fill="#FFFFFF"/>
+  <path d="M140 150H161" stroke="#A7B7CC" stroke-width="4"/>
+  <path d="M259 150H280" stroke="#A7B7CC" stroke-width="4"/>
+  <path d="M378 150H399" stroke="#A7B7CC" stroke-width="4"/>
+  <path d="M497 150H518" stroke="#A7B7CC" stroke-width="4"/>
+  <text x="72" y="146" fill="#2E72FF" font-size="12" font-family="Arial, Helvetica, sans-serif">STEP 1</text>
+  <text x="58" y="166" fill="#091936" font-size="16" font-family="Arial, Helvetica, sans-serif">相談</text>
+  <text x="191" y="146" fill="#2E72FF" font-size="12" font-family="Arial, Helvetica, sans-serif">STEP 2</text>
+  <text x="176" y="166" fill="#091936" font-size="16" font-family="Arial, Helvetica, sans-serif">設計</text>
+  <text x="310" y="146" fill="#2E72FF" font-size="12" font-family="Arial, Helvetica, sans-serif">STEP 3</text>
+  <text x="293" y="166" fill="#091936" font-size="16" font-family="Arial, Helvetica, sans-serif">評価</text>
+  <text x="429" y="146" fill="#2E72FF" font-size="12" font-family="Arial, Helvetica, sans-serif">STEP 4</text>
+  <text x="411" y="166" fill="#091936" font-size="16" font-family="Arial, Helvetica, sans-serif">提案</text>
+  <text x="541" y="146" fill="#2E72FF" font-size="12" font-family="Arial, Helvetica, sans-serif">STEP 5</text>
+  <text x="538" y="166" fill="#091936" font-size="16" font-family="Arial, Helvetica, sans-serif">実行</text>
+  <text x="44" y="60" fill="#091936" font-size="26" font-family="Arial, Helvetica, sans-serif">進め方のイメージ</text>
+  <text x="44" y="86" fill="#657187" font-size="14" font-family="Arial, Helvetica, sans-serif">相談から改善提案までを一気通貫で支援</text>
+</svg>

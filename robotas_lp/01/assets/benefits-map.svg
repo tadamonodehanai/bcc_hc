@@ -1,0 +1,22 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="32" fill="#F7FBFF"/>
+  <circle cx="320" cy="180" r="70" fill="#0A234E"/>
+  <text x="277" y="173" fill="white" font-size="20" font-family="Arial, Helvetica, sans-serif">見える化</text>
+  <text x="252" y="199" fill="white" font-size="20" font-family="Arial, Helvetica, sans-serif">→ 対策設計</text>
+  <rect x="62" y="78" width="154" height="74" rx="24" fill="white"/>
+  <rect x="62" y="206" width="154" height="74" rx="24" fill="white"/>
+  <rect x="424" y="78" width="154" height="74" rx="24" fill="white"/>
+  <rect x="424" y="206" width="154" height="74" rx="24" fill="white"/>
+  <path d="M218 115H252" stroke="#D4E0EB" stroke-width="4"/>
+  <path d="M218 243H252" stroke="#D4E0EB" stroke-width="4"/>
+  <path d="M388 115H424" stroke="#D4E0EB" stroke-width="4"/>
+  <path d="M388 243H424" stroke="#D4E0EB" stroke-width="4"/>
+  <text x="84" y="112" fill="#091936" font-size="18" font-family="Arial, Helvetica, sans-serif">働く人</text>
+  <text x="84" y="136" fill="#657187" font-size="14" font-family="Arial, Helvetica, sans-serif">身体の状態を理解</text>
+  <text x="84" y="240" fill="#091936" font-size="18" font-family="Arial, Helvetica, sans-serif">現場</text>
+  <text x="84" y="264" fill="#657187" font-size="14" font-family="Arial, Helvetica, sans-serif">改善の優先順位が明確</text>
+  <text x="448" y="112" fill="#091936" font-size="18" font-family="Arial, Helvetica, sans-serif">雇う人</text>
+  <text x="448" y="136" fill="#657187" font-size="14" font-family="Arial, Helvetica, sans-serif">定着・安全衛生に活用</text>
+  <text x="448" y="240" fill="#091936" font-size="18" font-family="Arial, Helvetica, sans-serif">施策</text>
+  <text x="448" y="264" fill="#657187" font-size="14" font-family="Arial, Helvetica, sans-serif">運動 / 作業改善 / 補助具</text>
+</svg>

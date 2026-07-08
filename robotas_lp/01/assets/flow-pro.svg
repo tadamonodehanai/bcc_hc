@@ -1,0 +1,28 @@
+<svg width="1160" height="380" viewBox="0 0 1160 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1160" height="380" rx="40" fill="#F7FBFF"/>
+  <rect x="28" y="28" width="1104" height="324" rx="32" fill="white"/>
+  <text x="72" y="92" fill="#091936" font-size="34" font-family="Arial, Helvetica, sans-serif">ご相談から改善提案までの流れ</text>
+  <text x="72" y="124" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">相談、設計、評価、提案、実行までを一気通貫で支援</text>
+  <line x1="140" y1="212" x2="1012" y2="212" stroke="#DCE6EF" stroke-width="4"/>
+
+  <g>
+    <circle cx="140" cy="212" r="38" fill="#091936"/><text x="126" y="220" fill="white" font-size="18" font-family="Arial, Helvetica, sans-serif">01</text>
+    <text x="104" y="274" fill="#091936" font-size="22" font-family="Arial, Helvetica, sans-serif">相談</text><text x="92" y="302" fill="#657187" font-size="15" font-family="Arial, Helvetica, sans-serif">課題整理</text>
+  </g>
+  <g>
+    <circle cx="358" cy="212" r="38" fill="#2E72FF"/><text x="344" y="220" fill="white" font-size="18" font-family="Arial, Helvetica, sans-serif">02</text>
+    <text x="322" y="274" fill="#091936" font-size="22" font-family="Arial, Helvetica, sans-serif">設計</text><text x="300" y="302" fill="#657187" font-size="15" font-family="Arial, Helvetica, sans-serif">評価計画</text>
+  </g>
+  <g>
+    <circle cx="576" cy="212" r="38" fill="#67D8EA"/><text x="562" y="220" fill="#091936" font-size="18" font-family="Arial, Helvetica, sans-serif">03</text>
+    <text x="540" y="274" fill="#091936" font-size="22" font-family="Arial, Helvetica, sans-serif">評価</text><text x="510" y="302" fill="#657187" font-size="15" font-family="Arial, Helvetica, sans-serif">チェック実施</text>
+  </g>
+  <g>
+    <circle cx="794" cy="212" r="38" fill="#A7B7CC"/><text x="780" y="220" fill="white" font-size="18" font-family="Arial, Helvetica, sans-serif">04</text>
+    <text x="758" y="274" fill="#091936" font-size="22" font-family="Arial, Helvetica, sans-serif">提案</text><text x="729" y="302" fill="#657187" font-size="15" font-family="Arial, Helvetica, sans-serif">改善方針</text>
+  </g>
+  <g>
+    <circle cx="1012" cy="212" r="38" fill="#FF8F5B"/><text x="998" y="220" fill="white" font-size="18" font-family="Arial, Helvetica, sans-serif">05</text>
+    <text x="976" y="274" fill="#091936" font-size="22" font-family="Arial, Helvetica, sans-serif">実行</text><text x="946" y="302" fill="#657187" font-size="15" font-family="Arial, Helvetica, sans-serif">運用支援</text>
+  </g>
+</svg>

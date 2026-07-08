@@ -1,0 +1,46 @@
+<svg width="1160" height="700" viewBox="0 0 1160 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1160" height="700" rx="40" fill="#F7FBFF"/>
+  <rect x="28" y="28" width="1104" height="644" rx="32" fill="white"/>
+  <text x="72" y="92" fill="#091936" font-size="34" font-family="Arial, Helvetica, sans-serif">高年齢労働者の安全対策を、見える化から改善へつなげる</text>
+  <text x="72" y="124" fill="#657187" font-size="18" font-family="Arial, Helvetica, sans-serif">身体機能・認知機能・作業負荷を整理し、優先順位の高い打ち手を設計する</text>
+
+  <rect x="72" y="164" width="486" height="236" rx="26" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <text x="104" y="208" fill="#091936" font-size="24" font-family="Arial, Helvetica, sans-serif">評価領域の全体像</text>
+  <text x="104" y="236" fill="#657187" font-size="16" font-family="Arial, Helvetica, sans-serif">身体機能 / 認知機能 / 作業負荷の3方向から確認</text>
+  <rect x="104" y="270" width="116" height="88" rx="18" fill="#EEF5FF"/>
+  <rect x="236" y="270" width="116" height="88" rx="18" fill="#E8FBFF"/>
+  <rect x="368" y="270" width="158" height="88" rx="18" fill="#FFF4EE"/>
+  <text x="127" y="320" fill="#2E72FF" font-size="18" font-family="Arial, Helvetica, sans-serif">身体機能</text>
+  <text x="261" y="320" fill="#169AB0" font-size="18" font-family="Arial, Helvetica, sans-serif">認知機能</text>
+  <text x="394" y="320" fill="#D46B3A" font-size="18" font-family="Arial, Helvetica, sans-serif">作業負荷</text>
+  <path d="M128 388C196 346 280 338 346 312C396 293 435 264 507 247" stroke="#2E72FF" stroke-width="5" stroke-linecap="round"/>
+  <path d="M126 366C195 372 267 357 331 334C388 314 446 318 508 296" stroke="#67D8EA" stroke-width="5" stroke-linecap="round"/>
+  <path d="M127 346C195 352 275 347 347 344C406 341 451 352 507 342" stroke="#FF8F5B" stroke-width="5" stroke-linecap="round"/>
+
+  <rect x="588" y="164" width="500" height="236" rx="26" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <text x="620" y="208" fill="#091936" font-size="24" font-family="Arial, Helvetica, sans-serif">見える化した後に整理すること</text>
+  <text x="620" y="236" fill="#657187" font-size="16" font-family="Arial, Helvetica, sans-serif">結果を、現場で実行できる論点へ変える</text>
+  <rect x="620" y="272" width="210" height="42" rx="21" fill="#F3F8FF"/>
+  <rect x="620" y="326" width="240" height="42" rx="21" fill="#F1FEFF"/>
+  <rect x="620" y="380" width="272" height="42" rx="21" fill="#FFF5F0"/>
+  <text x="646" y="299" fill="#2E72FF" font-size="18" font-family="Arial, Helvetica, sans-serif">誰にどのリスクがあるか</text>
+  <text x="646" y="353" fill="#169AB0" font-size="18" font-family="Arial, Helvetica, sans-serif">何を優先して改善すべきか</text>
+  <text x="646" y="407" fill="#D46B3A" font-size="18" font-family="Arial, Helvetica, sans-serif">運動・作業改善・補助具をどう組み合わせるか</text>
+
+  <rect x="72" y="458" width="244" height="162" rx="24" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <rect x="336" y="458" width="244" height="162" rx="24" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <rect x="600" y="458" width="244" height="162" rx="24" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <rect x="864" y="458" width="224" height="162" rx="24" fill="#FAFCFF" stroke="#DDE7F1"/>
+  <text x="100" y="500" fill="#2E72FF" font-size="16" font-family="Arial, Helvetica, sans-serif">STEP 1</text>
+  <text x="100" y="534" fill="#091936" font-size="26" font-family="Arial, Helvetica, sans-serif">状態把握</text>
+  <text x="100" y="570" fill="#657187" font-size="16" font-family="Arial, Helvetica, sans-serif">身体機能・認知機能・作業負荷を確認</text>
+  <text x="364" y="500" fill="#2E72FF" font-size="16" font-family="Arial, Helvetica, sans-serif">STEP 2</text>
+  <text x="364" y="534" fill="#091936" font-size="26" font-family="Arial, Helvetica, sans-serif">論点整理</text>
+  <text x="364" y="570" fill="#657187" font-size="16" font-family="Arial, Helvetica, sans-serif">離職・安全・継続就業との関係を整理</text>
+  <text x="628" y="500" fill="#2E72FF" font-size="16" font-family="Arial, Helvetica, sans-serif">STEP 3</text>
+  <text x="628" y="534" fill="#091936" font-size="26" font-family="Arial, Helvetica, sans-serif">対策設計</text>
+  <text x="628" y="570" fill="#657187" font-size="16" font-family="Arial, Helvetica, sans-serif">運動指導・作業改善・補助具活用を設計</text>
+  <text x="892" y="500" fill="#2E72FF" font-size="16" font-family="Arial, Helvetica, sans-serif">STEP 4</text>
+  <text x="892" y="534" fill="#091936" font-size="26" font-family="Arial, Helvetica, sans-serif">継続支援</text>
+  <text x="892" y="570" fill="#657187" font-size="16" font-family="Arial, Helvetica, sans-serif">実行と定着まで伴走</text>
+</svg>
