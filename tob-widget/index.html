@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>toB QA Widget Prototype | 介護DX</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="demo-page">
+    <header class="demo-header">
+      <div class="brand">BCC <span>HEALTHCARE</span></div>
+      <a class="header-link" href="https://hc.e-bcc.jp/contact/" target="_blank" rel="noreferrer">無料相談</a>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">伴走型 介護DX サポート</p>
+      <h1>介護DX、<br><span>何から始めますか？</span></h1>
+      <p class="lead">機器選び・補助金申請・現場定着まで、すべてワンストップで伴走する介護DXパートナーです。</p>
+      <a class="primary-link" href="https://hc.e-bcc.jp/contact/" target="_blank" rel="noreferrer">無料相談・資料請求はこちら</a>
+    </section>
+
+    <section class="demo-content">
+      <div>
+        <h2>プロトタイプ確認用ページ</h2>
+        <p>右下のチャットWidgetから、FAQ回答、自由入力、問い合わせCTAの動きを確認できます。</p>
+      </div>
+      <div class="note-grid">
+        <div>補助金・加算は断定しない</div>
+        <div>電話番号は案内しない</div>
+        <div>問い合わせフォームへ誘導</div>
+      </div>
+    </section>
+  </main>
+
+  <div class="chat-launcher" id="chatLauncher">
+    <span>相談する</span>
+  </div>
+
+  <section class="chat-widget" id="chatWidget" aria-label="介護DX QAチャット">
+    <header class="chat-header">
+      <div>
+        <strong>BCC HEALTHCARE</strong>
+        <span>介護DX QA</span>
+      </div>
+      <button type="button" id="closeChat" aria-label="閉じる">×</button>
+    </header>
+
+    <div class="chat-body" id="chatBody">
+      <div class="message bot">
+        介護DXについて、無料相談・サービス内容・補助金・導入の流れをご案内します。何から始めればよいか分からない段階でも、お気軽にご質問ください。
+      </div>
+
+      <div class="quick-list" id="quickList">
+        <button type="button" data-question="サービス内容を知りたい">サービス内容</button>
+        <button type="button" data-question="導入までの流れを知りたい">導入の流れ</button>
+        <button type="button" data-question="補助金について知りたい">補助金</button>
+        <button type="button" data-question="費用感を知りたい">費用感</button>
+        <button type="button" data-question="無料相談を申し込みたい">無料相談</button>
+      </div>
+    </div>
+
+    <div class="chat-cta">
+      <a href="https://hc.e-bcc.jp/contact/" target="_blank" rel="noreferrer">無料相談・資料請求はこちら</a>
+    </div>
+
+    <form class="chat-input" id="chatForm">
+      <input id="chatInput" type="text" autocomplete="off" placeholder="質問を入力してください">
+      <button type="submit">送信</button>
+    </form>
+  </section>
+
+  <script src="./widget.js"></script>
+</body>
+</html>
