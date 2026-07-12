@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://caresil.example/schema/subsidy.json",
+  "title": "介護補助金 制度レコード（ケアシル正規スキーマ v0.1）",
+  "description": "クローラの抽出出力と公開DB／UIが共有する単一の真実。UIは公開DB(このスキーマ)のみを参照する。",
+  "type": "object",
+  "required": [
+    "id", "実施主体レベル", "自治体名", "制度名", "カテゴリ",
+    "対象施設", "対象機器タグ", "受付状況", "出典", "確度", "抽出メタ"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "description": "一意ID 例: P-11, S-001, M-13109-001" },
+    "実施主体レベル": { "enum": ["国", "都道府県", "市区町村"] },
+    "自治体コード": {
+      "type": ["string", "null"],
+      "description": "都道府県コード(2桁)またはJIS X 0402市区町村コード(5桁)。国はnull",
+      "pattern": "^[0-9]{2}([0-9]{3})?$"
+    },
+    "自治体名": { "type": "string" },
+    "制度名": { "type": "string", "minLength": 2 },
+    "カテゴリ": {
+      "type": "array", "minItems": 1,
+      "items": { "enum": [
+        "ICT・介護ソフト", "介護ロボット", "人材確保・処遇改善",
+        "施設整備・改修", "感染症・BCP", "開業・地域展開"
+      ] }
+    },
+    "対象施設": {
+      "type": "array", "minItems": 1,
+      "items": { "enum": [
+        "特養", "老健", "GH", "通所", "訪問介護", "小多機", "サ高住",
+        "養護老人ホーム", "軽費老人ホーム", "介護サービス事業所全般"
+      ] }
+    },
+    "対象機器タグ": {
+      "type": "array",
+      "description": "機器マスタ.csv の機器IDのみ許可（V3検証）。空可（機器を限定しない制度）",
+      "items": { "type": "string", "pattern": "^(ROB|ICT|FUK)-[0-9]{2}$" }
+    },
+    "補助率": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "表示": { "type": ["string", "null"], "description": "原文表記 例: 5分の4" },
+        "分数": { "type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "正規化した割合 例: 0.8" }
+      }
+    },
+    "補助上限": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "表示": { "type": ["string", "null"], "description": "原文表記 例: パッケージ600万(定着促進で615万)" },
+        "金額_円": { "type": ["integer", "null"], "minimum": 0, "description": "代表額の正規化値。V6レンジ検査対象" }
+      }
+    },
+    "受付状況": { "enum": ["受付前", "受付中", "まもなく締切", "終了", "未定"] },
+    "受付開始": { "type": ["string", "null"], "format": "date" },
+    "締切": { "type": ["string", "null"], "format": "date" },
+    "財源": {
+      "type": ["string", "null"],
+      "description": "例: 地域医療介護総合確保基金(介護従事者確保分), 市単独, 交付金"
+    },
+    "上乗せ元制度ID": { "type": ["string", "null"], "description": "この制度が上乗せする親制度ID。無ければnull" },
+    "併用可否": { "enum": ["併用可", "併用不可", "要確認"] },
+    "窓口": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "担当課": { "type": ["string", "null"] },
+        "電話": { "type": ["string", "null"] },
+        "URL": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "出典": {
+      "type": "object",
+      "required": ["公式URL", "取得日時"],
+      "additionalProperties": false,
+      "properties": {
+        "公式URL": { "type": "string", "format": "uri" },
+        "要綱PDF_URL": { "type": ["string", "null"], "format": "uri" },
+        "取得日時": { "type": "string", "format": "date-time" },
+        "本文ハッシュ": { "type": ["string", "null"], "description": "変更検知用(SHA-256)" },
+        "PDFハッシュ": { "type": ["string", "null"] }
+      }
+    },
+    "確度": {
+      "enum": ["高", "中", "要確認"],
+      "description": "高=一次情報で数値まで確認＋検証全通過 / 中=存在とURLは確か・数値未確認 / 要確認=未確定・低自信度(UI非表示)"
+    },
+    "メモ": {
+      "type": ["string", "null"],
+      "description": "備考・曖昧日付の原文など、構造化前の補足情報を保持"
+    },
+    "抽出メタ": {
+      "type": "object",
+      "required": ["抽出日時", "レビュー状態"],
+      "additionalProperties": false,
+      "properties": {
+        "抽出モデル": { "type": ["string", "null"] },
+        "抽出日時": { "type": "string", "format": "date-time" },
+        "フィールド別自信度": {
+          "type": "object",
+          "description": "例: {\"補助上限\": 0.9, \"締切\": 0.6}",
+          "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "抽出根拠": {
+          "type": "array",
+          "description": "数値等の原文引用と出典箇所。ハルシネーション監査用",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "フィールド": { "type": "string" },
+              "原文引用": { "type": "string" },
+              "出典箇所": { "type": "string", "description": "例: 交付要綱PDF p.4 表2" }
+            }
+          }
+        },
+        "レビュー状態": { "enum": ["自動承認", "レビュー待ち", "レビュー済", "保留(検証NG)"] },
+        "レビュアー": { "type": ["string", "null"], "description": "承認したレビュアー" },
+        "レビュー日時": { "type": ["string", "null"], "format": "date-time" },
+        "検証結果": {
+          "type": "array",
+          "description": "適用した検証ルールの結果(V1〜V9)",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ルール": { "type": "string" },
+              "判定": { "enum": ["pass", "warn", "fail"] },
+              "詳細": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

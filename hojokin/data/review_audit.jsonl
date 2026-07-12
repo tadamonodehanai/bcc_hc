@@ -1,0 +1,22 @@
+{"id": "P-27", "action": "refuse", "reason": ["[P-27].抽出メタ: 未定義プロパティ 'レビュアー'", "[P-27].抽出メタ: 未定義プロパティ 'レビュー日時'"], "at": "2026-07-12T13:19:32+09:00", "by": "shin.tanaka"}
+{"id": "P-47", "action": "refuse", "reason": ["[P-47].抽出メタ: 未定義プロパティ 'レビュアー'", "[P-47].抽出メタ: 未定義プロパティ 'レビュー日時'"], "at": "2026-07-12T13:19:32+09:00", "by": "shin.tanaka"}
+{"id": "P-11", "action": "refuse", "reason": ["[P-11].抽出メタ: 未定義プロパティ 'レビュアー'", "[P-11].抽出メタ: 未定義プロパティ 'レビュー日時'"], "at": "2026-07-12T13:19:32+09:00", "by": "shin.tanaka"}
+{"id": "P-07", "action": "refuse", "reason": ["[P-07].抽出メタ: 未定義プロパティ 'レビュアー'", "[P-07].抽出メタ: 未定義プロパティ 'レビュー日時'"], "at": "2026-07-12T13:19:32+09:00", "by": "shin.tanaka"}
+{"id": "P-26", "action": "hold", "note": "補助率は取得したが上限が要綱PDFの表組みで未取得。次回LLM抽出で再取得", "at": "2026-07-12T13:19:32+09:00", "by": "shin.tanaka"}
+{"id": "P-27", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T13:19:55+09:00", "by": "shin.tanaka"}
+{"id": "P-47", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T13:19:55+09:00", "by": "shin.tanaka"}
+{"id": "P-11", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T13:19:55+09:00", "by": "shin.tanaka"}
+{"id": "P-07", "action": "approve", "confidence": "高", "edits": {"締切": "2026-07-31"}, "at": "2026-07-12T13:19:55+09:00", "by": "shin.tanaka"}
+{"id": "P-26", "action": "hold", "note": "補助率は取得したが上限が要綱PDFの表組みで未取得。次回LLM抽出で再取得", "at": "2026-07-12T13:19:55+09:00", "by": "shin.tanaka"}
+{"id": "P-27", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T13:21:08+09:00", "by": "shin.tanaka"}
+{"id": "P-47", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T13:21:08+09:00", "by": "shin.tanaka"}
+{"id": "P-11", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T13:21:08+09:00", "by": "shin.tanaka"}
+{"id": "P-07", "action": "approve", "confidence": "高", "edits": {"締切": "2026-07-31"}, "at": "2026-07-12T13:21:08+09:00", "by": "shin.tanaka"}
+{"id": "P-26", "action": "hold", "note": "補助率は取得したが上限が要綱PDFの表組みで未取得。次回LLM抽出で再取得", "at": "2026-07-12T13:21:08+09:00", "by": "shin.tanaka"}
+{"id": "P-27", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T13:36:47+09:00", "by": "shin.tanaka"}
+{"id": "P-47", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T13:36:47+09:00", "by": "shin.tanaka"}
+{"id": "P-11", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T13:36:47+09:00", "by": "shin.tanaka"}
+{"id": "P-07", "action": "approve", "confidence": "高", "edits": {"締切": "2026-07-31"}, "at": "2026-07-12T13:36:47+09:00", "by": "shin.tanaka"}
+{"id": "P-26", "action": "hold", "note": "補助率は取得したが上限が要綱PDFの表組みで未取得。次回LLM抽出で再取得", "at": "2026-07-12T13:36:47+09:00", "by": "shin.tanaka"}
+{"id": "P-26", "action": "reject", "note": "CSV側で一次確認済(手引きPDF直接抽出により高へ昇格)・ステージング版は不要", "at": "2026-07-12T14:08:56+09:00", "by": "shin.tanaka"}
+{"id": "P-47", "action": "approve", "confidence": "高", "edits": {}, "at": "2026-07-12T14:54:55+09:00", "by": "shin.tanaka"}

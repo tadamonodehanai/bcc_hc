@@ -1,0 +1,2595 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>介護ポータル KAIGO|NAVI — 全国介護施設検索</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F4EE;
+  --bg2: #EFE9DD;
+  --bg3: #E5DDD0;
+  --navy: #162038;
+  --navy2: #1F2E4D;
+  --vermillion: #C13A22;
+  --vermillion-light: #E04B30;
+  --gold: #A8793A;
+  --gold-light: #C49B58;
+  --text: #1E1E1E;
+  --text-mid: #4A4A4A;
+  --text-muted: #7A7570;
+  --border: #D5CBBE;
+  --border-light: #E8E0D2;
+  --white: #FEFCF9;
+  --shadow: 0 4px 24px rgba(22,32,56,0.08);
+  --shadow-lg: 0 12px 48px rgba(22,32,56,0.14);
+  --radius: 4px;
+  --radius-lg: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ────────────────────────────────
+   SCROLLBAR
+──────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ────────────────────────────────
+   NOISE TEXTURE OVERLAY
+──────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ────────────────────────────────
+   HEADER
+──────────────────────────────── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--navy);
+  border-bottom: 2px solid var(--vermillion);
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logo-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.08em;
+}
+
+.logo-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--gold-light);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.logo-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,0.2);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-nav a, .header-nav button {
+  padding: 8px 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: all 0.2s;
+  letter-spacing: 0.06em;
+}
+
+.header-nav a:hover, .header-nav button:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
+}
+
+.btn-admin {
+  background: rgba(193,58,34,0.2) !important;
+  color: #F5A090 !important;
+  border: 1px solid rgba(193,58,34,0.4) !important;
+}
+
+.btn-admin:hover {
+  background: var(--vermillion) !important;
+  color: var(--white) !important;
+}
+
+/* ────────────────────────────────
+   HERO SECTION
+──────────────────────────────── */
+.hero {
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+  padding: 80px 32px 0;
+}
+
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.5) 20px,
+      rgba(255,255,255,0.5) 21px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.5) 20px,
+      rgba(255,255,255,0.5) 21px
+    );
+}
+
+.hero-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.1s forwards;
+}
+
+.hero-eyebrow-line {
+  width: 40px;
+  height: 1px;
+  background: var(--vermillion);
+}
+
+.hero-eyebrow-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.2s forwards;
+}
+
+.hero-title span {
+  color: var(--gold-light);
+}
+
+.hero-subtitle {
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.3s forwards;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.35s forwards;
+}
+
+.hero-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1;
+}
+
+.hero-stat-num span {
+  font-size: 16px;
+  color: var(--gold-light);
+  margin-left: 2px;
+}
+
+.hero-stat-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.12em;
+}
+
+/* ────────────────────────────────
+   SEARCH BOX
+──────────────────────────────── */
+.search-box {
+  background: var(--white);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 32px 36px 0;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  animation: fadeUp 0.7s 0.4s forwards;
+}
+
+.search-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.search-tab {
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+
+.search-tab.active {
+  color: var(--navy);
+  border-bottom-color: var(--vermillion);
+  font-weight: 700;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.search-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.search-input, .search-select {
+  height: 44px;
+  padding: 0 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  transition: all 0.2s;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.search-input:focus, .search-select:focus {
+  border-color: var(--navy2);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(22,32,56,0.08);
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '▾';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  font-size: 12px;
+}
+
+.search-row-2 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.search-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+}
+
+.tag-filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  font-size: 12px;
+  color: var(--text-mid);
+  background: var(--bg);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.tag-filter-chip:hover {
+  border-color: var(--navy2);
+  color: var(--navy);
+  background: var(--bg2);
+}
+
+.tag-filter-chip.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+.btn-search {
+  height: 44px;
+  padding: 0 32px;
+  background: var(--vermillion);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-search:hover {
+  background: var(--vermillion-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(193,58,34,0.35);
+}
+
+.btn-search svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ────────────────────────────────
+   MAIN CONTENT
+──────────────────────────────── */
+.main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 32px;
+}
+
+/* ────────────────────────────────
+   RESULTS SECTION
+──────────────────────────────── */
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.results-count {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.results-count span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  color: var(--vermillion);
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.results-sort {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sort-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sort-select {
+  padding: 6px 28px 6px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  color: var(--text);
+  background: var(--bg);
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.results-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ────────────────────────────────
+   FILTER SIDEBAR
+──────────────────────────────── */
+.filter-sidebar {
+  position: sticky;
+  top: 80px;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.filter-sidebar-header {
+  padding: 16px 20px;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-reset {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Noto Sans JP', sans-serif;
+  transition: color 0.2s;
+}
+
+.filter-reset:hover { color: var(--white); }
+
+.filter-section {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.filter-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.filter-checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-mid);
+  transition: color 0.15s;
+}
+
+.filter-checkbox-item:hover { color: var(--navy); }
+
+.filter-checkbox-item input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--navy);
+  cursor: pointer;
+}
+
+.filter-count {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg2);
+  padding: 1px 7px;
+  border-radius: 100px;
+}
+
+.scale-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.scale-slider-item label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+}
+
+.scale-slider-item label span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.range-input {
+  width: 100%;
+  accent-color: var(--navy);
+  cursor: pointer;
+}
+
+/* ────────────────────────────────
+   FACILITY CARDS
+──────────────────────────────── */
+.facility-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.facility-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: grid;
+  grid-template-columns: 8px 1fr;
+}
+
+.facility-card:hover {
+  border-color: var(--navy2);
+  box-shadow: var(--shadow);
+  transform: translateX(3px);
+}
+
+.card-accent-bar {
+  background: var(--border);
+  transition: background 0.2s;
+}
+
+.facility-card:hover .card-accent-bar {
+  background: var(--vermillion);
+}
+
+.card-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.card-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-type-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 10px;
+  border-radius: 2px;
+  width: fit-content;
+}
+
+.card-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.card-corp {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-corp::before {
+  content: '▸';
+  color: var(--gold);
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-address {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-website-badge {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.website-yes {
+  background: #E8F5E9;
+  color: #2E7D32;
+  border: 1px solid #A5D6A7;
+}
+
+.website-no {
+  background: var(--bg2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.card-stats {
+  display: flex;
+  gap: 24px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.card-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.card-stat-value span {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-left: 1px;
+}
+
+.card-stat-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.card-tag {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.card-jobs-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.card-jobs-badge::before {
+  content: '●';
+  font-size: 8px;
+  animation: pulse 2s infinite;
+}
+
+.card-detail-link {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s;
+}
+
+.facility-card:hover .card-detail-link {
+  color: var(--vermillion);
+}
+
+/* ────────────────────────────────
+   FACILITY TYPE COLORS
+──────────────────────────────── */
+.type-tokubetsu { background: #FEF3E2; color: #B85C00; }
+.type-rooken   { background: #E8F0FE; color: #1A56CC; }
+.type-group    { background: #FCE8F3; color: #9C27B0; }
+.type-yuryou   { background: #E8F5E9; color: #2E7D32; }
+.type-sagaju   { background: #E3F2FD; color: #1565C0; }
+.type-day      { background: #FFF3E0; color: #E65100; }
+
+.tag-service   { background: #E8F0FE; color: #1A56CC; border: 1px solid #BBDEFB; }
+.tag-facility  { background: #F3E5F5; color: #7B1FA2; border: 1px solid #E1BEE7; }
+.tag-care      { background: #E8F5E9; color: #1B5E20; border: 1px solid #C8E6C9; }
+.tag-special   { background: #FFF3E0; color: #E65100; border: 1px solid #FFE0B2; }
+
+/* ────────────────────────────────
+   MODAL
+──────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(22,32,56,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+}
+
+.modal-overlay.active {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal {
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 900px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.3s ease;
+  margin: auto;
+}
+
+.modal-hero {
+  background: var(--navy);
+  padding: 32px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-hero::after {
+  content: '';
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 200px;
+  height: 200px;
+  border: 40px solid rgba(255,255,255,0.03);
+  border-radius: 50%;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50%;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.modal-close:hover { background: rgba(255,255,255,0.2); }
+
+.modal-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin: 8px 0 6px;
+  line-height: 1.3;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-body {
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.modal-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.modal-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.modal-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-info-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.modal-info-value {
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.modal-info-value a {
+  color: var(--vermillion);
+  text-decoration: none;
+}
+
+.modal-info-value a:hover { text-decoration: underline; }
+
+.modal-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border-light);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.modal-stat {
+  background: var(--white);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.modal-stat-value span {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.modal-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.conditions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.condition-item {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.condition-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.condition-value {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.job-item {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.job-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.job-type {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.job-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 12px;
+}
+
+.job-salary {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--vermillion);
+}
+
+.related-facilities {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.related-item {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.related-item:hover {
+  border-color: var(--navy2);
+  background: var(--bg);
+}
+
+.related-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.related-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ────────────────────────────────
+   ADMIN PANEL
+──────────────────────────────── */
+.admin-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(22,32,56,0.8);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: none;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.admin-overlay.active {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+
+.admin-panel {
+  width: 480px;
+  height: 100vh;
+  background: var(--navy);
+  overflow-y: auto;
+  animation: slideLeft 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-header {
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.admin-subtitle {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+.admin-close {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50%;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.admin-close:hover { background: rgba(255,255,255,0.2); }
+
+.admin-body {
+  padding: 24px 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.admin-form-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.admin-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.admin-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em;
+}
+
+.admin-input, .admin-select {
+  height: 38px;
+  padding: 0 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  color: var(--white);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.2s;
+  appearance: none;
+}
+
+.admin-input:focus, .admin-select:focus {
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.12);
+}
+
+.admin-input::placeholder { color: rgba(255,255,255,0.25); }
+
+.admin-select option {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.btn-admin-add {
+  height: 38px;
+  padding: 0 20px;
+  background: var(--vermillion);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.btn-admin-add:hover { background: var(--vermillion-light); }
+
+.tag-management-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.admin-tag-item {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-tag-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.admin-tag-name {
+  font-size: 13px;
+  color: var(--white);
+  flex: 1;
+}
+
+.admin-tag-category {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.08);
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+.admin-tag-delete {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px;
+  transition: color 0.2s;
+}
+
+.admin-tag-delete:hover { color: var(--vermillion-light); }
+
+.admin-assign-section {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.admin-facility-select-wrapper {
+  position: relative;
+}
+
+.admin-tags-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.admin-tag-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.admin-tag-checkbox:hover {
+  border-color: rgba(255,255,255,0.4);
+  color: var(--white);
+}
+
+.admin-tag-checkbox input { display: none; }
+
+.admin-tag-checkbox.checked {
+  background: var(--vermillion);
+  border-color: var(--vermillion);
+  color: var(--white);
+}
+
+.btn-admin-save {
+  width: 100%;
+  padding: 12px;
+  background: rgba(168,121,58,0.3);
+  color: var(--gold-light);
+  border: 1px solid rgba(168,121,58,0.4);
+  border-radius: var(--radius);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.btn-admin-save:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--white);
+}
+
+/* ────────────────────────────────
+   PAGINATION
+──────────────────────────────── */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 40px;
+}
+
+.page-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  color: var(--text-mid);
+  background: var(--white);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.page-btn:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+.page-btn.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* ────────────────────────────────
+   TOAST
+──────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: var(--navy);
+  color: var(--white);
+  padding: 14px 24px;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  z-index: 9999;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast-icon {
+  width: 20px;
+  height: 20px;
+  background: #4CAF50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* ────────────────────────────────
+   EMPTY STATE
+──────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 80px 40px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.4;
+}
+
+.empty-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.empty-text {
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* ────────────────────────────────
+   ANIMATIONS
+──────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.card-enter {
+  opacity: 0;
+  animation: fadeUp 0.4s ease forwards;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo" onclick="showHome()">
+      <span class="logo-jp">介護NAVI</span>
+      <div class="logo-divider"></div>
+      <span class="logo-en">Care Facility Portal</span>
+    </div>
+    <nav class="header-nav">
+      <a onclick="showHome()">施設を探す</a>
+      <a onclick="scrollToResults()">求人情報</a>
+      <a>法人情報</a>
+      <a>使い方</a>
+      <button class="btn-admin" onclick="openAdmin()">管理者ログイン</button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO + SEARCH -->
+<section class="hero" id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Japan Care Facility Search</span>
+    </div>
+    <h1 class="hero-title">
+      全国<span>介護施設</span>を<br>かんたん検索
+    </h1>
+    <p class="hero-subtitle">種別・地域・規模・特徴タグで、最適な介護施設を見つける</p>
+    <div class="hero-stats">
+      <div class="hero-stat-item">
+        <div class="hero-stat-num" id="stat-total">—</div>
+        <div class="hero-stat-label">登録施設数</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-num">47<span>都道府県</span></div>
+        <div class="hero-stat-label">全国対応</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-num" id="stat-corps">—</div>
+        <div class="hero-stat-label">登録法人数</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-num" id="stat-jobs">—</div>
+        <div class="hero-stat-label">求人掲載中</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <div class="search-tabs">
+        <button class="search-tab active">施設検索</button>
+        <button class="search-tab">求人検索</button>
+        <button class="search-tab">法人検索</button>
+      </div>
+      <div class="search-row">
+        <div class="search-field">
+          <label class="search-label">都道府県</label>
+          <div class="select-wrapper">
+            <select class="search-select" id="s-prefecture">
+              <option value="">すべての都道府県</option>
+            </select>
+          </div>
+        </div>
+        <div class="search-field">
+          <label class="search-label">市区町村</label>
+          <div class="select-wrapper">
+            <select class="search-select" id="s-city">
+              <option value="">すべての市区町村</option>
+            </select>
+          </div>
+        </div>
+        <div class="search-field">
+          <label class="search-label">施設種別</label>
+          <div class="select-wrapper">
+            <select class="search-select" id="s-type">
+              <option value="">すべての施設種別</option>
+              <option>特別養護老人ホーム（特養）</option>
+              <option>介護老人保健施設（老健）</option>
+              <option>グループホーム</option>
+              <option>有料老人ホーム</option>
+              <option>サービス付き高齢者向け住宅</option>
+              <option>デイサービス</option>
+              <option>訪問介護</option>
+              <option>小規模多機能型居宅介護</option>
+            </select>
+          </div>
+        </div>
+        <div class="search-field">
+          <label class="search-label">フリーワード</label>
+          <input class="search-input" id="s-keyword" placeholder="施設名・法人名・住所...">
+        </div>
+        <button class="btn-search" onclick="doSearch()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          検索
+        </button>
+      </div>
+      <div class="search-row-2">
+        <span style="font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;white-space:nowrap;">タグで絞込</span>
+        <div class="search-tags-row" id="tag-filter-row"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main" id="results-section">
+  <div class="results-header">
+    <div class="results-count"><span id="results-num">0</span>件の施設が見つかりました</div>
+    <div class="results-sort">
+      <span class="sort-label">並び替え</span>
+      <select class="sort-select" id="sort-select" onchange="doSort()">
+        <option value="name">施設名順</option>
+        <option value="capacity_desc">定員数（多い順）</option>
+        <option value="capacity_asc">定員数（少ない順）</option>
+        <option value="emp_desc">従業員数（多い順）</option>
+        <option value="jobs">求人あり優先</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="results-layout">
+    <!-- SIDEBAR -->
+    <aside class="filter-sidebar">
+      <div class="filter-sidebar-header">
+        <span>絞り込み条件</span>
+        <button class="filter-reset" onclick="resetFilters()">リセット</button>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">施設種別</div>
+        <div class="filter-checkbox-list" id="type-filter-list"></div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">タグ・特徴</div>
+        <div class="filter-checkbox-list" id="tag-filter-list"></div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">Webサイト</div>
+        <div class="filter-checkbox-list">
+          <label class="filter-checkbox-item">
+            <input type="checkbox" id="filter-website" onchange="applyFilters()">
+            Webサイトあり
+            <span class="filter-count" id="fc-website">—</span>
+          </label>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">求人情報</div>
+        <div class="filter-checkbox-list">
+          <label class="filter-checkbox-item">
+            <input type="checkbox" id="filter-jobs" onchange="applyFilters()">
+            求人募集中
+            <span class="filter-count" id="fc-jobs">—</span>
+          </label>
+        </div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-section-title">規模（入居定員）</div>
+        <div class="scale-slider-group">
+          <div class="scale-slider-item">
+            <label>定員上限 <span id="cap-val">200名以下</span></label>
+            <input type="range" class="range-input" min="10" max="200" value="200" id="cap-slider"
+              oninput="document.getElementById('cap-val').textContent=this.value+'名以下';applyFilters()">
+          </div>
+          <div class="scale-slider-item">
+            <label>従業員上限 <span id="emp-val">500名以下</span></label>
+            <input type="range" class="range-input" min="10" max="500" value="500" id="emp-slider"
+              oninput="document.getElementById('emp-val').textContent=this.value+'名以下';applyFilters()">
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CARDS -->
+    <div>
+      <div class="facility-grid" id="facility-grid"></div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </div>
+</main>
+
+<!-- FACILITY DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-hero">
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+      <div id="modal-type-badge"></div>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <div class="modal-subtitle" id="modal-subtitle"></div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="admin-overlay" onclick="closeAdmin(event)">
+  <div class="admin-panel" onclick="event.stopPropagation()">
+    <div class="admin-header">
+      <div>
+        <div class="admin-title">管理者パネル</div>
+        <div class="admin-subtitle">ADMIN DASHBOARD</div>
+      </div>
+      <button class="admin-close" onclick="closeAdminDirect()">✕</button>
+    </div>
+    <div class="admin-body">
+
+      <!-- TAG MANAGEMENT -->
+      <div>
+        <div class="admin-section-title">タグ管理</div>
+        <div class="admin-form-row" style="margin-bottom:16px;">
+          <div class="admin-form-field">
+            <label class="admin-label">タグ名</label>
+            <input class="admin-input" id="new-tag-name" placeholder="例：看取り対応">
+          </div>
+          <div class="admin-form-field" style="max-width:130px;">
+            <label class="admin-label">カテゴリ</label>
+            <select class="admin-select" id="new-tag-category">
+              <option>サービス</option>
+              <option>設備</option>
+              <option>医療</option>
+              <option>ケア</option>
+              <option>特徴</option>
+            </select>
+          </div>
+          <div class="admin-form-field" style="max-width:50px;">
+            <label class="admin-label">色</label>
+            <input type="color" id="new-tag-color" value="#1A56CC"
+              style="height:38px;width:50px;border:none;background:none;cursor:pointer;padding:0;">
+          </div>
+          <button class="btn-admin-add" onclick="addTag()">追加</button>
+        </div>
+        <div class="tag-management-list" id="admin-tag-list"></div>
+      </div>
+
+      <!-- TAG ASSIGN -->
+      <div>
+        <div class="admin-section-title">施設へのタグ付与</div>
+        <div class="admin-assign-section">
+          <div class="admin-form-field" style="margin-bottom:14px;">
+            <label class="admin-label">施設を選択</label>
+            <div class="admin-facility-select-wrapper">
+              <select class="admin-select" id="admin-facility-select" style="width:100%;" onchange="renderAdminTagCheckboxes()">
+                <option value="">施設を選択してください</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-tags-checkboxes" id="admin-tag-checkboxes"></div>
+          <button class="btn-admin-save" onclick="saveTagAssignment()">タグ設定を保存</button>
+        </div>
+      </div>
+
+      <!-- DATA UPDATE -->
+      <div>
+        <div class="admin-section-title">データ管理</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button class="btn-admin-save" onclick="simulateUpdate()" style="background:rgba(22,200,100,0.15);color:#7FFFC0;border-color:rgba(22,200,100,0.3);">
+            🔄 インターネットから最新データ取得（シミュレーション）
+          </button>
+          <button class="btn-admin-save" onclick="showToast('CSVエクスポートを開始しました')">
+            📥 全施設データをCSVエクスポート
+          </button>
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:14px;font-size:12px;color:rgba(255,255,255,0.4);line-height:1.8;">
+            <div style="color:rgba(255,255,255,0.6);font-weight:700;margin-bottom:4px;">自動更新スケジュール</div>
+            次回実行: 毎週月曜 02:00<br>
+            最終更新: 2026年3月20日 02:03<br>
+            更新ソース: WAM NET / 介護DB / 厚労省
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-icon">✓</div>
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+// ============================================================
+//  DATA
+// ============================================================
+const CORPORATIONS = [
+  { id: 'c1', name: '社会福祉法人 あおぞら福祉会', type: '社会福祉法人' },
+  { id: 'c2', name: '医療法人社団 光生会', type: '医療法人' },
+  { id: 'c3', name: '株式会社 はなみちケア', type: '株式会社' },
+  { id: 'c4', name: '社会福祉法人 ひまわり会', type: '社会福祉法人' },
+  { id: 'c5', name: '医療法人財団 桐の葉会', type: '医療法人財団' },
+  { id: 'c6', name: 'NPO法人 みどりの郷', type: 'NPO法人' },
+];
+
+let TAG_DEFS = [
+  { id: 't1', name: '看取り対応', category: 'サービス', color: '#C13A22' },
+  { id: 't2', name: '認知症専門', category: 'ケア', color: '#7B1FA2' },
+  { id: 't3', name: '医療連携', category: '医療', color: '#1565C0' },
+  { id: 't4', name: 'リハビリ充実', category: 'サービス', color: '#2E7D32' },
+  { id: 't5', name: '個室完備', category: '設備', color: '#B85C00' },
+  { id: 't6', name: '送迎あり', category: 'サービス', color: '#1565C0' },
+  { id: 't7', name: 'バリアフリー', category: '設備', color: '#00695C' },
+  { id: 't8', name: '24時間看護', category: '医療', color: '#AD1457' },
+  { id: 't9', name: 'ペット可', category: '特徴', color: '#4E342E' },
+  { id: 't10', name: '温浴設備あり', category: '設備', color: '#0277BD' },
+  { id: 't11', name: '外国語対応', category: '特徴', color: '#558B2F' },
+  { id: 't12', name: '夜間体制充実', category: '医療', color: '#1A237E' },
+];
+
+const FACILITIES = [
+  {
+    id: 'f01', corpId: 'c1', name: 'あおぞら特別養護老人ホーム 世田谷',
+    type: '特別養護老人ホーム（特養）', typeKey: 'tokubetsu',
+    prefecture: '東京都', city: '世田谷区',
+    address: '東京都世田谷区北沢3-12-5', phone: '03-3422-XXXX',
+    hasWebsite: true, websiteUrl: 'https://example.com',
+    capacity: 120, employees: 95, currentResidents: 118,
+    tags: ['t1','t2','t3','t5'],
+    entryCond: { age: '65歳以上', careLevel: '要介護3〜5', waitTime: '約6ヶ月', income: '制限なし' },
+    jobs: [
+      { type: '介護福祉士', empType: '正社員', salary: '月給 240,000〜280,000円' },
+      { type: '看護師（夜勤あり）', empType: '正社員', salary: '月給 300,000〜360,000円' },
+    ]
+  },
+  {
+    id: 'f02', corpId: 'c2', name: '光生会 老健センター 横浜',
+    type: '介護老人保健施設（老健）', typeKey: 'rooken',
+    prefecture: '神奈川県', city: '横浜市',
+    address: '神奈川県横浜市港北区綱島東2-8-1', phone: '045-540-XXXX',
+    hasWebsite: true, websiteUrl: 'https://example.com',
+    capacity: 80, employees: 120, currentResidents: 76,
+    tags: ['t3','t4','t7','t8'],
+    entryCond: { age: '65歳以上', careLevel: '要介護1〜5', waitTime: '2〜4週間', income: '制限なし' },
+    jobs: [
+      { type: '理学療法士（PT）', empType: '正社員', salary: '月給 270,000〜310,000円' },
+      { type: '作業療法士（OT）', empType: '契約社員', salary: '月給 260,000円〜' },
+      { type: '介護職員', empType: 'パート', salary: '時給 1,200〜1,400円' },
+    ]
+  },
+  {
+    id: 'f03', corpId: 'c3', name: 'はなみち グループホーム 大阪城東',
+    type: 'グループホーム', typeKey: 'group',
+    prefecture: '大阪府', city: '大阪市',
+    address: '大阪府大阪市城東区関目4-6-15', phone: '06-6930-XXXX',
+    hasWebsite: false, websiteUrl: null,
+    capacity: 18, employees: 22, currentResidents: 17,
+    tags: ['t2','t5','t9'],
+    entryCond: { age: '65歳以上', careLevel: '要支援2〜要介護5', waitTime: '1〜3ヶ月', income: '制限なし' },
+    jobs: [
+      { type: '介護職員（夜勤専従）', empType: 'パート', salary: '時給 1,350〜1,600円' },
+    ]
+  },
+  {
+    id: 'f04', corpId: 'c3', name: 'はなみち グループホーム 大阪淀川',
+    type: 'グループホーム', typeKey: 'group',
+    prefecture: '大阪府', city: '大阪市',
+    address: '大阪府大阪市淀川区十三本町2-3-8', phone: '06-6308-XXXX',
+    hasWebsite: false, websiteUrl: null,
+    capacity: 18, employees: 20, currentResidents: 18,
+    tags: ['t2','t7'],
+    entryCond: { age: '65歳以上', careLevel: '要支援2〜要介護5', waitTime: '現在満員', income: '制限なし' },
+    jobs: []
+  },
+  {
+    id: 'f05', corpId: 'c4', name: 'ひまわり苑 有料老人ホーム 名古屋',
+    type: '有料老人ホーム', typeKey: 'yuryou',
+    prefecture: '愛知県', city: '名古屋市',
+    address: '愛知県名古屋市昭和区桜山町4-99-1', phone: '052-751-XXXX',
+    hasWebsite: true, websiteUrl: 'https://example.com',
+    capacity: 60, employees: 55, currentResidents: 54,
+    tags: ['t1','t5','t8','t10','t12'],
+    entryCond: { age: '60歳以上', careLevel: '自立〜要介護5', waitTime: '空室あり', income: '入居一時金あり' },
+    jobs: [
+      { type: '管理栄養士', empType: '正社員', salary: '月給 230,000〜260,000円' },
+      { type: '介護福祉士', empType: '正社員', salary: '月給 235,000〜275,000円' },
+    ]
+  },
+  {
+    id: 'f06', corpId: 'c5', name: '桐の葉 サービス付き高齢者向け住宅 福岡',
+    type: 'サービス付き高齢者向け住宅', typeKey: 'sagaju',
+    prefecture: '福岡県', city: '福岡市',
+    address: '福岡県福岡市中央区大名1-4-20', phone: '092-717-XXXX',
+    hasWebsite: true, websiteUrl: 'https://example.com',
+    capacity: 45, employees: 30, currentResidents: 38,
+    tags: ['t6','t7','t11'],
+    entryCond: { age: '60歳以上', careLevel: '自立〜要介護2', waitTime: '空室あり', income: '月額10〜18万円' },
+    jobs: [
+      { type: '生活相談員', empType: '正社員', salary: '月給 220,000〜250,000円' },
+    ]
+  },
+  {
+    id: 'f07', corpId: 'c1', name: 'あおぞらデイサービス 下北沢',
+    type: 'デイサービス', typeKey: 'day',
+    prefecture: '東京都', city: '世田谷区',
+    address: '東京都世田谷区代沢5-29-6', phone: '03-3412-XXXX',
+    hasWebsite: true, websiteUrl: 'https://example.com',
+    capacity: 30, employees: 18, currentResidents: 28,
+    tags: ['t4','t6','t7'],
+    entryCond: { age: '65歳以上', careLevel: '要支援1〜要介護5', waitTime: '要相談', income: '制限なし' },
+    jobs: [
+      { type: '機能訓練指導員', empType: '正社員', salary: '月給 250,000〜300,000円' },
+      { type: '介護職員', empType: 'パート', salary: '時給 1,150〜1,300円' },
+    ]
+  },
+  {
+    id: 'f08', corpId: 'c4', name: 'ひまわり 特別養護老人ホーム 埼玉大宮',
+    type: '特別養護老人ホーム（特養）', typeKey: 'tokubetsu',
+    prefecture: '埼玉県', city: 'さいたま市',
+    address: '埼玉県さいたま市大宮区桜木町4-334', phone: '048-641-XXXX',
+    hasWebsite: true, websiteUrl: 'https://example.com',
+    capacity: 100, employees: 80, currentResidents: 99,
+    tags: ['t1','t3','t8','t12'],
+    entryCond: { age: '65歳以上', careLevel: '要介護3〜5', waitTime: '約12ヶ月', income: '制限なし' },
+    jobs: [
+      { type: '介護福祉士', empType: '正社員', salary: '月給 245,000〜290,000円' },
+      { type: '社会福祉士', empType: '正社員', salary: '月給 250,000〜280,000円' },
+    ]
+  },
+  {
+    id: 'f09', corpId: 'c6', name: 'みどりの郷 グループホーム 札幌',
+    type: 'グループホーム', typeKey: 'group',
+    prefecture: '北海道', city: '札幌市',
+    address: '北海道札幌市中央区北五条西12-1-10', phone: '011-231-XXXX',
+    hasWebsite: false, websiteUrl: null,
+    capacity: 18, employees: 15, currentResidents: 16,
+    tags: ['t2','t5'],
+    entryCond: { age: '65歳以上', careLevel: '要支援2〜要介護5', waitTime: '2〜3ヶ月', income: '制限なし' },
+    jobs: []
+  },
+  {
+    id: 'f10', corpId: 'c2', name: '光生会 有料老人ホーム 川崎',
+    type: '有料老人ホーム', typeKey: 'yuryou',
+    prefecture: '神奈川県', city: '川崎市',
+    address: '神奈川県川崎市高津区溝口3-12-7', phone: '044-822-XXXX',
+    hasWebsite: true, websiteUrl: 'https://example.com',
+    capacity: 75, employees: 65, currentResidents: 68,
+    tags: ['t1','t3','t5','t10','t11'],
+    entryCond: { age: '60歳以上', careLevel: '自立〜要介護5', waitTime: '空室あり', income: '入居一時金あり' },
+    jobs: [
+      { type: '看護師（常勤）', empType: '正社員', salary: '月給 310,000〜380,000円' },
+    ]
+  },
+  {
+    id: 'f11', corpId: 'c5', name: '桐の葉 老健リハビリセンター 仙台',
+    type: '介護老人保健施設（老健）', typeKey: 'rooken',
+    prefecture: '宮城県', city: '仙台市',
+    address: '宮城県仙台市青葉区一番町3-7-22', phone: '022-213-XXXX',
+    hasWebsite: true, websiteUrl: 'https://example.com',
+    capacity: 100, employees: 110, currentResidents: 92,
+    tags: ['t3','t4','t7','t8','t12'],
+    entryCond: { age: '65歳以上', careLevel: '要介護1〜5', waitTime: '1〜3週間', income: '制限なし' },
+    jobs: [
+      { type: '言語聴覚士（ST）', empType: '正社員', salary: '月給 260,000〜300,000円' },
+      { type: '理学療法士（PT）', empType: '正社員', salary: '月給 265,000〜310,000円' },
+      { type: '介護職員', empType: 'パート', salary: '時給 1,100〜1,250円' },
+    ]
+  },
+  {
+    id: 'f12', corpId: 'c6', name: 'みどりの郷 サ高住 京都',
+    type: 'サービス付き高齢者向け住宅', typeKey: 'sagaju',
+    prefecture: '京都府', city: '京都市',
+    address: '京都府京都市左京区岡崎西天王町10-5', phone: '075-751-XXXX',
+    hasWebsite: true, websiteUrl: 'https://example.com',
+    capacity: 30, employees: 20, currentResidents: 24,
+    tags: ['t6','t9','t11'],
+    entryCond: { age: '60歳以上', careLevel: '自立〜要介護2', waitTime: '空室あり', income: '月額12〜16万円' },
+    jobs: [
+      { type: '介護職員（日勤のみ可）', empType: 'パート', salary: '時給 1,050〜1,200円' },
+    ]
+  },
+];
+
+// ============================================================
+//  STATE
+// ============================================================
+let filteredFacilities = [...FACILITIES];
+let currentPage = 1;
+const PAGE_SIZE = 6;
+let selectedTagFilters = new Set();
+let activeFilters = {};
+
+// ============================================================
+//  INIT
+// ============================================================
+function init() {
+  renderStats();
+  populatePrefectureSelect();
+  renderTagFilterChips();
+  renderTypeFilterList();
+  renderTagFilterList();
+  updateFilterCounts();
+  applyFilters();
+  renderAdminTagList();
+  populateAdminFacilitySelect();
+}
+
+function renderStats() {
+  const totalEl = document.getElementById('stat-total');
+  const corpEl = document.getElementById('stat-corps');
+  const jobsEl = document.getElementById('stat-jobs');
+  animateNumber(totalEl, FACILITIES.length, '施設');
+  animateNumber(corpEl, CORPORATIONS.length, '法人');
+  const totalJobs = FACILITIES.reduce((s, f) => s + f.jobs.length, 0);
+  animateNumber(jobsEl, totalJobs, '件');
+}
+
+function animateNumber(el, target, suffix) {
+  let current = 0;
+  const step = Math.ceil(target / 30);
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.innerHTML = `${current}<span>${suffix}</span>`;
+    if (current >= target) clearInterval(timer);
+  }, 40);
+}
+
+function populatePrefectureSelect() {
+  const sel = document.getElementById('s-prefecture');
+  const prefs = [...new Set(FACILITIES.map(f => f.prefecture))].sort();
+  prefs.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p; opt.textContent = p;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', updateCitySelect);
+}
+
+function updateCitySelect() {
+  const pref = document.getElementById('s-prefecture').value;
+  const sel = document.getElementById('s-city');
+  sel.innerHTML = '<option value="">すべての市区町村</option>';
+  if (!pref) return;
+  const cities = [...new Set(FACILITIES.filter(f => f.prefecture === pref).map(f => f.city))].sort();
+  cities.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+}
+
+function renderTagFilterChips() {
+  const row = document.getElementById('tag-filter-row');
+  row.innerHTML = '';
+  TAG_DEFS.slice(0, 10).forEach(tag => {
+    const chip = document.createElement('div');
+    chip.className = 'tag-filter-chip' + (selectedTagFilters.has(tag.id) ? ' active' : '');
+    chip.textContent = tag.name;
+    chip.onclick = () => {
+      selectedTagFilters.has(tag.id) ? selectedTagFilters.delete(tag.id) : selectedTagFilters.add(tag.id);
+      chip.classList.toggle('active');
+      applyFilters();
+    };
+    row.appendChild(chip);
+  });
+}
+
+function renderTypeFilterList() {
+  const list = document.getElementById('type-filter-list');
+  const types = [...new Set(FACILITIES.map(f => f.type))];
+  list.innerHTML = '';
+  types.forEach(t => {
+    const cnt = FACILITIES.filter(f => f.type === t).length;
+    const li = document.createElement('label');
+    li.className = 'filter-checkbox-item';
+    li.innerHTML = `
+      <input type="checkbox" value="${t}" onchange="applyFilters()">
+      ${t.replace('（特養）','').replace('（老健）','')}
+      <span class="filter-count">${cnt}</span>
+    `;
+    list.appendChild(li);
+  });
+}
+
+function renderTagFilterList() {
+  const list = document.getElementById('tag-filter-list');
+  list.innerHTML = '';
+  TAG_DEFS.forEach(tag => {
+    const cnt = FACILITIES.filter(f => f.tags.includes(tag.id)).length;
+    const li = document.createElement('label');
+    li.className = 'filter-checkbox-item';
+    li.innerHTML = `
+      <input type="checkbox" value="${tag.id}" onchange="applyFilters()">
+      ${tag.name}
+      <span class="filter-count">${cnt}</span>
+    `;
+    list.appendChild(li);
+  });
+}
+
+function updateFilterCounts() {
+  document.getElementById('fc-website').textContent = FACILITIES.filter(f => f.hasWebsite).length;
+  document.getElementById('fc-jobs').textContent = FACILITIES.filter(f => f.jobs.length > 0).length;
+}
+
+// ============================================================
+//  SEARCH & FILTER
+// ============================================================
+function doSearch() {
+  selectedTagFilters.clear();
+  document.querySelectorAll('.tag-filter-chip').forEach(c => c.classList.remove('active'));
+  applyFilters();
+  scrollToResults();
+}
+
+function applyFilters() {
+  const pref = document.getElementById('s-prefecture').value;
+  const city = document.getElementById('s-city').value;
+  const type = document.getElementById('s-type').value;
+  const kw   = document.getElementById('s-keyword').value.trim().toLowerCase();
+  const capMax = parseInt(document.getElementById('cap-slider').value);
+  const empMax = parseInt(document.getElementById('emp-slider').value);
+  const filterWebsite = document.getElementById('filter-website').checked;
+  const filterJobs    = document.getElementById('filter-jobs').checked;
+
+  const checkedTypes = [...document.querySelectorAll('#type-filter-list input:checked')].map(i => i.value);
+  const checkedTags  = [...document.querySelectorAll('#tag-filter-list input:checked')].map(i => i.value);
+  const allTagFilters = [...selectedTagFilters, ...checkedTags];
+
+  filteredFacilities = FACILITIES.filter(f => {
+    if (pref && f.prefecture !== pref) return false;
+    if (city && f.city !== city) return false;
+    if (type && f.type !== type) return false;
+    if (kw && !f.name.toLowerCase().includes(kw) &&
+              !f.address.toLowerCase().includes(kw) &&
+              !f.city.toLowerCase().includes(kw)) return false;
+    if (f.capacity > capMax) return false;
+    if (f.employees > empMax) return false;
+    if (filterWebsite && !f.hasWebsite) return false;
+    if (filterJobs && f.jobs.length === 0) return false;
+    if (checkedTypes.length > 0 && !checkedTypes.includes(f.type)) return false;
+    if (allTagFilters.length > 0 && !allTagFilters.every(t => f.tags.includes(t))) return false;
+    return true;
+  });
+
+  doSort(true);
+}
+
+function doSort(skipApply) {
+  if (!skipApply) {}
+  const sort = document.getElementById('sort-select').value;
+  filteredFacilities.sort((a, b) => {
+    if (sort === 'name') return a.name.localeCompare(b.name, 'ja');
+    if (sort === 'capacity_desc') return b.capacity - a.capacity;
+    if (sort === 'capacity_asc') return a.capacity - b.capacity;
+    if (sort === 'emp_desc') return b.employees - a.employees;
+    if (sort === 'jobs') return b.jobs.length - a.jobs.length;
+    return 0;
+  });
+
+  currentPage = 1;
+  renderCards();
+  renderPagination();
+  document.getElementById('results-num').textContent = filteredFacilities.length;
+}
+
+function resetFilters() {
+  document.getElementById('s-prefecture').value = '';
+  document.getElementById('s-city').innerHTML = '<option value="">すべての市区町村</option>';
+  document.getElementById('s-type').value = '';
+  document.getElementById('s-keyword').value = '';
+  document.getElementById('cap-slider').value = 200;
+  document.getElementById('emp-slider').value = 500;
+  document.getElementById('cap-val').textContent = '200名以下';
+  document.getElementById('emp-val').textContent = '500名以下';
+  document.getElementById('filter-website').checked = false;
+  document.getElementById('filter-jobs').checked = false;
+  document.querySelectorAll('#type-filter-list input').forEach(i => i.checked = false);
+  document.querySelectorAll('#tag-filter-list input').forEach(i => i.checked = false);
+  selectedTagFilters.clear();
+  document.querySelectorAll('.tag-filter-chip').forEach(c => c.classList.remove('active'));
+  applyFilters();
+}
+
+// ============================================================
+//  RENDER CARDS
+// ============================================================
+const TYPE_COLORS = {
+  tokubetsu: 'type-tokubetsu',
+  rooken:    'type-rooken',
+  group:     'type-group',
+  yuryou:    'type-yuryou',
+  sagaju:    'type-sagaju',
+  day:       'type-day',
+};
+
+const TYPE_LABELS = {
+  tokubetsu: '特養',
+  rooken:    '老健',
+  group:     'GH',
+  yuryou:    '有料',
+  sagaju:    'サ高住',
+  day:       'DS',
+};
+
+function getTagClass(category) {
+  const map = { 'サービス':'tag-service', '設備':'tag-facility', '医療':'tag-care', 'ケア':'tag-service', '特徴':'tag-special' };
+  return map[category] || 'tag-service';
+}
+
+function renderCards() {
+  const grid = document.getElementById('facility-grid');
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const page  = filteredFacilities.slice(start, start + PAGE_SIZE);
+
+  if (page.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <div class="empty-title">施設が見つかりませんでした</div>
+        <div class="empty-text">検索条件を変更して、もう一度お試しください。</div>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = '';
+  page.forEach((f, i) => {
+    const corp = CORPORATIONS.find(c => c.id === f.corpId);
+    const tags = f.tags.map(tid => {
+      const t = TAG_DEFS.find(d => d.id === tid);
+      if (!t) return '';
+      return `<span class="card-tag ${getTagClass(t.category)}">${t.name}</span>`;
+    }).join('');
+
+    const card = document.createElement('div');
+    card.className = 'facility-card card-enter';
+    card.style.animationDelay = `${i * 0.06}s`;
+    card.onclick = () => openModal(f.id);
+    card.innerHTML = `
+      <div class="card-accent-bar"></div>
+      <div class="card-body">
+        <div class="card-header">
+          <div class="card-title-group">
+            <span class="card-type-badge ${TYPE_COLORS[f.typeKey]}">${f.type.replace('（特養）','').replace('（老健）','')}</span>
+            <div class="card-name">${f.name}</div>
+            ${corp ? `<div class="card-corp">${corp.name}</div>` : ''}
+          </div>
+          <span class="card-website-badge ${f.hasWebsite ? 'website-yes' : 'website-no'}">
+            ${f.hasWebsite ? 'WEB ✓' : 'WEBなし'}
+          </span>
+        </div>
+        <div class="card-meta">
+          <span class="card-address">📍 ${f.address}</span>
+          <span style="font-size:12px;color:var(--text-muted);">📞 ${f.phone}</span>
+        </div>
+        <div class="card-stats">
+          <div class="card-stat">
+            <div class="card-stat-value">${f.capacity}<span>名</span></div>
+            <div class="card-stat-label">入居定員</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-value">${f.currentResidents}<span>名</span></div>
+            <div class="card-stat-label">現在の入居者</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-value">${f.employees}<span>名</span></div>
+            <div class="card-stat-label">従業員数</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-value">${Math.round(f.currentResidents/f.capacity*100)}<span>%</span></div>
+            <div class="card-stat-label">稼働率</div>
+          </div>
+        </div>
+        <div class="card-tags">${tags || '<span style="font-size:11px;color:var(--text-muted)">タグなし</span>'}</div>
+        <div class="card-footer">
+          ${f.jobs.length > 0
+            ? `<span class="card-jobs-badge">${f.jobs.length}件の求人あり</span>`
+            : '<span style="font-size:12px;color:var(--text-muted)">求人なし</span>'}
+          <span class="card-detail-link">詳細を見る →</span>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function renderPagination() {
+  const pag = document.getElementById('pagination');
+  const total = Math.ceil(filteredFacilities.length / PAGE_SIZE);
+  pag.innerHTML = '';
+  if (total <= 1) return;
+
+  const prev = document.createElement('button');
+  prev.className = 'page-btn'; prev.textContent = '‹';
+  prev.onclick = () => { if (currentPage > 1) { currentPage--; renderCards(); renderPagination(); scrollToResults(); } };
+  pag.appendChild(prev);
+
+  for (let i = 1; i <= total; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+    btn.textContent = i;
+    btn.onclick = () => { currentPage = i; renderCards(); renderPagination(); scrollToResults(); };
+    pag.appendChild(btn);
+  }
+
+  const next = document.createElement('button');
+  next.className = 'page-btn'; next.textContent = '›';
+  next.onclick = () => { if (currentPage < total) { currentPage++; renderCards(); renderPagination(); scrollToResults(); } };
+  pag.appendChild(next);
+}
+
+function scrollToResults() {
+  document.getElementById('results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function showHome() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+//  MODAL
+// ============================================================
+function openModal(id) {
+  const f = FACILITIES.find(x => x.id === id);
+  if (!f) return;
+  const corp = CORPORATIONS.find(c => c.id === f.corpId);
+  const siblings = corp ? FACILITIES.filter(x => x.corpId === f.corpId && x.id !== f.id) : [];
+
+  document.getElementById('modal-type-badge').innerHTML =
+    `<span class="card-type-badge ${TYPE_COLORS[f.typeKey]}" style="margin-bottom:8px;display:inline-flex;">${f.type}</span>`;
+  document.getElementById('modal-title').textContent = f.name;
+  document.getElementById('modal-subtitle').innerHTML =
+    `<span>${f.address}</span><span>|</span><span>${f.phone}</span>`;
+
+  const tags = f.tags.map(tid => {
+    const t = TAG_DEFS.find(d => d.id === tid);
+    if (!t) return '';
+    return `<span class="card-tag ${getTagClass(t.category)}" style="font-size:13px;padding:5px 14px;">${t.name}</span>`;
+  }).join('');
+
+  const jobsHtml = f.jobs.length > 0 ? f.jobs.map(j => `
+    <div class="job-item">
+      <div class="job-info">
+        <div class="job-type">${j.type}</div>
+        <div class="job-meta"><span>${j.empType}</span></div>
+      </div>
+      <div class="job-salary">${j.salary}</div>
+    </div>`).join('') : '<p style="font-size:13px;color:var(--text-muted);padding:16px;">現在、求人情報はありません。</p>';
+
+  const siblingsHtml = siblings.length > 0 ? siblings.map(s => `
+    <div class="related-item" onclick="openModal('${s.id}');event.stopPropagation();">
+      <div>
+        <div class="related-name">${s.name}</div>
+        <div class="related-meta">${s.prefecture} ${s.city} / ${s.type}</div>
+      </div>
+      <span style="color:var(--text-muted);font-size:12px;">→</span>
+    </div>`).join('') : '<p style="font-size:13px;color:var(--text-muted);">系列施設はありません。</p>';
+
+  document.getElementById('modal-body').innerHTML = `
+    <div>
+      <div class="modal-section-title">基本情報</div>
+      <div class="modal-info-grid">
+        <div class="modal-info-item">
+          <div class="modal-info-label">法人名</div>
+          <div class="modal-info-value">${corp ? corp.name : '—'}</div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-label">法人種別</div>
+          <div class="modal-info-value">${corp ? corp.type : '—'}</div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-label">電話番号</div>
+          <div class="modal-info-value">${f.phone}</div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-label">Webサイト</div>
+          <div class="modal-info-value">
+            ${f.hasWebsite ? `<a href="${f.websiteUrl}" target="_blank">公式サイトを開く ↗</a>` : 'なし'}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="modal-section-title">規模・稼働状況</div>
+      <div class="modal-stats-grid">
+        <div class="modal-stat">
+          <div class="modal-stat-value">${f.capacity}<span>名</span></div>
+          <div class="modal-stat-label">入居定員</div>
+        </div>
+        <div class="modal-stat">
+          <div class="modal-stat-value">${f.currentResidents}<span>名</span></div>
+          <div class="modal-stat-label">現在の入居者</div>
+        </div>
+        <div class="modal-stat">
+          <div class="modal-stat-value">${f.employees}<span>名</span></div>
+          <div class="modal-stat-label">従業員数</div>
+        </div>
+        <div class="modal-stat">
+          <div class="modal-stat-value">${Math.round(f.currentResidents/f.capacity*100)}<span>%</span></div>
+          <div class="modal-stat-label">稼働率</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="modal-section-title">施設の特徴タグ</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">${tags || '<span style="font-size:13px;color:var(--text-muted)">タグ未設定</span>'}</div>
+    </div>
+    <div>
+      <div class="modal-section-title">入居条件</div>
+      <div class="conditions-grid">
+        <div class="condition-item">
+          <div class="condition-label">対象年齢</div>
+          <div class="condition-value">${f.entryCond.age}</div>
+        </div>
+        <div class="condition-item">
+          <div class="condition-label">介護度</div>
+          <div class="condition-value">${f.entryCond.careLevel}</div>
+        </div>
+        <div class="condition-item">
+          <div class="condition-label">待機期間の目安</div>
+          <div class="condition-value">${f.entryCond.waitTime}</div>
+        </div>
+        <div class="condition-item">
+          <div class="condition-label">費用・収入条件</div>
+          <div class="condition-value">${f.entryCond.income}</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="modal-section-title">求人・採用情報</div>
+      <div class="job-list">${jobsHtml}</div>
+    </div>
+    ${corp && siblings.length > 0 ? `
+    <div>
+      <div class="modal-section-title">${corp.name} の系列施設</div>
+      <div class="related-facilities">${siblingsHtml}</div>
+    </div>` : ''}
+  `;
+
+  document.getElementById('modal-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+}
+
+function closeModalDirect() {
+  document.getElementById('modal-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ============================================================
+//  ADMIN PANEL
+// ============================================================
+function openAdmin() {
+  document.getElementById('admin-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAdmin(e) {
+  if (e.target === document.getElementById('admin-overlay')) closeAdminDirect();
+}
+
+function closeAdminDirect() {
+  document.getElementById('admin-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function renderAdminTagList() {
+  const list = document.getElementById('admin-tag-list');
+  list.innerHTML = '';
+  TAG_DEFS.forEach(tag => {
+    const item = document.createElement('div');
+    item.className = 'admin-tag-item';
+    item.innerHTML = `
+      <div class="admin-tag-color" style="background:${tag.color}"></div>
+      <span class="admin-tag-name">${tag.name}</span>
+      <span class="admin-tag-category">${tag.category}</span>
+      <button class="admin-tag-delete" onclick="deleteTag('${tag.id}')">✕</button>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function addTag() {
+  const name = document.getElementById('new-tag-name').value.trim();
+  const category = document.getElementById('new-tag-category').value;
+  const color = document.getElementById('new-tag-color').value;
+  if (!name) { showToast('タグ名を入力してください', true); return; }
+  const id = 't' + Date.now();
+  TAG_DEFS.push({ id, name, category, color });
+  document.getElementById('new-tag-name').value = '';
+  renderAdminTagList();
+  renderTagFilterChips();
+  renderTagFilterList();
+  renderAdminTagCheckboxes();
+  showToast(`タグ「${name}」を追加しました`);
+}
+
+function deleteTag(id) {
+  TAG_DEFS = TAG_DEFS.filter(t => t.id !== id);
+  FACILITIES.forEach(f => { f.tags = f.tags.filter(t => t !== id); });
+  renderAdminTagList();
+  renderTagFilterChips();
+  renderTagFilterList();
+  renderAdminTagCheckboxes();
+  applyFilters();
+  showToast('タグを削除しました');
+}
+
+function populateAdminFacilitySelect() {
+  const sel = document.getElementById('admin-facility-select');
+  FACILITIES.forEach(f => {
+    const opt = document.createElement('option');
+    opt.value = f.id; opt.textContent = f.name;
+    sel.appendChild(opt);
+  });
+}
+
+function renderAdminTagCheckboxes() {
+  const container = document.getElementById('admin-tag-checkboxes');
+  const facilityId = document.getElementById('admin-facility-select').value;
+  const facility = facilityId ? FACILITIES.find(f => f.id === facilityId) : null;
+  container.innerHTML = '';
+  if (!facilityId) return;
+  TAG_DEFS.forEach(tag => {
+    const isChecked = facility && facility.tags.includes(tag.id);
+    const el = document.createElement('label');
+    el.className = 'admin-tag-checkbox' + (isChecked ? ' checked' : '');
+    el.innerHTML = `<input type="checkbox" value="${tag.id}" ${isChecked ? 'checked' : ''}>${tag.name}`;
+    el.querySelector('input').addEventListener('change', () => el.classList.toggle('checked'));
+    container.appendChild(el);
+  });
+}
+
+function saveTagAssignment() {
+  const facilityId = document.getElementById('admin-facility-select').value;
+  if (!facilityId) { showToast('施設を選択してください', true); return; }
+  const facility = FACILITIES.find(f => f.id === facilityId);
+  const checked = [...document.querySelectorAll('#admin-tag-checkboxes input:checked')].map(i => i.value);
+  facility.tags = checked;
+  renderCards();
+  showToast(`「${facility.name}」のタグを更新しました`);
+}
+
+function simulateUpdate() {
+  showToast('データ取得中... (シミュレーション)');
+  setTimeout(() => showToast('最新データの取得が完了しました ✓'), 2200);
+}
+
+// ============================================================
+//  TOAST
+// ============================================================
+function showToast(msg, isError) {
+  const toast = document.getElementById('toast');
+  const icon  = toast.querySelector('.toast-icon');
+  document.getElementById('toast-msg').textContent = msg;
+  icon.style.background = isError ? '#E53935' : '#4CAF50';
+  icon.textContent = isError ? '!' : '✓';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ============================================================
+//  BOOT
+// ============================================================
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

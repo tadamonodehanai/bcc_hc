@@ -1,0 +1,15 @@
+制度ID,実施主体レベル,自治体コード,自治体名,制度名,カテゴリ,対象施設,受付状況,申請開始,申請締切,補助率,補助上限,対象機器タグ,財源,公式URL,確度,備考
+M-01,市区町村,13103,港区,港区介護ロボット等導入支援事業,介護ロボット,介護サービス事業所全般,未定,,,要確認,1事業所400万円,ROB-09/ICT-01/ICT-05,港区,https://www.city.minato.tokyo.jp/kaigojigyoushien/robo.html,中,国/都への上乗せ・上限は公式記載(令和8年度詳細は要確認)
+M-02,市区町村,15100,新潟市,新潟市介護テクノロジー導入支援事業,ICT・介護ソフト|介護ロボット,介護サービス事業所全般,受付中,2026-05-20,,4/5,要確認,ROB-01〜13/ICT-01〜09,新潟市,https://www.city.niigata.lg.jp/iryo/kaigo/kaigojinzai/kaigo_techno.html,中,予算上限まで・県事業と別枠(上乗せ)
+M-03,市区町村,11100,さいたま市,さいたま市 介護ロボット・ICT導入支援(地域密着型サービス等),ICT・介護ソフト|介護ロボット,GH|小多機,未定,,,要確認,要確認,ROB-01〜13/ICT-01〜09,さいたま市,https://www.city.saitama.lg.jp/005/001/018/010/p091876.html,中,地域密着型は市/居宅・施設は県が実施・令和8年度詳細は要確認
+M-04,市区町村,40130,福岡市,介護施設等の大規模修繕に併せた介護ロボット・ICT導入支援事業,施設整備・改修|介護ロボット,介護サービス事業所全般,未定,,,要確認,1床39.6万円(定期巡回660万円/施設),ROB-01〜13/ICT-01〜09,福岡市,https://www.city.fukuoka.lg.jp/fukushi/kaigohoken/health/00/05/R8chimitsu_chousa.html,中,大規模修繕と一体・希望調査は終了(本募集待ち)・窓口092-733-5452
+M-05,市区町村,13122,葛飾区,葛飾区介護ロボット導入促進事業補助金,介護ロボット,介護サービス事業所全般,未定,,,要確認,1事業者83.4万円/年度,ROB-01〜13,葛飾区,https://www.city.katsushika.lg.jp/business/1000011/1000069/1005251/1035308.html,中,対象経費20万円以上・国/都への上乗せ(実額834300円/年度)
+M-06,市区町村,28100,神戸市,神戸市 社会福祉施設等ICT化推進事業補助金,ICT・介護ソフト,介護サービス事業所全般,未定,,,要確認,要確認,ICT-01/ICT-04/ICT-06,神戸市,https://www.city.kobe.lg.jp/a46210/kenko/fukushi/carenet/kaigozinzai/ictsienn.html,中,兵庫県事業と別枠・詳細要確認
+M-07,市区町村,14100,横浜市,横浜市介護ロボット等導入支援事業費補助金,介護ロボット,介護サービス事業所全般,未定,,,9/10,45万円,ROB-01〜13,横浜市,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/shigoto/kaigo/zinzaikakuho.html,中,中高年齢者/外国人雇用事業者向け・携帯翻訳機も対象・窓口kf-zinzai@city.yokohama.lg.jp
+M-08,市区町村,12100,千葉市,千葉市 大規模修繕時介護ロボット・ICT導入支援事業,施設整備・改修|介護ロボット,介護サービス事業所全般,未定,,,要確認,要確認,ROB-01〜13/ICT-01〜09,千葉市,https://www.city.chiba.jp/hokenfukushi/koreishogai/kaigohokenkanri/robot/daikiborobot_syukusya.html,中,大規模修繕と一体・令和8年度事業量見込調査
+M-09,市区町村,27140,堺市,堺市 介護ロボット及びICT導入支援事業補助金,ICT・介護ソフト|介護ロボット,介護サービス事業所全般,未定,,,要確認,要確認,ROB-01〜13/ICT-01〜09,堺市,https://www.city.sakai.lg.jp/kenko/fukushikaigo/koreishafukushi/jigyo/jigyosha/kaigo-robot.html,中,市独自の申請募集ページあり・府事業と別枠か要一次確認
+M-10,市区町村,14130,川崎市,川崎市 介護ロボット・ICT導入支援事業費補助金(大規模修繕併せ),施設整備・改修|介護ロボット,介護サービス事業所全般,未定,,,要確認,要確認,ROB-01〜13/ICT-01〜09,川崎市,https://www.city.kawasaki.jp/350/page/0000177221.html,中,交付要領公開済・令和8年度は希望調査段階・窓口:高齢者事業推進課
+M-11,市区町村,12204,船橋市,船橋市 大規模修繕時介護ロボット・ICT導入支援事業,施設整備・改修|介護ロボット,介護サービス事業所全般,未定,,,要確認,要確認,ROB-01〜13/ICT-01〜09,船橋市,https://www.city.funabashi.lg.jp/jigyou/fukushi_kosodate/001/05/p110875.html,中,中核市=広域型施設の補助者(千葉県資料に明記)・大規模修繕併せ型
+M-12,市区町村,14201,横須賀市,横須賀市 介護ロボット・ICT導入支援事業費補助金,ICT・介護ソフト|介護ロボット,介護サービス事業所全般,未定,,,要確認,要確認,ROB-01〜13/ICT-01〜09,横須賀市,https://www.city.yokosuka.kanagawa.jp/2640/youkou/documents/shisetsu09.pdf,中,市の交付要綱(公式PDF)を確認・募集状況は要一次確認
+M-13,市区町村,12217,柏市,柏市公的介護施設等整備等補助金,施設整備・改修,特養,未定,,,要確認,要確認(要綱),,柏市,https://www.city.kashiwa.lg.jp/kourei/jigyosha/welfare_sr/hojokin/2608.html,中,建設工事費等が対象・介護ロボット/ICT導入を含むかは要綱確認要・担当:高齢者支援課04-7168-1996
+M-14,市区町村,11224,戸田市,戸田市 介護ロボット等導入支援事業補助金,介護ロボット,介護サービス事業所全般,未定,,,要確認,要確認,ROB-01〜13,戸田市,https://www.city.toda.saitama.jp/soshiki/234/chojukaigo-kaigorobot.html,中,一般市(Tier3)の独自制度・市公式ページあり・詳細要一次確認

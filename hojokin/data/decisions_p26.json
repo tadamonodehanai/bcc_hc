@@ -1,0 +1,10 @@
+{
+  "reviewer": "shin.tanaka",
+  "decisions": [
+    {
+      "id": "P-26",
+      "action": "reject",
+      "note": "CSV側で一次確認済(手引きPDF直接抽出により高へ昇格)・ステージング版は不要"
+    }
+  ]
+}

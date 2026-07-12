@@ -1,0 +1,10 @@
+{
+  "reviewer": "shin.tanaka",
+  "decisions": [
+    {"id": "P-27", "action": "approve", "confidence": "高"},
+    {"id": "P-47", "action": "approve", "confidence": "高"},
+    {"id": "P-11", "action": "approve", "confidence": "高"},
+    {"id": "P-07", "action": "approve", "confidence": "高", "edits": {"締切": "2026-07-31"}},
+    {"id": "P-26", "action": "hold", "note": "補助率は取得したが上限が要綱PDFの表組みで未取得。次回LLM抽出で再取得"}
+  ]
+}
