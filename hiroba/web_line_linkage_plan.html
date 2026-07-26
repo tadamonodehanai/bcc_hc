@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web会員 × LINE 連携・集客プラン｜介護レク広場 14期戦略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    right: -40px;
+    width: 320px;
+    height: 320px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--accent-warm);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 64px;
+    max-width: 620px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep {
+    background: var(--bg-section);
+    border-top: none;
+  }
+  .section.dark {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-top: none;
+  }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead {
+    font-size: 16px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    max-width: 680px;
+  }
+  .section-lead strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .section.dark .section-lead strong { color: var(--accent-gold); }
+
+  /* Challenge list */
+  .challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 48px;
+  }
+  .challenge-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+  .challenge-item:last-child { border-bottom: 1px solid var(--border-soft); }
+  .challenge-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-warm);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .challenge-body { display: flex; flex-direction: column; gap: 8px; }
+  .challenge-title {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .challenge-note {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+  .challenge-note strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+
+  /* Shift grid - 認識転換 */
+  .shift-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border-soft);
+    margin-top: 48px;
+    border: 1px solid var(--border-soft);
+  }
+  .shift-card {
+    background: var(--bg-card);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 280px;
+  }
+  .shift-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .shift-title {
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .shift-arrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-top: 1px dashed var(--border-line);
+    margin-top: auto;
+  }
+  .shift-from, .shift-to {
+    font-family: var(--font-display);
+    font-size: 14px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .shift-from { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-to { color: var(--accent-deep); font-weight: 500; }
+  .shift-mark { font-family: var(--font-mono); color: var(--accent-warm); font-size: 14px; }
+  .shift-body {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-secondary);
+  }
+
+  /* Roadmap */
+  .roadmap-frame {
+    background: var(--bg-card);
+    border: 1px solid var(--border-line);
+    padding: 48px 36px;
+    margin-top: 24px;
+  }
+  .roadmap-zones {
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+    gap: 24px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+  .zone-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-line);
+  }
+  .zone-label.exec { color: var(--accent-warm); }
+
+  .phase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .phase-card {
+    padding: 24px 20px;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+  .phase-card.exec {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    border-color: var(--bg-deep);
+  }
+  .phase-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  .phase-card.exec .phase-tag { color: var(--accent-gold); }
+  .phase-verb {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+  .phase-card.exec .phase-verb { color: var(--text-on-deep); }
+  .phase-period {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    padding-top: 8px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-card.exec .phase-period { color: rgba(242, 236, 222, 0.7); border-color: rgba(184, 146, 74, 0.3); }
+  .phase-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+  .phase-card.exec .phase-desc { color: rgba(242, 236, 222, 0.85); }
+
+  /* Phase detail */
+  .phase-detail {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 56px;
+    padding: 56px 0;
+    border-top: 1px solid var(--border-soft);
+  }
+  .phase-detail:last-child { border-bottom: 1px solid var(--border-soft); }
+  .phase-detail-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .phase-detail-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .phase-detail-verb {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin: 8px 0 12px;
+  }
+  .phase-detail-period {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .phase-detail-purpose {
+    font-family: var(--font-display);
+    font-size: 19px;
+    line-height: 1.9;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .phase-detail-section { margin-bottom: 24px; }
+  .phase-detail-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .phase-detail-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .phase-detail-list li {
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+  }
+  .phase-detail-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent-warm);
+    font-size: 12px;
+  }
+  .phase-detail-gate {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: var(--bg-section);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--accent-warm);
+  }
+  .phase-detail-gate strong {
+    color: var(--text-primary);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--font-display);
+  }
+
+  /* Criteria */
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .criteria-card {
+    background: var(--bg-card);
+    padding: 36px 28px;
+    border-top: 3px solid var(--accent-warm);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+  .criteria-card.primary {
+    background: var(--bg-deep);
+    border-top-color: var(--accent-gold);
+    border-top-width: 4px;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(31, 72, 71, 0.18);
+  }
+  .criteria-card.primary .criteria-num { color: var(--accent-gold); }
+  .criteria-card.primary .criteria-name { color: var(--text-on-deep); }
+  .criteria-card.primary .criteria-q {
+    color: rgba(242, 236, 222, 0.88);
+    border-top-color: rgba(184, 146, 74, 0.3);
+  }
+  .criteria-mark {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 3px 8px;
+    vertical-align: middle;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+  .criteria-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--accent-warm);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .criteria-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .criteria-q {
+    font-size: 13px;
+    line-height: 1.95;
+    color: var(--text-secondary);
+    padding-top: 16px;
+    border-top: 1px solid var(--border-soft);
+    margin-top: 4px;
+  }
+
+  /* Next actions */
+  .nextactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 32px;
+  }
+  .nextaction {
+    padding: 32px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .nextaction-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent-gold);
+    font-weight: 500;
+  }
+  .nextaction-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--text-on-deep);
+    line-height: 1.5;
+  }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--accent-gold);
+  }
+
+  /* Footer */
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* Page nav (between docs) */
+  .pagenav {
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-side.disabled { opacity: 0.35; pointer-events: none; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  /* §00 Essence section */
+  .emph-warm { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+
+  .essence-block {
+    margin-top: 48px;
+    padding: 48px 44px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent-warm);
+  }
+  .essence-block.accent {
+    background: var(--bg-section);
+    border-left-color: var(--accent-deep);
+  }
+  .essence-block + .essence-block { margin-top: 24px; }
+  .essence-head {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .essence-block.accent .essence-tag { color: var(--accent-deep); }
+  .essence-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+  }
+  .essence-body {
+    font-size: 15px;
+    line-height: 2.1;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .essence-body:last-child { margin-bottom: 0; }
+  .essence-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+  .essence-table {
+    margin: 24px 0;
+    border: 1px solid var(--border-soft);
+    background: var(--bg-paper);
+  }
+  .essence-row {
+    display: grid;
+    grid-template-columns: 140px 200px 1fr;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .essence-row:last-child { border-bottom: none; }
+  .essence-row > span {
+    padding: 18px 20px;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    border-right: 1px solid var(--border-soft);
+  }
+  .essence-row > span:last-child { border-right: none; }
+  .essence-row-head > span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    background: var(--bg-section);
+  }
+  .essence-row .essence-col-label {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .essence-row.strategic .essence-col-label {
+    color: var(--accent-warm);
+  }
+  .essence-row.strategic {
+    background: rgba(184, 92, 61, 0.04);
+  }
+
+  /* Print */
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    body { font-size: 12px; }
+    .hero-title { font-size: 42px; }
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-title { font-size: 38px; }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 28px; }
+    .shift-grid { grid-template-columns: 1fr; }
+    .phase-row { grid-template-columns: 1fr; }
+    .roadmap-zones { grid-template-columns: 1fr; }
+    .phase-detail { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+    .criteria-grid { grid-template-columns: 1fr; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+    .essence-block { padding: 32px 24px; }
+    .essence-title { font-size: 21px; }
+    .essence-row { grid-template-columns: 1fr; }
+    .essence-row > span { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    .essence-row > span:last-child { border-bottom: none; }
+  }
+
+
+  /* === colorblind-safe overrides for dark (green) sections === */
+  .section.dark .emph-warm{color:var(--text-on-deep);border-bottom:2px solid var(--accent-gold);padding-bottom:2px;}
+  .section.dark .section-lead strong{color:var(--text-on-deep);}
+
+  /* === §00 disconnection cards (light bg, dark text) === */
+  .brk{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;margin-top:18px;border:1px solid var(--border-soft);background:var(--bg-card);}
+  .brk-side{padding:20px 22px;}
+  .brk-side .bs-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);}
+  .brk-side .bs-name{font-family:var(--font-display);font-size:18px;color:var(--text-primary);font-weight:600;margin-top:4px;}
+  .brk-cut{display:flex;align-items:center;justify-content:center;padding:0 10px;font-size:18px;font-weight:600;color:var(--accent-deep);border-left:1px dashed var(--border-line);border-right:1px dashed var(--border-line);background:var(--bg-section);}
+  .brk-conseq{grid-column:1/-1;border-top:1px solid var(--border-soft);padding:12px 22px;font-size:13px;color:var(--text-secondary);background:var(--bg-paper);}
+  .brk-conseq b{color:var(--text-primary);font-weight:700;}
+
+  /* === layered blocks (dark bg) — FIXED layout: label / title / desc stacked === */
+  .layers{display:flex;flex-direction:column;gap:12px;margin-top:28px;}
+  .layer{border:1px solid rgba(242,236,222,0.22);padding:22px 26px;}
+  .layer.base{border:1px solid rgba(242,236,222,0.5);border-left:4px solid var(--text-on-deep);background:rgba(242,236,222,0.06);}
+  .layer-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;}
+  .layer-n{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(242,236,222,0.6);}
+  .layer-flag{font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--bg-deep);background:var(--text-on-deep);padding:3px 10px;border-radius:2px;font-weight:700;}
+  .layer-t{font-family:var(--font-display);font-size:20px;color:var(--text-on-deep);line-height:1.5;font-weight:600;margin-bottom:8px;}
+  .layer-d{font-size:13.5px;color:rgba(242,236,222,0.82);line-height:1.85;}
+
+  /* === operation cards (light bg): 今すぐ / 要確認 / OKなら / NGなら === */
+  .opc{background:var(--bg-card);border:1px solid var(--border-soft);border-left:4px solid var(--accent-deep);padding:24px 28px;margin-top:18px;}
+  .opc-head{display:flex;gap:12px;align-items:baseline;margin-bottom:14px;flex-wrap:wrap;}
+  .opc-code{font-family:var(--font-mono);font-weight:600;font-size:13px;color:#fff;background:var(--accent-deep);padding:3px 10px;border-radius:3px;}
+  .opc-title{font-family:var(--font-display);font-size:19px;font-weight:600;color:var(--text-primary);}
+  .opc-goal{flex-basis:100%;font-size:13px;color:var(--text-muted);margin-top:2px;}
+  .opc-row{display:grid;grid-template-columns:104px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--border-soft);align-items:start;}
+  .opc-row.chk{background:var(--bg-section);border-left:3px solid var(--accent-gold);margin:0 -28px;padding:14px 28px 14px 25px;border-top:1px solid var(--border-soft);}
+  .opc-k{font-family:var(--font-mono);font-size:11px;letter-spacing:0.06em;font-weight:600;color:var(--accent-deep);padding-top:2px;}
+  .opc-k.warn{color:#7A4A12;}
+  .opc-v{font-size:13.5px;color:var(--text-secondary);line-height:1.75;}
+  .opc-v b{color:var(--text-primary);font-weight:600;}
+  .opc-who{display:inline-block;font-family:var(--font-mono);font-size:10.5px;color:#7A4A12;border:1px solid #C9A24B;border-radius:2px;padding:1px 7px;margin-left:2px;}
+
+  /* === Plan B blocks (dark) === */
+  .pb-block{border:1px solid rgba(242,236,222,0.22);padding:22px 26px;margin-top:16px;}
+  .pb-block.keep{border-left:4px solid rgba(242,236,222,0.4);}
+  .pb-block.do{border-left:4px solid var(--accent-gold);}
+  .pb-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(242,236,222,0.6);}
+  .pb-block.do .pb-label{color:var(--text-on-deep);}
+  .pb-title{font-family:var(--font-display);font-size:18px;color:var(--text-on-deep);margin-top:6px;font-weight:600;}
+  .pb-body{font-size:13.5px;color:rgba(242,236,222,0.85);line-height:1.85;margin-top:8px;}
+  .pb-body b{color:var(--text-on-deep);}
+
+  /* === plain action cards (light) === */
+  .pcard{background:var(--bg-card);border:1px solid var(--border-soft);border-left:4px solid var(--accent-deep);padding:22px 26px;margin-top:16px;}
+  .pcard-head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;}
+  .pcard-code{font-family:var(--font-mono);font-weight:600;font-size:12px;color:#fff;background:var(--accent-deep);padding:3px 10px;border-radius:3px;}
+  .pcard-title{font-family:var(--font-display);font-size:18px;color:var(--text-primary);font-weight:600;}
+  .pcard-ev{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);}
+  .pcard-body{font-size:14px;color:var(--text-secondary);line-height:1.8;margin-top:10px;}
+
+  /* === confirm list (dark) === */
+  .conf{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:24px;}
+  .conf li{display:grid;grid-template-columns:1fr;gap:4px;border-left:3px solid var(--accent-gold);padding:2px 0 2px 16px;}
+  .conf .cf-q{font-size:14.5px;color:var(--text-on-deep);line-height:1.6;font-weight:500;}
+  .conf .cf-who{font-family:var(--font-mono);font-size:11px;color:rgba(242,236,222,0.65);letter-spacing:0.03em;}
+
+  @media(max-width:720px){.brk{grid-template-columns:1fr;}.brk-cut{border:none;padding:8px;}.opc-row{grid-template-columns:1fr;gap:4px;}.opc-row.chk{margin:0;padding:14px 18px;}}
+
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜Web会員 × LINE 連携・集客プラン</a>
+    <span class="banner-tag">v0.2 / 2026.07 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-label">PHASE 0 — 観る ／ 連携設計</span>
+    <h1 class="hero-title">増やす前に、<br><em>つなぐ</em>。</h1>
+    <p class="hero-subtitle">いまの伸び悩みは、集客ではなく「会員・行動・LINEが線でつながっていない」計測と連携の問題。この資料は、今すぐできる操作と、社内・制作会社に確認すべきことを、実務ベースで並べたもの。仮説は書かず、確認項目を明示する。</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 00　現状整理</span>
+      <h2 class="section-title">3つの、<br><span class="emph-warm">つながっていない</span>。</h2>
+    </div>
+    <p class="section-lead">GA4レポートが取得できる情報のすべて。そこから見えるのは、増やす手前にある「分断」。<strong>ログイン必須で会員が使っているのに、その事実がどこにも接続されていない。</strong></p>
+    <div class="brk">
+      <div class="brk-side"><span class="bs-label">会員</span><span class="bs-name">誰が</span></div>
+      <div class="brk-cut">✕</div>
+      <div class="brk-side"><span class="bs-label">行動（DL）</span><span class="bs-name">何を落とした</span></div>
+      <div class="brk-conseq">ログイン必須なのに、DLと会員IDが未連携。→ <b>誰が何を落としたか、分からない</b></div>
+    </div>
+    <div class="brk">
+      <div class="brk-side"><span class="bs-label">会員</span><span class="bs-name">Web 7万</span></div>
+      <div class="brk-cut">✕</div>
+      <div class="brk-side"><span class="bs-label">LINE</span><span class="bs-name">友だち 563</span></div>
+      <div class="brk-conseq">友だちと会員を名寄せできない。→ <b>移行できたのか、見えない</b></div>
+    </div>
+    <div class="brk">
+      <div class="brk-side"><span class="bs-label">訪問</span><span class="bs-name">3.6万UU</span></div>
+      <div class="brk-cut">✕</div>
+      <div class="brk-side"><span class="bs-label">属性</span><span class="bs-name">会員 or 非会員</span></div>
+      <div class="brk-conseq">GA4で会員/非会員が判別できない。→ <b>本当の母数（実会員アクセス）が不明</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　全体像</span>
+      <h2 class="section-title">打ち手を、<br><span class="emph-warm">3層</span>に分ける。</h2>
+    </div>
+    <p class="section-lead">やみくもに増やさない。<strong>「つなぐ」土台がないと、1000人集めても“誰が来たか”が分からず、価値化に進めない。</strong>だから層1を最優先に置く。</p>
+    <div class="layers">
+      <div class="layer base">
+        <div class="layer-top"><span class="layer-n">Layer 1</span><span class="layer-flag">最優先・土台</span></div>
+        <div class="layer-t">つなぐ ── 計測と連携</div>
+        <div class="layer-d">会員・行動・LINEを線でつなぐ。ここが無いと、上の2層は数字が読めないまま。</div>
+      </div>
+      <div class="layer">
+        <div class="layer-top"><span class="layer-n">Layer 2</span></div>
+        <div class="layer-t">増やす ── モバイル会員をLINEへ</div>
+        <div class="layer-d">GA4の事実を根拠に、価値を感じた瞬間へ導線を置く。土台の上でこそ効果が測れる。</div>
+      </div>
+      <div class="layer">
+        <div class="layer-top"><span class="layer-n">Layer 3</span></div>
+        <div class="layer-t">聞く ── アンケートを機能させる</div>
+        <div class="layer-d">母数と回答率の設計で、いま出せない集計を出せるようにする。層1と並行で進む。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　層1「つなぐ」</span>
+      <h2 class="section-title">今すぐやる操作と、<br><span class="emph-warm">確認すべきこと</span>。</h2>
+    </div>
+    <p class="section-lead">4つの紐付けを、実務の手順で並べる。各カードは「今すぐできる操作（開発不要）」「要確認（誰に・何を）」「確認結果での分岐」。<strong>できるかどうか不明な部分は、仮説で書かず“確認事項”として明示している。</strong></p>
+
+    <div class="opc">
+      <div class="opc-head"><span class="opc-code">連携 A</span><span class="opc-title">会員アクセスの規模を見る</span><span class="opc-goal">目的：訪問のうち「会員」がどれだけかを知る</span></div>
+      <div class="opc-row"><span class="opc-k">今すぐ</span><span class="opc-v">GA4で「登録完了(regist_comp)またはDLイベントを含むセッション」をセグメント化し、<b>“会員セッション”の近似値</b>を出す。開発不要で今日できる。</span></div>
+      <div class="opc-row chk"><span class="opc-k warn">要確認</span><span class="opc-v"><b>ログイン状態をページのdataLayerに出力できるか</b>（例：is_member）。GTMの編集権限が社内にあるか。<span class="opc-who">確認先：制作会社／サイト担当</span></span></div>
+      <div class="opc-row"><span class="opc-k">OKなら</span><span class="opc-v">GA4のユーザープロパティに会員フラグを設定 → 会員/非会員を正確に分けて分析。</span></div>
+      <div class="opc-row"><span class="opc-k">NGなら</span><span class="opc-v">上の近似セグメントで運用（精度は落ちるが規模感は掴める）。</span></div>
+    </div>
+
+    <div class="opc">
+      <div class="opc-head"><span class="opc-code">連携 B</span><span class="opc-title">誰が何をDLしたか</span><span class="opc-goal">目的：会員ごとの利用素材を知る</span></div>
+      <div class="opc-row"><span class="opc-k">今すぐ</span><span class="opc-v">GA4でDL（file_download等）を<b>「素材名別」に集計</b>。何が・どれだけ落ちたかは見える。</span></div>
+      <div class="opc-row chk"><span class="opc-k warn">要確認</span><span class="opc-v"><b>DL処理時に会員ID(member_id)をイベントに付与できるか</b>。または<b>サーバのDLログにmember_idが記録されているか</b>。<span class="opc-who">確認先：制作会社</span></span></div>
+      <div class="opc-row"><span class="opc-k">OKなら</span><span class="opc-v">会員別のDL履歴が取れる（誰が何を何回）。</span></div>
+      <div class="opc-row"><span class="opc-k">NGなら</span><span class="opc-v">素材名別の集計 × 連携Aの会員フラグで「会員/非会員のDL傾向」を集計レベルで把握。</span></div>
+    </div>
+
+    <div class="opc">
+      <div class="opc-head"><span class="opc-code">連携 C</span><span class="opc-title">LINE友だちと会員の突合</span><span class="opc-goal">目的：移行できたかを見える化する</span></div>
+      <div class="opc-row"><span class="opc-k">今すぐ</span><span class="opc-v">技術的な突合なしでも、<b>LINEウェルカムの1問目で「会員番号 or 登録メール」を任意入力</b>してもらい、手動照合の名簿を作り始める。</span></div>
+      <div class="opc-row chk"><span class="opc-k warn">要確認</span><span class="opc-v"><b>現在のLINE公式アカウントのプランでLINEログイン／アカウント連携(LIFF)が使えるか</b>、実装リソースがあるか。<span class="opc-who">確認先：LINE運用担当／制作会社</span></span></div>
+      <div class="opc-row"><span class="opc-k">OKなら</span><span class="opc-v">LINE userId ↔ member_id を自動突合し、移行を個人単位で可視化。</span></div>
+      <div class="opc-row"><span class="opc-k">NGなら</span><span class="opc-v">§03のPlan B（自己申告パネル）へ切り替え。</span></div>
+    </div>
+
+    <div class="opc">
+      <div class="opc-head"><span class="opc-code">連携 D</span><span class="opc-title">登録者の流入媒体</span><span class="opc-goal">目的：どの経路の登録が多いかを知る</span></div>
+      <div class="opc-row"><span class="opc-k">今すぐ</span><span class="opc-v">GA4で <b>page_view_regist_comp を「参照元/メディア別」に集計</b>。登録がどの媒体経由かは、今すぐ・開発不要で分かる。</span></div>
+      <div class="opc-row chk"><span class="opc-k warn">要確認</span><span class="opc-v"><b>会員DBに「流入媒体」カラムを追加でき、登録フォームでUTM/リファラを保存できるか</b>。<span class="opc-who">確認先：制作会社</span></span></div>
+      <div class="opc-row"><span class="opc-k">OKなら</span><span class="opc-v">会員DBに媒体が残り、登録者を媒体別に長期分析できる。</span></div>
+      <div class="opc-row"><span class="opc-k">NGなら</span><span class="opc-v">GA4集計で継続把握（会員DBには残らないが、傾向は追える）。</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 03　Plan B</span>
+      <h2 class="section-title">紐付けができなくても、<br>価値化は<span class="emph-warm">止めない</span>。</h2>
+    </div>
+    <p class="section-lead">連携A〜Cの「要確認」がすべてNGだった場合。個人単位の突合は諦め、<strong>LINEを「独立した自己申告パネル」として運用する。</strong>“何も見えない”から“塊で見える”へ、コストほぼゼロで進む。</p>
+    <div class="pb-block keep">
+      <span class="pb-label">やめること</span>
+      <div class="pb-title">「誰が移行したか」を個人で追うこと</div>
+      <div class="pb-body">技術的な名寄せを前提にした設計を、いったん手放す。</div>
+    </div>
+    <div class="pb-block do">
+      <span class="pb-label">代わりにやること</span>
+      <div class="pb-title">LINEアンケートで“自己申告”を集める</div>
+      <div class="pb-body">友だち追加後の1問目で ①会員ですか？ ②どこで知りましたか？ を、月次で ③属性（役職／施設形態／地域／担当）を取得。集計レベルで会員率・流入源・属性構成が見える＝価値化に必要な<b>「アクティブ × 属性の塊」</b>は、名寄せ無しでも作れる。</div>
+    </div>
+    <div class="pb-block do">
+      <span class="pb-label">移行の評価</span>
+      <div class="pb-title">2本の推移の“マクロ連動”で間接評価</div>
+      <div class="pb-body">Web会員数の推移とLINE友だち数の推移を並べ、施策と連動して動くかで間接的に効果を判断する。精度は中だが、意思決定には十分。</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 04　層2「増やす」</span>
+      <h2 class="section-title">モバイル会員を、<br>LINEへ<span class="emph-warm">導く</span>。</h2>
+    </div>
+    <p class="section-lead">GA4の事実を根拠に、置く場所を決める。<strong>共通のフックは「新作が通知で届く／LINE限定・先行／スマホですぐ＋3,500円OFF」。</strong></p>
+    <div class="pcard"><div class="pcard-head"><span class="pcard-code">増 5</span><span class="pcard-title">DL完了・マイページに常設のLINE導線</span><span class="pcard-ev">根拠：regist_comp を計測できている</span></div><p class="pcard-body">やること：登録・DL完了画面とマイページに、LINE追加＋クーポンのブロックを常設。会員が確定する最も熱い一点。PC/モバイル問わず「価値を得た直後」に出せる。</p></div>
+    <div class="pcard"><div class="pcard-head"><span class="pcard-code">増 6</span><span class="pcard-title">人気ページの文脈連動</span><span class="pcard-ev">根拠：枕草子78,214／七夕塗り絵+942%</span></div><p class="pcard-body">やること：伸びている季節・シリーズ物のページに「次の七夕素材をLINEで先行配信」など、そのページの文脈に合った誘導を置く。汎用バナーより効く。</p></div>
+    <div class="pcard"><div class="pcard-head"><span class="pcard-code">増 7</span><span class="pcard-title">LINEメニュー流入の“逆流”設計</span><span class="pcard-ev">根拠：ラインメニュー流入15位／line +562%</span></div><p class="pcard-body">やること：LINE→Webの導線は既に太い。その逆（Web→LINE）を、同じ人気ページに対称に置き、実証済みの経路を双方向化する。</p></div>
+    <div class="pcard"><div class="pcard-head"><span class="pcard-code">増 8</span><span class="pcard-title">メルマガ開封セグメントへの的絞り</span><span class="pcard-ev">要確認：開封者セグメント配信の可否（§06）</span></div><p class="pcard-body">やること：セグメント配信が可能なら、通りすがりでなく既存の濃い層（開封者）にだけ移行特集を当てる。</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 05　層3「聞く」</span>
+      <h2 class="section-title">アンケートを、<br><span class="emph-warm">機能</span>させる。</h2>
+    </div>
+    <p class="section-lead">配信先はLINE563人で正しい。集計画面すら出ないのは、<strong>母数 × 回答率が低いだけ</strong>。設計を変えれば解ける。</p>
+    <div class="pcard"><div class="pcard-head"><span class="pcard-code">聞 9</span><span class="pcard-title">1問マイクロ ＋ 回答したら即・限定素材</span></div><p class="pcard-body">やること：設問を1問に削り、回答直後に限定素材を返す。回答率20〜30%＝<strong>110〜170回答</strong>で、集計・分析できる母数に届く。</p></div>
+    <div class="pcard"><div class="pcard-head"><span class="pcard-code">聞 10</span><span class="pcard-title">「どこで知ったか」設問で媒体を補完</span></div><p class="pcard-body">やること：連携Dが実装できない間、この設問が流入媒体の代替になる。Plan Bの中核でもある。</p></div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 06　進め方と確認事項</span>
+      <h2 class="section-title">つなぐ → 増やす → 聞く、<br>の<span class="emph-warm">順で</span>。</h2>
+    </div>
+    <p class="section-lead">層1の「今すぐできる操作」は開発ゼロ。土台を先に置き、その上で増やし、聞くを並行させる。全体マップには記号 <strong>D（連携プラン）</strong> として「今 → 定点観測①」の間に接続する。</p>
+    <div class="layers">
+      <div class="layer base">
+        <div class="layer-top"><span class="layer-n">Step 1 ／ 今すぐ・開発ゼロ</span></div>
+        <div class="layer-t">つなぐ（GA4集計から）</div>
+        <div class="layer-d">連携A〜Dの「今すぐ」操作をGA4で実施（登録×流入元・会員セッション近似・素材別DL）。並行で下の確認事項を回す。</div>
+      </div>
+      <div class="layer">
+        <div class="layer-top"><span class="layer-n">Step 2 ／ 土台の上で</span></div>
+        <div class="layer-t">増やす</div>
+        <div class="layer-d">増5〜8を人気ページ・完了画面に設置。効果が“会員か否か”付きで測れる。</div>
+      </div>
+      <div class="layer">
+        <div class="layer-top"><span class="layer-n">Step 3 ／ 並行</span></div>
+        <div class="layer-t">聞く</div>
+        <div class="layer-d">聞9・10でアンケートを機能させ、Plan Bの自己申告パネルも同時に走らせる。</div>
+      </div>
+    </div>
+    <p class="section-lead" style="margin-top:40px"><strong>確認事項</strong>（回答が揃うと、各連携が「本格版でいく／簡易版でしのぐ」に確定する）</p>
+    <ul class="conf">
+      <li><span class="cf-q">メルマガ配信ツールで「開封者だけへのセグメント配信」ができるか</span><span class="cf-who">確認先：メルマガ担当（まずツール名を特定）</span></li>
+      <li><span class="cf-q">会員DBに「流入媒体」カラムを1つ追加できるか</span><span class="cf-who">確認先：制作会社</span></li>
+      <li><span class="cf-q">DL処理・ログインに会員IDを紐づけて出力できるか（dataLayer／DLログ）</span><span class="cf-who">確認先：制作会社／サイト担当</span></li>
+      <li><span class="cf-q">LINE公式のプランでLINEログイン／アカウント連携(LIFF)が使えるか</span><span class="cf-who">確認先：LINE運用担当</span></li>
+      <li><span class="cf-q">GTM・GA4の編集権限が社内にあるか</span><span class="cf-who">確認先：サイト担当</span></li>
+    </ul>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="phase0_data_action_list.html" class="pagenav-side"><span class="pagenav-direction">← Prev</span><span class="pagenav-title">データ収集<br>アクションリスト</span></a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <a href="line_execution_plan.html" class="pagenav-side right"><span class="pagenav-direction">Next →</span><span class="pagenav-title">LINE実行プラン<br>10倍ロードマップ</span></a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">介護レク広場 14期戦略 ／ Web会員 × LINE 連携・集客プラン<br>検討稿 v0.2 ／ 2026年7月 ／ 内部討議用</p>
+  </div>
+</footer>
+
+</body>
+</html>
