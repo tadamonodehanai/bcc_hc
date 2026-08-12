@@ -63,8 +63,9 @@
   .admin-link:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
   .prototype-flag{
     font-size:11px;letter-spacing:.08em;background:rgba(255,255,255,.14);
-    padding:4px 10px;border-radius:999px;color:#DCEDEC
+    padding:4px 10px;border-radius:999px;color:#DCEDEC;white-space:nowrap;flex:none
   }
+  @media(max-width:640px){ .prototype-flag{display:none} }
 
   /* ---------- entrance switch (horizontal) ---------- */
   nav.switch{background:var(--panel);border-bottom:1px solid var(--line)}
