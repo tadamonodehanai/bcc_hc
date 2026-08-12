@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>けんさぽ、秋まつりキャンペーン LP ワイヤーフレーム v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#22262e;
+  --gray-1:#f4f4f2;
+  --gray-2:#e7e7e4;
+  --gray-3:#d2d2ce;
+  --gray-4:#9a9a94;
+  --line:#b9b9b4;
+  --accent:#d9542f;       /* CTA / 訴求 */
+  --accent-soft:#fbeee8;
+  --note:#2f6f8f;         /* 注釈 */
+  --note-soft:#eaf2f6;
+  --paper:#fbfaf7;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Noto Sans JP",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.doc-head{
+  max-width:1180px;margin:0 auto;padding:48px 32px 24px;
+  border-bottom:2px solid var(--ink);
+}
+.doc-head .kicker{
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.18em;
+  color:var(--accent);text-transform:uppercase;margin:0 0 10px;
+}
+.doc-head h1{font-size:26px;margin:0 0 8px;letter-spacing:.02em}
+.doc-head p{margin:0;font-size:13px;color:#5d6068;line-height:1.8}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.meta span{
+  font-size:11px;background:var(--gray-2);border:1px solid var(--gray-3);
+  padding:4px 10px;border-radius:999px;
+}
+.meta span b{color:var(--accent)}
+
+.wrap{max-width:1180px;margin:0 auto;padding:40px 32px 120px}
+.row{display:grid;grid-template-columns:400px 1fr;gap:36px;align-items:start;margin-bottom:14px}
+@media(max-width:900px){.row{grid-template-columns:1fr}}
+
+/* ---- ワイヤー本体（SPカラム） ---- */
+.frame{
+  background:#fff;border:1px solid var(--line);border-radius:6px;
+  padding:20px 18px;position:relative;
+}
+.frame::before{
+  content:attr(data-no);
+  position:absolute;left:-13px;top:-13px;width:30px;height:30px;
+  background:var(--ink);color:#fff;border-radius:50%;
+  font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.sec-label{
+  font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;
+  color:var(--gray-4);text-transform:uppercase;margin-bottom:12px;
+  border-bottom:1px dashed var(--gray-3);padding-bottom:6px;
+}
+.h-lg{font-size:20px;font-weight:900;line-height:1.4;margin:0 0 10px}
+.h-md{font-size:15px;font-weight:700;line-height:1.5;margin:0 0 8px}
+.txt{font-size:12px;line-height:1.85;color:#4c5058;margin:0 0 10px}
+.txt.sm{font-size:11px;color:#6c7078}
+
+.ph{
+  background:repeating-linear-gradient(135deg,var(--gray-1),var(--gray-1) 8px,var(--gray-2) 8px,var(--gray-2) 16px);
+  border:1px dashed var(--line);border-radius:4px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:var(--gray-4);font-size:11px;line-height:1.6;padding:10px;margin-bottom:12px;
+}
+.ph.hero{height:150px}
+.ph.mid{height:92px}
+.ph.sm{height:58px}
+.ph.icon{height:52px;width:52px;flex:0 0 52px;border-radius:50%;font-size:9px;margin:0}
+
+.btn{
+  background:var(--accent);color:#fff;text-align:center;border-radius:999px;
+  padding:13px 10px;font-size:14px;font-weight:700;margin:12px 0 6px;
+}
+.btn.ghost{background:#fff;color:var(--accent);border:2px solid var(--accent)}
+.btn.sub{background:var(--gray-2);color:#5d6068;font-size:11px;font-weight:500;padding:9px}
+
+.price{
+  background:var(--accent-soft);border:2px solid var(--accent);border-radius:8px;
+  padding:14px;text-align:center;margin:12px 0;
+}
+.price .was{font-size:12px;color:var(--gray-4);text-decoration:line-through}
+.price .now{font-size:30px;font-weight:900;color:var(--accent);line-height:1.2}
+.price .now small{font-size:13px}
+.price .term{font-size:11px;margin-top:6px;color:#5d6068}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.cards.c3{grid-template-columns:1fr 1fr 1fr}
+.card{
+  background:var(--gray-1);border:1px solid var(--gray-3);border-radius:4px;
+  padding:10px;font-size:11px;line-height:1.6;color:#4c5058;min-height:70px;
+}
+.card b{display:block;font-size:11.5px;color:var(--ink);margin-bottom:4px}
+
+.list{margin:0 0 10px;padding:0;list-style:none}
+.list li{
+  font-size:12px;line-height:1.7;padding:8px 10px 8px 30px;position:relative;
+  background:var(--gray-1);border-radius:4px;margin-bottom:5px;color:#4c5058;
+}
+.list li::before{
+  content:"☑";position:absolute;left:10px;top:8px;color:var(--accent);font-size:12px;
+}
+.list.num{counter-reset:n}
+.list.num li::before{
+  counter-increment:n;content:counter(n);
+  width:16px;height:16px;background:var(--ink);color:#fff;border-radius:50%;
+  font-size:10px;display:flex;align-items:center;justify-content:center;top:9px;
+}
+
+.tbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:10px}
+.tbl th,.tbl td{border:1px solid var(--gray-3);padding:7px 8px;text-align:left;line-height:1.6}
+.tbl th{background:var(--gray-1);width:38%;font-weight:500;color:#5d6068}
+.tbl td.hi{background:var(--accent-soft);color:var(--accent);font-weight:700}
+
+.faq{border-top:1px solid var(--gray-2);padding:9px 0;font-size:12px;color:#4c5058}
+.faq b{color:var(--ink)}
+
+.row-flex{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.voice{border:1px solid var(--gray-3);border-radius:4px;padding:10px;margin-bottom:8px}
+
+/* ---- 注釈 ---- */
+.notes{padding-top:6px}
+.note{
+  background:var(--note-soft);border-left:3px solid var(--note);
+  padding:12px 14px;border-radius:0 4px 4px 0;margin-bottom:10px;
+}
+.note h4{
+  margin:0 0 6px;font-size:12px;color:var(--note);letter-spacing:.04em;
+}
+.note p{margin:0 0 6px;font-size:12px;line-height:1.85;color:#3a4650}
+.note p:last-child{margin-bottom:0}
+.note ul{margin:0;padding-left:18px;font-size:12px;line-height:1.85;color:#3a4650}
+.note.warn{background:#fdf1ec;border-left-color:var(--accent)}
+.note.warn h4{color:var(--accent)}
+.tag{
+  display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10px;
+  background:#fff;border:1px solid var(--note);color:var(--note);
+  padding:2px 7px;border-radius:3px;margin:0 4px 4px 0;
+}
+.copy{
+  background:#fff;border:1px dashed var(--gray-4);border-radius:4px;
+  padding:10px 12px;font-size:12px;line-height:1.9;color:#3a3e46;margin-bottom:10px;
+}
+.copy em{font-style:normal;color:var(--accent);font-weight:700}
+.copy .lbl{
+  display:block;font-family:"JetBrains Mono",monospace;font-size:9px;
+  letter-spacing:.12em;color:var(--gray-4);margin-bottom:5px;
+}
+
+.divider{
+  margin:34px 0;border:0;border-top:1px dashed var(--gray-3);
+}
+.fixed-bar{
+  background:var(--ink);color:#fff;border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.fixed-bar .t{font-size:11px;line-height:1.5}
+.fixed-bar .t b{color:#ffb59d;font-size:13px}
+.fixed-bar .b{background:var(--accent);border-radius:999px;padding:9px 16px;font-size:12px;font-weight:700;white-space:nowrap}
+
+.legend{
+  display:flex;gap:18px;flex-wrap:wrap;font-size:11px;color:#5d6068;
+  margin-top:18px;padding-top:14px;border-top:1px solid var(--gray-2);
+}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-2px}
+</style>
+</head>
+<body>
+
+<div class="doc-head">
+  <p class="kicker">Wireframe v1 / Landing Page</p>
+  <h1>けんさぽ、秋まつりキャンペーン ─ LP構成案</h1>
+  <p>高齢者健幸サポーター講座 秋の受講促進キャンペーン。SP縦1カラムを基準に設計（PCは最大960pxのセンター寄せ、同一順序）。左＝ワイヤー、右＝設計意図とコピー案。</p>
+  <p style="margin-top:10px;padding:10px 12px;background:#fdf1ec;border-left:3px solid var(--accent);font-size:12.5px"><b>大前提：</b>「高齢者健幸サポーター」は<b>資格の名称</b>。受講者は高齢者ご本人ではなく、<b>高齢者を支える側の30〜50代の現役世代</b>（子世代／施設スタッフ／レク担当／介護に関心のある層）。ビジュアル・トーン・文字組は<b>すべて現役世代向け</b>で統一し、シニア向けの意匠（極太明朝・和柄・特大級の文字・提灯装飾）には振らない。</p>
+  <div class="meta">
+    <span>価格 <b>8,880円（税込）</b> ／ 通常 9,900円</span>
+    <span>期間 <b>2026.9.1 → 9.28</b></span>
+    <span>受講時間 約2時間・オンライン完結</span>
+    <span>ターゲット <b>30〜50代の"支える側"</b></span>
+    <span>主KPI：<b>アカウント登録 → 決済完了</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- 00 -->
+<div class="row">
+  <div class="frame" data-no="00">
+    <div class="sec-label">Sticky / 全画面追従</div>
+    <div class="fixed-bar">
+      <div class="t">9/28まで<br><b>8,880円（税込）</b></div>
+      <div class="b">今すぐ申し込む</div>
+    </div>
+    <p class="txt sm" style="margin-top:10px">※SPは画面下部固定、PCは右下フローティング。FVを抜けた地点から出現。</p>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>追従CTA</h4>
+      <p>LPが長くなるほど「今いくらか」を見失うので、価格と締切を常時表示。押下先は <span class="tag">learning.japan-ac.jp/auth/create-account</span> に統一します。</p>
+      <p>スクロール率に関係なくいつでも離脱→CTAできる状態を作るのが目的。閉じるボタンは付けない方向で。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 01 -->
+<div class="row">
+  <div class="frame" data-no="01">
+    <div class="sec-label">FV / ファーストビュー</div>
+    <div class="ph sm" style="height:38px">ロゴ ／ 協会名 ＋ キャンペーンロゴ（秋のあしらいは軽く・モダンに）</div>
+    <div class="ph hero">メインビジュアル<br><b>主役は受講者（30〜50代）</b>。通勤中・仕事の合間・夜のリビングでスマホを見て学ぶ姿。<br>高齢者は"支える相手"として小さく添える程度（主役に置かない）</div>
+    <p class="h-lg">読書の秋、食欲の秋、<br>そして、<span style="color:var(--accent)">まなびの秋。</span></p>
+    <p class="txt">仕事や家事のスキマ時間、約2時間。<br>大切な人を<b>"支える側"</b>になるための資格です。</p>
+    <div class="price">
+      <div class="was">通常 9,900円（税込）</div>
+      <div class="now">8,880<small>円（税込）</small></div>
+      <div class="term">2026年9月1日(火)〜9月28日(月)まで</div>
+    </div>
+    <div class="btn">▶ 今すぐ申し込む</div>
+    <div class="btn sub">まずは資料請求・お問い合わせ</div>
+    <div class="ph sm">残り◯日｜カウントダウン（任意）</div>
+    <p class="txt sm" style="margin-top:8px">※「高齢者健幸サポーター」は資格の名称です。高齢者ご本人ではなく、<b>高齢者を支える方のための講座</b>です。</p>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>FVの役割</h4>
+      <p>3秒で「①何の学びか ②いくら ③いつまで」を成立させる。8,880円は先に出す派で組んでいます（値引き率より"末広がり8並び＝縁起"を推したい）。</p>
+    </div>
+    <div class="note warn">
+      <h4>資格名の誤読対策（最重要）</h4>
+      <p>名称に「高齢者」が入るため、<b>「高齢者向けの講座」と読み違えられるリスク</b>が最大の設計課題。FVの1枚で「これは"支える側"の資格だ」と伝わらないと、ターゲットが自分ごと化せずに離脱します。</p>
+      <ul>
+        <li>写真の主役は必ず受講者世代（高齢者を大写しにしない）</li>
+        <li>サブコピーで「支える側」「あなたが学ぶ」と主語を固定</li>
+        <li>注記1行で名称＝資格名であることを明示</li>
+      </ul>
+    </div>
+    <div class="copy">
+      <span class="lbl">COPY / メイン案</span>
+      読書の秋、食欲の秋、そして<em>まなびの秋</em>。<br>
+      <span class="lbl" style="margin-top:8px">サブ案</span>
+      ・秋のスキマ時間で、資格までゲット。<br>
+      ・"支える側"になる、はじめの2時間。<br>
+      ・親のこと、まだ何も知らないかもしれない。<br>
+      ・わかると、ちゃんと優しくなれる。
+    </div>
+    <div class="note warn">
+      <h4>要確認</h4>
+      <p>①「8,880円」は8並びの語呂を訴求に使ってよいか（末広がり／秋まつり感と相性◎）。②カウントダウンを入れるか＝煽り感の許容度。③キャンペーン名のロゴ化（あしらい）は制作範囲に含めるか。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 02 -->
+<div class="row">
+  <div class="frame" data-no="02">
+    <div class="sec-label">キャンペーン概要（一目でわかる箱）</div>
+    <p class="h-md">けんさぽ、秋まつりキャンペーンとは</p>
+    <table class="tbl">
+      <tr><th>対象講座</th><td>高齢者健幸サポーター講座</td></tr>
+      <tr><th>キャンペーン価格</th><td class="hi">8,880円（税込）／通常 9,900円</td></tr>
+      <tr><th>期間</th><td>2026年9月1日〜9月28日</td></tr>
+      <tr><th>お申込方法</th><td>Webから／クレジットカード決済</td></tr>
+      <tr><th>学習期限</th><td>決済後180日</td></tr>
+    </table>
+    <p class="txt sm">※期間中にお申込み・ご決済いただいた方が対象です。</p>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>先に"条件"を潰す</h4>
+      <p>キャンペーンLPは「で、結局どうすれば安くなるの？」が最大の摩擦。読了前に離脱する層のために、FV直下で条件を確定させます。</p>
+      <ul>
+        <li>クーポンコード方式なら、ここにコードを大きく置く</li>
+        <li>特設商品ページ方式なら「このボタンからの申込のみ対象」を明記</li>
+      </ul>
+    </div>
+    <div class="note warn">
+      <h4>要確認：割引の実装方式</h4>
+      <p>eラーニング側（learning.japan-ac.jp）で <b>a) 期間限定価格に差し替え / b) クーポンコード / c) キャンペーン用コースを別建て</b> のどれになるかで、LPの導線とこのセクションの文言が変わります。ここだけ先に決めさせてください。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 03 -->
+<div class="row">
+  <div class="frame" data-no="03">
+    <div class="sec-label">共感 / こんな方へ</div>
+    <p class="h-md">あなたのこんな"モヤモヤ"、<br>そのままにしていませんか？</p>
+    <ul class="list">
+      <li>実家の親と、話が噛み合わなくなってきた</li>
+      <li>家族の介護が、そろそろ現実味を帯びてきた</li>
+      <li>介護施設で働いているが、体系的に学んだことはない</li>
+      <li>レクを任されたけど、高齢者のことがそもそも分からない</li>
+      <li>介護の仕事に興味はあるが、何から始めればいいか不明</li>
+    </ul>
+    <div class="ph mid">共感イラスト（4コマ的なすれ違い描写）</div>
+    <p class="txt" style="text-align:center;font-weight:700">その"すれ違い"には、ちゃんと理由があります。</p>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>ターゲット4層を1画面で自己認識させる</h4>
+      <p>①介護に興味がある層 ②家族に介護者がいる層 ③施設勤務者 ④レク興味層。チェックリスト形式にして「自分ごと」のフラグを立てさせます。</p>
+      <p>本家LPの「高齢者とのすれ違い、実は原因があった!?」の資産がそのまま流用できるはずなので、素材の有無を確認したいです。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 04 -->
+<div class="row">
+  <div class="frame" data-no="04">
+    <div class="sec-label">解決提示 / 講座紹介</div>
+    <p class="h-md">「高齢者健幸サポーター」は、<br><b>高齢者を"支える人"</b>のための資格です。</p>
+    <p class="txt">「高齢者ってなに？」という基本から、体系的に学べます。</p>
+    <div class="cards c3">
+      <div class="card"><b>オンライン完結</b>申込〜認定証までWebで</div>
+      <div class="card"><b>最短2時間</b>スキマ時間でOK</div>
+      <div class="card"><b>受講資格なし</b>どなたでも</div>
+    </div>
+    <div class="ph mid">講座画面のイメージ（実際の受講画面キャプチャ）</div>
+    <div class="btn ghost">▶ 8,880円で申し込む</div>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>3つの障壁を先に外す</h4>
+      <p>「難しそう／時間がない／資格要件が要りそう」を3カードで即否定。ここが本キャンペーンの"スキマ時間で学べる"訴求の中核です。</p>
+      <p>受講画面の実キャプチャは信頼形成に効くので、既存の講座マニュアル用に処理した画像を再利用できるはず。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 05 -->
+<div class="row">
+  <div class="frame" data-no="05">
+    <div class="sec-label">まなびの秋 / カリキュラム</div>
+    <p class="h-md">全5章。<br>秋の夜長にちょうどいい、約2時間。</p>
+    <ul class="list num">
+      <li>高齢期に起こること</li>
+      <li>高齢者を取り巻く環境</li>
+      <li>こころと身体の変化</li>
+      <li>健康寿命をのばすためには</li>
+      <li>高齢期の生きがいと楽しみ</li>
+    </ul>
+    <p class="txt sm">第一〜四章は確認問題（各3問）、第五章に最終試験（25問）。合格で認定証を発行。</p>
+    <div class="ph sm">学習時間イメージ図（1日20分×6日 ／ 週末2時間 など）</div>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>"スキマ時間"を具体で見せる</h4>
+      <p>2時間と言われてもピンと来ないので、「通勤20分×6日」「土曜の午前中だけ」のような分割モデルを図示。これが今回のキャンペーン独自の追加要素です。</p>
+      <span class="tag">差別化ポイント</span><span class="tag">通常LPには無い図</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 06 -->
+<div class="row">
+  <div class="frame" data-no="06">
+    <div class="sec-label">秋まつり演出 / 三本柱</div>
+    <div class="cards c3">
+      <div class="card"><b>読書の秋</b>知識が増える</div>
+      <div class="card"><b>食欲の秋</b>—</div>
+      <div class="card"><b>まなびの秋</b>資格が残る</div>
+    </div>
+    <div class="ph mid">秋まつり感のグラフィック帯（提灯・紅葉・屋台）</div>
+    <p class="txt" style="text-align:center">この秋、<b>いちばん実りのある2時間</b>を。</p>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>ここは"味付け"セクション</h4>
+      <p>キャンペーン名の世界観を回収するブリッジ。情報量は持たせず、スクロールのリズムを作る帯として機能させます。装飾強度が高いのはこの1枚だけ、と決めておくと全体が締まります。</p>
+    </div>
+    <div class="note warn">
+      <h4>要確認：トーンの落としどころ</h4>
+      <p>ここで和柄・提灯・筆文字に振ると、<b>一気に「シニア向け講座」に見えてしまう</b>のが怖いところ。読者は30〜50代の現役世代なので、<b>秋＝現役世代のライフスタイル（読書・カフェ・夜の時間）</b>として翻訳した、軽やかでモダンな秋の方向を推します。</p>
+      <p>「まつり」感はカラー（栗・柿・深緑）と幾何学的なあしらいで出し、和装飾には頼らない案。ここだけ方向性の確認をお願いしたいです。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 07 -->
+<div class="row">
+  <div class="frame" data-no="07">
+    <div class="sec-label">ステップアップ導線</div>
+    <p class="h-md">この資格は、<br>次の学びへの"入口"にもなります。</p>
+    <div class="ph mid">STEP図：高齢者健幸サポーター → レクリエーション介護士2級 → 1級</div>
+    <p class="txt">まずは高齢者を「知る」。次に、楽しませる「レクリエーション介護士2級」へ。順番に進めば、무理なく専門性が積み上がります。</p>
+    <div class="btn sub">レクリエーション介護士2級について見る</div>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>ゲートウェイ機能の明示</h4>
+      <p>「2級への入口」というポジションは、施設勤務者・レク興味層に強く効くLTV訴求。ただし主CTAを食わないよう、リンクはサブ扱い・別タブ推奨。</p>
+    </div>
+    <div class="note warn">
+      <h4>要確認</h4>
+      <p>秋キャンペーン中に2級講座側の特典（受講料の一部充当、割引等）はありますか？あれば、ここが一番の強みになります。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 08 -->
+<div class="row">
+  <div class="frame" data-no="08">
+    <div class="sec-label">受講者の声</div>
+    <p class="h-md">受講した方の声</p>
+    <div class="voice">
+      <div class="row-flex"><div class="ph icon">顔写真</div><div class="txt sm" style="margin:0"><b>H・Hさん／30代・女性</b><br>祖父の変化の理由を知れた</div></div>
+    </div>
+    <div class="voice">
+      <div class="row-flex"><div class="ph icon">顔写真</div><div class="txt sm" style="margin:0"><b>H・Oさん／40代・女性</b><br>介護をリアルに考えられた</div></div>
+    </div>
+    <div class="voice">
+      <div class="row-flex"><div class="ph icon">顔写真</div><div class="txt sm" style="margin:0"><b>K・Kさん／50代・男性</b><br>高齢者の特徴と接し方を学べた</div></div>
+    </div>
+    <p class="txt sm">※アコーディオンで全文表示（初期は要約のみ）</p>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>既存資産の流用</h4>
+      <p>本家LPのモニターの声3本をそのまま使用。LPが長いので初期表示は見出し＋1行、タップで全文の折りたたみに。年代・性別を出して読者の自己投影先を作ります。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 09 -->
+<div class="row">
+  <div class="frame" data-no="09">
+    <div class="sec-label">受講の流れ</div>
+    <p class="h-md">お申し込みは4ステップ</p>
+    <ul class="list num">
+      <li>会員登録（メール認証）</li>
+      <li>講座を選んでお申し込み</li>
+      <li>クレジットカードで決済</li>
+      <li>受講スタート（約2時間）</li>
+    </ul>
+    <div class="ph sm">各ステップの画面サムネイル（4点）</div>
+    <div class="btn">▶ 会員登録して申し込む</div>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>既存マニュアルとの整合</h4>
+      <p>先に作った登録フロー／受講フローPDFと手順・文言を揃えます。LP側は4ステップに圧縮、詳細はPDFへ誘導する二層構造が管理上ラク。</p>
+      <span class="tag">PDF②と表記統一</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 10 -->
+<div class="row">
+  <div class="frame" data-no="10">
+    <div class="sec-label">受講概要・動作環境</div>
+    <table class="tbl">
+      <tr><th>名称</th><td>高齢者健幸サポーター</td></tr>
+      <tr><th>料金</th><td class="hi">8,880円（税込）※期間限定</td></tr>
+      <tr><th>支払方法</th><td>クレジットカード決済</td></tr>
+      <tr><th>受講時間</th><td>約2時間（確認問題・最終試験含む）</td></tr>
+      <tr><th>学習期限</th><td>決済後180日</td></tr>
+      <tr><th>推奨環境</th><td>PC／スマートフォン対応（詳細は開閉）</td></tr>
+    </table>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>事務情報はここに集約</h4>
+      <p>推奨環境の詳細（OS・ブラウザ）はアコーディオン内に格納してスクロール量を削減。カード会社ロゴを並べると決済不安の低減に効きます。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 11 -->
+<div class="row">
+  <div class="frame" data-no="11">
+    <div class="sec-label">FAQ</div>
+    <p class="h-md">よくあるご質問</p>
+    <div class="faq"><b>Q.</b> 高齢者本人が受ける講座ですか？（→いいえ、支える側の方向けです）</div>
+    <div class="faq"><b>Q.</b> キャンペーン価格の対象期間は？</div>
+    <div class="faq"><b>Q.</b> 期間を過ぎたらどうなりますか？</div>
+    <div class="faq"><b>Q.</b> 国家資格ですか？</div>
+    <div class="faq"><b>Q.</b> スマホでも受講できますか？</div>
+    <div class="faq"><b>Q.</b> レクリエーション介護士との違いは？</div>
+    <div class="faq"><b>Q.</b> 途中でやめても再開できますか？</div>
+    <div class="faq"><b>Q.</b> 認定証はどう受け取れますか？</div>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>キャンペーン固有Qを冒頭に</h4>
+      <p>冒頭3つは今回のための新規Q。以降は本家FAQから転載。「期間後は通常価格9,900円に戻ります」を明記して、決断の先送りを防ぎます。</p>
+      <p>1問目の「高齢者本人が受ける講座か？」は、名称由来の誤解を検索流入層にも解消させるための保険。FVで伝わっていれば読まれない問いですが、置いておく価値はあります。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 12 -->
+<div class="row">
+  <div class="frame" data-no="12">
+    <div class="sec-label">ラストCTA</div>
+    <div class="ph mid">背景ビジュアル（受講者世代の日常・秋・やわらかい光）</div>
+    <p class="h-lg" style="text-align:center">知ることは、<br>いちばん優しい備えになる。</p>
+    <div class="price">
+      <div class="was">通常 9,900円（税込）</div>
+      <div class="now">8,880<small>円（税込）</small></div>
+      <div class="term">9月28日(月)まで</div>
+    </div>
+    <div class="btn">▶ 今すぐ申し込む</div>
+    <div class="btn sub">資料請求・お問い合わせ</div>
+    <div class="ph sm" style="height:44px">フッター（協会情報・各種リンク・SNS）</div>
+  </div>
+  <div class="notes">
+    <div class="note">
+      <h4>締めは情緒で</h4>
+      <p>比較検討で降りてきた読者に、最後だけ感情の背中押しを。価格ブロックを再掲して、そのまま押せる状態で終わらせます。</p>
+    </div>
+    <div class="note">
+      <h4>計測まわり</h4>
+      <p>CTAは全て同一遷移先ですが、GTMで <span class="tag">fv</span><span class="tag">mid</span><span class="tag">flow</span><span class="tag">last</span><span class="tag">sticky</span> のラベルを分けて、どこで刺さったかを取れるようにしておきます。</p>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <span><i style="background:var(--accent)"></i>CTA・訴求要素</span>
+  <span><i style="background:var(--gray-2);border:1px dashed var(--line)"></i>画像・図版プレースホルダ</span>
+  <span><i style="background:var(--note-soft);border-left:3px solid var(--note)"></i>設計意図</span>
+  <span><i style="background:#fdf1ec;border-left:3px solid var(--accent)"></i>要確認事項</span>
+</div>
+
+</div>
+</body>
+</html>
