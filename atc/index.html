@@ -364,6 +364,9 @@
   .statepill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px}
   .statepill.on{background:var(--good-wash);color:#1f5a41}
   .statepill.off{background:#eee;color:#999}
+  select.m-act{font-weight:700;border-radius:999px;padding:5px 8px}
+  select.m-act.act-on{background:var(--good-wash);color:#1f5a41;border-color:var(--good)}
+  select.m-act.act-off{background:#EFEFEF;color:#8a8a8a;border-color:#CCC}
   .rulelist{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink-soft);line-height:1.9}
   .rulelist b{color:var(--teal-dark)}
   .adminsave{display:flex;gap:10px;align-items:center;margin-top:18px}
@@ -926,6 +929,9 @@
     {id:"LOG", name:"ログ跡",        full:"ログ跡／吹き抜け", cap:200, fee:0,    equip:"設備なし・立ちスペース", policy:"shared", uses:"多目的（複数団体の同時利用可）"},
   ];
   const R = Object.fromEntries(ROOMS.map(r=>[r.id,r]));
+  ROOMS.forEach(r=>{ r.active = true; });          // 有効/無効（管理画面で切替）
+  const isActive = id => R[id] && R[id].active !== false;
+  const activeRooms = () => ROOMS.filter(r=>r.active!==false);
   // 見学系の自動割当順: D → H2 → …（Hはセミナー等専用のため対象外／受付から近いDを優先）
   const PRIORITY = ["D","H2","HALL","LIB","B","LOG"];
 
@@ -1001,8 +1007,9 @@
       banner.style.display="block";
     } else banner.style.display="none";
 
+    const ROOMSv=activeRooms();   // 無効の部屋は列ごと非表示
     const head=document.getElementById("boardHead");
-    head.innerHTML='<th class="timehead">時間</th>'+ROOMS.map(r=>
+    head.innerHTML='<th class="timehead">時間</th>'+ROOMSv.map(r=>
       `<th>${r.name}<span class="cap">定員${r.cap}</span></th>`).join("");
 
     const body=document.getElementById("boardBody");
@@ -1017,7 +1024,7 @@
       const label = mm===0? `${pad(hh)}:00` : (mm===30? `${pad(hh)}:30` : "");
       rows+=`<tr class="${isHour?'hourrow':''} ${m===BIZ?'bizline':''}">`;
       rows+=`<td class="timecell ${isHour?'hourtop':''} ${m===BIZ?'bizmark':''}">${label}${m===BIZ?'<span class="bizlb">営業終了</span>':''}</td>`;
-      for(const r of ROOMS){
+      for(const r of ROOMSv){
         if(r.policy==="shared"){
           // 共有・無制限：重複予約を併記。マスはロックせず常に追加登録できる
           const startingAll=dayBk.filter(b=>b.room===r.id && toMin(b.start)===m && b.type!=="cancelled");
@@ -1085,8 +1092,12 @@
     root:document.getElementById("drawer"), scrim:document.getElementById("scrim"),
     room:document.getElementById("dw-room"),
   };
-  // room options
-  dw.room.innerHTML = ROOMS.map(r=>`<option value="${r.id}">${r.name}（${r.full}）</option>`).join("");
+  // room options（無効の部屋は〔無効〕表示で残す：既存予約の編集用）
+  function fillRoomOptions(){
+    dw.room.innerHTML = ROOMS.map(r=>
+      `<option value="${r.id}">${r.name}（${r.full}）${r.active===false?"〔無効〕":""}</option>`).join("");
+  }
+  fillRoomOptions();
   let editingId=null;   // null => new booking
 
   function dwSet(id,v){document.getElementById(id).value = v==null?"":v;}
@@ -1333,7 +1344,7 @@
     let primaryId;
 
     if(f.purpose==="全室"){
-      return {primary:null, allRooms:true, addons:[], why:["イベント全室使用のため、全部屋を確保します。"]};
+      return {primary:null, allRooms:true, addons:[], why:["イベント全室使用のため、全部屋（有効な部屋）を確保します。"]};
     }
     if(f.purpose==="セミナー"){
       primaryId="H";
@@ -1351,10 +1362,21 @@
       primaryId="HALL";
       why.push("研修を含む見学のため、展示イベントホールが望ましい。");
     } else {
-      // default: fill D → H2 by capacity, 受付から近い順
-      primaryId = PRIORITY.find(id=>R[id].cap>=f.head && id!=="LOG") || "LOG";
+      // default: fill D → H2 by capacity, 受付から近い順（無効の部屋は候補外）
+      primaryId = PRIORITY.find(id=>isActive(id) && R[id].cap>=f.head && id!=="LOG")
+               || (isActive("LOG") ? "LOG" : null);
       if(primaryId==="D") why.push("受付から案内しやすい D を最優先で提案（定員"+R.D.cap+"）。");
-      else why.push("人数 "+f.head+"名 に合う "+R[primaryId].name+" を提案（定員"+R[primaryId].cap+"）。");
+      else if(primaryId) why.push("人数 "+f.head+"名 に合う "+R[primaryId].name+" を提案（定員"+R[primaryId].cap+"）。");
+    }
+    // 目的別の第一候補が「無効」なら、有効な部屋から代替を選ぶ
+    if(primaryId && !isActive(primaryId)){
+      const fallback = PRIORITY.find(id=>isActive(id) && R[id].cap>=f.head)
+                    || PRIORITY.find(id=>isActive(id));
+      why.push("※ "+R[primaryId].name+" は現在無効のため、代わりに "+(fallback?R[fallback].name:"（有効な部屋なし）")+" を提案。");
+      primaryId = fallback || null;
+    }
+    if(!primaryId){
+      return {primary:null, allRooms:false, addons:[], why:["有効な部屋がありません。管理画面で部屋の状態を確認してください。"]};
     }
 
     // capacity note
@@ -1362,12 +1384,12 @@
       why.push("※ 人数が定員を超えています。分割か別室をご検討ください。");
     }
 
-    // add-ons
+    // add-ons（無効の部屋は追加確保の対象外）
     const addons=[];
-    if((f.purpose==="セミナー"||f.training) && f.lecturer){
+    if((f.purpose==="セミナー"||f.training) && f.lecturer && isActive("B")){
       addons.push({id:"B", reason:"外部講師の控室として B会議室 を追加確保。"});
     }
-    if((f.purpose==="セミナー"||f.training) && f.exhibit){
+    if((f.purpose==="セミナー"||f.training) && f.exhibit && isActive("H2")){
       addons.push({id:"H2", reason:"展示スペースとして 多目的ルーム(H2) を追加確保。"});
     }
     return {primary:primaryId, allRooms:false, addons, why};
@@ -1383,6 +1405,10 @@
     }
     const rec=recommend(f);
     let html="";
+    if(!rec.allRooms && !rec.primary){
+      body.innerHTML=`<div class="warnbox crit"><span class="ic">✕</span><div>${rec.why.join("<br>")}</div></div>`;
+      return;
+    }
 
     // half-year booking window check
     if(f.date){
@@ -1398,7 +1424,7 @@
     }
 
     // conflict / status banner
-    const targetIds = rec.allRooms ? ROOMS.map(r=>r.id)
+    const targetIds = rec.allRooms ? activeRooms().map(r=>r.id)
                       : [rec.primary, ...rec.addons.map(a=>a.id)].filter(Boolean);
     let conflictRooms=[];
     targetIds.forEach(id=>{ if(conflictsFor(id,f.date,f.start,f.end).length) conflictRooms.push(id); });
@@ -1436,7 +1462,7 @@
     });
 
     // fee
-    let feeRooms = rec.allRooms ? ROOMS.slice() : targetIds.map(id=>R[id]);
+    let feeRooms = rec.allRooms ? activeRooms().slice() : targetIds.map(id=>R[id]);
     if(f.fee==="free"){
       html+=`<table class="fee-table"><tbody>`;
       feeRooms.forEach(r=>{ html+=`<tr><td>${r.name}</td><td class="amt">無料</td></tr>`; });
@@ -1460,17 +1486,18 @@
 
     el("doBook").onclick=()=>{
       if(conflictRooms.length){toast("先約があるため、別室に変更してください","!");return;}
-      const ids = rec.allRooms?ROOMS.map(r=>r.id):targetIds;
+      const ids = rec.allRooms?activeRooms().map(r=>r.id):targetIds;
       ids.forEach(id=>bookings.push({date:f.date,room:id,group:(f.group||"（外部・仮）")+"（仮）",head:f.head,start:f.start,end:f.end,type:"tentative"}));
       toast((f.group||"外部予約")+" を仮予約に登録しました（ボードに反映）");
       if(f.date===iso(viewDate)) renderBoard();
     };
     el("doOverride").onclick=()=>{
-      const opts=ROOMS.map((r,i)=>`${i+1}: ${r.name}（定員${r.cap}）`).join("\n");
+      const avail=activeRooms();
+      const opts=avail.map((r,i)=>`${i+1}: ${r.name}（定員${r.cap}）`).join("\n");
       const pick=prompt("手動で部屋を選びます。番号を入力：\n"+opts);
       const idx=parseInt(pick,10)-1;
-      if(idx>=0&&idx<ROOMS.length){
-        const id=ROOMS[idx].id;
+      if(idx>=0&&idx<avail.length){
+        const id=avail[idx].id;
         bookings.push({date:f.date,room:id,group:(f.group||"（外部・仮）")+"（仮）",head:f.head,start:f.start,end:f.end,type:"tentative"});
         toast(R[id].name+" に手動で仮予約しました");
         if(f.date===iso(viewDate)) renderBoard();
@@ -1600,8 +1627,14 @@
           <option value="exclusive" ${r.policy==="exclusive"?"selected":""}>占有</option>
           <option value="shared" ${r.policy==="shared"?"selected":""}>共有・無制限</option>
         </select></td>
-        <td><span class="statepill on">有効</span></td>
+        <td><select class="m-act ${r.active!==false?'act-on':'act-off'}">
+          <option value="1" ${r.active!==false?"selected":""}>有効</option>
+          <option value="0" ${r.active===false?"selected":""}>無効</option>
+        </select></td>
       </tr>`).join("")+`</tbody>`;
+    document.querySelectorAll("#masterTable .m-act").forEach(s=>{
+      s.addEventListener("change",()=>{ s.classList.toggle("act-on",s.value==="1"); s.classList.toggle("act-off",s.value!=="1"); });
+    });
   }
   function openAdmin(){
     fillAdminInputs(); renderMaster();
@@ -1632,7 +1665,9 @@
       r.equip=tr.querySelector(".m-eq").value;
       r.uses=tr.querySelector(".m-uses").value;
       r.policy=tr.querySelector(".m-pol").value;
+      r.active=tr.querySelector(".m-act").value==="1";
     });
+    fillRoomOptions();
     renderBoard();
     const m=document.getElementById("adminMsg"); m.classList.add("show"); setTimeout(()=>m.classList.remove("show"),2200);
     toast("設定を保存し、画面に反映しました");
@@ -1664,9 +1699,10 @@
 
     // 割当ルールで候補部屋を決め、仮予約として台帳へ（確定は受付担当）
     const rec=recommend({purpose:f.purpose,head:f.head,training:false,lecturer:false,exhibit:false});
-    let roomId = rec.primary || "LOG";
+    let roomId = rec.primary || (activeRooms()[0]||{}).id;
+    if(!roomId){warn.innerHTML=`<div class="warnbox crit"><span class="ic">✕</span><div>現在ご予約を受け付けられる部屋がありません。お電話でお問い合わせください。</div></div>`;return;}
     if(conflictsFor(roomId,f.date,f.start,f.end).length){
-      const alt=PRIORITY.find(id=>R[id].cap>=f.head && !conflictsFor(id,f.date,f.start,f.end).length);
+      const alt=PRIORITY.find(id=>isActive(id) && R[id].cap>=f.head && !conflictsFor(id,f.date,f.start,f.end).length);
       roomId = alt || roomId;   // 空きが無ければ候補のまま登録し、担当者が調整
     }
     const bk={id:uid(), date:f.date, room:roomId, group:f.group, head:f.head, groups:1,
