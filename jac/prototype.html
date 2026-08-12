@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>特集「高齢社会と、これからの介護レク」プロトタイプ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF3EF; --paper-2:#F5E7E0; --white:#FFFFFF;
+  --rule:#E7D6CE; --rule-2:#D8C0B5;
+  --ink:#2B2320; --ink-2:#6E5A54;
+  --pink:#F0546C; --pink-deep:#A83250; --pink-pale:#FDECEE; --gold:#B99A2E;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Zen Kaku Gothic New","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;
+  background:#E9DBD4; color:var(--ink);
+  letter-spacing:.04em; line-height:2.0;
+}
+a{color:inherit;text-decoration:none}
+img,figure{display:block}
+
+/* ================= プロトタイプの外枠 ================= */
+.tool{position:sticky;top:0;z-index:50;background:var(--ink);color:#fff;padding:12px 22px;
+  display:flex;align-items:center;gap:26px;flex-wrap:wrap;line-height:1.6}
+.tool .ttl{font-size:14px;font-weight:700;letter-spacing:.08em}
+.tool .grp{display:flex;align-items:center;gap:8px}
+.tool .lb{font-size:11px;letter-spacing:.12em;opacity:.65}
+.tool button{font-family:inherit;font-size:13px;letter-spacing:.04em;color:#fff;background:transparent;
+  border:1px solid rgba(255,255,255,.4);padding:6px 14px;cursor:pointer;line-height:1.6}
+.tool button:hover{border-color:#fff}
+.tool button[aria-pressed="true"]{background:var(--pink);border-color:var(--pink);font-weight:700}
+.tool .hint{font-size:12px;opacity:.6;margin-left:auto}
+
+.stage{padding:30px 20px 80px;display:flex;justify-content:center}
+.dummy-flag{position:fixed;right:14px;bottom:14px;z-index:60;background:var(--pink-deep);color:#fff;
+  font-size:11px;letter-spacing:.08em;padding:7px 13px;line-height:1.6}
+
+/* ================= デバイス枠 ================= */
+.device{background:var(--paper);border:1px solid var(--rule-2);width:100%}
+body[data-dev="pc"] .device{max-width:1100px}
+body[data-dev="sp"] .device{max-width:390px;border-width:8px;border-color:var(--ink);border-radius:6px}
+
+/* ================= サイト共通 ================= */
+.chrome{background:var(--paper-2);border-bottom:1px solid var(--rule);color:var(--ink-2);
+  font-size:12px;letter-spacing:.06em;padding:12px 24px;line-height:1.6}
+.chrome.foot{border-bottom:none;border-top:1px solid var(--rule)}
+body[data-dev="sp"] .chrome{padding:10px 14px;font-size:11px}
+
+.ph{background:var(--paper-2);border:1px solid var(--rule);display:flex;align-items:center;
+  justify-content:center;color:var(--ink-2);font-size:12px;line-height:1.65;text-align:center;padding:6px}
+body[data-dev="sp"] .ph{font-size:11px}
+
+.label{display:inline-block;background:var(--pink-deep);color:#fff;font-size:13px;font-weight:700;
+  letter-spacing:.1em;padding:4px 14px;line-height:1.7}
+body[data-dev="sp"] .label{font-size:12px;padding:3px 11px}
+
+.dummy{display:inline-block;font-size:11px;letter-spacing:.08em;color:#fff;background:var(--ink-2);
+  padding:3px 9px;line-height:1.6;margin-bottom:12px}
+
+/* ================= Index ================= */
+.hero{padding:60px 40px 50px;text-align:center;background:var(--white);border-bottom:1px solid var(--rule)}
+body[data-dev="sp"] .hero{padding:34px 16px 32px}
+.badge-day{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:14px;font-weight:700;
+  letter-spacing:.1em;padding:7px 18px;line-height:1.6;margin-bottom:24px}
+body[data-dev="sp"] .badge-day{font-size:12px;padding:5px 13px;margin-bottom:18px}
+.hero h1{font-size:42px;font-weight:900;line-height:1.5;margin-bottom:16px}
+body[data-dev="sp"] .hero h1{font-size:26px;line-height:1.55}
+.hero h1 em{font-style:normal;color:var(--pink-deep)}
+.hero .sub{font-size:16px;color:var(--ink-2);line-height:1.9;margin-bottom:32px}
+body[data-dev="sp"] .hero .sub{font-size:14px;margin-bottom:22px}
+.faces{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:660px;margin:0 auto}
+body[data-dev="sp"] .faces{grid-template-columns:1fr 1fr;gap:8px}
+.faces .ph{height:155px}
+body[data-dev="sp"] .faces .ph{height:96px}
+
+.idx-lead{padding:42px 60px;background:var(--white);border-bottom:1px solid var(--rule)}
+body[data-dev="sp"] .idx-lead{padding:24px 16px}
+.idx-lead p{font-size:18px;line-height:2.0}
+body[data-dev="sp"] .idx-lead p{font-size:17px;line-height:2.0}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:42px 40px}
+body[data-dev="sp"] .cards{grid-template-columns:1fr;gap:16px;padding:20px 16px}
+.card{background:var(--white);border:1px solid var(--rule);display:block;transition:border-color .15s}
+.card:hover{border-color:var(--pink)}
+.card .ph{height:200px;border:none;border-bottom:1px solid var(--rule)}
+body[data-dev="sp"] .card .ph{height:150px}
+.card .body{padding:22px 24px 26px}
+body[data-dev="sp"] .card .body{padding:16px 16px 20px}
+.card h2{font-size:24px;font-weight:700;line-height:1.5;margin:12px 0 2px}
+body[data-dev="sp"] .card h2{font-size:21px}
+.card .yomi{font-size:14px;color:var(--ink-2);line-height:1.7}
+.card .role{font-size:15px;color:var(--ink-2);line-height:1.8;margin-top:8px;padding-top:12px;border-top:1px solid var(--rule)}
+body[data-dev="sp"] .card .role{font-size:14px}
+.card .hook{font-size:17px;line-height:1.95;margin-top:14px}
+.card .more{display:block;margin-top:18px;border:1px solid var(--pink-deep);color:var(--pink-deep);
+  text-align:center;font-size:16px;font-weight:700;padding:14px;line-height:1.6;letter-spacing:.06em}
+.card:hover .more{background:var(--pink-deep);color:#fff}
+
+.idx-tail{padding:0 40px 46px}
+body[data-dev="sp"] .idx-tail{padding:0 16px 30px}
+
+/* ================= 記事 ================= */
+.crumb{background:var(--pink-deep);color:#fff;font-size:14px;padding:12px 40px;letter-spacing:.06em;line-height:1.7}
+body[data-dev="sp"] .crumb{font-size:12px;padding:10px 16px}
+.crumb a{border-bottom:1px solid rgba(255,255,255,.5)}
+
+.art{background:var(--white)}
+.art-head{padding:50px 60px 34px;border-bottom:1px solid var(--rule)}
+body[data-dev="sp"] .art-head{padding:26px 16px 22px}
+.art-head h1{font-size:34px;font-weight:900;line-height:1.65;margin:14px 0 22px}
+body[data-dev="sp"] .art-head h1{font-size:24px;line-height:1.6;margin:12px 0 16px}
+.byline{font-size:16px;color:var(--ink-2);line-height:1.9}
+body[data-dev="sp"] .byline{font-size:14px}
+.byline strong{color:var(--ink);font-size:19px;font-weight:700}
+body[data-dev="sp"] .byline strong{font-size:17px}
+
+.col{max-width:680px;margin:0 auto;padding:0 0 46px}
+body[data-dev="sp"] .col{max-width:none}
+.mv{height:330px}
+body[data-dev="sp"] .mv{height:190px}
+
+.inner{padding:0 60px}
+body[data-dev="sp"] .inner{padding:0 16px}
+
+.art-lead{padding:34px 0;font-size:18px;line-height:2.05;border-bottom:1px solid var(--rule)}
+body[data-dev="sp"] .art-lead{font-size:17px;padding:22px 0}
+
+.chap{padding:36px 0 0}
+body[data-dev="sp"] .chap{padding:26px 0 0}
+.chap .num{font-size:13px;letter-spacing:.14em;color:var(--pink-deep);font-weight:700;line-height:1.6}
+.chap h3{font-size:25px;font-weight:700;line-height:1.65;margin:8px 0 20px;padding-left:16px;border-left:5px solid var(--pink)}
+body[data-dev="sp"] .chap h3{font-size:21px;margin:6px 0 14px;padding-left:12px;border-left-width:4px}
+.chap p{font-size:18px;line-height:2.05;margin-bottom:1.3em}
+body[data-dev="sp"] .chap p{font-size:17px;line-height:2.0}
+
+blockquote{background:var(--pink-pale);padding:34px 40px;margin:36px 0;
+  font-family:"Shippori Mincho B1",serif;font-size:26px;font-weight:600;line-height:1.95;letter-spacing:.03em}
+body[data-dev="sp"] blockquote{font-size:20px;padding:22px 20px;margin:26px -16px;line-height:1.9}
+blockquote .who{display:block;font-family:"Zen Kaku Gothic New",sans-serif;font-size:14px;font-weight:400;
+  color:var(--ink-2);letter-spacing:.06em;margin-top:16px;line-height:1.7}
+body[data-dev="sp"] blockquote .who{font-size:12px;margin-top:12px}
+
+figure{margin:36px 0}
+figure .ph{height:270px}
+body[data-dev="sp"] figure{margin:26px -16px}
+body[data-dev="sp"] figure .ph{height:180px;border-left:none;border-right:none}
+figcaption{font-size:15px;color:var(--ink-2);line-height:1.85;padding-top:12px}
+body[data-dev="sp"] figcaption{font-size:14px;padding:10px 16px 0}
+
+.msg{border:2px solid var(--pink);padding:30px 34px;margin-top:42px}
+body[data-dev="sp"] .msg{padding:20px 18px;margin-top:30px}
+.msg .t{font-size:13px;letter-spacing:.12em;color:var(--pink-deep);font-weight:700;margin-bottom:12px;line-height:1.6}
+.msg p{font-size:19px;line-height:2.05}
+body[data-dev="sp"] .msg p{font-size:17px}
+
+.prof{background:var(--paper);border:1px solid var(--rule);padding:28px 30px;margin-top:42px;display:flex;gap:24px}
+body[data-dev="sp"] .prof{flex-direction:column;gap:16px;padding:20px 18px;margin-top:30px}
+.prof .ph{width:120px;height:120px;flex:none}
+body[data-dev="sp"] .prof .ph{width:96px;height:96px}
+.prof h4{font-size:21px;font-weight:700;line-height:1.6}
+.prof dl{margin-top:12px;font-size:15px;line-height:1.9}
+.prof dt{color:var(--pink-deep);font-weight:700;font-size:13.5px;letter-spacing:.06em;margin-top:9px}
+
+.next{margin-top:46px}
+.next .t{font-size:17px;font-weight:700;margin-bottom:16px;line-height:1.7}
+.next .row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+body[data-dev="sp"] .next .row{gap:10px}
+.next .item{border:1px solid var(--rule);padding:14px;display:block}
+body[data-dev="sp"] .next .item{padding:9px}
+.next .item:hover{border-color:var(--pink)}
+.next .ph{height:100px;margin-bottom:12px}
+body[data-dev="sp"] .next .ph{height:64px;margin-bottom:8px}
+.next .item h5{font-size:17px;font-weight:700;line-height:1.6;margin-top:9px}
+body[data-dev="sp"] .next .item h5{font-size:14px;margin-top:6px}
+body[data-dev="sp"] .next .item .label{font-size:10px;padding:2px 7px;letter-spacing:.06em}
+
+.share{margin-top:42px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+body[data-dev="sp"] .share{grid-template-columns:1fr 1fr;gap:8px;margin-top:30px}
+.share div{border:1px solid var(--rule-2);color:var(--ink-2);text-align:center;font-size:15px;padding:15px;line-height:1.6}
+body[data-dev="sp"] .share div{font-size:14px;padding:13px}
+.cta{margin-top:14px;background:var(--pink-deep);color:#fff;text-align:center;font-size:17px;font-weight:700;
+  padding:20px;letter-spacing:.06em;line-height:1.6;display:block}
+body[data-dev="sp"] .cta{font-size:16px;padding:17px}
+.back{margin-top:14px;border:1px solid var(--rule-2);color:var(--ink-2);text-align:center;font-size:16px;
+  padding:17px;line-height:1.6;display:block}
+</style>
+</head>
+<body data-dev="pc">
+
+<div class="tool">
+  <span class="ttl">特集プロトタイプ</span>
+  <span class="grp"><span class="lb">DEVICE</span>
+    <button data-dev-btn="pc" aria-pressed="true">PC</button>
+    <button data-dev-btn="sp" aria-pressed="false">SP</button>
+  </span>
+  <span class="grp"><span class="lb">PAGE</span>
+    <button data-go="index" aria-pressed="true">Index</button>
+    <button data-go="hirao" aria-pressed="false">平尾</button>
+    <button data-go="nikai" aria-pressed="false">二階</button>
+    <button data-go="kondo" aria-pressed="false">近藤</button>
+    <button data-go="marumoto" aria-pressed="false">丸本</button>
+  </span>
+  <span class="hint">カード・パンくず・「次を読む」はすべて動きます</span>
+</div>
+
+<div class="stage"><div class="device" id="device"></div></div>
+<div class="dummy-flag">本文はすべてダミー原稿です</div>
+
+<script>
+const PEOPLE = [
+  {
+    id:"hirao", name:"平尾 麻衣子", yomi:"ひらお まいこ", label:"エビデンス",
+    role:"日本アクティブコミュニティ協会 認定講師／実験音声学",
+    roleLong:"一般社団法人日本アクティブコミュニティ協会 認定講師",
+    hook:"研究機関とともに、朗読というレクリエーションの効果を確かめてきた。",
+    title:"確かめられる、ということが<br>レクリエーションを変えていく",
+    lead:"朗読を、高齢者の健康に役立てる。その考えを研究機関とともに形にしてきたのが平尾麻衣子さんです。声とことばを扱う専門家として、介護レクリエーションに何を持ち込もうとしているのか。伺いました。",
+    chapters:[
+      { h:"いま届けているもの", p:[
+        "自治体の介護予防事業や介護施設で、健康朗読という取り組みを続けています。朗読と聞くと、上手に読むための練習だと思われることが多いのですが、目的はそこにはありません。声を出すこと自体に、口腔機能や身体機能を支える働きがあります。",
+        "参加される方の多くは、最初は声を出すことをためらわれます。それでも十分ほど経つと、部屋の空気が変わる。そこからが本番だと思っています。",
+        "題材は、誰もが知っている物語を選びます。知らない文章では、読むことに気を取られて声が出ないからです。"
+      ]},
+      { h:"変わってきたこと", p:[
+        "始めた頃と比べて、介護レクリエーションに求められるものは確実に変わりました。以前は場をなごませてくれればよい、という受け止められ方が中心でしたが、いまは何のための時間なのかを説明できることが求められます。",
+        "それは負担が増えたということではなく、レクリエーションが介護の一部として認められはじめたということだと受け止めています。"
+      ]},
+      { h:"レクリエーションとは何か", p:[
+        "効果が確かめられていると示せるようになってから、自治体や介護施設の反応がはっきり変わりました。導入を決める方が、上司やご家族に説明できるようになるからです。",
+        "ただ、数字で測れることだけがレクリエーションの価値ではありません。測れるものと、こぼれ落ちるもの。その両方を抱えていることが、この仕事の難しさであり、面白さでもあります。"
+      ]},
+      { h:"これからの介護レク", p:[
+        "十年後には、レクリエーションが介護施設の付け足しではなく、はじめから予定に組み込まれているようになってほしい。そのために足りないのは、届ける人の数だと思っています。",
+        "だから私は、自分が届けることと同じくらい、届ける人を育てることに時間を使っています。"
+      ]}
+    ],
+    q1:"レクリエーションは、楽しませるための時間ではなく、その方が自分の力を思い出すための時間だと考えています。",
+    q2:"終わったあとに、久しぶりに大きな声を出したと言ってくださった。あの一言のために続けているようなものです。",
+    cap:"指導で使用している健康朗読のテキスト。行間を広くとり、離れた席からでも読めるよう組まれている。",
+    msg:"うまくできなくてもかまいません。声をかけ続けること自体が、すでにレクリエーションです。",
+    prof:[["協会での立場","一般社団法人日本アクティブコミュニティ協会 認定講師"],["専門","実験音声学・朗読"],["届けているもの","研究機関と共同開発した「健康朗読」"],["原点","認知症予防への科学的アプローチ"]]
+  },
+  {
+    id:"nikai", name:"二階 喜美子", yomi:"にかい きみこ", label:"当事者性",
+    role:"日本アクティブコミュニティ協会 認定講師／音楽療法",
+    roleLong:"一般社団法人日本アクティブコミュニティ協会 認定講師",
+    hook:"支えられる側を経験したことが、いまのプログラムの土台になっている。",
+    title:"寝たきりを経験して、<br>レクの組み立て方が変わった",
+    lead:"音楽療法とレクリエーションを組み合わせた独自のプログラム「音活」を各地で展開する二階喜美子さん。突然寝たきりになったという経験は、いまの活動に何を残したのか。伺いました。",
+    chapters:[
+      { h:"いま届けているもの", p:[
+        "高齢者施設や障がい者施設で、音活というプログラムを行っています。音楽療法とレクリエーションの、ちょうど間にあるものだと思ってください。",
+        "音楽療法は目的がはっきりしている分、参加する側に構えが生まれます。レクリエーションの顔をして入っていくと、その構えがほどける。そこを狙っています。"
+      ]},
+      { h:"変わってきたこと", p:[
+        "十年前は、歌えば喜ばれました。いまは、歌える方と歌えない方が同じ部屋にいます。要介護度も、これまで生きてこられた背景も、以前よりずっと幅が広い。",
+        "全員を一度に楽しませようとすると、結局は誰にも届きません。同じ時間の中に、参加の仕方をいくつも用意するようになりました。"
+      ]},
+      { h:"レクリエーションとは何か", p:[
+        "私は突然、寝たきりになったことがあります。ベッドの上から見る天井と、そこへ来てくださる方の顔は、いまでもはっきり覚えています。",
+        "支えられる側になって分かったのは、できないことを数えられる時間がいちばんつらい、ということでした。だから私のプログラムでは、できることから始めます。指が一本動けば、それで参加していることにする。"
+      ]},
+      { h:"これからの介護レク", p:[
+        "身近なもので道具を作るのが好きで、ペットボトルや洗濯ばさみをよく使います。弱みを強みに変えるというのは、道具の話でもあり、その方の状態の話でもあります。",
+        "十年後には、レクリエーションが「元気な人のためのもの」でなくなっていてほしい。いちばん動けない方が、いちばん楽しめる設計を考えていきたいです。"
+      ]}
+    ],
+    q1:"できないことを数えられる時間が、いちばんつらいんです。だからできることから始めます。",
+    q2:"指が一本動けば、それで参加していることにする。そう決めてから、断られることがなくなりました。",
+    cap:"ペットボトルと洗濯ばさみで作った手作りの楽器。握力が弱い方でも音が出せるよう工夫されている。",
+    msg:"完璧な進行より、その方が今日どこまでできるかを見ていてください。それがレクリエーションの始まりです。",
+    prof:[["協会での立場","一般社団法人日本アクティブコミュニティ協会 認定講師"],["専門","音楽療法（日本音楽療法学会認定音楽療法士）"],["届けているもの","レクと音楽療法を融合した独自プログラム「音活」"],["原点","突然寝たきりになった経験"]]
+  },
+  {
+    id:"kondo", name:"近藤 真紀子", yomi:"こんどう まきこ", label:"越境",
+    role:"レクリエーション介護士2級／語り・三味線",
+    roleLong:"レクリエーション介護士2級／介護レクサポーター",
+    hook:"舞台で培った語りを、高齢者の前で。届き方は舞台とまるで違った。",
+    title:"舞台の届け方は、<br>ここでは通用しませんでした",
+    lead:"三味線の弾き語りで江戸東京の民話を語る近藤真紀子さん。舞台に立つ表現者が、高齢者の前で語りはじめたとき、何が起きたのか。伺いました。",
+    chapters:[
+      { h:"いま届けているもの", p:[
+        "三味線を弾きながら、江戸や東京に伝わる民話を語っています。聞いていただくだけでなく、途中で一緒に声を出していただく参加型にしています。",
+        "語り部の話を耳から聞いて、そのあとご自分の声で参加する。この順番が大事で、いきなり声を出してくださいとお願いしても、なかなか出ません。"
+      ]},
+      { h:"変わってきたこと", p:[
+        "最初の頃は、舞台と同じつもりで語っていました。間の取り方も、声の張り方も、そのまま持ち込んだんです。まったく届きませんでした。",
+        "舞台は暗くして、こちらを見ていただく場所です。でもここは明るくて、隣の方とおしゃべりが始まる。同じ語りでも、届け方をつくり直す必要がありました。"
+      ]},
+      { h:"レクリエーションとは何か", p:[
+        "いまは、語りながら参加されている方の顔をずっと見ています。目が合った方に少し寄っていく。舞台では絶対にしない動き方です。",
+        "介護の専門職ではない私が関わる意味があるとしたら、それは技術ではなく、外から来た人だということかもしれません。いつもと違う人が来た、というだけで、その日の空気は変わりますから。"
+      ]},
+      { h:"これからの介護レク", p:[
+        "特技を持っている人は、世の中にたくさんいます。その方たちが介護施設に入っていける道が、もっと分かりやすくなるといい。",
+        "私自身、資格を取るまでは、どう関わればいいのか分かりませんでした。入口が見えることが、いちばん大きいと思います。"
+      ]}
+    ],
+    q1:"舞台は、こちらを見ていただく場所。ここは、隣の方とおしゃべりが始まる場所なんです。",
+    q2:"いつもと違う人が来た。それだけで、その日の部屋の空気は変わります。",
+    cap:"語りに使用している三味線。曲の合間に楽器そのものを見ていただく時間を必ず設けている。",
+    msg:"ご自分の特技を、そのまま持ち込まなくて大丈夫です。届け方だけ、この場所に合わせればいい。",
+    prof:[["協会での立場","レクリエーション介護士2級／介護レクサポーター"],["専門","語り・朗読（三味線の弾き語り）"],["届けているもの","江戸東京の民話による参加型の朗読レクリエーション"],["原点","舞台俳優・語り部としての表現"]]
+  },
+  {
+    id:"marumoto", name:"丸本 幸", yomi:"まるもと みゆき", label:"実践の蓄積",
+    role:"レクリエーション介護士2級／音楽",
+    roleLong:"レクリエーション介護士2級／介護レクサポーター",
+    hook:"場が変われば、同じ曲でも届け方を変える。積み重ねてきた手ざわり。",
+    title:"同じ曲でも、場所が変われば<br>届け方は変わります",
+    lead:"グループホーム、デイサービス、老人保健施設。さまざまな場で音楽レクリエーションを重ねてきた丸本幸さん。日々の実践から見えてきたものを伺いました。",
+    chapters:[
+      { h:"いま届けているもの", p:[
+        "声楽を学んだあと、いろいろな施設で音楽レクリエーションを続けてきました。歌う、聴く、楽器を鳴らす。その日その場でできることを組み合わせています。",
+        "音楽大学の実習で高齢者施設に行ったときのことが、いまでも出発点になっています。歌が始まった瞬間に、それまで一言も話されなかった方が口を動かされた。あれを見てしまったので。"
+      ]},
+      { h:"変わってきたこと", p:[
+        "場によって、まったく違います。グループホームは人数が少ないので、一人ひとりの反応を見ながら進められます。デイサービスは人数が多く、時間も決まっている。老人保健施設では、体調の波が日によって大きい。",
+        "同じ曲を持っていっても、始め方も、長さも、盛り上げる場所も変えます。それをやらずに同じことを繰り返すと、どこかで必ず届かなくなります。"
+      ]},
+      { h:"レクリエーションとは何か", p:[
+        "たくさんある音楽の中に、お一人おひとりの思い出があります。何の曲が誰に効くかは、その方に聞いてみないと分かりません。",
+        "一時でも、一瞬でも、楽しかった、よかったと笑顔になる瞬間があれば、その日は成立していると思っています。ずっと盛り上げ続ける必要はありません。"
+      ]},
+      { h:"これからの介護レク", p:[
+        "音楽療法とレクリエーションは、目指しているものは近いけれど、構え方が違います。どちらが上ということではなく、使い分けができるといい。",
+        "十年後には、レクリエーションが職員の方の負担ではなく、一緒に楽しめる時間になっていてほしいです。"
+      ]}
+    ],
+    q1:"一時でも、一瞬でも笑顔になる瞬間があれば、その日は成立していると思っています。",
+    q2:"何の曲が誰に効くかは、その方に聞いてみないと分からないんです。",
+    cap:"施設に持参している歌集。参加される方の年代に合わせて、曲の並びを毎回入れ替えている。",
+    msg:"うまく盛り上げようとしなくていい。一瞬の笑顔を見つけられたら、それで十分です。",
+    prof:[["協会での立場","レクリエーション介護士2級／介護レクサポーター"],["専門","音楽（声楽・音楽療法）"],["届けているもの","グループホーム・デイサービス・老健での音楽レクリエーション"],["原点","音楽大学在学中、実習先の高齢者施設で受けた衝撃"]]
+  }
+];
+
+const byId = id => PEOPLE.find(p => p.id === id);
+const dev = () => document.body.dataset.dev;
+
+function renderIndex(){
+  return `
+  <div class="chrome">協会サイト共通ヘッダー（既存流用）</div>
+  <div class="hero">
+    <div class="badge-day">9.15　レクリエーション介護士の日</div>
+    <h1>高齢社会と、<br><em>これからの介護レク</em></h1>
+    <p class="sub">介護レクリエーションに携わる4名に聞きました</p>
+    <div class="faces">
+      ${PEOPLE.map(p=>`<div class="ph">引きの1枚<br>${p.name.split(' ')[0]}</div>`).join('')}
+    </div>
+  </div>
+  <div class="idx-lead">
+    <span class="dummy">ダミー原稿</span>
+    <p>高齢化が進むなかで、介護レクリエーションに求められるものは変わり続けています。楽しませるための時間なのか、それとも別の何かなのか。今回お話を伺った4名は、いずれも声と音を手がかりに高齢者と向き合ってきた方々です。それぞれの立場から、これからの介護レクリエーションを語っていただきました。</p>
+  </div>
+  <div class="cards">
+    ${PEOPLE.map(p=>`
+      <a class="card" href="#" data-go="${p.id}">
+        <div class="ph">寄りの1枚　3:2</div>
+        <div class="body">
+          <span class="label">${p.label}</span>
+          <h2>${p.name}</h2>
+          <div class="yomi">${p.yomi}</div>
+          <div class="role">${p.role}</div>
+          <p class="hook">${p.hook}（ダミー）</p>
+          <span class="more">記事を読む</span>
+        </div>
+      </a>`).join('')}
+  </div>
+  <div class="idx-tail">
+    <div class="share">
+      <div>Xでシェア</div><div>Facebook</div><div>LINE</div><div>URLをコピー</div>
+    </div>
+    <a class="cta" href="#">レクリエーション介護士とは</a>
+  </div>
+  <div class="chrome foot">協会サイト共通フッター（既存流用）</div>`;
+}
+
+function renderArticle(id){
+  const p = byId(id);
+  const others = PEOPLE.filter(x => x.id !== id);
+  const c = p.chapters;
+  const ch = (i) => `
+    <div class="chap">
+      <div class="num">0${i+1}</div>
+      <h3>${c[i].h}</h3>
+      ${c[i].p.map(t=>`<p>${t}（ダミー）</p>`).join('')}
+    </div>`;
+  return `
+  <div class="chrome">協会サイト共通ヘッダー（既存流用）</div>
+  <div class="crumb"><a href="#" data-go="index">特集｜高齢社会と、これからの介護レク</a>　＞　${p.name}</div>
+  <div class="art">
+    <div class="art-head">
+      <span class="label">${p.label}</span>
+      <h1>${p.title}</h1>
+      <div class="byline"><strong>${p.name}</strong>　${p.yomi}<br>${p.roleLong}</div>
+    </div>
+    <div class="ph mv">寄りの1枚　16:9　1600×900px</div>
+    <div class="col"><div class="inner">
+      <div class="art-lead"><span class="dummy">ダミー原稿（取材前の仮組み）</span><p>${p.lead}</p></div>
+      ${ch(0)}
+      <blockquote>${p.q1}<span class="who">（ダミー引用／Q3の核心発言）</span></blockquote>
+      <figure><div class="ph">手元・お道具　4:3</div><figcaption>${p.cap}（ダミー）</figcaption></figure>
+      ${ch(1)}
+      ${ch(2)}
+      <blockquote>${p.q2}<span class="who">（ダミー引用／参加者からの言葉）</span></blockquote>
+      ${ch(3)}
+      <div class="msg"><div class="t">介護レクリエーションに関わる方へ</div><p>${p.msg}（ダミー）</p></div>
+      <div class="prof">
+        <div class="ph">顔写真</div>
+        <div>
+          <h4>${p.name}</h4>
+          <dl>${p.prof.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+        </div>
+      </div>
+      <div class="next">
+        <div class="t">ほかの3名の記事を読む</div>
+        <div class="row">
+          ${others.map(o=>`
+            <a class="item" href="#" data-go="${o.id}">
+              <div class="ph">顔</div>
+              <span class="label">${o.label}</span>
+              <h5>${o.name}</h5>
+            </a>`).join('')}
+        </div>
+      </div>
+      <div class="share"><div>Xでシェア</div><div>Facebook</div><div>LINE</div><div>URLをコピー</div></div>
+      <a class="cta" href="#">レクリエーション介護士とは</a>
+      <a class="back" href="#" data-go="index">特集トップへ戻る</a>
+    </div></div>
+  </div>
+  <div class="chrome foot">協会サイト共通フッター（既存流用）</div>`;
+}
+
+let current = "index";
+function go(page){
+  current = page;
+  document.getElementById('device').innerHTML =
+    page === "index" ? renderIndex() : renderArticle(page);
+  document.querySelectorAll('[data-go]').forEach(b=>{
+    if(b.tagName === 'BUTTON') b.setAttribute('aria-pressed', b.dataset.go === page);
+  });
+  window.scrollTo({top:0});
+}
+
+document.addEventListener('click', e=>{
+  const t = e.target.closest('[data-go]');
+  if(t){ e.preventDefault(); go(t.dataset.go); return; }
+  const d = e.target.closest('[data-dev-btn]');
+  if(d){
+    document.body.dataset.dev = d.dataset.devBtn;
+    document.querySelectorAll('[data-dev-btn]').forEach(b=>
+      b.setAttribute('aria-pressed', b.dataset.devBtn === d.dataset.devBtn));
+  }
+});
+
+go("index");
+</script>
+</body>
+</html>
