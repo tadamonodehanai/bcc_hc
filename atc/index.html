@@ -139,6 +139,60 @@
   tr.bizline td{border-top:2px dashed var(--amber)}
   .timecell.bizmark{color:var(--amber)}
   .timecell .bizlb{display:block;font-size:9px;font-weight:700;color:var(--amber);letter-spacing:.02em}
+
+  /* shared (重複可) room cells */
+  .sharedslot{height:auto;min-height:26px;vertical-align:top;padding:1px 2px}
+  .sharedslot.sharedbusy{background:repeating-linear-gradient(90deg,#F2F7F6,#F2F7F6 8px,#fff 8px,#fff 16px)}
+  .sharedslot:hover{background:var(--teal-wash)}
+  .minibk{display:block;font-size:10px;line-height:1.5;font-weight:700;margin:1px 0;padding:0 5px;border-radius:4px;
+    border-left:3px solid;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;max-width:100%}
+  .minibk.confirmed{background:var(--teal-wash-2);border-color:var(--teal);color:var(--teal-dark)}
+  .minibk.tentative{background:var(--amber-wash);border-color:var(--amber);color:#8a4a12}
+  .minibk.internal{background:var(--good-wash);border-color:var(--good);color:#1f5a41}
+  .minibk:hover{filter:brightness(.95)}
+  .minibk:focus-visible{outline:2px solid var(--teal)}
+
+  /* role selector */
+  .role-sel{display:flex;align-items:center;gap:7px;font-size:12px;color:#CFE3E1}
+  .role-sel select{appearance:none;font-family:inherit;font-size:12.5px;font-weight:700;color:#fff;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:6px 26px 6px 12px;
+    cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23ffffff'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 9px center}
+  .role-sel select:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .role-sel select option{color:var(--ink)}
+
+  /* simple form mode: hide full-only sections */
+  .drawer.simple-mode .fullonly{display:none}
+  .drawer:not(.simple-mode) .simpleonly{display:none}
+
+  /* inbox */
+  .inbox-badge{min-width:18px;height:18px;border-radius:999px;background:var(--crit);color:#fff;font-size:11px;
+    font-weight:800;display:inline-grid;place-items:center;padding:0 5px}
+  .inbox-badge.zero{background:var(--line-strong)}
+  .inbox-h{font-size:14px;margin:22px 0 10px;display:flex;align-items:baseline;gap:10px}
+  .inbox-sub{font-size:11.5px;color:var(--ink-faint);font-weight:500}
+  .inbox-item{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px;margin-bottom:8px;flex-wrap:wrap}
+  .inbox-item .kind{font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;flex:none}
+  .kind.k-self{background:var(--amber-wash);color:#8a4a12}
+  .kind.k-tent{background:var(--teal-wash);color:var(--teal-dark)}
+  .kind.k-inq{background:#E8E4F4;color:#5B4A96}
+  .inbox-item .who{font-weight:700}
+  .inbox-item .meta{font-size:12px;color:var(--muted)}
+  .inbox-item .sp{flex:1}
+  .inbox-item .btn{padding:8px 13px;font-size:12.5px}
+  .inbox-empty{padding:18px;border:1px dashed var(--line-strong);border-radius:10px;color:var(--ink-faint);
+    font-size:12.5px;text-align:center;background:#FBFCFB}
+
+  /* self-booking page */
+  .self-wrap{max-width:640px;margin:0 auto}
+  .self-hero{background:var(--teal-dark);color:#EAF4F3;border-radius:12px;padding:22px 24px;margin-bottom:18px}
+  .self-hero h1{font-size:20px;margin:0 0 6px;color:#fff}
+  .self-hero p{margin:0;font-size:12.5px;color:#BFE0DE;line-height:1.7}
+  .self-done{background:var(--good-wash);border:1.5px solid var(--good);border-radius:12px;padding:22px 24px;font-size:14px}
+  .self-done h2{margin:0 0 8px;font-size:17px;color:#1f5a41}
+  .self-done p{margin:6px 0;color:var(--ink-soft);font-size:13px}
+  .self-done .refno{font-size:12px;color:var(--muted)}
   .bk{
     position:absolute;left:2px;right:2px;top:1px;bottom:1px;border-radius:5px;
     padding:3px 6px;overflow:hidden;font-size:11px;line-height:1.25;border:1px solid;
@@ -362,8 +416,6 @@
   .dchk:has(input:checked){border-color:var(--teal);background:var(--teal-wash)}
   .dchk input{accent-color:var(--teal);width:15px;height:15px}
   .dchk .sm{color:var(--muted);font-size:11px;margin-left:auto}
-  .agewarn{font-size:11px;color:var(--crit);margin-top:5px;display:none}
-  .agewarn.show{display:block}
   .dfield label{display:block;font-size:11.5px;font-weight:700;color:var(--ink-faint);letter-spacing:.02em;margin-bottom:5px;text-transform:none}
   .drow2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .drawer .time-edit{display:flex;align-items:center;gap:8px}
@@ -394,6 +446,14 @@
         <span>エイジレスセンター 予約管理<span class="sub">　ATC / 部屋予約システム</span></span>
       </div>
       <div class="top-spacer"></div>
+      <div class="role-sel"><span>ロール</span>
+        <select id="roleSel" aria-label="ロール切替（プロトタイプ用）">
+          <option value="reception" selected>受付担当（林・草刈）</option>
+          <option value="staff">一般スタッフ（簡易入力）</option>
+          <option value="public">外部利用者（セルフ予約）</option>
+          <option value="admin">管理者</option>
+        </select>
+      </div>
       <button class="admin-link" id="adminOpen">⚙ 管理者専用</button>
       <span class="prototype-flag">プロトタイプ</span>
     </div>
@@ -405,6 +465,12 @@
     </button>
     <button class="tab" id="tab-external" role="tab" aria-selected="false" aria-controls="view-external">
       <span class="dot"></span><b>外部予約 受付</b><small>条件から おすすめ部屋</small>
+    </button>
+    <button class="tab" id="tab-inbox" role="tab" aria-selected="false" aria-controls="view-inbox">
+      <span class="dot"></span><b>受付箱</b><span class="inbox-badge" id="inboxBadge">0</span><small>新規予約・キャンセル・問い合わせ</small>
+    </button>
+    <button class="tab" id="tab-self" role="tab" aria-selected="false" aria-controls="view-self">
+      <span class="dot"></span><b>セルフ予約</b><small>公開ページ（外部利用者向け）</small>
     </button>
   </nav>
 
@@ -449,6 +515,7 @@
         <b>この画面で解決すること：</b> 現状「予約簿に直接書けてしまい、林さん・草刈さんを通さず部屋が押さえられる」問題に対し、
         だれが登録しても即座に全員へ反映され、同じ部屋・時間は二重に登録できません（登録済みマスはロック）。
         仮予約は斜線で区別し、確定すると実線に変わります。
+        例外として<b>ログ跡は「共有・無制限」</b>のため、同時間帯でも複数の予約を重ねて登録できます（重複可否は現場判断）。
       </p>
       </div><!-- /boardView -->
 
@@ -563,6 +630,98 @@
       </p>
     </section>
 
+    <!-- ============ INBOX (reception/admin) ============ -->
+    <section class="wrap hidden" id="view-inbox" role="tabpanel" aria-labelledby="tab-inbox">
+      <div class="panel-intro">
+        <div>
+          <h1>受付箱</h1>
+          <p>セルフ予約・仮予約・問い合わせなど、対応が必要なものが集まります。対応するとメール通知が送られます（プロトタイプではモック表示）。</p>
+        </div>
+      </div>
+      <div id="inboxPendingWrap">
+        <h2 class="inbox-h">対応待ちの仮予約 <span class="inbox-sub">確定またはキャンセルで対応完了</span></h2>
+        <div id="inboxPending"></div>
+      </div>
+      <div>
+        <h2 class="inbox-h">問い合わせ <span class="inbox-sub">Webサイト経由</span></h2>
+        <div id="inboxInq"></div>
+      </div>
+      <p class="footnote">
+        <b>この画面の位置づけ：</b>セルフ予約の一般公開に伴う管理機能（スコープ1）。新規のセルフ予約・キャンセル依頼・問い合わせがここに届き、
+        受付担当・管理者が対応します。対応（確定・キャンセル）と同時に申込者へ<b>メール通知</b>が送られます。
+      </p>
+    </section>
+
+    <!-- ============ SELF BOOKING (public) ============ -->
+    <section class="wrap hidden" id="view-self" role="tabpanel" aria-labelledby="tab-self">
+      <div class="self-wrap">
+        <div class="self-hero">
+          <h1>エイジレスセンター 施設利用のお申し込み</h1>
+          <p>ご希望の内容を入力して送信してください。<b>お申し込みは仮予約です。</b>担当者が内容を確認し、ご連絡のうえ確定します。施設のご利用は基本無料です（貸室は有料）。</p>
+        </div>
+
+        <div class="card form-card" id="selfFormCard">
+          <div class="field"><label for="s-group">団体名・お名前 <span class="opt">必須</span></label>
+            <input type="text" id="s-group" placeholder="例）〇〇小学校／〇〇株式会社"></div>
+          <div class="row2">
+            <div class="field"><label for="s-booker">代表者名</label><input type="text" id="s-booker" placeholder="お名前"></div>
+            <div class="field"><label for="s-category">分類</label>
+              <select id="s-category">
+                <option value="">選択してください</option>
+                <option>地域団体・一般</option><option>公官庁</option><option>一般学校</option>
+                <option>福祉学校・企業</option><option>一般企業</option><option>海外</option>
+              </select></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="s-tel">電話番号</label><input type="text" id="s-tel" class="num" placeholder="06-0000-0000"></div>
+            <div class="field"><label for="s-email">メール</label><input type="text" id="s-email" placeholder="mail@example.jp"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="s-purpose">ご利用目的</label>
+              <select id="s-purpose">
+                <option value="見学">施設見学</option><option value="セミナー">セミナー利用</option>
+                <option value="会議">会議室利用</option><option value="部屋貸し">部屋貸し</option>
+                <option value="卓球">卓球</option>
+              </select></div>
+            <div class="field"><label for="s-head">人数</label><input type="number" id="s-head" class="num" min="1" value="20"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="s-date">ご希望日</label><input type="date" id="s-date" value="2026-07-09"></div>
+            <div class="field"><label>時間</label>
+              <div class="time-edit">
+                <input type="time" id="s-start" step="900" value="10:15" class="num"><span>〜</span>
+                <input type="time" id="s-end" step="900" value="12:00" class="num">
+              </div></div>
+          </div>
+          <div class="field"><label>交通手段</label>
+            <div class="dsegmented" id="s-transport">
+              <label class="dseg"><input type="radio" name="s-transport" value="電車">電車</label>
+              <label class="dseg"><input type="radio" name="s-transport" value="バス">バス</label>
+              <label class="dseg"><input type="radio" name="s-transport" value="その他">その他</label>
+            </div></div>
+          <div class="field"><label for="s-note">ご要望・備考 <span class="opt">任意</span></label>
+            <input type="text" id="s-note" placeholder="研修も行いたい、車椅子あり など"></div>
+          <div id="selfWarn"></div>
+          <div class="actions">
+            <button class="btn primary" id="selfSubmit">この内容で申し込む（仮予約）</button>
+          </div>
+          <p class="override-note">送信後、担当者より確定のご連絡を差し上げます。この時点では部屋は確定しません。</p>
+        </div>
+
+        <div class="self-done hidden" id="selfDone">
+          <h2>✓ お申し込みを受け付けました（仮予約）</h2>
+          <p id="selfDoneSummary"></p>
+          <p>ご入力のメールアドレス宛に<b>受付確認メール</b>をお送りしました（プロトタイプではモック）。担当者が内容を確認し、<b>お電話またはメールでご連絡のうえ確定</b>します。日程・お部屋はご相談のうえ調整させていただく場合があります。</p>
+          <p class="refno" id="selfDoneRef"></p>
+          <div class="actions"><button class="btn ghost" id="selfAgain">続けて申し込む</button></div>
+        </div>
+      </div>
+      <p class="footnote">
+        <b>この画面の位置づけ：</b>外部利用者向けの公開ページ（スコープ1）。申込は<b>仮予約</b>としてボードに反映され、
+        受付担当が詳細ドロワーから「本予約に確定」します。全自動では確定しません（人の調整を残す設計）。
+      </p>
+    </section>
+
     <!-- ============ ADMIN / MASTER ============ -->
     <section class="wrap hidden" id="view-admin">
       <div class="admin-head">
@@ -617,11 +776,12 @@
           <h2><span class="ni">割</span>部屋の割当ルール（参考）</h2>
           <p class="desc">外部受付の「おすすめ部屋」に使われる現在のルールです。</p>
           <ul class="rulelist">
-            <li>基本は <b>D → H2</b> の順で提案（受付から近い）</li>
+            <li>見学は <b>D → H2</b> の順で提案（受付から近い）。<b>Hゾーンは見学では使わない</b></li>
+            <li><b>セミナー等 → Hゾーン</b>（センター最大・定員100）を第一候補</li>
             <li>人数は各室の<b>定員</b>に合わせる</li>
             <li>研修付き見学 → <b>展示イベントホール</b></li>
-            <li>セミナー＋外部講師 → <b>B会議室</b>を控室に追加</li>
-            <li>セミナー＋展示 → <b>多目的ルーム(H2)</b>を追加</li>
+            <li>セミナー＋外部講師 → <b>B会議室</b>を控室に追加／＋展示 → <b>H2</b>を追加</li>
+            <li><b>ログ跡は共有・無制限</b>（重複可否は人が判断）</li>
             <li>競合時は <b>内部・全館イベントを優先</b></li>
           </ul>
         </div>
@@ -661,35 +821,30 @@
     <div class="drawer-body">
       <div class="cancel-banner hidden" id="dwCancelBanner">この予約はキャンセルされています。</div>
 
-      <div class="dsect"><span class="ico">団</span>団体・代表者</div>
+      <div class="dsect"><span class="ico">団</span><span id="dw-sect1-label">団体・代表者</span></div>
       <div class="dfield">
-        <label>団体名</label>
+        <label id="dw-group-label">団体名</label>
         <input type="text" id="dw-group" placeholder="団体名">
       </div>
+      <div class="dfield simpleonly">
+        <label>担当者（記入者・自由入力）</label>
+        <input type="text" id="dw-staff" placeholder="お名前">
+      </div>
+      <div class="fullonly">
       <div class="drow2">
         <div class="dfield"><label>人数</label><input type="number" id="dw-head" class="num" min="0"></div>
         <div class="dfield"><label>組数</label><input type="number" id="dw-groups" class="num" min="0"></div>
       </div>
       <div class="drow2">
         <div class="dfield"><label>代表者</label><input type="text" id="dw-booker" placeholder="お名前"></div>
-        <div class="dfield"><label>性別</label>
-          <div class="dsegmented" id="dw-gender">
-            <label class="dseg"><input type="radio" name="gender" value="男">男</label>
-            <label class="dseg"><input type="radio" name="gender" value="女">女</label>
-            <label class="dseg"><input type="radio" name="gender" value="">―</label>
-          </div>
-        </div>
-      </div>
-      <div class="drow2">
-        <div class="dfield"><label>分類（自由メモ）</label><input type="text" id="dw-category" placeholder="学校／福祉／企業 など"></div>
-        <div class="dfield"><label>年代</label>
-          <select id="dw-age">
-            <option value="">―</option><option>10代</option><option>20〜50代</option>
-            <option>60代以上</option><option>70代以上</option>
+        <div class="dfield"><label>分類</label>
+          <select id="dw-category">
+            <option value="">―</option>
+            <option>地域団体・一般</option><option>公官庁</option><option>一般学校</option>
+            <option>福祉学校・企業</option><option>一般企業</option><option>海外</option>
           </select>
         </div>
       </div>
-      <p class="agewarn" id="dw-agewarn">⚠ 高齢者体験は60代以上に勧めない運用のため要注意。</p>
 
       <div class="dsect"><span class="ico">℡</span>連絡先</div>
       <div class="drow2">
@@ -697,11 +852,12 @@
         <div class="dfield"><label>緊急連絡先</label><input type="text" id="dw-emergency" class="num" placeholder="当日つながる番号"></div>
       </div>
       <div class="dfield"><label>メール</label><input type="text" id="dw-email" placeholder="mail@example.jp"></div>
+      </div><!-- /fullonly -->
 
       <div class="dsect"><span class="ico">枠</span>予約枠</div>
       <div class="drow2">
         <div class="dfield"><label>利用日</label><input type="date" id="dw-date"></div>
-        <div class="dfield"><label>受付日</label><input type="date" id="dw-recv"></div>
+        <div class="dfield fullonly"><label>受付日</label><input type="date" id="dw-recv"></div>
       </div>
       <div class="dfield">
         <label>利用時間（15分単位で変更できます）</label>
@@ -713,7 +869,7 @@
       </div>
       <div class="drow2">
         <div class="dfield"><label>部屋</label><select id="dw-room"></select></div>
-        <div class="dfield"><label>目的</label>
+        <div class="dfield fullonly"><label>目的</label>
           <select id="dw-purpose">
             <option>見学</option><option>セミナー</option><option>会議</option>
             <option>部屋貸し</option><option>卓球</option><option>エコプラザ</option>
@@ -722,27 +878,25 @@
         </div>
       </div>
 
+      <div class="fullonly">
       <div class="dsect"><span class="ico">受</span>受付メモ</div>
       <div class="dfield">
         <label>交通手段</label>
         <div class="dsegmented" id="dw-transport">
           <label class="dseg"><input type="radio" name="transport" value="電車">電車</label>
           <label class="dseg"><input type="radio" name="transport" value="バス">バス</label>
-          <label class="dseg"><input type="radio" name="transport" value="">未定</label>
+          <label class="dseg"><input type="radio" name="transport" value="その他">その他</label>
         </div>
       </div>
       <div class="dchecks">
         <label class="dchk"><input type="checkbox" id="dw-busPark">バス駐車場の予約が必要<span class="sm">→ATC管理事務所を案内</span></label>
         <label class="dchk"><input type="checkbox" id="dw-surveyTold">見学後アンケート（必須）を伝えた</label>
-        <label class="dchk"><input type="checkbox" id="dw-shitami">下見・下見見学あり</label>
-        <label class="dchk"><input type="checkbox" id="dw-locker">ロッカー案内</label>
-        <label class="dchk"><input type="checkbox" id="dw-overseas">来場のきっかけ（海外）</label>
       </div>
-     <div class="dfield" style="margin-top:11px"><label>来場のきっかけ／どこで知ったか</label><input type="text" id="dw-knownFrom" placeholder="HP／紹介／リピーター など"></div>
+      </div><!-- /fullonly -->
 
-      <div class="dsect"><span class="ico">備</span>備考</div>
+      <div class="dsect"><span class="ico">備</span>備考（特記事項）</div>
       <div class="dfield">
-        <input type="text" id="dw-note" placeholder="車椅子、確定連絡待ち、設営 など">
+        <input type="text" id="dw-note" placeholder="車椅子で来場・介助が必要・確定連絡待ち など">
       </div>
     </div>
 
@@ -757,16 +911,18 @@
   "use strict";
 
   // ---------- master data ----------
+  // policy: "exclusive"=占有（重複不可） / "shared"=共有・無制限（重複可否は人が判断）
   const ROOMS = [
-    {id:"D",   name:"D",            full:"ガイダンスルーム", cap:80,  fee:8000, equip:"椅子・モニター"},
-    {id:"H2",  name:"H2",           full:"多目的ルーム",     cap:30,  fee:5000, equip:"椅子"},
-    {id:"HALL",name:"展示ホール",    full:"展示イベントホール",cap:40,  fee:12000,equip:"椅子・デスク・モニター"},
-    {id:"LIB", name:"ライブラリー",  full:"ライブラリー",     cap:20,  fee:4000, equip:"椅子6・デスク3・モニター"},
-    {id:"B",   name:"B会議室",       full:"B会議室",          cap:20,  fee:4000, equip:"椅子10・デスク6"},
-    {id:"LOG", name:"ログ跡",        full:"ログ跡／吹き抜け", cap:200, fee:0,    equip:"設備なし・立ちスペース"},
+    {id:"D",   name:"D",            full:"ガイダンスルーム", cap:80,  fee:8000, equip:"椅子・モニター", policy:"exclusive", uses:"見学・セミナー・会議"},
+    {id:"H",   name:"H",            full:"Hゾーン",          cap:100, fee:15000,equip:"センター最大の会場", policy:"exclusive", uses:"セミナー等専用（見学では使わない）"},
+    {id:"H2",  name:"H2",           full:"多目的ルーム",     cap:30,  fee:5000, equip:"椅子", policy:"exclusive", uses:"見学・展示"},
+    {id:"HALL",name:"展示ホール",    full:"展示イベントホール",cap:40,  fee:12000,equip:"椅子・デスク・モニター", policy:"exclusive", uses:"研修付き見学・展示"},
+    {id:"LIB", name:"ライブラリー",  full:"ライブラリー",     cap:20,  fee:4000, equip:"椅子6・デスク3・モニター", policy:"exclusive", uses:"少人数利用"},
+    {id:"B",   name:"B会議室",       full:"B会議室",          cap:20,  fee:4000, equip:"椅子10・デスク6", policy:"exclusive", uses:"会議・講師控室"},
+    {id:"LOG", name:"ログ跡",        full:"ログ跡／吹き抜け", cap:200, fee:0,    equip:"設備なし・立ちスペース", policy:"shared", uses:"多目的（複数団体の同時利用可）"},
   ];
   const R = Object.fromEntries(ROOMS.map(r=>[r.id,r]));
-  // default fill priority: D → H2 → HALL → LIB → B → LOG （受付から近いDを優先）
+  // 見学系の自動割当順: D → H2 → …（Hはセミナー等専用のため対象外／受付から近いDを優先）
   const PRIORITY = ["D","H2","HALL","LIB","B","LOG"];
 
   // admin-configurable settings（管理画面から変更）
@@ -783,13 +939,15 @@
   let seq = 100;
   const uid = ()=> "bk"+(++seq);
   const bookings = [
-    {id:uid(), date:"2026-07-07", room:"D",   group:"民生委員 視察団", head:22, groups:2, start:"10:15", end:"11:45", type:"confirmed", purpose:"見学", booker:"田中 一郎", gender:"男", tel:"06-6615-0001", email:"tanaka@minsei.example.jp", emergency:"090-1111-2222", recv:"2026-05-20", category:"民生委員視察", age:"60代以上", transport:"バス", busPark:true, surveyTold:true, shitami:false, locker:false, overseas:false, knownFrom:"紹介", note:"車椅子2名あり"},
-    {id:uid(), date:"2026-07-07", room:"HALL",group:"〇〇小学校 3年", head:38, groups:1, start:"13:00", end:"15:00", type:"confirmed", purpose:"見学", booker:"佐藤 花子", gender:"女", tel:"06-6100-2222", email:"sato@school.example.jp", emergency:"", recv:"2026-04-10", category:"学校団体", age:"10代", transport:"バス", busPark:true, surveyTold:true, shitami:true, locker:true, overseas:false, knownFrom:"HP", note:"研修あり"},
-    {id:uid(), date:"2026-07-07", room:"B",   group:"内部：定例ミーティング", head:8, groups:1, start:"09:00", end:"10:00", type:"internal", purpose:"内部行事", booker:"草刈", gender:"", tel:"", email:"", emergency:"", recv:"", category:"", age:"", transport:"", busPark:false, surveyTold:false, shitami:false, locker:false, overseas:false, knownFrom:"", note:""},
-    {id:uid(), date:"2026-07-07", room:"H2",  group:"△△福祉会", head:18, groups:1, start:"14:00", end:"16:00", type:"tentative", purpose:"見学", booker:"鈴木 次郎", gender:"男", tel:"090-1234-5678", email:"", emergency:"", recv:"2026-06-30", category:"福祉団体", age:"70代以上", transport:"電車", busPark:false, surveyTold:false, shitami:false, locker:false, overseas:false, knownFrom:"リピーター", note:"3日以内に確定連絡もらう"},
-    {id:uid(), date:"2026-07-07", room:"LIB", group:"卓球サークル", head:12, groups:1, start:"15:30", end:"17:00", type:"confirmed", purpose:"卓球", booker:"山本 三郎", gender:"男", tel:"080-9999-0000", email:"yamamoto@example.jp", emergency:"", recv:"2026-06-01", category:"サークル", age:"60代以上", transport:"電車", busPark:false, surveyTold:false, shitami:false, locker:false, overseas:false, knownFrom:"", note:""},
-    {id:uid(), date:"2026-07-15", room:"D",   group:"健康フェスタ実行委員会", head:60, groups:1, start:"10:15", end:"16:00", type:"tentative", purpose:"セミナー", booker:"奥田", gender:"", tel:"06-0000-0000", email:"", emergency:"", recv:"2026-06-15", category:"イベント", age:"", transport:"", busPark:false, surveyTold:false, shitami:false, locker:false, overseas:false, knownFrom:"", note:"設営あり"},
-    {id:uid(), date:"2026-07-22", room:"HALL",group:"海外視察団（台湾）", head:25, groups:1, start:"13:30", end:"15:30", type:"confirmed", purpose:"見学", booker:"Lin", gender:"", tel:"", email:"lin@example.tw", emergency:"", recv:"2026-05-02", category:"海外視察", age:"", transport:"バス", busPark:true, surveyTold:true, shitami:false, locker:false, overseas:true, knownFrom:"海外の紹介", note:"英語対応・モニターでDVD説明"},
+    {id:uid(), date:"2026-07-07", room:"D",   group:"民生委員 視察団", head:22, groups:2, start:"10:15", end:"11:45", type:"confirmed", purpose:"見学", booker:"田中 一郎", gender:"男", tel:"06-6615-0001", email:"tanaka@minsei.example.jp", emergency:"090-1111-2222", recv:"2026-05-20", category:"地域団体・一般", age:"60代以上", transport:"バス", busPark:true, surveyTold:true, note:"車椅子2名あり"},
+    {id:uid(), date:"2026-07-07", room:"HALL",group:"〇〇小学校 3年", head:38, groups:1, start:"13:00", end:"15:00", type:"confirmed", purpose:"見学", booker:"佐藤 花子", gender:"女", tel:"06-6100-2222", email:"sato@school.example.jp", emergency:"", recv:"2026-04-10", category:"一般学校", age:"10代", transport:"バス", busPark:true, surveyTold:true, note:"研修あり"},
+    {id:uid(), date:"2026-07-07", room:"B",   group:"内部：定例ミーティング", head:8, groups:1, start:"09:00", end:"10:00", type:"internal", purpose:"内部行事", booker:"草刈", gender:"", tel:"", email:"", emergency:"", recv:"", category:"", age:"", transport:"", busPark:false, surveyTold:false, note:""},
+    {id:uid(), date:"2026-07-07", room:"H2",  group:"△△福祉会", head:18, groups:1, start:"14:00", end:"16:00", type:"tentative", purpose:"見学", booker:"鈴木 次郎", gender:"男", tel:"090-1234-5678", email:"", emergency:"", recv:"2026-06-30", category:"福祉学校・企業", age:"70代以上", transport:"電車", busPark:false, surveyTold:false, note:"3日以内に確定連絡もらう"},
+    {id:uid(), date:"2026-07-07", room:"LIB", group:"卓球サークル", head:12, groups:1, start:"15:30", end:"17:00", type:"confirmed", purpose:"卓球", booker:"山本 三郎", gender:"男", tel:"080-9999-0000", email:"yamamoto@example.jp", emergency:"", recv:"2026-06-01", category:"地域団体・一般", age:"60代以上", transport:"電車", busPark:false, surveyTold:false, note:""},
+    {id:uid(), date:"2026-07-07", room:"LOG", group:"パネル展示（市民活動）", head:0, groups:1, start:"10:00", end:"16:00", type:"confirmed", purpose:"部屋貸し", booker:"事務局", gender:"", tel:"", email:"", emergency:"", recv:"2026-06-20", category:"地域団体・一般", age:"", transport:"", busPark:false, surveyTold:false, note:"通路側で常設展示"},
+    {id:uid(), date:"2026-07-07", room:"LOG", group:"整列待機（○○小）", head:38, groups:1, start:"12:45", end:"13:00", type:"confirmed", purpose:"見学", booker:"佐藤 花子", gender:"", tel:"", email:"", emergency:"", recv:"2026-06-25", category:"一般学校", age:"", transport:"", busPark:false, surveyTold:false, note:"展示ホール入場前の待機（展示と重複OK）"},
+    {id:uid(), date:"2026-07-15", room:"H",   group:"健康フェスタ実行委員会", head:60, groups:1, start:"10:15", end:"16:00", type:"tentative", purpose:"セミナー", booker:"奥田", gender:"", tel:"06-0000-0000", email:"", emergency:"", recv:"2026-06-15", category:"一般企業", age:"", transport:"", busPark:false, surveyTold:false, note:"設営あり（Hゾーン＝セミナー会場）"},
+    {id:uid(), date:"2026-07-22", room:"HALL",group:"海外視察団（台湾）", head:25, groups:1, start:"13:30", end:"15:30", type:"confirmed", purpose:"見学", booker:"Lin", gender:"", tel:"", email:"lin@example.tw", emergency:"", recv:"2026-05-02", category:"海外", age:"", transport:"バス", busPark:true, surveyTold:true, note:"英語対応・モニターでDVD説明"},
   ];
   const REGULARS = [
     {name:"〇〇小学校 3年", purpose:"見学", head:38, training:true},
@@ -815,6 +973,7 @@
 
   function overlaps(aS,aE,bS,bE){return toMin(aS)<toMin(bE)&&toMin(bS)<toMin(aE);}
   function conflictsFor(room,date,start,end){
+    if(R[room] && R[room].policy==="shared") return [];   // 共有・無制限：重複を制止しない
     return bookings.filter(b=>b.room===room&&b.date===date&&b.type!=="cancelled"&&overlaps(start,end,b.start,b.end));
   }
 
@@ -855,6 +1014,20 @@
       rows+=`<tr class="${isHour?'hourrow':''} ${m===BIZ?'bizline':''}">`;
       rows+=`<td class="timecell ${isHour?'hourtop':''} ${m===BIZ?'bizmark':''}">${label}${m===BIZ?'<span class="bizlb">営業終了</span>':''}</td>`;
       for(const r of ROOMS){
+        if(r.policy==="shared"){
+          // 共有・無制限：重複予約を併記。マスはロックせず常に追加登録できる
+          const startingAll=dayBk.filter(b=>b.room===r.id && toMin(b.start)===m && b.type!=="cancelled");
+          const covering  =dayBk.filter(b=>b.room===r.id && toMin(b.start)<m && toMin(b.end)>m && b.type!=="cancelled");
+          const chips=startingAll.map(b=>
+            `<span class="minibk ${b.type}" data-id="${b.id}" role="button" tabindex="0" title="${b.group}（${b.start}–${b.end}）">${b.group}</span>`).join("");
+          const busy=(startingAll.length||covering.length)?" sharedbusy":"";
+          if(canBook){
+            rows+=`<td class="slot sharedslot${busy} ${afterBiz?'afterbiz':''}" tabindex="0" data-room="${r.id}" data-min="${m}" role="button" aria-label="${r.name} ${pad(hh)}:${pad(mm)} 共有スペース（重複予約可）">${chips}</td>`;
+          } else {
+            rows+=`<td class="slot nobook ${afterBiz?'afterbiz':''}">${chips}</td>`;
+          }
+          continue;
+        }
         const starting=dayBk.find(b=>b.room===r.id && toMin(b.start)===m);
         const covered =dayBk.find(b=>b.room===r.id && toMin(b.start)<m && toMin(b.end)>m);
         if(starting){
@@ -886,6 +1059,12 @@
       el.addEventListener("click",()=>openDetail(el.dataset.id));
       el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetail(el.dataset.id);}});
     });
+    body.querySelectorAll(".minibk").forEach(el=>{
+      el.addEventListener("click",e=>{e.stopPropagation();openDetail(el.dataset.id);});
+      el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();openDetail(el.dataset.id);}});
+    });
+    updateInboxBadge();
+    if(!document.getElementById("view-inbox").classList.contains("hidden")) renderInbox();
   }
   function quickAdd(el){
     const room=el.dataset.room, m=+el.dataset.min;
@@ -918,34 +1097,34 @@
     const r=dw.root.querySelector('input[name="'+name+'"]:checked');
     return r?r.value:"";
   }
-  function updateAgeWarn(){
-    const a=dwGet("dw-age");
-    document.getElementById("dw-agewarn").classList.toggle("show", a==="60代以上"||a==="70代以上");
-  }
 
+  let simpleMode=false;   // 一般スタッフの新規登録＝簡易フォーム（要件/時間/担当者/備考）
   function openDetail(id, presets){
     const isNew = !id;
     editingId = id;
-    const b = isNew ? Object.assign({group:"",booker:"",head:"",groups:"",gender:"",tel:"",email:"",emergency:"",
-                     date:iso(viewDate),recv:iso(refToday),start:"10:15",end:"11:15",room:"D",purpose:"見学",
-                     category:"",age:"",transport:"",busPark:false,surveyTold:false,shitami:false,locker:false,
-                     overseas:false,knownFrom:"",note:"",type:"tentative"}, presets||{})
+    simpleMode = isNew && role==="staff";
+    dw.root.classList.toggle("simple-mode",simpleMode);
+    document.getElementById("dw-group-label").textContent = simpleMode ? "要件（例：○○セミナー）" : "団体名";
+    document.getElementById("dw-sect1-label").textContent = simpleMode ? "要件" : "団体・代表者";
+
+    const b = isNew ? Object.assign({group:"",booker:"",head:"",groups:"",tel:"",email:"",emergency:"",
+                     date:iso(viewDate),recv:iso(refToday),start:"10:15",end:"11:15",room:"D",
+                     purpose:simpleMode?"内部行事":"見学",
+                     category:"",transport:"",busPark:false,surveyTold:false,
+                     note:"",type:simpleMode?"internal":"tentative"}, presets||{})
                     : bookings.find(x=>x.id===id);
 
     document.getElementById("dwRoom").textContent = R[b.room].full;
-    document.getElementById("dwTitle").textContent = isNew ? "新規の仮予約" : (b.group||"（無題）");
-    dwSet("dw-group",b.group); dwSet("dw-booker",b.booker); dwSet("dw-head",b.head);
-    dwSet("dw-groups",b.groups); dwSet("dw-category",b.category); dwSet("dw-age",b.age||"");
-    dwSetRadio("gender",b.gender);
+    document.getElementById("dwTitle").textContent = isNew ? (simpleMode?"新規の内部利用（簡易入力）":"新規の仮予約") : (b.group||"（無題）");
+    dwSet("dw-group",b.group); dwSet("dw-booker",b.booker); dwSet("dw-staff",b.booker); dwSet("dw-head",b.head);
+    dwSet("dw-groups",b.groups); dwSet("dw-category",b.category||"");
     dwSet("dw-tel",b.tel); dwSet("dw-email",b.email); dwSet("dw-emergency",b.emergency);
     dwSet("dw-date",b.date); dwSet("dw-recv",b.recv);
     dwSet("dw-start",b.start); dwSet("dw-end",b.end);
     dw.room.value=b.room; dwSet("dw-purpose",b.purpose||"見学");
     dwSetRadio("transport",b.transport);
     dwSetChk("dw-busPark",b.busPark); dwSetChk("dw-surveyTold",b.surveyTold);
-    dwSetChk("dw-shitami",b.shitami); dwSetChk("dw-locker",b.locker); dwSetChk("dw-overseas",b.overseas);
-    dwSet("dw-knownFrom",b.knownFrom); dwSet("dw-note",b.note);
-    updateAgeWarn();
+    dwSet("dw-note",b.note);
 
     paintStatus(b.type);
     paintFoot(b.type, isNew);
@@ -984,7 +1163,7 @@
     const foot=document.getElementById("dwFoot");
     let h="";
     if(isNew){
-      h=`<button class="btn primary" id="dw-create">仮予約で登録</button>
+      h=`<button class="btn primary" id="dw-create">${simpleMode?"登録する（内部利用）":"仮予約で登録"}</button>
          <div class="foot-spacer"></div>
          <button class="btn ghost" id="dw-cancelEdit">やめる</button>`;
     } else if(type==="tentative"){
@@ -1016,17 +1195,16 @@
   }
 
   function collect(){
-    return {group:dwGet("dw-group")||"（無題）", booker:dwGet("dw-booker"),
+    return {group:dwGet("dw-group")||"（無題）",
+      booker: simpleMode ? dwGet("dw-staff") : dwGet("dw-booker"),
       head:parseInt(dwGet("dw-head")||"0",10), groups:dwGet("dw-groups"),
-      gender:dwGetRadio("gender"), category:dwGet("dw-category"), age:dwGet("dw-age"),
+      category:dwGet("dw-category"),
       tel:dwGet("dw-tel"), email:dwGet("dw-email"), emergency:dwGet("dw-emergency"),
       date:dwGet("dw-date"), recv:dwGet("dw-recv"),
       start:dwGet("dw-start"), end:dwGet("dw-end"), room:dw.room.value, purpose:dwGet("dw-purpose"),
       transport:dwGetRadio("transport"), busPark:dwGetChk("dw-busPark"), surveyTold:dwGetChk("dw-surveyTold"),
-      shitami:dwGetChk("dw-shitami"), locker:dwGetChk("dw-locker"), overseas:dwGetChk("dw-overseas"),
-      knownFrom:dwGet("dw-knownFrom"), note:dwGet("dw-note")};
+      note:dwGet("dw-note")};
   }
-  document.getElementById("dw-age").addEventListener("change",updateAgeWarn);
   function timeValid(c){ return c.start && c.end && toMin(c.end)>toMin(c.start); }
 
   function saveNew(){
@@ -1034,8 +1212,10 @@
     if(!timeValid(c)){toast("終了は開始より後にしてください","!");return;}
     const conf=conflictsFor(c.room,c.date,c.start,c.end);
     if(conf.length){toast(R[c.room].name+" は先約あり（"+conf[0].group+"）","!");return;}
-    bookings.push(Object.assign({id:uid(),type:"tentative"},c));
-    closeDrawer(); renderBoard(); toast((c.group)+" を仮予約で登録しました");
+    const newType = simpleMode ? "internal" : "tentative";
+    bookings.push(Object.assign({id:uid(),type:newType},c));
+    closeDrawer(); renderBoard();
+    toast((c.group)+(simpleMode?" を内部利用で登録しました":" を仮予約で登録しました"));
   }
   function saveEdit(newType, msg){
     const b=bookings.find(x=>x.id===editingId); if(!b)return;
@@ -1050,8 +1230,9 @@
     document.getElementById("dwTitle").textContent=b.group;
     document.getElementById("dwCancelBanner").classList.toggle("hidden", b.type!=="cancelled");
     renderBoard();
-    toast(msg || "変更を保存しました");
-    if(newType==="cancelled"||newType) { /* keep drawer open to show new state */ }
+    let m = msg || "変更を保存しました";
+    if((newType==="confirmed"||newType==="cancelled") && (b.email||b.tel)) m += "／申込者へメール通知（モック）";
+    toast(m);
   }
 
   function closeDrawer(){ dw.scrim.classList.remove("show"); dw.root.classList.remove("show"); }
@@ -1150,7 +1331,10 @@
     if(f.purpose==="全室"){
       return {primary:null, allRooms:true, addons:[], why:["イベント全室使用のため、全部屋を確保します。"]};
     }
-    if(f.purpose==="卓球"){
+    if(f.purpose==="セミナー"){
+      primaryId="H";
+      why.push("セミナー等はセンター最大の Hゾーン（定員"+R.H.cap+"）が基本会場。");
+    } else if(f.purpose==="卓球"){
       primaryId = f.head>40 ? "LOG" : "HALL";
       why.push("卓球は広い空間が必要なため "+R[primaryId].name+" を提案。");
     } else if(f.purpose==="会議"){
@@ -1311,18 +1495,82 @@
   ["f-purpose","f-head","f-date","f-start","f-end","f-training","f-lecturer","f-exhibit","f-group","f-fee"]
     .forEach(id=>el(id).addEventListener("input",renderRec));
 
-  // ---------- tabs ----------
+  // ================= INBOX =================
+  const inquiries=[
+    {id:"inq1", who:"匿名（Webフォーム）", text:"12月に40名で見学したい。バス2台で伺う予定。", when:"2026-08-10", done:false},
+    {id:"inq2", who:"〇〇デイサービス 様", text:"先日の仮予約をキャンセルしたい。", when:"2026-08-11", done:false, cancelReq:true},
+  ];
+  function pendingBookings(){ return bookings.filter(b=>b.type==="tentative"); }
+  function updateInboxBadge(){
+    const n=pendingBookings().length + inquiries.filter(q=>!q.done).length;
+    const el=document.getElementById("inboxBadge");
+    el.textContent=n; el.classList.toggle("zero",n===0);
+  }
+  function renderInbox(){
+    const pend=document.getElementById("inboxPending");
+    const list=pendingBookings().sort((a,b)=> (a.recv||"") < (b.recv||"") ? 1 : -1);
+    pend.innerHTML = list.length ? list.map(b=>{
+      const isSelf=(b.note||"").startsWith("【セルフ予約】");
+      return `<div class="inbox-item">
+        <span class="kind ${isSelf?'k-self':'k-tent'}">${isSelf?'新規セルフ予約':'仮予約'}</span>
+        <span class="who">${b.group}</span>
+        <span class="meta num">${b.date}　${b.start}〜${b.end}　${R[b.room].name}・${b.head||"-"}名</span>
+        <span class="sp"></span>
+        <button class="btn ghost" data-open="${b.id}">開いて対応</button>
+      </div>`;}).join("")
+      : `<div class="inbox-empty">対応待ちの仮予約はありません</div>`;
+    const inq=document.getElementById("inboxInq");
+    const open=inquiries.filter(q=>!q.done);
+    inq.innerHTML = open.length ? open.map(q=>`<div class="inbox-item">
+        <span class="kind k-inq">${q.cancelReq?'キャンセル依頼':'問い合わせ'}</span>
+        <span class="who">${q.who}</span>
+        <span class="meta">${q.text}（${q.when}）</span>
+        <span class="sp"></span>
+        <button class="btn ghost" data-inq="${q.id}">対応済みにする</button>
+      </div>`).join("")
+      : `<div class="inbox-empty">未対応の問い合わせはありません</div>`;
+    pend.querySelectorAll("[data-open]").forEach(el=>{ el.onclick=()=>openDetail(el.dataset.open); });
+    inq.querySelectorAll("[data-inq]").forEach(el=>{ el.onclick=()=>{
+      const q=inquiries.find(x=>x.id===el.dataset.inq); if(q){q.done=true; renderInbox(); updateInboxBadge();
+      toast("対応済みにしました（返信メールを送信・モック）");} }; });
+    updateInboxBadge();
+  }
+
+  // ---------- tabs & roles ----------
   let lastTab="internal";
+  const TABDEFS={internal:["tab-internal","view-internal"],external:["tab-external","view-external"],inbox:["tab-inbox","view-inbox"],self:["tab-self","view-self"]};
   function selectTab(which){
     lastTab=which;
-    const ti=document.getElementById("tab-internal"), te=document.getElementById("tab-external");
-    const vi=document.getElementById("view-internal"), ve=document.getElementById("view-external");
-    const internal=which==="internal";
-    ti.setAttribute("aria-selected",internal); te.setAttribute("aria-selected",!internal);
-    vi.classList.toggle("hidden",!internal); ve.classList.toggle("hidden",internal);
+    for(const k in TABDEFS){
+      document.getElementById(TABDEFS[k][0]).setAttribute("aria-selected",k===which);
+      document.getElementById(TABDEFS[k][1]).classList.toggle("hidden",k!==which);
+    }
+    if(which==="inbox") renderInbox();
   }
   document.getElementById("tab-internal").onclick=()=>selectTab("internal");
   document.getElementById("tab-external").onclick=()=>selectTab("external");
+  document.getElementById("tab-inbox").onclick=()=>selectTab("inbox");
+  document.getElementById("tab-self").onclick=()=>selectTab("self");
+
+  // ロールごとに見える入口を出し分け（プロトタイプ用の切替）
+  let role="reception";
+  const ROLE_TABS={
+    reception:["internal","external","inbox"],      // 受付担当：ボード＋受付入力＋受付箱
+    staff:["internal"],                             // 一般スタッフ：ボードのみ（クリック→簡易フォーム）
+    public:["self"],                                // 外部利用者：セルフ予約ページのみ
+    admin:["internal","external","inbox","self"],   // 管理者：全部＋⚙
+  };
+  function applyRole(){
+    role=document.getElementById("roleSel").value;
+    const allowed=ROLE_TABS[role];
+    for(const k in TABDEFS){
+      document.getElementById(TABDEFS[k][0]).style.display = allowed.includes(k)?"":"none";
+    }
+    document.getElementById("adminOpen").style.display = role==="admin"?"":"none";
+    if(role!=="admin" && !document.getElementById("view-admin").classList.contains("hidden")) closeAdmin();
+    selectTab(allowed.includes(lastTab)?lastTab:allowed[0]);
+  }
+  document.getElementById("roleSel").addEventListener("change",applyRole);
 
   // ---------- admin / master ----------
   const DOWJP=["日","月","火","水","木","金","土"];
@@ -1337,12 +1585,17 @@
   }
   function renderMaster(){
     document.getElementById("masterTable").innerHTML=
-      `<thead><tr><th>略称</th><th>正式名称</th><th>定員</th><th>料金(円)</th><th>設備</th><th>状態</th></tr></thead><tbody>`+
+      `<thead><tr><th>略称</th><th>正式名称</th><th>定員</th><th>料金(円)</th><th>設備</th><th>用途</th><th>重複予約</th><th>状態</th></tr></thead><tbody>`+
       ROOMS.map(r=>`<tr data-id="${r.id}">
         <td><b>${r.name}</b></td><td>${r.full}</td>
         <td><input type="number" class="num m-cap" value="${r.cap}" min="0"></td>
         <td><input type="number" class="num m-fee" value="${r.fee}" min="0"></td>
         <td><input type="text" class="m-eq" value="${r.equip}"></td>
+        <td><input type="text" class="m-uses" value="${r.uses||""}"></td>
+        <td><select class="m-pol">
+          <option value="exclusive" ${r.policy==="exclusive"?"selected":""}>占有</option>
+          <option value="shared" ${r.policy==="shared"?"selected":""}>共有・無制限</option>
+        </select></td>
         <td><span class="statepill on">有効</span></td>
       </tr>`).join("")+`</tbody>`;
   }
@@ -1373,6 +1626,8 @@
       r.cap=parseInt(tr.querySelector(".m-cap").value||"0",10);
       r.fee=parseInt(tr.querySelector(".m-fee").value||"0",10);
       r.equip=tr.querySelector(".m-eq").value;
+      r.uses=tr.querySelector(".m-uses").value;
+      r.policy=tr.querySelector(".m-pol").value;
     });
     renderBoard();
     const m=document.getElementById("adminMsg"); m.classList.add("show"); setTimeout(()=>m.classList.remove("show"),2200);
@@ -1381,6 +1636,56 @@
   document.getElementById("adminReset").onclick=()=>{
     Object.assign(settings,{openTime:"09:00",closeTime:"21:00",bizCloseTime:"17:00",closedDow:[1],allowClosedDayBooking:true,bookAheadMonths:6});
     fillAdminInputs(); toast("既定値に戻しました");
+  };
+
+  // ================= SELF BOOKING (public) =================
+  const sv=id=>document.getElementById(id).value;
+  function selfSubmit(){
+    const f={
+      group:sv("s-group").trim(), booker:sv("s-booker"), category:sv("s-category"),
+      tel:sv("s-tel"), email:sv("s-email"),
+      purpose:sv("s-purpose"), head:parseInt(sv("s-head")||"0",10),
+      date:sv("s-date"), start:sv("s-start"), end:sv("s-end"),
+      transport:(document.querySelector('input[name="s-transport"]:checked')||{}).value||"",
+      note:sv("s-note"),
+    };
+    const warn=document.getElementById("selfWarn");
+    warn.innerHTML="";
+    if(!f.group){warn.innerHTML=`<div class="warnbox warn"><span class="ic">!</span><div>団体名・お名前を入力してください。</div></div>`;return;}
+    if(!f.head||!f.date||!f.start||!f.end||toMin(f.end)<=toMin(f.start)){
+      warn.innerHTML=`<div class="warnbox warn"><span class="ic">!</span><div>人数と日時をご確認ください（終了は開始より後にしてください）。</div></div>`;return;}
+    const [Y,M,D]=f.date.split("-").map(Number); const fd=new Date(Y,M-1,D);
+    if(!inWindow(fd)){warn.innerHTML=`<div class="warnbox warn"><span class="ic">!</span><div>ご予約は半年先（${windowEndLabel()}）まで受け付けています。日付をご確認ください。</div></div>`;return;}
+    if(isClosed(fd)){warn.innerHTML=`<div class="warnbox crit"><span class="ic">✕</span><div>${DOW[fd.getDay()]}曜は休館日です。別の日をご指定ください。</div></div>`;return;}
+
+    // 割当ルールで候補部屋を決め、仮予約として台帳へ（確定は受付担当）
+    const rec=recommend({purpose:f.purpose,head:f.head,training:false,lecturer:false,exhibit:false});
+    let roomId = rec.primary || "LOG";
+    if(conflictsFor(roomId,f.date,f.start,f.end).length){
+      const alt=PRIORITY.find(id=>R[id].cap>=f.head && !conflictsFor(id,f.date,f.start,f.end).length);
+      roomId = alt || roomId;   // 空きが無ければ候補のまま登録し、担当者が調整
+    }
+    const bk={id:uid(), date:f.date, room:roomId, group:f.group, head:f.head, groups:1,
+      start:f.start, end:f.end, type:"tentative", purpose:f.purpose,
+      booker:f.booker, gender:"", tel:f.tel, email:f.email, emergency:"",
+      recv:iso(refToday), category:f.category, age:"", transport:f.transport,
+      busPark:false, surveyTold:false, note:"【セルフ予約】"+(f.note||"")};
+    bookings.push(bk);
+    if(f.date===iso(viewDate)) renderBoard(); else updateInboxBadge();
+
+    document.getElementById("selfFormCard").classList.add("hidden");
+    document.getElementById("selfDone").classList.remove("hidden");
+    document.getElementById("selfDoneSummary").textContent =
+      `${f.group} 様｜${Y}年${M}月${D}日 ${f.start}〜${f.end}｜${f.purpose}・${f.head}名`;
+    document.getElementById("selfDoneRef").textContent = "受付番号："+bk.id.toUpperCase();
+    window.scrollTo(0,0);
+  }
+  document.getElementById("selfSubmit").onclick=selfSubmit;
+  document.getElementById("selfAgain").onclick=()=>{
+    document.getElementById("selfDone").classList.add("hidden");
+    document.getElementById("selfFormCard").classList.remove("hidden");
+    document.getElementById("s-group").value=""; document.getElementById("s-note").value="";
+    document.getElementById("selfWarn").innerHTML="";
   };
 
   // ---------- toast ----------
@@ -1395,6 +1700,7 @@
   }
 
   // ---------- init ----------
+  applyRole();
   renderBoard();
   renderRec();
 })();
