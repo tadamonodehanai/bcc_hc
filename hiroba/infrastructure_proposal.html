@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>インフラ・技術構成の提案｜介護レク広場</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link { color: inherit; text-decoration: none; transition: opacity 0.2s ease; }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag { font-family: var(--font-mono); font-size: 10px; opacity: 0.7; }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 60px; right: -40px;
+    width: 320px; height: 320px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before { content: ""; width: 32px; height: 1px; background: var(--accent-warm); }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 64px;
+    max-width: 660px;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep { background: var(--bg-section); border-top: none; }
+  .section.dark { background: var(--bg-deep); color: var(--text-on-deep); border-top: none; }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+  .section.dark .section-lead strong { color: var(--accent-gold); }
+
+  .section-header { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead { font-size: 16px; line-height: 2.1; color: var(--text-secondary); max-width: 700px; }
+  .section-lead strong { color: var(--text-primary); font-weight: 600; }
+
+  .emph-warm { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+
+  /* Essence blocks */
+  .essence-block {
+    margin-top: 40px;
+    padding: 44px 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent-warm);
+  }
+  .essence-block.accent { background: var(--bg-section); border-left-color: var(--accent-deep); }
+  .essence-block + .essence-block { margin-top: 24px; }
+  .essence-head { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }
+  .essence-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .essence-block.accent .essence-tag { color: var(--accent-deep); }
+  .essence-title {
+    font-family: var(--font-display);
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.55;
+  }
+  .essence-body { font-size: 14.5px; line-height: 2.05; color: var(--text-secondary); margin-bottom: 18px; }
+  .essence-body:last-child { margin-bottom: 0; }
+  .essence-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+
+  .shift-arrow {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 0; margin-top: 20px;
+    border-top: 1px dashed var(--border-line);
+  }
+  .shift-from, .shift-to { font-family: var(--font-display); font-size: 14.5px; line-height: 1.6; flex: 1; }
+  .shift-from { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-to { color: var(--accent-deep); font-weight: 500; }
+  .shift-mark { font-family: var(--font-mono); color: var(--accent-warm); font-size: 14px; }
+
+  /* Generic data table */
+  .dtable { margin-top: 40px; border: 1px solid var(--border-soft); background: var(--bg-card); overflow-x: auto; }
+  .dtable table { width: 100%; border-collapse: collapse; min-width: 620px; }
+  .dtable th, .dtable td {
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 13.5px;
+    line-height: 1.85;
+    border-bottom: 1px solid var(--border-soft);
+    border-right: 1px solid var(--border-soft);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .dtable th:last-child, .dtable td:last-child { border-right: none; }
+  .dtable tr:last-child td { border-bottom: none; }
+  .dtable th {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--bg-section);
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  .dtable td.k { font-family: var(--font-display); font-size: 14.5px; color: var(--text-primary); font-weight: 500; white-space: nowrap; }
+  .dtable td strong { color: var(--text-primary); font-weight: 600; }
+  .dtable tr.hl { background: rgba(184, 92, 61, 0.05); }
+  .dtable tr.hl td.k { color: var(--accent-warm); }
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+    border: 1px solid var(--border-line);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .pill.must { color: var(--accent-warm); border-color: var(--accent-warm); }
+  .pill.gold { color: var(--accent-gold); border-color: var(--accent-gold); }
+  .pill.deep { color: var(--accent-deep); border-color: var(--accent-deep); }
+
+  /* Timeline */
+  .timeline { margin-top: 40px; border: 1px solid var(--border-line); background: var(--bg-card); }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 150px;
+    border-bottom: 1px solid var(--border-soft);
+    align-items: stretch;
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-row.gate { background: var(--bg-section); }
+  .tl-row.fixed { background: var(--bg-deep); color: var(--text-on-deep); }
+  .tl-when {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    padding: 22px 18px;
+    color: var(--accent-warm);
+    border-right: 1px solid var(--border-soft);
+    white-space: nowrap;
+  }
+  .tl-row.fixed .tl-when { color: var(--accent-gold); border-right-color: rgba(184,146,74,0.3); }
+  .tl-what { padding: 22px 22px; display: flex; flex-direction: column; gap: 6px; }
+  .tl-title { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .tl-row.fixed .tl-title { color: var(--text-on-deep); }
+  .tl-note { font-size: 13px; line-height: 1.85; color: var(--text-secondary); }
+  .tl-row.fixed .tl-note { color: rgba(242,236,222,0.85); }
+  .tl-track {
+    padding: 22px 18px;
+    border-left: 1px solid var(--border-soft);
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+  .tl-row.fixed .tl-track { color: rgba(242,236,222,0.6); border-left-color: rgba(184,146,74,0.3); }
+
+  /* Layer cards */
+  .layer-list { display: flex; flex-direction: column; gap: 20px; margin-top: 44px; }
+  .layer {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--border-line);
+    padding: 36px 32px;
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 36px;
+  }
+  .layer.must { border-top-color: var(--accent-warm); }
+  .layer.mid { border-top-color: var(--accent-gold); }
+  .layer.late { border-top-color: var(--accent-deep); }
+  .layer-head { display: flex; flex-direction: column; gap: 10px; }
+  .layer-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .layer.must .layer-tag { color: var(--accent-warm); }
+  .layer-name { font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+  .layer-when { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); letter-spacing: 0.05em; line-height: 1.7; }
+  .layer-body { display: flex; flex-direction: column; gap: 14px; }
+  .layer-desc { font-size: 14px; line-height: 2; color: var(--text-secondary); }
+  .layer-desc strong { color: var(--text-primary); font-weight: 600; }
+  .layer-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .layer-items li { padding-left: 20px; position: relative; font-size: 13.5px; line-height: 1.9; color: var(--text-secondary); }
+  .layer-items li::before { content: "▸"; position: absolute; left: 0; color: var(--accent-warm); font-size: 12px; }
+
+  /* Risk list */
+  .risk-list { display: flex; flex-direction: column; margin-top: 44px; }
+  .risk {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+  .risk:last-child { border-bottom: 1px solid var(--border-soft); }
+  .risk-num { font-family: var(--font-display); font-size: 28px; color: var(--accent-warm); font-weight: 500; line-height: 1; }
+  .risk-body { display: flex; flex-direction: column; gap: 10px; }
+  .risk-title { font-family: var(--font-display); font-size: 21px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .risk-note { font-size: 14px; color: var(--text-secondary); line-height: 1.95; }
+  .risk-note strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+  .risk-fix {
+    margin-top: 6px;
+    padding: 14px 18px;
+    background: var(--bg-section);
+    border-left: 3px solid var(--accent-deep);
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+  }
+  .risk-fix strong { font-family: var(--font-display); color: var(--accent-deep); font-weight: 600; display: block; margin-bottom: 3px; }
+  .risk-when {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent-warm);
+    border: 1px solid var(--accent-warm);
+    padding: 3px 9px;
+    align-self: flex-start;
+  }
+
+  /* Confirm list (dark) */
+  .confirms { display: flex; flex-direction: column; margin-top: 36px; }
+  .confirm {
+    padding: 26px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 48px 1fr 190px;
+    gap: 24px;
+    align-items: center;
+  }
+  .confirm:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .confirm-num { font-family: var(--font-display); font-size: 24px; color: var(--accent-gold); font-weight: 500; }
+  .confirm-title { font-family: var(--font-display); font-size: 18px; color: var(--text-on-deep); line-height: 1.6; }
+  .confirm-who {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 6px 12px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* Next actions */
+  .nextactions { display: flex; flex-direction: column; margin-top: 32px; }
+  .nextaction {
+    padding: 28px 0;
+    border-top: 1px solid var(--border-soft);
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid var(--border-soft); }
+  .nextaction-num { font-family: var(--font-display); font-size: 26px; color: var(--accent-warm); font-weight: 500; }
+  .nextaction-title { font-family: var(--font-display); font-size: 19px; color: var(--text-primary); line-height: 1.55; }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--accent-deep);
+    text-transform: uppercase;
+    padding: 6px 13px;
+    border: 1px solid var(--border-line);
+    white-space: nowrap;
+  }
+
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text { font-family: var(--font-display); font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  .pagenav { border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); background: var(--bg-paper); }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-title { font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    body { font-size: 12px; }
+    .hero-title { font-size: 42px; }
+  }
+
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-title { font-size: 36px; }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 27px; }
+    .essence-block { padding: 30px 22px; }
+    .essence-title { font-size: 21px; }
+    .layer { grid-template-columns: 1fr; gap: 20px; padding: 28px 22px; }
+    .tl-row { grid-template-columns: 1fr; }
+    .tl-when { border-right: none; border-bottom: 1px solid var(--border-soft); padding: 14px 18px; }
+    .tl-track { border-left: none; border-top: 1px solid var(--border-soft); padding: 14px 18px; }
+    .risk { grid-template-columns: 44px 1fr; gap: 16px; }
+    .confirm { grid-template-columns: 36px 1fr; gap: 14px; }
+    .confirm-who { grid-column: 1 / -1; justify-self: start; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+    .shift-arrow { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+  /* Matrix marks */
+  .mx td, .mx th { text-align: center; }
+  .mx td.k, .mx td.note { text-align: left; }
+  .mx td.note { font-size: 12.5px; line-height: 1.75; }
+  .m { font-family: var(--font-mono); font-size: 15px; font-weight: 500; }
+  .m.a { color: var(--accent-warm); }
+  .m.b { color: var(--accent-deep); }
+  .m.c { color: var(--text-muted); }
+  .m.d { color: #A63D2F; }
+  .mx tr.pick { background: rgba(184, 92, 61, 0.07); }
+  .mx tr.pick td.k { color: var(--accent-warm); font-weight: 600; }
+  .mx tr.avoid td.k { color: var(--text-muted); }
+  .axis-key { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; font-size: 12.5px; color: var(--text-secondary); }
+  .axis-key span { font-family: var(--font-mono); }
+  @media (max-width: 720px) { .mx table { min-width: 720px; } }
+</style>
+
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜インフラ・技術構成の提案</a>
+    <span class="banner-tag">v0.2 / 2026.08 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-label">INFRASTRUCTURE — 技術構成の提案</span>
+    <h1 class="hero-title">15年後に、<br>同じ話をしないために。</h1>
+    <p class="hero-subtitle">
+      いま起きている問題は「古い技術を選んだこと」ではなく、<br>
+      <em>自分たちで動かせなくなったこと</em>にある。構成は、そこから逆算する。
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Scale</span>
+        <span class="hero-meta-value">会員 7万<br>月間 3.6万UU</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Constraint</span>
+        <span class="hero-meta-value">6ヶ月・小規模チーム<br>事業単体の売上なし</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Principle</span>
+        <span class="hero-meta-value">有りもので済ませる／<br>済ませない を分ける</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- §00 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 00　前提</span>
+      <h2 class="section-title">3つの主体を、<br>先に確定させる。</h2>
+    </div>
+    <p class="section-lead">
+      技術構成の前に、<strong>誰がこのシステムに載るのか</strong>を確定させる。ここが曖昧なままDB設計に入ると、後から最も直しにくい部分を間違える。主体は3つに分かれた——<strong>ただし、システムに載るのは2つだけ。</strong>
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>主体</th><th>誰か</th><th>システム上の扱い</th><th>スコープ</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">個人</td>
+            <td>現場の介護職。既存7万会員はここに入る</td>
+            <td><strong>会員テーブルの主体。</strong>所属施設への参照を持つ</td>
+            <td><span class="pill must">スコープ1</span></td>
+          </tr>
+          <tr class="hl">
+            <td class="k">介護施設</td>
+            <td>利用者が所属する組織</td>
+            <td><strong>施設テーブル。</strong>個人がぶら下がる親。請求書払いの請求先にもなる</td>
+            <td><span class="pill gold">器のみ</span></td>
+          </tr>
+          <tr>
+            <td class="k">ヘルスケア企業</td>
+            <td><strong>介護施設にジョインしたい企業</strong>／レク起点で自社商品・サービスを施設導入したい企業</td>
+            <td><strong>システムには載せない。</strong>LPと問い合わせ導線のみ</td>
+            <td><span class="pill">LPのみ</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Decision — 確定</span>
+        <h3 class="essence-title">個人は、所属施設を<br>参照できる形で持つ。</h3>
+      </div>
+      <p class="essence-body">
+        会員テーブルに<strong>所属施設への参照を持たせる</strong>。スコープ1で施設アカウントの機能（施設管理者による職員管理、請求書払い等）を実装する必要はないが、<strong>参照だけは最初から持つ</strong>。
+      </p>
+      <p class="essence-body">
+        理由は単純で、<strong>後から足すのが最も高くつく箇所</strong>だから。7万件のデータを持ったまま会員モデルに親子構造を追加するのは、コンテンツのスキーマ変更とは比較にならない重さになる。逆にいま持っておけば、<strong>スコープ2で施設アカウントをやるかどうかを、後から自由に決められる</strong>。
+      </p>
+      <p class="essence-body">
+        副次的な効果も大きい。所属施設が分かるということは、<strong>「どの施設が使っているか」が観測できる</strong>ということ。DOMAIN 06（顧客接点としての戦略価値）にとって、<strong>個人名7万件のリストより、利用している施設のリストのほうが営業の武器になる</strong>。
+      </p>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Decision — データの取り扱い</span>
+        <h3 class="essence-title">個人データの提供は行わない。<br>3つは、同意事項に明記して実行する。</h3>
+      </div>
+      <p class="essence-body">
+        ヘルスケア企業は Document B の <strong>DOMAIN 03-A「第三者からのスポンサー型」</strong>にあたり、<strong>層2で貯める「属性 × アクティブ会員」データの想定される買い手</strong>でもある。ただし<strong>会員の個人データそのものを提供することは行わない</strong>——これは確定。
+      </p>
+      <p class="essence-body">
+        実行するのは次の3つで、<strong>いずれも同意事項に明記したうえで行う</strong>。<strong>①集計データの提供</strong>（属性別のアクティブ数など、個人が特定されない形）、<strong>②媒体としての配信</strong>（広告・タイアップ）、<strong>③本人または施設の同意に基づくマッチング</strong>。
+      </p>
+      <div class="shift-arrow">
+        <span class="shift-from">個人データを<br>第三者に渡す</span>
+        <span class="shift-mark">→</span>
+        <span class="shift-to">集計・配信・同意ベースのマッチングを、<br>同意事項に明記して行う</span>
+      </div>
+    </div>
+
+    <div class="essence-block accent">
+      <div class="essence-head">
+        <span class="essence-tag">Critical — 移行フローに効く</span>
+        <h3 class="essence-title">この決定により、<br>移行時の再同意が必要になる。</h3>
+      </div>
+      <p class="essence-body">
+        既存7万会員が同意しているのは<strong>現行のプライバシーポリシー</strong>であり、上の①〜③を含む内容ではない。したがって<strong>新しい同意事項への再同意が、移行時に必要になる</strong>。会員移行ロードマップで「未確定」としていた論点に、ここで答えが出たことになる。
+      </p>
+      <p class="essence-body">
+        これは移行フローに<strong>ステップが1つ増える</strong>ことを意味し、歩留まりに影響する。ただし避けられないため、<strong>設計で軽くする</strong>——ログイン後の初回に1画面で完結させ、事前のメール同意取得のような重い方式は採らない。
+      </p>
+      <p class="essence-body">
+        システム側の要件も1つ増える。<strong>「誰が、いつ、どの版の同意事項に同意したか」を会員レコードに保持する</strong>必要がある。同意事項は今後も改定されるため、<strong>版を持てる形</strong>にしておく（§ 05）。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §01 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　判断軸</span>
+      <h2 class="section-title">この事業の制約が、<br>そのまま選定基準になる。</h2>
+    </div>
+    <p class="section-lead">
+      技術の流行ではなく、<strong>この事業が置かれている状況</strong>から基準を引く。以降のマトリクスは、すべてこの5軸で評価する。<strong>上の2つが特に重い。</strong>
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>軸</th><th>問い</th><th>なぜ重いか</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">A　自走性</td>
+            <td>自分たちで手を入れ続けられるか</td>
+            <td>現行の問題は「古いこと」ではなく<strong>自分たちで動かせなくなったこと</strong>。改修コストが事業規模に対して大きい（課題02）</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">B　運用コスト</td>
+            <td>使われるほど赤字が増えないか</td>
+            <td>事業単体での売上がなく、<strong>運用コスト＞売上が常態化</strong>している（課題01）</td>
+          </tr>
+          <tr>
+            <td class="k">C　6ヶ月</td>
+            <td>小規模チームで作り切れるか</td>
+            <td>2026.09着手・2027.02完了。管理画面・会員基盤まで含む</td>
+          </tr>
+          <tr>
+            <td class="k">D　SEO・速度</td>
+            <td>検索流入と表示速度に強いか</td>
+            <td>検索流入が主要導線。sitemap すらない現状からの立て直し</td>
+          </tr>
+          <tr>
+            <td class="k">E　拡張性</td>
+            <td>後から足せるか</td>
+            <td>施設アカウント・決済・デジタルレクは、いずれもスコープ2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Principle — 有りものの使い方</span>
+        <h3 class="essence-title">有りもので済ませる場所と、<br>済ませてはいけない場所がある。</h3>
+      </div>
+      <p class="essence-body">
+        環境構築が委任されており、既製のものを使う自由がある。その前提で線を引く。
+      </p>
+      <p class="essence-body">
+        <strong>有りもので済ませる</strong>——管理画面、認証の基盤部分、メール配信、CDN、決済、監視。<strong>ここを自作すると6ヶ月が持たない</strong>。差別化にもならない。
+      </p>
+      <p class="essence-body">
+        <strong>有りもので済ませない</strong>——<strong>顧客ID連携とデータ観測</strong>。ここが今回の目的そのものであり、<strong>既製品の枠に合わせた瞬間に目的を失う</strong>。「会員サイトSaaS」のような完成品を採ると、DL履歴の持ち方もLINE名寄せもイベント設計も、相手の設計に従うことになる。<strong>15年前と同じ、自分たちで動かせない状態に戻る。</strong>
+      </p>
+      <div class="shift-arrow">
+        <span class="shift-from">全部を有りもので、<br>もしくは全部を自作で</span>
+        <span class="shift-mark">→</span>
+        <span class="shift-to">周辺は有りもの、<br>目的の部分だけ自分で持つ</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §02 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　選択マトリクス</span>
+      <h2 class="section-title">レイヤごとに、<br>選択肢を並べる。</h2>
+    </div>
+    <p class="section-lead">
+      8つのレイヤそれぞれについて、選択肢を § 01 の5軸で評価した。<strong>色付きの行が推奨</strong>。評価は「この案件において」であって、技術の優劣ではない。
+    </p>
+    <div class="axis-key">
+      <span class="m a">◎</span> 強い　<span class="m b">○</span> 十分　<span class="m c">△</span> 条件付き　<span class="m d">×</span> 避けたい　　
+      <span>A 自走性 ／ B 運用コスト ／ C 6ヶ月 ／ D SEO・速度 ／ E 拡張性</span>
+    </div>
+
+    <div class="dtable mx" style="margin-top:32px;">
+      <table>
+        <thead><tr><th style="width:180px">① アプリ基盤</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th class="note">備考</th></tr></thead>
+        <tbody>
+          <tr class="pick"><td class="k">Laravel（PHP）</td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td class="note">現行がCakePHPのため、旧コード・旧スキーマの読み解きが速い。管理画面パッケージが豊富</td></tr>
+          <tr class="pick"><td class="k">Rails（Ruby）</td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td class="note">Laravelとほぼ引き分け。認証・管理画面が枯れている。<strong>どちらかはチームで決める</strong></td></tr>
+          <tr><td class="k">Next.js ＋ 自前API</td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m c">△</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td class="note">会員基盤と管理画面を自作する分、6ヶ月では重い</td></tr>
+          <tr><td class="k">ヘッドレスCMS ＋ Next.js</td><td><span class="m b">○</span></td><td><span class="m c">△</span></td><td><span class="m c">△</span></td><td><span class="m a">◎</span></td><td><span class="m b">○</span></td><td class="note">コンテンツ数万点でAPI課金が効く。会員限定DLの制御が弱い</td></tr>
+          <tr><td class="k">WordPress ＋ プラグイン</td><td><span class="m c">△</span></td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m d">×</span></td><td class="note">7万会員＋LIFF連携＋独自のデータ観測をプラグインで組むと破綻しやすい</td></tr>
+          <tr class="avoid"><td class="k">会員サイトSaaS（有りもの）</td><td><span class="m d">×</span></td><td><span class="m c">△</span></td><td><span class="m a">◎</span></td><td><span class="m c">△</span></td><td><span class="m d">×</span></td><td class="note"><strong>最速だが目的に反する。</strong>顧客ID連携とデータ観測を相手の設計に合わせることになる</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dtable mx" style="margin-top:24px;">
+      <table>
+        <thead><tr><th style="width:180px">② ホスティング</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th class="note">備考</th></tr></thead>
+        <tbody>
+          <tr class="pick"><td class="k">PaaS（国内リージョン可）</td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m b">○</span></td><td class="note"><strong>推奨。</strong>デプロイ・監視・バックアップが付いてくる。運用要員を持たなくてよい</td></tr>
+          <tr><td class="k">IaaS（EC2 等）</td><td><span class="m a">◎</span></td><td><span class="m c">△</span></td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td class="note">自由度は最大。ただし監視・パッチ・バックアップを自分で持つ</td></tr>
+          <tr><td class="k">VPS</td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td class="note">最も安い。冗長化とバックアップは自前。<strong>属人化に注意</strong></td></tr>
+          <tr><td class="k">サーバーレス</td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td><span class="m c">△</span></td><td><span class="m b">○</span></td><td><span class="m c">△</span></td><td class="note">モノリスとは相性が悪い。コールドスタートが表示速度に響く</td></tr>
+          <tr><td class="k">自社サーバ／オンプレ</td><td><span class="m c">△</span></td><td><span class="m c">△</span></td><td><span class="m c">△</span></td><td><span class="m b">○</span></td><td><span class="m c">△</span></td><td class="note">運用要員が前提。今回の体制では現実的でない</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dtable mx" style="margin-top:24px;">
+      <table>
+        <thead><tr><th style="width:180px">③ データベース</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th class="note">備考</th></tr></thead>
+        <tbody>
+          <tr class="pick"><td class="k">マネージド PostgreSQL</td><td><span class="m a">◎</span></td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m a">◎</span></td><td class="note"><strong>推奨。</strong>JSON型でコンテンツのタイプ固有属性を柔軟に持てる。可搬性が高い</td></tr>
+          <tr><td class="k">マネージド MySQL</td><td><span class="m a">◎</span></td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m b">○</span></td><td class="note"><strong>現行がMySQL系なら移行が楽</strong>。要確認（§ 07-04）</td></tr>
+          <tr><td class="k">自前運用</td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m c">△</span></td><td>—</td><td><span class="m a">◎</span></td><td class="note">バックアップ・復旧の運用負荷を誰が持つか</td></tr>
+          <tr><td class="k">BaaS（Supabase 等）</td><td><span class="m c">△</span></td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m b">○</span></td><td class="note">認証と結合しており、<strong>ハッシュ移行に制約が出る</strong>（§ 06-01）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dtable mx" style="margin-top:24px;">
+      <table>
+        <thead><tr><th style="width:180px">④ ファイル配信</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th class="note">備考</th></tr></thead>
+        <tbody>
+          <tr class="pick"><td class="k">egress無料のS3互換 ＋ CDN</td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td class="note"><strong>推奨。</strong>素材DLが主動線のため、<strong>転送量が従量課金だと利用が伸びるほど赤字が増える</strong></td></tr>
+          <tr><td class="k">S3 ＋ CloudFront</td><td><span class="m a">◎</span></td><td><span class="m c">△</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td class="note">定番で確実。ただし転送量課金が利用増に比例する</td></tr>
+          <tr><td class="k">国内クラウドのストレージ</td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td class="note">国内完結。データの所在を国内に限定したい場合</td></tr>
+          <tr><td class="k">アプリサーバから直接配信</td><td><span class="m b">○</span></td><td><span class="m c">△</span></td><td><span class="m a">◎</span></td><td><span class="m c">△</span></td><td><span class="m c">△</span></td><td class="note">手軽だが、アクセス集中時の負荷とコストが読めない</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dtable mx" style="margin-top:24px;">
+      <table>
+        <thead><tr><th style="width:180px">⑤ 認証</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th class="note">備考</th></tr></thead>
+        <tbody>
+          <tr class="pick"><td class="k">自前（フレームワーク標準）</td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m a">◎</span></td><td class="note"><strong>推奨。</strong>旧ハッシュを検証して再ハッシュする「サイレント移行」が実装できる<strong>唯一確実な選択</strong></td></tr>
+          <tr><td class="k">BaaS認証（Supabase 等）</td><td><span class="m c">△</span></td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m b">○</span></td><td class="note">標準的なハッシュならインポート可。<strong>独自方式だと手がなくなる</strong></td></tr>
+          <tr class="avoid"><td class="k">外部IdP（Auth0 等）</td><td><span class="m c">△</span></td><td><span class="m c">△</span></td><td><span class="m b">○</span></td><td>—</td><td><span class="m b">○</span></td><td class="note"><strong>7万人全員に再設定を求める結末になりうる。</strong>この案件では避けたい</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dtable mx" style="margin-top:24px;">
+      <table>
+        <thead><tr><th style="width:180px">⑥ メール配信</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th class="note">備考</th></tr></thead>
+        <tbody>
+          <tr class="pick"><td class="k">配信サービス（SES／SendGrid 等）</td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m a">◎</span></td><td class="note"><strong>推奨。</strong>バウンスをWebhookで受けて会員レコードに書き戻せる＝<strong>到達可能数が常時わかる</strong></td></tr>
+          <tr class="avoid"><td class="k">現行メルマガツールを継続</td><td><span class="m d">×</span></td><td><span class="m c">△</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m d">×</span></td><td class="note"><strong>ツールが未特定（§ 07-06）。</strong>依存すると到達性が測れず、移行の最初の一歩が踏めない</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dtable mx" style="margin-top:24px;">
+      <table>
+        <thead><tr><th style="width:180px">⑦ 管理画面（CMS）</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th class="note">備考</th></tr></thead>
+        <tbody>
+          <tr class="pick"><td class="k">フレームワークの管理画面パッケージ</td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m a">◎</span></td><td class="note"><strong>推奨・有りものを使う筆頭。</strong>入稿・会員管理・集計出力を短期間で用意できる</td></tr>
+          <tr><td class="k">ヘッドレスCMS</td><td><span class="m b">○</span></td><td><span class="m c">△</span></td><td><span class="m b">○</span></td><td>—</td><td><span class="m b">○</span></td><td class="note">入稿体験は良い。コンテンツ数万点で課金が効き、会員データとは別管理になる</td></tr>
+          <tr><td class="k">自作</td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m d">×</span></td><td>—</td><td><span class="m a">◎</span></td><td class="note"><strong>6ヶ月では厳しい。</strong>ここに工数を使うと本体が間に合わない</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dtable mx" style="margin-top:24px;">
+      <table>
+        <thead><tr><th style="width:180px">⑧ 決済（スコープ2）</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th class="note">備考</th></tr></thead>
+        <tbody>
+          <tr class="pick"><td class="k">請求書は手運用 ＋ 決済は後追い</td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m b">○</span></td><td class="note"><strong>スコープ2の初期はこれで十分。</strong>施設数が少ないうちにシステム化しない</td></tr>
+          <tr><td class="k">Stripe 等</td><td><span class="m a">◎</span></td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td>—</td><td><span class="m a">◎</span></td><td class="note">オンライン決済。請求書発行の機能も持つ</td></tr>
+          <tr><td class="k">国内決済代行</td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td><span class="m b">○</span></td><td>—</td><td><span class="m b">○</span></td><td class="note">請求書払い・コンビニ決済など、国内の商習慣に強い</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- §03 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 03　構成パターン</span>
+      <h2 class="section-title">組み合わせで、<br>3つに絞る。</h2>
+    </div>
+    <p class="section-lead">
+      § 02 の選択肢を現実的な組み合わせにすると3パターンになる。<strong>どれでも動くものは作れる</strong>。差がつくのは、6ヶ月で終わるかと、運用を自分たちで回せるか。
+    </p>
+
+    <div class="dtable mx">
+      <table>
+        <thead><tr><th style="width:150px">パターン</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th class="note">構成と、想定される躓きどころ</th></tr></thead>
+        <tbody>
+          <tr class="pick">
+            <td class="k">P1　堅実<br><span class="pill must">推奨</span></td>
+            <td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td>
+            <td class="note">Laravel／Rails ＋ PaaS ＋ マネージドDB ＋ egress無料ストレージ ＋ 自前認証 ＋ 配信サービス ＋ 管理画面パッケージ<br><strong>躓きどころ：</strong>フロントの表現力に上限がある。デザインの凝った要求が来たとき、実装コストが跳ねる可能性</td>
+          </tr>
+          <tr>
+            <td class="k">P2　モダン</td>
+            <td><span class="m b">○</span></td><td><span class="m c">△</span></td><td><span class="m c">△</span></td><td><span class="m a">◎</span></td><td><span class="m a">◎</span></td>
+            <td class="note">Next.js ＋ ヘッドレスCMS ＋ BaaS ＋ Vercel<br><strong>躓きどころ：</strong>会員基盤・会員限定DL・管理画面の3つを組み上げる工数。<strong>ハッシュ移行がBaaSの制約に当たる</strong>と、7万人の再設定が現実になる</td>
+          </tr>
+          <tr>
+            <td class="k">P3　最小</td>
+            <td><span class="m d">×</span></td><td><span class="m b">○</span></td><td><span class="m a">◎</span></td><td><span class="m b">○</span></td><td><span class="m d">×</span></td>
+            <td class="note">WordPress ＋ プラグイン、または会員サイトSaaS<br><strong>躓きどころ：</strong>最速で立ち上がるが、<strong>顧客ID連携とデータ観測を自由に作れない</strong>。この案件の目的そのものが達成できない</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Recommendation</span>
+        <h3 class="essence-title">P1。ただし、<br>言語はチームで決める。</h3>
+      </div>
+      <p class="essence-body">
+        推奨は<strong>P1（堅実）</strong>。決め手は3つ——<strong>①管理画面を短期間で用意できる</strong>（要件でMUST。自作すると6ヶ月が持たない）、<strong>②パスワードのサイレント移行を自分で制御できる</strong>（§ 06-01）、<strong>③施設アカウントをマイグレーションで後から足せる</strong>。
+      </p>
+      <p class="essence-body">
+        <strong>Laravel と Rails は技術的にほぼ引き分け</strong>。決め手になるのは<strong>ぐっさんがどちらを保守できるか</strong>であって、それ以外の理由で選ぶべきではない。あえて材料を出すなら、現行が CakePHP であるため<strong>PHPの知見があれば Laravel のほうが旧コード・旧スキーマの読み解きが速い</strong>——移行作業で必ず読む場面が出てくる。
+      </p>
+      <p class="essence-body">
+        <strong>チームが書けない言語を選ぶことが、この案件の最大のリスク</strong>。15年前の失敗は技術の選択ではなく、手を入れられる人がいなくなったことで起きている。<strong>同じ構造を繰り返さない。</strong>
+      </p>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Note — P3を選ばない理由</span>
+        <h3 class="essence-title">最速の選択肢が、<br>目的を最も損なう。</h3>
+      </div>
+      <p class="essence-body">
+        環境構築が委任されている以上、<strong>会員サイトSaaSのような完成品を採る自由もある</strong>。実際、6ヶ月という期間だけを見ればこれが最も安全に見える。
+      </p>
+      <p class="essence-body">
+        しかし本プロジェクトの目的は<strong>顧客ID連携とデータ観測の実現</strong>（要件定義 Decision 01）。SaaSを採ると、DL履歴の持ち方も、LINE名寄せも、イベント設計も、<strong>すべて相手の設計に従うことになる</strong>。GA4への会員フラグ出力ひとつ取っても、相手が対応していなければ手が出ない。
+      </p>
+      <p class="essence-body">
+        <strong>それは15年前と同じ、「自分たちで動かせない」状態に戻ることを意味する</strong>。今回の投資は、まさにその状態から抜け出すために行うもの。<strong>P3は速いが、この案件では目的と正面から衝突する。</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §04 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 04　データモデルの骨格</span>
+      <h2 class="section-title">9月に、<br>ここだけは決めておく。</h2>
+    </div>
+    <p class="section-lead">
+      詳細設計ではなく、<strong>後から変えられない部分の形</strong>。中身は後から載せられるが、この骨格は後から変えられない。<strong>スコープ2で何をやるか未確定でも、この形なら受けられる</strong>という最小構成を示す。
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>領域</th><th>持つもの</th><th>スコープ1で作るか</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">members<br>個人会員</td>
+            <td>既存7万件の移行先。メール・パスワード・流入媒体（UTM/リファラ）・<strong>所属施設への参照（null 可）</strong></td>
+            <td><strong>作る。</strong>施設参照も列として持つ</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">facilities<br>施設</td>
+            <td>施設名・種別・所在地・請求先情報（将来）</td>
+            <td><strong>テーブルだけ作る。</strong>スコープ1では空でよい</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">consents<br>同意記録</td>
+            <td><code>member_id</code>・<strong>同意事項の版</strong>・同意日時・同意した項目（集計提供／配信／マッチング）</td>
+            <td><strong>作る。</strong>移行時の再同意を記録する（§ 00）</td>
+          </tr>
+          <tr>
+            <td class="k">member_profiles<br>属性</td>
+            <td>役職／施設形態／地域／担当業務／関心テーマ／購買関与</td>
+            <td>作る（層2）。任意入力・後から積み増す</td>
+          </tr>
+          <tr>
+            <td class="k">line_links<br>LINE連携</td>
+            <td><code>member_id</code> ↔ <code>line_user_id</code></td>
+            <td>作る（層1・連携C）</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">contents<br>コンテンツ基底</td>
+            <td>タイプ・タイトル・カテゴリ・季節・対象・難易度・公開状態・<strong>有料フラグ（将来用）</strong></td>
+            <td><strong>作る。</strong>全タイプ共通のメタデータ</td>
+          </tr>
+          <tr>
+            <td class="k">タイプ固有</td>
+            <td>DL型（ファイル実体）／埋め込み型（デジタルレク）／知見型（エビデンス系：根拠・手順・測定方法・事例）</td>
+            <td>作る。JSON型で持てば追加は柔軟にできる</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">events<br>行動ログ</td>
+            <td><code>member_id</code>・<code>content_id</code>・種別（閲覧／DL／起動／完了）・日時・デバイス・参照元</td>
+            <td><strong>作る。層2の中核。</strong>DL以外の利用もここで測る</td>
+          </tr>
+          <tr>
+            <td class="k">redirects<br>301マップ</td>
+            <td>旧URL・新URL・種別</td>
+            <td>作る（§ 06-03）。管理画面から編集可能にする</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Key — 1テーブルが、要件の半分を解く</span>
+        <h3 class="essence-title">events があれば、<br>デジタルレクも同じ器で測れる。</h3>
+      </div>
+      <p class="essence-body">
+        現行の問題は「DL数しか取れない」ことにあった。<strong>種別を持つ汎用のイベントテーブルを1つ置く</strong>だけで、DL・閲覧・デジタルレクの起動・完了が同じ形で記録できる。<strong>コンテンツタイプが増えても、測る仕組みは増えない。</strong>
+      </p>
+      <p class="essence-body">
+        そしてこのテーブルが、<strong>「7万人のうち何人が動いているか」（DOMAIN 06）と「何が本当に効く素材か」（DOMAIN 05）の両方に、同時に答える</strong>。Phase 0 でエクスポートを集めて手作業で出している数字が、リニューアル後は常時取れる状態になる。
+      </p>
+      <p class="essence-body">
+        さらに <code>members.facility_id</code> と結合すれば、<strong>「どの施設が、何を、どれだけ使っているか」</strong>まで届く。これは DOMAIN 03-C（施設の経費科目）と DOMAIN 06（顧客接点）の検証材料そのもので、<strong>営業が使える形の情報</strong>になる。
+      </p>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Note — 同意を版で持つ理由</span>
+        <h3 class="essence-title">同意事項は、<br>今後も改定される。</h3>
+      </div>
+      <p class="essence-body">
+        集計データの提供・媒体配信・同意ベースのマッチングを行う以上、<strong>「誰が、いつ、どの版の同意事項に同意したか」を証跡として持つ</strong>必要がある。同意日時だけでは、後から内容を改定したときに<strong>誰が何に同意しているのか分からなくなる</strong>。
+      </p>
+      <p class="essence-body">
+        版を持てば、改定のたびに<strong>再同意が必要な会員だけを抽出できる</strong>。スコープ2でマネタイズの形が具体化したとき、同意事項の改定はほぼ確実に発生する。<strong>そのときに、また7万人全員へ一斉に頼まなくて済む</strong>——ここは最初に作っておく価値が大きい。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §05 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 05　コストの考え方</span>
+      <h2 class="section-title">何が、<br>コストを決めるのか。</h2>
+    </div>
+    <p class="section-lead">
+      具体的な金額は構成と契約形態で変わるため、<strong>ここでは金額ではなくコスト構造を示す</strong>。実額は構成と体制を決めたうえで見積もる（§ 08-F）。判断軸B（運用コスト）に効くのは、下の3つ。
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>費目</th><th>何で決まるか</th><th>効かせ方</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">転送量</td>
+            <td><strong>素材DLの総量。</strong>PDF・画像を月3.6万UUに配信する。従量課金だと利用が伸びるほどコストが増える——<strong>事業として最も避けたい構造</strong></td>
+            <td><strong>egress無料のストレージ＋CDNキャッシュ</strong>で、ほぼ固定費化できる</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">メール配信</td>
+            <td>通数。<strong>移行期は7万通級の配信が数回発生する</strong>（予告①②・切替告知・リマインド）</td>
+            <td>移行期にスパイクし、その後は落ちる。<strong>従量課金で問題ない費目</strong></td>
+          </tr>
+          <tr class="hl">
+            <td class="k">アプリ／DB</td>
+            <td>常時稼働のサーバとDB。<strong>月3.6万UUは小規模の範囲</strong>で、過剰なスペックは要らない</td>
+            <td>固定費として小さく抑えられる。マネージドDBでバックアップ運用を買う</td>
+          </tr>
+          <tr>
+            <td class="k">ストレージ</td>
+            <td>素材の総容量。<strong>現時点で未把握</strong>（§ 07-04 の棚卸し対象）</td>
+            <td>数万点のPDF・画像なら、費目としては小さい見込み</td>
+          </tr>
+          <tr>
+            <td class="k">保守・運用</td>
+            <td><strong>最大の費目になりうる。</strong>内製か外注か、監視・障害対応を誰が持つか</td>
+            <td>体制の決定（§ 07）と一体。技術構成より、ここが総コストを決める</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Note</span>
+        <h3 class="essence-title">利用が伸びるほど<br>赤字が増える構造にしない。</h3>
+      </div>
+      <p class="essence-body">
+        Document A 課題01 は「運用コスト＞売上が常態化」と指摘している。この状態で<strong>転送量課金の構成を採ると、利用者が増えるほどコストが増える</strong>——事業として最も避けたい形になる。14期のテーマが「資産を働かせ直す」ことである以上、<strong>利用が増えたときに赤字が膨らむ構造は、それ自体が戦略の足かせになる</strong>。
+      </p>
+      <p class="essence-body">
+        逆に、<strong>コストを固定費に寄せておけば、利用が伸びるほど1人あたりコストは下がる</strong>。スポンサー提案（SHIFT 03）の場面でも、この構造のほうが説明しやすい。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §06 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 06　移行の技術要件</span>
+      <h2 class="section-title">構成が、<br>移行の成否を決める部分。</h2>
+    </div>
+    <p class="section-lead">
+      技術構成の選択が、そのまま会員移行（別資料）の成否に効く箇所が3つある。<strong>いずれも「後から変える」ができない</strong>ため、選定時点で織り込む。
+    </p>
+
+    <div class="risk-list">
+      <div class="risk">
+        <span class="risk-num">01</span>
+        <div class="risk-body">
+          <span class="risk-when">認証</span>
+          <h3 class="risk-title">旧ハッシュを検証できる場所に、認証を置く。</h3>
+          <p class="risk-note">
+            外部IdP（Auth0・Cognito 等）に認証を預けると、<strong>旧システムのパスワードハッシュを検証するロジックを差し込めない</strong>。旧が標準方式ならインポートできる場合もあるが、独自方式だと手がなくなり、<strong>7万人全員にパスワード再設定を求める結末</strong>になる。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            <strong>認証は自前のテーブルで持つ</strong>。初回ログイン時に旧方式で検証し、成功したら新方式で再ハッシュして保存する——この「サイレント移行」が実装できる構成にしておく（会員移行ロードマップ § 02 の方式B）。<strong>この1点だけで、移行率が桁で変わりうる。</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">02</span>
+        <div class="risk-body">
+          <span class="risk-when">メール</span>
+          <h3 class="risk-title">バウンスを自分で受け取れる形にする。</h3>
+          <p class="risk-note">
+            会員移行の最初の一歩は<strong>到達可能会員数の確定</strong>——7万人のうち何人にメールが届くのか。これは<strong>実際に送ってバウンスを集計する以外に測る方法がない</strong>。現行のメルマガツールは特定できておらず（§ 07-06）、そこに依存すると数字が取れないまま12月を迎える。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            <strong>メール配信基盤を新システム側に持ち、バウンス通知をWebhookで受けて会員レコードに書き戻す</strong>。ハードバウンスは自動的に到達不能（S4）として分類され、<strong>到達可能会員数が常時わかる状態</strong>になる。移行のKPIがシステムから出てくる。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">03</span>
+        <div class="risk-body">
+          <span class="risk-when">URL設計</span>
+          <h3 class="risk-title">301リダイレクトを、データとして持つ。</h3>
+          <p class="risk-note">
+            現行URLは <code>?tRecreationMaterial_id=（UUID）</code> 形式。新体系への対応表が必要で、しかも<strong>カテゴリ整理で消えるコンテンツには移行先が存在しない</strong>。設定ファイルに書き下すには数が多すぎ、変更のたびにデプロイが必要になる。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            <strong>リダイレクトマップをDBのテーブルとして持つ</strong>（§ 04）。旧URL・新URL・種別を行として持ち、管理画面から編集できるようにする。運用開始後にSearch Consoleで404を見つけたとき、<strong>デプロイなしで受け皿を追加できる</strong>。移行直後の数ヶ月で必ず効いてくる。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">04</span>
+        <div class="risk-body">
+          <span class="risk-when">同意</span>
+          <h3 class="risk-title">再同意を、移行フローの中で完結させる。</h3>
+          <p class="risk-note">
+            § 00 の決定により、<strong>移行時に新しい同意事項への再同意が必要になる</strong>。事前にメールで同意を集める方式を採ると、<strong>メールが届いて開封されてクリックされた人だけが移行できる</strong>ことになり、歩留まりが大きく落ちる。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            <strong>ログイン後の初回に1画面で完結させる</strong>。会員は「これまでどおりログインする」だけでよく、同意はその後の1ステップとして提示される。同意記録は版付きで保存する（§ 04）。<strong>ステップは増えるが、増えるのは1つだけに抑える。</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §07 -->
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 07　決めるべきこと</span>
+      <h2 class="section-title">構成より先に、<br>体制が決まる。</h2>
+    </div>
+    <p class="section-lead">
+      技術構成は<strong>チームが保守できるものが正解</strong>であり、それ以外の基準で選ぶと15年前と同じ結末になる。以下は順番に決める必要がある——<strong>01が決まらないと02は決められない</strong>。
+    </p>
+
+    <div class="confirms">
+      <div class="confirm">
+        <span class="confirm-num">01</span>
+        <span class="confirm-title">開発体制。ぐっさんが主担当か、外注か、併用か。保守は運用開始後も誰が持つか</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">02</span>
+        <span class="confirm-title">言語とフレームワーク。ぐっさんが書けて保守できるもの（PHP系／Ruby系）</span>
+        <span class="confirm-who">ぐっさん<br>／ PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">03</span>
+        <span class="confirm-title">ホスティング先。国内リージョンの要否、既存の契約・アカウントの有無</span>
+        <span class="confirm-who">サイト<br>担当</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">04</span>
+        <span class="confirm-title">現行DBの種別（MySQL系か）と、素材の総容量・点数</span>
+        <span class="confirm-who">既存<br>管理会社</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">05</span>
+        <span class="confirm-title">パスワードハッシュ方式。認証構成の前提（要件定義 § 09-03 と同一項目）</span>
+        <span class="confirm-who">既存<br>管理会社</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">06</span>
+        <span class="confirm-title">メール配信を新基盤側に移すか、現行ツールを継続するか</span>
+        <span class="confirm-who">メルマガ<br>担当 ／ PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">07</span>
+        <span class="confirm-title">同意事項（規約・プライバシーポリシー）の改定案。①集計提供 ②媒体配信 ③マッチング を明記する</span>
+        <span class="confirm-who">法務<br>／ PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">08</span>
+        <span class="confirm-title">監視・バックアップ・障害対応の担当と、その連絡体制</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §08 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 08　次のアクション</span>
+      <h2 class="section-title">8月中に、<br>構成を確定させる。</h2>
+    </div>
+    <p class="section-lead">
+      9月にDB設計から着手するには、構成が8月中に決まっている必要がある。上から順に進める。
+    </p>
+
+    <div class="nextactions">
+      <div class="nextaction">
+        <span class="nextaction-num">A.</span>
+        <span class="nextaction-title">ぐっさんと § 02 のマトリクスを見ながら、レイヤごとの選択を確定する</span>
+        <span class="nextaction-doc">§ 02･03</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">B.</span>
+        <span class="nextaction-title">パスワードハッシュ方式を確認し、認証構成を確定する</span>
+        <span class="nextaction-doc">§ 06-01</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">C.</span>
+        <span class="nextaction-title">メール配信を新基盤側に持つ判断をする（到達性測定の前提）</span>
+        <span class="nextaction-doc">§ 06-02</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">D.</span>
+        <span class="nextaction-title">同意事項の改定案を法務と詰める（移行フローの設計に直結）</span>
+        <span class="nextaction-doc">§ 06-04</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">E.</span>
+        <span class="nextaction-title">現行DB種別・素材の総容量・点数を棚卸しする</span>
+        <span class="nextaction-doc">§ 07-04</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">F.</span>
+        <span class="nextaction-title">確定した構成で、月額運用コストの実額を見積もる</span>
+        <span class="nextaction-doc">§ 05</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">G.</span>
+        <span class="nextaction-title">データモデルの骨格（§ 04）をレビューし、9月のDB設計の入力とする</span>
+        <span class="nextaction-doc">§ 04</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="renewal_requirements.html" class="pagenav-side"><span class="pagenav-direction">← Prev</span><span class="pagenav-title">サイトリニューアル<br>要件定義</span></a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <a href="member_migration_roadmap.html" class="pagenav-side right"><span class="pagenav-direction">Next →</span><span class="pagenav-title">会員移行ロードマップ<br>7万人をどう連れていくか</span></a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">
+      介護レク広場 14期戦略 ／ インフラ・技術構成の提案<br>
+      検討稿 v0.2 ／ 2026年8月 ／ 内部討議用
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

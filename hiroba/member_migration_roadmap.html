@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会員移行ロードマップ｜介護レク広場</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link { color: inherit; text-decoration: none; transition: opacity 0.2s ease; }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag { font-family: var(--font-mono); font-size: 10px; opacity: 0.7; }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 60px; right: -40px;
+    width: 320px; height: 320px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before { content: ""; width: 32px; height: 1px; background: var(--accent-warm); }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 64px;
+    max-width: 660px;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep { background: var(--bg-section); border-top: none; }
+  .section.dark { background: var(--bg-deep); color: var(--text-on-deep); border-top: none; }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+  .section.dark .section-lead strong { color: var(--accent-gold); }
+
+  .section-header { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead { font-size: 16px; line-height: 2.1; color: var(--text-secondary); max-width: 700px; }
+  .section-lead strong { color: var(--text-primary); font-weight: 600; }
+
+  .emph-warm { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+
+  /* Essence blocks */
+  .essence-block {
+    margin-top: 40px;
+    padding: 44px 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent-warm);
+  }
+  .essence-block.accent { background: var(--bg-section); border-left-color: var(--accent-deep); }
+  .essence-block + .essence-block { margin-top: 24px; }
+  .essence-head { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }
+  .essence-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .essence-block.accent .essence-tag { color: var(--accent-deep); }
+  .essence-title {
+    font-family: var(--font-display);
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.55;
+  }
+  .essence-body { font-size: 14.5px; line-height: 2.05; color: var(--text-secondary); margin-bottom: 18px; }
+  .essence-body:last-child { margin-bottom: 0; }
+  .essence-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+
+  .shift-arrow {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 0; margin-top: 20px;
+    border-top: 1px dashed var(--border-line);
+  }
+  .shift-from, .shift-to { font-family: var(--font-display); font-size: 14.5px; line-height: 1.6; flex: 1; }
+  .shift-from { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-to { color: var(--accent-deep); font-weight: 500; }
+  .shift-mark { font-family: var(--font-mono); color: var(--accent-warm); font-size: 14px; }
+
+  /* Generic data table */
+  .dtable { margin-top: 40px; border: 1px solid var(--border-soft); background: var(--bg-card); overflow-x: auto; }
+  .dtable table { width: 100%; border-collapse: collapse; min-width: 620px; }
+  .dtable th, .dtable td {
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 13.5px;
+    line-height: 1.85;
+    border-bottom: 1px solid var(--border-soft);
+    border-right: 1px solid var(--border-soft);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .dtable th:last-child, .dtable td:last-child { border-right: none; }
+  .dtable tr:last-child td { border-bottom: none; }
+  .dtable th {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--bg-section);
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  .dtable td.k { font-family: var(--font-display); font-size: 14.5px; color: var(--text-primary); font-weight: 500; white-space: nowrap; }
+  .dtable td strong { color: var(--text-primary); font-weight: 600; }
+  .dtable tr.hl { background: rgba(184, 92, 61, 0.05); }
+  .dtable tr.hl td.k { color: var(--accent-warm); }
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+    border: 1px solid var(--border-line);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .pill.must { color: var(--accent-warm); border-color: var(--accent-warm); }
+  .pill.gold { color: var(--accent-gold); border-color: var(--accent-gold); }
+  .pill.deep { color: var(--accent-deep); border-color: var(--accent-deep); }
+
+  /* Timeline */
+  .timeline { margin-top: 40px; border: 1px solid var(--border-line); background: var(--bg-card); }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 150px;
+    border-bottom: 1px solid var(--border-soft);
+    align-items: stretch;
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-row.gate { background: var(--bg-section); }
+  .tl-row.fixed { background: var(--bg-deep); color: var(--text-on-deep); }
+  .tl-when {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    padding: 22px 18px;
+    color: var(--accent-warm);
+    border-right: 1px solid var(--border-soft);
+    white-space: nowrap;
+  }
+  .tl-row.fixed .tl-when { color: var(--accent-gold); border-right-color: rgba(184,146,74,0.3); }
+  .tl-what { padding: 22px 22px; display: flex; flex-direction: column; gap: 6px; }
+  .tl-title { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .tl-row.fixed .tl-title { color: var(--text-on-deep); }
+  .tl-note { font-size: 13px; line-height: 1.85; color: var(--text-secondary); }
+  .tl-row.fixed .tl-note { color: rgba(242,236,222,0.85); }
+  .tl-track {
+    padding: 22px 18px;
+    border-left: 1px solid var(--border-soft);
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+  .tl-row.fixed .tl-track { color: rgba(242,236,222,0.6); border-left-color: rgba(184,146,74,0.3); }
+
+  /* Layer cards */
+  .layer-list { display: flex; flex-direction: column; gap: 20px; margin-top: 44px; }
+  .layer {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--border-line);
+    padding: 36px 32px;
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 36px;
+  }
+  .layer.must { border-top-color: var(--accent-warm); }
+  .layer.mid { border-top-color: var(--accent-gold); }
+  .layer.late { border-top-color: var(--accent-deep); }
+  .layer-head { display: flex; flex-direction: column; gap: 10px; }
+  .layer-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .layer.must .layer-tag { color: var(--accent-warm); }
+  .layer-name { font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+  .layer-when { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); letter-spacing: 0.05em; line-height: 1.7; }
+  .layer-body { display: flex; flex-direction: column; gap: 14px; }
+  .layer-desc { font-size: 14px; line-height: 2; color: var(--text-secondary); }
+  .layer-desc strong { color: var(--text-primary); font-weight: 600; }
+  .layer-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .layer-items li { padding-left: 20px; position: relative; font-size: 13.5px; line-height: 1.9; color: var(--text-secondary); }
+  .layer-items li::before { content: "▸"; position: absolute; left: 0; color: var(--accent-warm); font-size: 12px; }
+
+  /* Risk list */
+  .risk-list { display: flex; flex-direction: column; margin-top: 44px; }
+  .risk {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+  .risk:last-child { border-bottom: 1px solid var(--border-soft); }
+  .risk-num { font-family: var(--font-display); font-size: 28px; color: var(--accent-warm); font-weight: 500; line-height: 1; }
+  .risk-body { display: flex; flex-direction: column; gap: 10px; }
+  .risk-title { font-family: var(--font-display); font-size: 21px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .risk-note { font-size: 14px; color: var(--text-secondary); line-height: 1.95; }
+  .risk-note strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+  .risk-fix {
+    margin-top: 6px;
+    padding: 14px 18px;
+    background: var(--bg-section);
+    border-left: 3px solid var(--accent-deep);
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+  }
+  .risk-fix strong { font-family: var(--font-display); color: var(--accent-deep); font-weight: 600; display: block; margin-bottom: 3px; }
+  .risk-when {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent-warm);
+    border: 1px solid var(--accent-warm);
+    padding: 3px 9px;
+    align-self: flex-start;
+  }
+
+  /* Confirm list (dark) */
+  .confirms { display: flex; flex-direction: column; margin-top: 36px; }
+  .confirm {
+    padding: 26px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 48px 1fr 190px;
+    gap: 24px;
+    align-items: center;
+  }
+  .confirm:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .confirm-num { font-family: var(--font-display); font-size: 24px; color: var(--accent-gold); font-weight: 500; }
+  .confirm-title { font-family: var(--font-display); font-size: 18px; color: var(--text-on-deep); line-height: 1.6; }
+  .confirm-who {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 6px 12px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* Next actions */
+  .nextactions { display: flex; flex-direction: column; margin-top: 32px; }
+  .nextaction {
+    padding: 28px 0;
+    border-top: 1px solid var(--border-soft);
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid var(--border-soft); }
+  .nextaction-num { font-family: var(--font-display); font-size: 26px; color: var(--accent-warm); font-weight: 500; }
+  .nextaction-title { font-family: var(--font-display); font-size: 19px; color: var(--text-primary); line-height: 1.55; }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--accent-deep);
+    text-transform: uppercase;
+    padding: 6px 13px;
+    border: 1px solid var(--border-line);
+    white-space: nowrap;
+  }
+
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text { font-family: var(--font-display); font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  .pagenav { border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); background: var(--bg-paper); }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-title { font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    body { font-size: 12px; }
+    .hero-title { font-size: 42px; }
+  }
+
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-title { font-size: 36px; }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 27px; }
+    .essence-block { padding: 30px 22px; }
+    .essence-title { font-size: 21px; }
+    .layer { grid-template-columns: 1fr; gap: 20px; padding: 28px 22px; }
+    .tl-row { grid-template-columns: 1fr; }
+    .tl-when { border-right: none; border-bottom: 1px solid var(--border-soft); padding: 14px 18px; }
+    .tl-track { border-left: none; border-top: 1px solid var(--border-soft); padding: 14px 18px; }
+    .risk { grid-template-columns: 44px 1fr; gap: 16px; }
+    .confirm { grid-template-columns: 36px 1fr; gap: 14px; }
+    .confirm-who { grid-column: 1 / -1; justify-self: start; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+    .shift-arrow { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜会員移行ロードマップ</a>
+    <span class="banner-tag">v0.6 / 2026.08 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-label">MIGRATION — 会員移行ロードマップ</span>
+    <h1 class="hero-title">7万人を、<br>どう連れていくか。</h1>
+    <p class="hero-subtitle">
+      新しい器を作ることより難しいのは、そこへ人を移すこと。<br>
+      しかも今わかっているのは会員数だけで、<em>そのうち何人に連絡が付くのかを、まだ誰も知らない。</em>
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Scope</span>
+        <span class="hero-meta-value">会員の再有効化<br>（データ移行は要件定義側）</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Milestone</span>
+        <span class="hero-meta-value">2027.02 目処が立つ<br>2027.04 移行開始</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Unknown</span>
+        <span class="hero-meta-value">到達可能会員数<br>＝すべての分母</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- §00 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 00　前提の整理</span>
+      <h2 class="section-title">「移行」という言葉が、<br>2つのことを指している。</h2>
+    </div>
+    <p class="section-lead">
+      会員移行という一語に、性質のまったく違う2つの作業が混ざっている。混ぜたまま計画すると、<strong>技術的には成功したのに会員が消えている</strong>という結末になる。まず分ける。
+    </p>
+
+    <div class="essence-block accent">
+      <div class="essence-head">
+        <span class="essence-tag">ハード — データ移行</span>
+        <h3 class="essence-title">レコードを、旧DBから新DBへ移す。</h3>
+      </div>
+      <p class="essence-body">
+        技術作業であり、<strong>ユーザーは一切関与しない</strong>。失敗すれば即座に、かつ明確にわかる。エクスポート範囲・ハッシュ方式・ドライランの設計は<strong>要件定義 § 07</strong> の担当範囲であり、本資料では扱わない。<strong>ハードとソフトは、オペレーションとして分けて回す</strong>——担当も、進捗の測り方も、失敗の見え方も違うため、同じ会議で同じ指標で追わない。
+      </p>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">ソフト — 会員の再有効化　★本資料の対象</span>
+        <h3 class="essence-title">本人に、戻ってきてもらう。</h3>
+      </div>
+      <p class="essence-body">
+        新しいサイトにログインしてもらう、必要なら再同意してもらう、可能なら属性とLINE連携も取る。<strong>相手にアクションを求める以上、必ず歩留まりが発生する</strong>。そしてデータ移行と違い、<strong>失敗しても静かに進行する</strong>。誰も戻ってこなくてもエラーは出ない。気づいたときには数字が消えている。
+      </p>
+      <p class="essence-body">
+        ここに、もうひとつ厄介な前提が乗る。<strong>7万人のうち何人に連絡が付くのかを、現時点で誰も知らない</strong>。15年分の会員リストであり、介護業界は離職・異動も多い。メールアドレスの相当数がすでに死んでいると考えるのが自然だが、その割合は測られていない。
+      </p>
+      <div class="shift-arrow">
+        <span class="shift-from">7万人に案内を送り、<br>7万人を移行させる</span>
+        <span class="shift-mark">→</span>
+        <span class="shift-to">まず到達可能数を確定し、<br>そこを分母に移行を設計する</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §01 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　3つの未知数</span>
+      <h2 class="section-title">計画を書く前に、<br>潰しておく空白。</h2>
+    </div>
+    <p class="section-lead">
+      2つの未知数と、1つの確定事項。<strong>未知数はいずれも9月中に着手できるもの</strong>であり、答えが出るまで詳細設計を進めても意味がない。03は答えが出たため、未知数ではなく<strong>前提</strong>として扱う。
+    </p>
+
+    <div class="risk-list">
+      <div class="risk">
+        <span class="risk-num">01</span>
+        <div class="risk-body">
+          <span class="risk-when">最重要 ／ 9月着手</span>
+          <h3 class="risk-title">到達可能会員数。すべての分母になる数字。</h3>
+          <p class="risk-note">
+            有効なメールアドレスが何件あるのか。<strong>バウンス率は、実際に送ってみるまでわからない</strong>。ここが確定しないと、移行率の目標も、案内の回数も、成功の定義も決められない。LINE友だちは563人しかおらず、サイト内告知は訪問者にしか届かない。<strong>メールが唯一の大量到達手段</strong>である以上、その実力を測ることが最初の一歩になる。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            § 03 のとおり、<strong>「リニューアル予告」の一斉配信を、到達性テストとして兼用する</strong>。告知しながら測れる。単独でテスト配信を組むより早く、無駄がない。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">02</span>
+        <div class="risk-body">
+          <span class="risk-when">最重要 ／ 9月中</span>
+          <h3 class="risk-title">パスワードハッシュ方式。ユーザーに何を求めるかが決まる。</h3>
+          <p class="risk-note">
+            これが § 02 の3方式の分岐そのもの。標準方式なら<strong>ユーザーは何もしなくてよい</strong>。独自方式・可逆暗号・平文なら<strong>7万人全員にパスワード再設定を求める</strong>ことになり、移行率は桁で変わる。設計の前提が根本から変わるため、他の何よりも先に確定させる。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            既存管理会社へ、ハッシュ方式とソルトの持ち方を確認（要件定義 § 09-03 と同一項目）。開発が9月着手である以上、<strong>この確認は8月中に投げておく</strong>のが望ましい。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">03</span>
+        <div class="risk-body">
+          <span class="risk-when">確定 ／ 前提</span>
+          <h3 class="risk-title">再同意は、必要になる。</h3>
+          <p class="risk-note">
+            ヘルスケア企業に対して<strong>①集計データの提供、②媒体としての配信、③同意に基づくマッチング</strong>を、<strong>同意事項に明記したうえで実行する</strong>ことが決まった（インフラ提案 § 00）。既存7万会員が同意しているのは現行のプライバシーポリシーであり、この内容を含まない。<strong>したがって移行時の再同意は避けられない</strong>——移行フローにステップが1つ増える。<strong>なお、個人データそのものの第三者提供は行わない。</strong>
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            <strong>ログイン後の初回に1画面で完結させる</strong>。会員は「これまでどおりログインする」だけでよく、同意はその後の1ステップとして提示される。<strong>事前にメールで同意を集める方式は採らない</strong>——それだと「メールが届いて開封してクリックした人」だけが移行できることになり、歩留まりが大きく落ちる。<strong>ステップは増えるが、増えるのは1つだけに抑える。</strong>同意記録は版付きで保存する（インフラ提案 § 04）。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §02 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　移行方式</span>
+      <h2 class="section-title">ユーザーに、<br>何を求めるか。</h2>
+    </div>
+    <p class="section-lead">
+      未知数02（ハッシュ方式）の答えで、取れる方式が決まる。<strong>方式AかBを取りに行き、Cは最終手段</strong>とする。ユーザーに求めるアクションが1つ増えるごとに、歩留まりは確実に落ちる。
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>方式</th><th>ユーザーがすること</th><th>成立条件</th><th>評価</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">A　完全透過</td>
+            <td>何もしない。これまでと同じIDとパスワードで、そのままログインできる</td>
+            <td>ハッシュがそのまま移せる ＋ 再同意不要</td>
+            <td><span class="pill must">最良</span></td>
+          </tr>
+          <tr class="hl">
+            <td class="k">B　サイレント移行</td>
+            <td>何もしない。<strong>初回ログイン時に旧方式で検証し、裏で新方式へ再ハッシュ</strong>する</td>
+            <td>新基盤側で旧ハッシュを検証できる（実装で吸収可能）</td>
+            <td><span class="pill must">現実解</span></td>
+          </tr>
+          <tr>
+            <td class="k">C　再設定必須</td>
+            <td>メールを受け取り、リンクを開き、パスワードを再設定する（3ステップ）</td>
+            <td>ハッシュが移行不可の場合の、やむを得ない選択</td>
+            <td><span class="pill">最終手段</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Note — 方式Cになった場合</span>
+        <h3 class="essence-title">Cは、移行計画ではなく<br>再獲得キャンペーンになる。</h3>
+      </div>
+      <p class="essence-body">
+        方式Cでは、<strong>メールが届き、開封され、リンクが押され、再設定が完了する</strong>——この4段すべてを通過した人だけが移行する。休眠会員がこの4段を通ることはまずない。つまりCは「移行」ではなく<strong>実質的な再獲得</strong>であり、必要な工数もコミュニケーション設計も別物になる。
+      </p>
+      <p class="essence-body">
+        したがって、<strong>方式Cが確定した時点で本ロードマップは書き直しになる</strong>。9月に方式を確定させることを最優先とするのは、このため。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §03 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 03　到達性を測る</span>
+      <h2 class="section-title">告知を打ちながら、<br>同時に測る。</h2>
+    </div>
+    <p class="section-lead">
+      バウンス率は送らないとわからない。ならば<strong>最初の告知そのものを測定機会にする</strong>。単独のテスト配信を組むより早く、告知としても無駄がない。ここで得られる有効アドレス数が、以降すべての計画の分母になる。
+    </p>
+
+    <div class="layer-list">
+      <div class="layer must">
+        <div class="layer-head">
+          <span class="layer-tag">Measure 01</span>
+          <span class="layer-name">到達</span>
+          <span class="layer-when">取得：予告①配信時<br>2026.12</span>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">
+            全会員へ一斉配信し、<strong>配信数・バウンス数・有効アドレス数</strong>を確定する。これが「連絡が付く会員」の実数。7万人という登録数との差が、そのまま § 06 で扱う論点になる。
+          </p>
+          <ul class="layer-items">
+            <li>ハードバウンス（アドレス消滅）とソフトバウンス（一時的）を分けて集計</li>
+            <li>ドメイン別のバウンス傾向（施設ドメインか、個人のフリーメールか）</li>
+            <li>ハードバウンス分はリストから除外し、以降の分母から外す</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="layer mid">
+        <div class="layer-head">
+          <span class="layer-tag">Measure 02</span>
+          <span class="layer-name">反応</span>
+          <span class="layer-when">取得：予告①〜②<br>2026.12 — 2027.02</span>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">
+            届いた人のうち、<strong>開封した人・クリックした人</strong>。ここが実質的な移行の上限になる。開封もされない層に、切替後の案内が届くと期待してはいけない。
+          </p>
+          <ul class="layer-items">
+            <li>開封率・クリック率（メルマガ実績 § Phase 0 STAGE 1 の水準と比較）</li>
+            <li>クリック到達者を「移行見込み層」として識別できるようにしておく</li>
+            <li>セグメント配信が可能かはツール依存（要件定義 § 09-05 の確認事項）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="layer late">
+        <div class="layer-head">
+          <span class="layer-tag">Measure 03</span>
+          <span class="layer-name">実態</span>
+          <span class="layer-when">取得：Phase 0 STAGE 2<br>2026.09 —</span>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">
+            Phase 0 で算出する<strong>実アクティブ数</strong>を、そのままセグメント設計（§ 04）の軸として使う。移行のために新しく定義を作らない。同じ定義を使うことで、移行の成否が Phase 0 の議論と地続きになる。
+          </p>
+          <ul class="layer-items">
+            <li>アクティブの定義は STAGE 2 で決めたものを流用（直近12ヶ月のログイン・DL・LINE反応 等）</li>
+            <li>最終接触からの経過月による分布を、そのままセグメント境界に使う</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §04 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 04　セグメント設計</span>
+      <h2 class="section-title">7万人を、<br>一律に扱わない。</h2>
+    </div>
+    <p class="section-lead">
+      全員に同じ回数・同じ熱量で案内を打つと、工数が休眠層に吸われる。Document A 原則01「引き算 → 磨き込み」をここにも適用する。<strong>S1を絶対に落とさないことに工数を集中し、S3は深追いしない。</strong>
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>区分</th><th>定義</th><th>打ち手</th><th>目標</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">S1　アクティブ</td>
+            <td>直近12ヶ月に接触あり（Phase 0 の定義を流用）</td>
+            <td><strong>絶対に落とさない層。</strong>全案内を届け、切替後は未移行者へ個別リマインド。LINE連携もここから取る</td>
+            <td>移行率 90%以上</td>
+          </tr>
+          <tr>
+            <td class="k">S2　準アクティブ</td>
+            <td>12〜24ヶ月前に接触</td>
+            <td>復帰の一押しを設計する。<strong>新しくなったこと（新UI・新コンテンツの予告）を訴求の中心</strong>に置く。休眠していた層には「変わった」が最も効く</td>
+            <td>移行率 30〜40%</td>
+          </tr>
+          <tr>
+            <td class="k">S3　休眠</td>
+            <td>24ヶ月超・ただしメールは到達する</td>
+            <td><strong>1回だけ声をかけ、深追いしない。</strong>リマインドの対象から外す。工数をここに使わない</td>
+            <td>移行率 10%前後</td>
+          </tr>
+          <tr>
+            <td class="k">S4　到達不能</td>
+            <td>ハードバウンス。連絡手段がない</td>
+            <td><strong>追わない。</strong>分母から外す。ここを追う手段は事実上存在しない</td>
+            <td>—（統計から除外）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Principle</span>
+        <h3 class="essence-title">S3を追いかけないことが、<br>この計画の規律になる。</h3>
+      </div>
+      <p class="essence-body">
+        2年以上動いていない会員を呼び戻す施策は、費用対効果が最も悪い。にもかかわらず<strong>「7万人」という数字を守りたい心理が働くと、ここに工数が流れ込む</strong>。原則01が対象にしているのは、まさにこの種の重さである。S3は1回だけ声をかけ、反応がなければ手放す。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §05 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 05　コミュニケーション設計</span>
+      <h2 class="section-title">誰に、いつ、<br>何回伝えるか。</h2>
+    </div>
+    <p class="section-lead">
+      切替の直前だけ告知しても間に合わない。<strong>2026年12月から、切替をまたいで2027年6月まで</strong>の一連の設計として組む。メールが主、LINEとサイト内告知が補助。
+    </p>
+
+    <div class="timeline">
+      <div class="tl-row">
+        <span class="tl-when">2026.12<br>T−4M</span>
+        <span class="tl-what">
+          <span class="tl-title">予告① ／ リニューアル告知 ＋ 到達性テスト</span>
+          <span class="tl-note">全会員へ一斉配信。「サイトが新しくなります」の予告と同時に、バウンス率を測定する（§ 03）。<strong>ここで得た有効アドレス数が、以降すべての分母になる。</strong></span>
+        </span>
+        <span class="tl-track">対象：全会員<br>手段：メール</span>
+      </div>
+      <div class="tl-row gate">
+        <span class="tl-when">2027.02<br>T−2M</span>
+        <span class="tl-what">
+          <span class="tl-title">◆ 移行の目処が立つ（マイルストーン）</span>
+          <span class="tl-note">移行方式の確定・案内文面の確定・セグメント別の対象者数の確定・移行フローの動作確認まで完了している状態。<strong>顧客ID連携とデータ観測の設計完了と対になるマイルストーン。</strong></span>
+        </span>
+        <span class="tl-track">要・社内合意</span>
+      </div>
+      <div class="tl-row">
+        <span class="tl-when">2027.02<br>T−2M</span>
+        <span class="tl-what">
+          <span class="tl-title">予告② ／ 何が変わり、何が変わらないか</span>
+          <span class="tl-note"><strong>変わること（画面・探し方・カテゴリの整理）、変わらないこと（無料で使えること）、これから増えること（デジタルレク・エビデンス系）を、3つ並べて伝える</strong>。新UIの画面イメージをここで見せ、切替時の驚きを減らす。あわせて属性アンケートを任意で実施。</span>
+        </span>
+        <span class="tl-track">対象：S1・S2・S3<br>手段：メール＋LINE</span>
+      </div>
+      <div class="tl-row">
+        <span class="tl-when">2027.03<br>T−2W</span>
+        <span class="tl-what">
+          <span class="tl-title">切替日の告知</span>
+          <span class="tl-note">切替日時、当日つながりにくくなる時間帯、ログイン方法（方式A・Bなら「これまでと同じ」）を具体的に伝える。<strong>新しい画面での「素材の探し方」を1枚で案内する</strong>。サイト内にも常設バナーを掲出。</span>
+        </span>
+        <span class="tl-track">対象：S1・S2<br>手段：メール＋LINE＋サイト</span>
+      </div>
+      <div class="tl-row fixed">
+        <span class="tl-when">2027.04<br>T0</span>
+        <span class="tl-what">
+          <span class="tl-title">切替完了 ／ 移行開始</span>
+          <span class="tl-note">新サイト稼働。旧URLからの流入は301先で「新しくなりました」を表示。<strong>初回ログイン時に新UIのヘルプ導線を出す</strong>。ここから移行率の実測が始まる。</span>
+        </span>
+        <span class="tl-track">全チャネル</span>
+      </div>
+      <div class="tl-row">
+        <span class="tl-when">2027.04<br>T＋2W</span>
+        <span class="tl-what">
+          <span class="tl-title">リマインド① ／ 未移行者のみ</span>
+          <span class="tl-note">S1の未移行者に絞って配信する。<strong>すでに移行した人に送らない</strong>ことが、リストの信頼を保つ条件（層1の会員フラグがあれば自動で除外できる）。</span>
+        </span>
+        <span class="tl-track">対象：S1未移行<br>手段：メール＋LINE</span>
+      </div>
+      <div class="tl-row">
+        <span class="tl-when">2027.06<br>T＋2M</span>
+        <span class="tl-what">
+          <span class="tl-title">リマインド② ／ 最終 ＋ 復帰の一押し</span>
+          <span class="tl-note">S1・S2の未移行者へ最後の案内。ここで反応がなければ手放す。<strong>S3は対象に含めない</strong>（§ 04 の規律）。</span>
+        </span>
+        <span class="tl-track">対象：S1・S2未移行<br>手段：メール</span>
+      </div>
+      <div class="tl-row gate">
+        <span class="tl-when">2027.07</span>
+        <span class="tl-what">
+          <span class="tl-title">◆ 移行率の確定 → Phase 3「魅せる」へ</span>
+          <span class="tl-note">移行完了数・移行率・属性取得数・LINE連携数を確定させ、14期事業報告書の材料として引き渡す。</span>
+        </span>
+        <span class="tl-track">Phase 3 接続</span>
+      </div>
+    </div>
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Note — 変化と、追い風</span>
+        <h3 class="essence-title">画面もカテゴリも変わる。<br>ただし、無料であることは変わらない。</h3>
+      </div>
+      <p class="essence-body">
+        リニューアルにより<strong>UIが新しくなり、カテゴリも整理される</strong>。既存会員にとっては変化であり、<strong>S1（アクティブ層）ほど現行の使い方に習熟しているため、変化のコストを大きく受ける</strong>。ここは正直に扱う必要がある。
+      </p>
+      <p class="essence-body">
+        一方で、<strong>この移行には強い追い風がある</strong>。<strong>既存のレク素材を有料化する計画はない</strong>——これまで無料で使ってきた会員は、引き続き無料で使える。マネタイズは「新しい仕組み」としてスコープ2で設計されるものであり、<strong>移行のタイミングで負担が発生することはない</strong>。移行しない理由が、実質的に「面倒だから」だけになる。
+      </p>
+      <p class="essence-body">
+        したがって訴求は3点セットにする。<strong>①変わること（画面・探し方・カテゴリの整理）、②変わらないこと（これまでの素材は無料のまま）、③増えること（デジタルレク・エビデンス系）</strong>。②が土台で、①を安心して受け入れてもらうために置く。③は戻ってくる理由になる——<strong>新コンテンツは用意する方向で進むため、予告ではなく実物を見せられる可能性が高い</strong>。
+      </p>
+      <p class="essence-body">
+        加えて、カテゴリ整理は<strong>損失ではなく体験の改善</strong>として設計する。整理の判断材料にDLログを使い、<strong>アクティブ会員が繰り返し使っているものを保護対象にする</strong>（要件定義 Risk 06）。「よく使っていたものが無くなった」を、可能な限り起こさない。
+      </p>
+      <p class="essence-body">
+        あわせて、<strong>デザインレビューとカテゴリ整理の両方に、現場に近い担当者を必ず入れる</strong>。7万人の移行を左右する判断を、現場を知らない目だけで確定させない。
+      </p>
+      <div class="shift-arrow">
+        <span class="shift-from">使い慣れたものが<br>そのまま残ります</span>
+        <span class="shift-mark">→</span>
+        <span class="shift-to">探しやすく整理しました。<br>これまでどおり、無料です</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §06 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 06　数字の扱い</span>
+      <h2 class="section-title">移行後、「7万人」は<br>名乗れなくなる。</h2>
+    </div>
+    <p class="section-lead">
+      これは本ロードマップで<strong>最も先に経営と握っておくべき論点</strong>。技術でも運用でもなく、覚悟の問題として扱う必要がある。
+    </p>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Issue</span>
+        <h3 class="essence-title">移行率の分母は、<br>7万人ではない。</h3>
+      </div>
+      <p class="essence-body">
+        移行率を「対7万人」で測ると、どれだけ丁寧に設計しても<strong>数字は必ず低く見える</strong>。S4（到達不能）は連絡手段が存在せず、追う方法がないためである。分母は<strong>到達可能会員</strong>とし、7万人は「登録累計」として別枠で扱う。この定義を先に決めておかないと、成功した移行が失敗として報告されることになる。
+      </p>
+    </div>
+
+    <div class="essence-block accent">
+      <div class="essence-head">
+        <span class="essence-tag">Strategic — Document B / DOMAIN 06</span>
+        <h3 class="essence-title">しかしそれは、<br>D06が目指したものそのもの。</h3>
+      </div>
+      <p class="essence-body">
+        Document B の DOMAIN 06 は、<strong>「営業トークで語る7万人と、現場の実態との乖離」</strong>を14期の中心テーマに据えていた。会員移行は、その乖離を<strong>実測値に置き換える作業</strong>にほかならない。移行後に手元に残るのは、小さいが<strong>全員が実在し、連絡が付き、属性がわかる会員基盤</strong>である。
+      </p>
+      <p class="essence-body">
+        SHIFT 03（業界外スポンサー）の観点でも同じ結論になる。スポンサーに売れるのは<strong>「7万人という登録数」ではなく「属性のわかるアクティブ会員」</strong>。数字は小さくなるが、商品としての価値は上がる。
+      </p>
+      <div class="shift-arrow">
+        <span class="shift-from">会員7万人と<br>言い続ける</span>
+        <span class="shift-mark">→</span>
+        <span class="shift-to">実在する会員◯◯人、<br>うち属性判明◯◯人と言う</span>
+      </div>
+    </div>
+
+    <div class="dtable" style="margin-top:44px;">
+      <table>
+        <thead>
+          <tr><th>KPI</th><th>定義</th><th>確定時期</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl"><td class="k">到達可能会員数</td><td>ハードバウンスを除いた有効アドレス数。<strong>以降すべての分母</strong></td><td>2026.12</td></tr>
+          <tr><td class="k">移行完了数</td><td>新基盤で1回以上ログインした会員の実数</td><td>2027.04 —</td></tr>
+          <tr class="hl"><td class="k">移行率</td><td>移行完了数 ÷ <strong>到達可能会員数</strong>（7万人ではない）</td><td>2027.07</td></tr>
+          <tr><td class="k">セグメント別移行率</td><td>S1／S2／S3 それぞれの移行率。S1が最重要</td><td>2027.07</td></tr>
+          <tr><td class="k">属性取得数</td><td>役職・施設形態等が判明している会員数（＝スポンサー提案の在庫）</td><td>2027.07</td></tr>
+          <tr><td class="k">LINE連携数</td><td>member_id と LINE userId が突合できている会員数</td><td>2027.07</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- §07 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 07　この機会に取るもの</span>
+      <h2 class="section-title">15年で最大の、<br>一斉接触の機会。</h2>
+    </div>
+    <p class="section-lead">
+      リニューアルの告知は、<strong>全会員に連絡する正当な理由</strong>になる。これほどの機会は15年間なかったし、次にいつ来るかもわからない。Phase 0 で欲しかった属性データを取りに行く好機である。<strong>ただし、移行率と引き換えにしてはならない。</strong>
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>取りたいもの</th><th>取り方</th><th>必須にするか</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">ログイン</td>
+            <td>方式A・Bなら、これまでどおりログインするだけ</td>
+            <td><strong>必須</strong>（これが移行の定義）</td>
+          </tr>
+          <tr>
+            <td class="k">属性</td>
+            <td>初回ログイン後に1画面。<strong>スキップ可能にする</strong>。マイページとLINEで継続的に積み増す</td>
+            <td>任意</td>
+          </tr>
+          <tr>
+            <td class="k">LINE連携</td>
+            <td>初回ログイン後に案内。素材の先行配信を動機づけにする</td>
+            <td>任意</td>
+          </tr>
+          <tr>
+            <td class="k">再同意</td>
+            <td><strong>初回ログイン時に1画面で完結させる。</strong>同意事項の版とあわせて記録する</td>
+            <td><strong>必須</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Trade-off</span>
+        <h3 class="essence-title">属性を必須にした瞬間、<br>移行率が落ちる。</h3>
+      </div>
+      <p class="essence-body">
+        属性データは戦略上ほしい。しかし<strong>移行フローの必須ステップにすると、そこで離脱が発生する</strong>。会員基盤そのものを失うほうが損失は大きい。したがって<strong>属性は任意・スキップ可能とし、移行後にマイページとLINEで時間をかけて積み増す</strong>方針を取る。
+      </p>
+      <p class="essence-body">
+        これは層2（測る・貯める）を「登録時に取り切らず、継続的に積み増す設計にする」とした要件定義 § 03 の方針と一致している。<strong>急がない。ただし取れる仕組みは最初から入れておく。</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §08 -->
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 08　次のアクション</span>
+      <h2 class="section-title">9月に、<br>着手すること。</h2>
+    </div>
+    <p class="section-lead">
+      開発が9月着手である以上、移行方式の分岐（§ 02）は<strong>設計に間に合うタイミングで確定している必要がある</strong>。上から順に、遅れるほど後工程を巻き込む順で並べる。
+    </p>
+
+    <div class="confirms">
+      <div class="confirm">
+        <span class="confirm-num">01</span>
+        <span class="confirm-title">パスワードハッシュ方式を確認し、移行方式A／B／Cを確定する</span>
+        <span class="confirm-who">既存<br>管理会社</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">02</span>
+        <span class="confirm-title">メルマガ配信ツールを特定し、バウンス集計とセグメント配信の可否を確認する</span>
+        <span class="confirm-who">メルマガ<br>担当</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">03</span>
+        <span class="confirm-title">同意事項（規約・プライバシーポリシー）の改定案を法務と詰める。①集計提供 ②媒体配信 ③マッチング を明記</span>
+        <span class="confirm-who">法務<br>／ 社内</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">04</span>
+        <span class="confirm-title">移行率の分母を「到達可能会員」とすることを、経営と合意する</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">05</span>
+        <span class="confirm-title">Phase 0 STAGE 2 のアクティブ定義を、セグメント境界として確定する</span>
+        <span class="confirm-who">Phase 0<br>連携</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">06</span>
+        <span class="confirm-title">12月の予告①配信を、到達性テストとして企画に組み込む</span>
+        <span class="confirm-who">はるちゃん<br>／ 運用</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">07</span>
+        <span class="confirm-title">移行フロー（ログイン→再同意→属性→LINE連携）の画面設計を要件へ反映</span>
+        <span class="confirm-who">ぐっさん<br>／ 開発</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">08</span>
+        <span class="confirm-title">S1が繰り返し使っている素材を、カテゴリ整理の保護対象とすることを Phase 1 と合意する</span>
+        <span class="confirm-who">Phase 1<br>／ PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">09</span>
+        <span class="confirm-title">4月時点で公開できる新コンテンツの点数。訴求③の中身がここで決まる</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="renewal_requirements.html" class="pagenav-side"><span class="pagenav-direction">← Prev</span><span class="pagenav-title">サイトリニューアル<br>要件定義</span></a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <a href="doc_b_phase0_kanru_verification.html" class="pagenav-side right"><span class="pagenav-direction">Related →</span><span class="pagenav-title">Document B<br>DOMAIN 06 顧客接点</span></a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">
+      介護レク広場 14期戦略 ／ 会員移行ロードマップ<br>
+      検討稿 v0.6 ／ 2026年8月 ／ 内部討議用
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

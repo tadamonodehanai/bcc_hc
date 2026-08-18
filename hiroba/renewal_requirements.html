@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サイトリニューアル要件定義｜介護レク広場</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link { color: inherit; text-decoration: none; transition: opacity 0.2s ease; }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag { font-family: var(--font-mono); font-size: 10px; opacity: 0.7; }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 60px; right: -40px;
+    width: 320px; height: 320px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before { content: ""; width: 32px; height: 1px; background: var(--accent-warm); }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 64px;
+    max-width: 660px;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep { background: var(--bg-section); border-top: none; }
+  .section.dark { background: var(--bg-deep); color: var(--text-on-deep); border-top: none; }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+  .section.dark .section-lead strong { color: var(--accent-gold); }
+
+  .section-header { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead { font-size: 16px; line-height: 2.1; color: var(--text-secondary); max-width: 700px; }
+  .section-lead strong { color: var(--text-primary); font-weight: 600; }
+
+  .emph-warm { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+
+  /* Essence blocks */
+  .essence-block {
+    margin-top: 40px;
+    padding: 44px 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent-warm);
+  }
+  .essence-block.accent { background: var(--bg-section); border-left-color: var(--accent-deep); }
+  .essence-block + .essence-block { margin-top: 24px; }
+  .essence-head { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }
+  .essence-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .essence-block.accent .essence-tag { color: var(--accent-deep); }
+  .essence-title {
+    font-family: var(--font-display);
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.55;
+  }
+  .essence-body { font-size: 14.5px; line-height: 2.05; color: var(--text-secondary); margin-bottom: 18px; }
+  .essence-body:last-child { margin-bottom: 0; }
+  .essence-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+
+  .shift-arrow {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 0; margin-top: 20px;
+    border-top: 1px dashed var(--border-line);
+  }
+  .shift-from, .shift-to { font-family: var(--font-display); font-size: 14.5px; line-height: 1.6; flex: 1; }
+  .shift-from { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-to { color: var(--accent-deep); font-weight: 500; }
+  .shift-mark { font-family: var(--font-mono); color: var(--accent-warm); font-size: 14px; }
+
+  /* Generic data table */
+  .dtable { margin-top: 40px; border: 1px solid var(--border-soft); background: var(--bg-card); overflow-x: auto; }
+  .dtable table { width: 100%; border-collapse: collapse; min-width: 620px; }
+  .dtable th, .dtable td {
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 13.5px;
+    line-height: 1.85;
+    border-bottom: 1px solid var(--border-soft);
+    border-right: 1px solid var(--border-soft);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .dtable th:last-child, .dtable td:last-child { border-right: none; }
+  .dtable tr:last-child td { border-bottom: none; }
+  .dtable th {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--bg-section);
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  .dtable td.k { font-family: var(--font-display); font-size: 14.5px; color: var(--text-primary); font-weight: 500; white-space: nowrap; }
+  .dtable td strong { color: var(--text-primary); font-weight: 600; }
+  .dtable tr.hl { background: rgba(184, 92, 61, 0.05); }
+  .dtable tr.hl td.k { color: var(--accent-warm); }
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+    border: 1px solid var(--border-line);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .pill.must { color: var(--accent-warm); border-color: var(--accent-warm); }
+  .pill.gold { color: var(--accent-gold); border-color: var(--accent-gold); }
+  .pill.deep { color: var(--accent-deep); border-color: var(--accent-deep); }
+
+  /* Timeline */
+  .timeline { margin-top: 40px; border: 1px solid var(--border-line); background: var(--bg-card); }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 150px;
+    border-bottom: 1px solid var(--border-soft);
+    align-items: stretch;
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-row.gate { background: var(--bg-section); }
+  .tl-row.fixed { background: var(--bg-deep); color: var(--text-on-deep); }
+  .tl-when {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    padding: 22px 18px;
+    color: var(--accent-warm);
+    border-right: 1px solid var(--border-soft);
+    white-space: nowrap;
+  }
+  .tl-row.fixed .tl-when { color: var(--accent-gold); border-right-color: rgba(184,146,74,0.3); }
+  .tl-what { padding: 22px 22px; display: flex; flex-direction: column; gap: 6px; }
+  .tl-title { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .tl-row.fixed .tl-title { color: var(--text-on-deep); }
+  .tl-note { font-size: 13px; line-height: 1.85; color: var(--text-secondary); }
+  .tl-row.fixed .tl-note { color: rgba(242,236,222,0.85); }
+  .tl-track {
+    padding: 22px 18px;
+    border-left: 1px solid var(--border-soft);
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+  .tl-row.fixed .tl-track { color: rgba(242,236,222,0.6); border-left-color: rgba(184,146,74,0.3); }
+
+  /* Layer cards */
+  .layer-list { display: flex; flex-direction: column; gap: 20px; margin-top: 44px; }
+  .layer {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--border-line);
+    padding: 36px 32px;
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 36px;
+  }
+  .layer.must { border-top-color: var(--accent-warm); }
+  .layer.mid { border-top-color: var(--accent-gold); }
+  .layer.late { border-top-color: var(--accent-deep); }
+  .layer-head { display: flex; flex-direction: column; gap: 10px; }
+  .layer-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .layer.must .layer-tag { color: var(--accent-warm); }
+  .layer-name { font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+  .layer-when { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); letter-spacing: 0.05em; line-height: 1.7; }
+  .layer-body { display: flex; flex-direction: column; gap: 14px; }
+  .layer-desc { font-size: 14px; line-height: 2; color: var(--text-secondary); }
+  .layer-desc strong { color: var(--text-primary); font-weight: 600; }
+  .layer-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .layer-items li { padding-left: 20px; position: relative; font-size: 13.5px; line-height: 1.9; color: var(--text-secondary); }
+  .layer-items li::before { content: "▸"; position: absolute; left: 0; color: var(--accent-warm); font-size: 12px; }
+
+  /* Risk list */
+  .risk-list { display: flex; flex-direction: column; margin-top: 44px; }
+  .risk {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+  .risk:last-child { border-bottom: 1px solid var(--border-soft); }
+  .risk-num { font-family: var(--font-display); font-size: 28px; color: var(--accent-warm); font-weight: 500; line-height: 1; }
+  .risk-body { display: flex; flex-direction: column; gap: 10px; }
+  .risk-title { font-family: var(--font-display); font-size: 21px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .risk-note { font-size: 14px; color: var(--text-secondary); line-height: 1.95; }
+  .risk-note strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+  .risk-fix {
+    margin-top: 6px;
+    padding: 14px 18px;
+    background: var(--bg-section);
+    border-left: 3px solid var(--accent-deep);
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+  }
+  .risk-fix strong { font-family: var(--font-display); color: var(--accent-deep); font-weight: 600; display: block; margin-bottom: 3px; }
+  .risk-when {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent-warm);
+    border: 1px solid var(--accent-warm);
+    padding: 3px 9px;
+    align-self: flex-start;
+  }
+
+  /* Confirm list (dark) */
+  .confirms { display: flex; flex-direction: column; margin-top: 36px; }
+  .confirm {
+    padding: 26px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 48px 1fr 190px;
+    gap: 24px;
+    align-items: center;
+  }
+  .confirm:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .confirm-num { font-family: var(--font-display); font-size: 24px; color: var(--accent-gold); font-weight: 500; }
+  .confirm-title { font-family: var(--font-display); font-size: 18px; color: var(--text-on-deep); line-height: 1.6; }
+  .confirm-who {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 6px 12px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* Next actions */
+  .nextactions { display: flex; flex-direction: column; margin-top: 32px; }
+  .nextaction {
+    padding: 28px 0;
+    border-top: 1px solid var(--border-soft);
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid var(--border-soft); }
+  .nextaction-num { font-family: var(--font-display); font-size: 26px; color: var(--accent-warm); font-weight: 500; }
+  .nextaction-title { font-family: var(--font-display); font-size: 19px; color: var(--text-primary); line-height: 1.55; }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--accent-deep);
+    text-transform: uppercase;
+    padding: 6px 13px;
+    border: 1px solid var(--border-line);
+    white-space: nowrap;
+  }
+
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text { font-family: var(--font-display); font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  .pagenav { border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); background: var(--bg-paper); }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-title { font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    body { font-size: 12px; }
+    .hero-title { font-size: 42px; }
+  }
+
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-title { font-size: 36px; }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 27px; }
+    .essence-block { padding: 30px 22px; }
+    .essence-title { font-size: 21px; }
+    .layer { grid-template-columns: 1fr; gap: 20px; padding: 28px 22px; }
+    .tl-row { grid-template-columns: 1fr; }
+    .tl-when { border-right: none; border-bottom: 1px solid var(--border-soft); padding: 14px 18px; }
+    .tl-track { border-left: none; border-top: 1px solid var(--border-soft); padding: 14px 18px; }
+    .risk { grid-template-columns: 44px 1fr; gap: 16px; }
+    .confirm { grid-template-columns: 36px 1fr; gap: 14px; }
+    .confirm-who { grid-column: 1 / -1; justify-self: start; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+    .shift-arrow { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜サイトリニューアル要件定義</a>
+    <span class="banner-tag">v0.8 / 2026.08 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-label">RENEWAL — 要件定義（たたき台）</span>
+    <h1 class="hero-title">まず、器を<br>作り替える。</h1>
+    <p class="hero-subtitle">
+      このシステムの役割は、コンテンツのインデックスであること。<br>
+      <em>器の完成を、中身の完成に依存させない</em>——この性質を使って、スコープを分ける。
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Foundation</span>
+        <span class="hero-meta-value">顧客ID連携と<br>データ観測の実現</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Scope 1</span>
+        <span class="hero-meta-value">現行機能ベース<br>2027.02 完了</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Scope 2</span>
+        <span class="hero-meta-value">新コンテンツと<br>収益プロダクト</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- §00 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 00　決定事項</span>
+      <h2 class="section-title">3つの決定と、<br>ひとつの前提の更新。</h2>
+    </div>
+    <p class="section-lead">
+      この資料は、Document A・B で固めた14期戦略の上に、サイトリニューアルという実行計画を接続するためのもの。先に、今回下された決定を明文化しておく。<strong>ここが後続のすべての判断の起点になる。</strong>
+    </p>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Decision 01 — Foundation</span>
+        <h3 class="essence-title">土台は、顧客ID連携と<br>データ観測の実現にある。</h3>
+      </div>
+      <p class="essence-body">
+        本プロジェクトの土台は<strong>「つなぐ」と「測る」</strong>。Web会員 × LINE 連携プランで「要確認」のまま止まっていた4つの連携（会員フラグ／DL×member_id／LINE名寄せ／流入媒体）を、<strong>「できたらやる」ではなく MUST 要件として設計に組み込む</strong>。ここが解けないまま器だけ新しくすると、同じ問題が再生産される。
+      </p>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Decision 02 — System Role</span>
+        <h3 class="essence-title">このシステムの役割は、<br>コンテンツのインデックスである。</h3>
+      </div>
+      <p class="essence-body">
+        システムは、コンテンツを<strong>並べ、探させ、届ける器</strong>。中身そのものではない。この定義を採ると、<strong>箱（コンテンツタイプの枠）と動線さえ用意すれば、中身は後から載せられる</strong>ことになる。
+      </p>
+      <p class="essence-body">
+        新コンテンツは<strong>用意する方向で進める</strong>。ただし、<strong>その完成をスコープ1の完了条件にはしない</strong>。デジタルレクの枠、エビデンス系の枠と導線を先に作り、中身が間に合えば載せ、間に合わなければ予告のまま運用を開始する。<strong>器の完成と、中身の充実を、同じ期限に縛らない</strong>——Coming soon は計画ではなく、保険である。
+      </p>
+      <div class="shift-arrow">
+        <span class="shift-from">中身が揃ってから<br>公開する</span>
+        <span class="shift-mark">→</span>
+        <span class="shift-to">器を先に完成させ、<br>中身はそこへ載せていく</span>
+      </div>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Decision 03 — Scope &amp; Schedule</span>
+        <h3 class="essence-title">スコープを2つに分け、<br>スコープ1を2月に置く。</h3>
+      </div>
+      <p class="essence-body">
+        <strong>スコープ1は「今の機能ベース」</strong>——現行機能を新基盤・新UIで実現し、カテゴリを整理し、既存会員を移す。2027年2月に完了させ、4月に運用開始する。この期限は既存管理会社との契約満了に紐づく<strong>固定の外部制約</strong>であり、日付は動かせない。
+      </p>
+      <p class="essence-body">
+        <strong>スコープ2は、その器に載せていくもの</strong>——新コンテンツの拡充と、<strong>新しい仕組みによるマネタイズ</strong>。既存のレク素材を有料化して売ることは考えていない。線引きの詳細は § 01。
+      </p>
+    </div>
+
+    <div class="essence-block accent">
+      <div class="essence-head">
+        <span class="essence-tag">Update — Document A § 02</span>
+        <h3 class="essence-title">SHIFT 01 を改定する。<br>ただし、その本質は維持される。</h3>
+      </div>
+      <p class="essence-body">
+        Document A の SHIFT 01 は「古いWebプラットフォームを<strong>無理にリプレイスせず</strong>、ストック資産として残す」と書かれていた。今回の決定はこれを更新する。ただし更新されるのは<strong>「器を作り替えるか否か」だけ</strong>であり、SHIFT 01 の本質である「Web＝ストック／LINE＝フロー の役割分業」はそのまま維持される。
+      </p>
+      <p class="essence-body">
+        むしろ、Web側が会員IDと行動ログを正しく持てるようになることで、<strong>分業は初めて実装可能になる</strong>。現行基盤では、LINEで集めた友だちとWebの会員を突き合わせる手段がなく、分業を設計しても数字が読めないまま終わる。リプレイスは SHIFT 01 の否定ではなく、その前提条件の整備にあたる。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §01 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　スコープの分割</span>
+      <h2 class="section-title">2月に間に合わせるものと、<br>その後に載せるもの。</h2>
+    </div>
+    <p class="section-lead">
+      Decision 02（システム＝インデックス）により、<strong>器の完成と中身の充実を切り離せる</strong>。この線引きを先に確定させることが、6ヶ月を成立させる最大の要因になる。
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>対象</th><th>スコープ 1 ／ 〜2027.02（運用開始 2027.04）</th><th>スコープ 2 ／ 2027.04 —</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl"><td class="k">顧客ID連携</td><td><strong>実装する。</strong>4連携すべて（層1）</td><td>—</td></tr>
+          <tr class="hl"><td class="k">データ観測</td><td><strong>実装する。</strong>属性・行動ログ・集計出力（層2）</td><td>取得したデータの活用・価値化</td></tr>
+          <tr class="hl"><td class="k">会員移行</td><td><strong>実行する。</strong>7万会員の移行（別資料）</td><td>移行後のリマインドと復帰施策</td></tr>
+          <tr><td class="k">UI</td><td><strong>全面刷新する。</strong>デザインシステム＋全画面</td><td>運用しながらの改善</td></tr>
+          <tr><td class="k">既存コンテンツ</td><td><strong>カテゴリを整理して移行する。</strong>素材・レクネタ・動画・特集</td><td>継続的な仕分けと磨き込み</td></tr>
+          <tr class="hl"><td class="k">デジタルレク</td><td><strong>箱と動線を作り、中身も用意する方向。</strong>間に合わなければ予告のまま開始</td><td>拡充を継続</td></tr>
+          <tr class="hl"><td class="k">エビデンス系</td><td><strong>箱と動線を作り、中身も用意する方向。</strong>PoCと連動</td><td>PoC結果の反映と拡充</td></tr>
+          <tr><td class="k">有料サービス</td><td>作らない。ただし<strong>構造上の余地を残す</strong></td><td>新しい仕組みの検討。<strong>現場の介護士に役立つものなら課金を検討</strong></td></tr>
+          <tr class="hl"><td class="k">所属施設の参照</td><td><strong>持つ（決定）。</strong>会員が所属施設を参照できる形にする</td><td>施設アカウント機能（職員管理・請求書払い・オンライン決済）</td></tr>
+          <tr><td class="k">ヘルスケア企業向けLP</td><td><strong>LPと動線のみ。</strong>システムとは連動しない</td><td>PoC・レク実装サービスの拡充</td></tr>
+          <tr><td class="k">開発</td><td>作らない</td><td>商品設計・導線</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Critical — 9月のDB設計に効く</span>
+        <h3 class="essence-title">器の形は、<br>将来の仕組みの形で決まる。</h3>
+      </div>
+      <p class="essence-body">
+        「箱だけ作る」は簡単に聞こえるが、<strong>どんな器にするかは、将来そこで何をするかで変わる</strong>。<strong>スコープ1でこれらを作る必要はないが、後から足せない構造で組むと、スコープ2でスキーマ移行が発生する</strong>。実装するかどうかではなく、<strong>後から足せる形になっているか</strong>——この問いだけを8月中に決める。
+      </p>
+      <div class="dtable" style="margin-top:24px;">
+        <table>
+          <thead>
+            <tr><th>論点</th><th>いま決めること</th><th>重み</th></tr>
+          </thead>
+          <tbody>
+            <tr class="hl">
+              <td class="k">所属施設の参照</td>
+              <td><strong>決定済み。</strong>会員が所属施設を参照できる形で持つ。施設アカウントの機能はスコープ2</td>
+              <td><span class="pill must">決定</span></td>
+            </tr>
+            <tr class="hl">
+              <td class="k">決済</td>
+              <td>スコープ1では実装しない。ただし<strong>オンライン決済と請求書払いの両方</strong>を後から載せられる構造か（請求書払いは施設アカウント前提）</td>
+              <td><span class="pill must">重要</span></td>
+            </tr>
+            <tr>
+              <td class="k">課金対象</td>
+              <td><strong>レク素材を有料化するのではない。</strong>課金対象は「新しい仕組み」や「現場の介護士に役立つサービス」であり、コンテンツとは別概念として置けるか</td>
+              <td><span class="pill gold">中</span></td>
+            </tr>
+            <tr>
+              <td class="k">企業向けLP</td>
+              <td><strong>解決済み。</strong>PoC・レク実装サービスのLPを置き、動線を張るだけ。<strong>システムとは連動しない</strong>ため、情報設計への影響は小さい</td>
+              <td><span class="pill">低</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Focus — 施設アカウント</span>
+        <h3 class="essence-title">個人の会員テーブルに、<br>後から親を生やせるか。</h3>
+      </div>
+      <p class="essence-body">
+ここでいう法人は<strong>介護施設</strong>——つまり<strong>利用者が所属する組織</strong>のこと。個人アカウントの上に施設という単位を置き、複数の職員がぶら下がる構造になる。<strong>これは会員モデルの根幹に関わるため、後から足すのが最も難しい部分</strong>にあたる。<strong>所属施設への参照を持つことは決定事項</strong>とし、施設アカウントとしての機能（職員管理・請求書払い）はスコープ2で判断する。
+      </p>
+      <p class="essence-body">
+スコープ1で施設アカウントの機能まで実装する必要はない。ただし<strong>会員テーブルに施設への参照を持つ</strong>だけで、スコープ2の選択肢が open になる。逆にここを閉じてしまうと、7万件のデータを持ったままの構造変更になる。
+      </p>
+      <p class="essence-body">
+        設計上の論点は4つ。<strong>①1施設に複数職員がぶら下がる親子構造、②既存の個人アカウントを後から施設へ紐づけられるか、③施設内の権限（管理者／一般職員）、④請求書払いに必要な請求先情報</strong>。②は特に重要で、<strong>「個人で使い始めた職員が、後から施設として契約する」という流れ</strong>を受けられるかどうかを決める。
+      </p>
+      <div class="shift-arrow">
+        <span class="shift-from">個人アカウント<br>だけの世界</span>
+        <span class="shift-mark">→</span>
+        <span class="shift-to">個人で始め、後から<br>施設に紐づけられる世界</span>
+      </div>
+    </div>
+
+    <div class="essence-block accent">
+      <div class="essence-head">
+        <span class="essence-tag">Strategic — DOMAIN 01・03-C・06 との接続</span>
+        <h3 class="essence-title">施設アカウントは、<br>戦略仮説の検証装置でもある。</h3>
+      </div>
+      <p class="essence-body">
+        Document B の DOMAIN 01 は、個人利用か組織利用かを測ったうえで、グレーゾーンなら<strong>「個人→推薦→施設導入」の橋渡しモデルを試す</strong>としていた。施設アカウントは、まさにこの橋渡しの実装にあたる。SHIFT 02（法人想定 → 個人ユーザー前提）とも矛盾しない——<strong>個人を起点に置いたまま、施設という単位を後から重ねられる</strong>構造だからである。
+      </p>
+      <p class="essence-body">
+        <strong>請求書払いが持つ意味も大きい</strong>。DOMAIN 03-C は「レク予算ではなく、広報費・研修費・福利厚生費・備品費として落ちるか」を探索対象としていた。請求書払いに対応するということは、<strong>施設の経理フローに乗せられる</strong>ということであり、この仮説を実際に試せる状態になる。
+      </p>
+      <p class="essence-body">
+        観測面でも効く。個人アカウントだけでは「誰が使っているか」しか分からないが、施設アカウントがあれば<strong>「どの施設が使っているか」が分かる</strong>。これは DOMAIN 06（顧客接点としての戦略価値）にとって、<strong>営業が使える形の情報</strong>になる。7万人の個人名より、利用している施設のリストのほうが、営業現場では武器になりうる。
+      </p>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Focus — ヘルスケア企業</span>
+        <h3 class="essence-title">3つめの主体は、<br>システムには載らない。</h3>
+      </div>
+      <p class="essence-body">
+        今回の整理で、関わる主体は3つに分かれた。<strong>①個人（現場の介護職）、②介護施設（利用者が所属する組織）、③ヘルスケア企業</strong>。③は<strong>介護施設にジョインしたい企業</strong>、<strong>レク起点で自社商品・サービスを施設に導入したい企業</strong>——つまり<strong>売り手側</strong>であり、①②とは立場が逆になる。
+      </p>
+      <p class="essence-body">
+        これは Document B の <strong>DOMAIN 03-A「第三者からのスポンサー型」</strong>そのもの。「介護現場に届きたい第三者」にあたり、<strong>層2で貯める「属性 × アクティブ会員」データの想定される買い手</strong>でもある。
+      </p>
+      <p class="essence-body">
+        ただし今回、<strong>システムには載せない</strong>——LPと問い合わせ導線のみで、システム連携はしない。静的ページとして成立するため、<strong>データモデルへの影響はなく、スコープ1で開発工数を使う必要もない</strong>。
+      </p>
+      <p class="essence-body">
+<strong>データの扱いは決定済み。個人データそのものの提供は行わない</strong>。実行するのは<strong>①集計データの提供、②媒体としての配信（広告・タイアップ）、③本人または施設の同意に基づくマッチング</strong>——の3つで、<strong>いずれも同意事項に明記したうえで行う</strong>。
+      </p>
+      <p class="essence-body">
+        この決定は<strong>スコープ1の要件を1つ増やす</strong>。既存7万会員が同意しているのは現行のプライバシーポリシーであり、①〜③を含まない。したがって<strong>移行時の再同意が必要になり、移行フローにステップが1つ増える</strong>。あわせてシステム側に<strong>「誰が、いつ、どの版の同意事項に同意したか」を保持する仕組み</strong>が要る（§ 09-17）。
+      </p>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Note — 原則02との関係</span>
+        <h3 class="essence-title">素材の有料化ではない。<br>だから原則02とは衝突しない。</h3>
+      </div>
+      <p class="essence-body">
+        <strong>既存のレク素材を有料化して売ることは考えていない</strong>。マネタイズは「新しい仕組み」として、これから設計する。したがって<strong>現在無料で使えているものが有料になる、という変化は起きない</strong>——これは会員移行にとっても重要な前提になる（別資料）。
+      </p>
+      <p class="essence-body">
+        Document A 原則02 は「<strong>個人の財布から取らない。対価の出所を業界外に求める</strong>」と定めていた。施設アカウントと請求書払いは<strong>施設の経費科目からの拠出</strong>にあたり、原則02の想定内（DOMAIN 03-C）。一方、<strong>現場の介護士に役立つサービスへの個人課金</strong>は、必要であれば検討するとしている——ここは原則02との関係を整理する余地があるが、<strong>スコープ1の要件には影響しない</strong>。いま結論を出す必要はなく、リニューアルを止める理由にもならない。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §02 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　スケジュール</span>
+      <h2 class="section-title">2本のラインを、<br>並走させる。</h2>
+    </div>
+    <p class="section-lead">
+      2027年4月の運用開始は固定。9月着手で実期間は6ヶ月。ラインは3本走るが、<strong>期限に縛られるのは開発とデザインの2本だけ</strong>。新コンテンツ制作は並走させるものの、<strong>遅れてもスコープ1は完了できる</strong>——この非対称性が、6ヶ月を成立させている。<strong>残る調整点は、カテゴリ整理の期日</strong>。
+    </p>
+
+    <div class="timeline">
+      <div class="tl-row">
+        <span class="tl-when">2026.08</span>
+        <span class="tl-what">
+          <span class="tl-title">要件確定 ／ 体制確定 ／ 移行協議の着手</span>
+          <span class="tl-note">本資料の合意 ／ § 09 の確認事項を回収 ／ 既存管理会社へエクスポート範囲とハッシュ方式を打診 ／ 技術スタック・デザイン体制・<strong>新コンテンツの制作体制</strong>の確定 ／ <strong>器の形に関わる4論点（§ 01）の方針決め — とくに施設アカウント</strong></span>
+        </span>
+        <span class="tl-track">並走：Phase 0「観る」</span>
+      </div>
+      <div class="tl-row">
+        <span class="tl-when">2026.09</span>
+        <span class="tl-what">
+          <span class="tl-title">着手 ／ 層1実装 ＋ UI設計 ＋ カテゴリ整理</span>
+          <span class="tl-note">DB設計（<strong>複数コンテンツタイプ ＋ 会員モデルに施設の余地</strong>／§ 04）・会員基盤・4連携の実装着手 ／ IA再設計とワイヤーフレーム ／ <strong>カテゴリ整理を Phase 1 から前倒しで開始</strong> ／ 新コンテンツの制作着手 ／ 現行サイトの全数棚卸し</span>
+        </span>
+        <span class="tl-track">開発・デザイン</span>
+      </div>
+      <div class="tl-row gate">
+        <span class="tl-when">2026.09 末</span>
+        <span class="tl-what">
+          <span class="tl-title">◆ 定点観測① ／ ROUTE 分岐</span>
+          <span class="tl-note">実アクティブ数と対価の出所が出る。ROUTE 2 と判定された場合は投資規模の再判断が必要（Risk 07）。<strong>アクティブの定義は層2のDB設計に直結するため、ここで確定させる。</strong></span>
+        </span>
+        <span class="tl-track">要・経営判断</span>
+      </div>
+      <div class="tl-row">
+        <span class="tl-when">2026.10</span>
+        <span class="tl-what">
+          <span class="tl-title">デザインシステム構築 ／ 主要画面デザイン</span>
+          <span class="tl-note">デザイントークンとコンポーネント一式を先に定義。トップ・各コンテンツの一覧／詳細・検索・マイページ・登録／ログインのカンプ作成。<strong>新コンテンツの「箱」と Coming soon の見せ方も、この段階で設計する</strong>。層1実装・層2設計は並行</span>
+        </span>
+        <span class="tl-track">14期スタート</span>
+      </div>
+      <div class="tl-row gate">
+        <span class="tl-when">2026.11 末</span>
+        <span class="tl-what">
+          <span class="tl-title">◆ ゲート① ／ デザイン確定 ＋ カテゴリ体系の確定</span>
+          <span class="tl-note">全画面のデザインとデザインシステムを確定。<strong>同時に、残すカテゴリ／統合するカテゴリ／廃止するカテゴリを確定させる</strong>。デザインが必要とするのは体系であって個別素材の可否ではない（§ 08）。<strong>本プロジェクトで最も守るべき期日。</strong></span>
+        </span>
+        <span class="tl-track">Risk 04・05</span>
+      </div>
+      <div class="tl-row">
+        <span class="tl-when">2026.12</span>
+        <span class="tl-what">
+          <span class="tl-title">フロント実装 ／ 予告①配信</span>
+          <span class="tl-note">確定デザインの実装。SEO基盤・301リダイレクト・静的ページ・<strong>企業向けLPの設置</strong>。あわせて全会員へリニューアル予告を配信し、<strong>到達性（バウンス率）を測定する</strong>（会員移行ロードマップ § 03）</span>
+        </span>
+        <span class="tl-track">開発・移行<br>・コンテンツ</span>
+      </div>
+      <div class="tl-row gate">
+        <span class="tl-when">2027.01 末</span>
+        <span class="tl-what">
+          <span class="tl-title">◆ ゲート② ／ 移行対象リストの確定</span>
+          <span class="tl-note">カテゴリ整理の結果を、個別コンテンツ単位の移行対象リストに落とす。<strong>移行スクリプトの入力になるため、ドライラン①に間に合う必要がある</strong>。DLログとアクティブ会員の利用実績を判断材料に使う（Risk 06）。</span>
+        </span>
+        <span class="tl-track">コンテンツ→開発<br>ハンドオフ</span>
+      </div>
+      <div class="tl-row">
+        <span class="tl-when">2027.01</span>
+        <span class="tl-what">
+          <span class="tl-title">統合テスト ／ 移行ドライラン①</span>
+          <span class="tl-note">本番同等データを載せた環境の構築 ／ 会員データ移行のリハーサル1回目 ／ 移行フローの検証 ／ 実機でのユーザビリティ確認</span>
+        </span>
+        <span class="tl-track">要・管理会社の<br>データ提供</span>
+      </div>
+      <div class="tl-row gate">
+        <span class="tl-when">2027.02 末</span>
+        <span class="tl-what">
+          <span class="tl-title">◆ スコープ1 完了 ／ マイルストーン</span>
+          <span class="tl-note">①顧客ID連携とデータ観測が実データで動作している。②会員移行の方式・対象者数・案内文面が確定している。③新コンテンツの箱と動線が実装され、<strong>用意できた分は載り、間に合わない分は予告として成立している</strong>。</span>
+        </span>
+        <span class="tl-track">要・社内合意<br>§ 09-01</span>
+      </div>
+      <div class="tl-row">
+        <span class="tl-when">2027.03</span>
+        <span class="tl-what">
+          <span class="tl-title">移行ドライラン② ／ UAT ／ 切替準備</span>
+          <span class="tl-note">本番データでのリハーサル2回目 ／ 受入テストと是正 ／ 301リダイレクト検証 ／ 切替手順の確定 ／ 会員への切替日告知と新UIの事前案内</span>
+        </span>
+        <span class="tl-track">既存管理会社の<br>協力が必要な期間</span>
+      </div>
+      <div class="tl-row fixed">
+        <span class="tl-when">2027.04</span>
+        <span class="tl-what">
+          <span class="tl-title">運用開始 ／ スコープ2 着手</span>
+          <span class="tl-note">新サイト本番稼働。既存管理会社との契約満了に伴う切替完了。ここから会員移行の実測が始まり、<strong>同時にスコープ2（新コンテンツの拡充・新しい仕組みによるマネタイズ）に着手する</strong>。</span>
+        </span>
+        <span class="tl-track">Phase 2「磨く」<br>期間内</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §03 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 03　要件の三層</span>
+      <h2 class="section-title">土台の上に、<br>器を載せる。</h2>
+    </div>
+    <p class="section-lead">
+      スコープ1を要件の構造に落とすと三層になる。<strong>層1と層2が土台、層3が利用者に見える器</strong>。スコープ2の中身は、この三層が完成したところに載っていく。
+    </p>
+
+    <div class="layer-list">
+      <div class="layer must">
+        <div class="layer-head">
+          <span class="layer-tag">Layer 1 — 土台・MUST</span>
+          <span class="layer-name">つなぐ</span>
+          <span class="layer-when">実装：2026.09 —<br>顧客ID連携</span>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">
+            現行で「要確認」のまま止まっている4連携を、<strong>標準機能として実装する</strong>。ここが完成しない限り、他の何が出来上がっても目的は達成されない。UI設計やカテゴリ整理とは独立に進められるため、9月から先行着手する。
+          </p>
+          <ul class="layer-items">
+            <li>会員フラグ（<code>is_member</code>）を dataLayer へ出力 → GA4 ユーザープロパティに反映</li>
+            <li>DLイベントとサーバログの両方に <code>member_id</code> を付与（誰が何を何回落としたか）</li>
+            <li>LINEログイン／LIFF による <code>LINE userId ↔ member_id</code> の自動突合</li>
+            <li>会員DBに流入媒体カラムを持ち、登録時の UTM／リファラを永続保存</li>
+            <li>GTM・GA4 の管理権限を社内に保持する構成</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="layer mid">
+        <div class="layer-head">
+          <span class="layer-tag">Layer 2 — 土台・MUST</span>
+          <span class="layer-name">測る・貯める</span>
+          <span class="layer-when">実装：2026.10 —<br>データ観測</span>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">
+            層1でつないだIDに、<strong>観測できるデータを載せる</strong>。SHIFT 03（業界外スポンサー）で売る対象は「精度の高いアクティブ会員データ」。<strong>スコープ2の商品を売るための在庫を、スコープ1で貯め始める</strong>という関係にある。
+          </p>
+          <ul class="layer-items">
+            <li>属性項目：役職／施設形態／地域／担当業務／関心テーマ／購買関与</li>
+            <li>アクティブ判定ロジックの実装（定義は Phase 0 STAGE 2 の結果を採用）</li>
+            <li>会員別の行動履歴（ログイン・DL・閲覧）を分析可能な形で保持</li>
+            <li>属性 × アクティブのクロス集計を、管理画面から出力できること</li>
+            <li>アンケート基盤（1問マイクロ形式・回答後に即時素材配布）</li>
+            <li><strong>新コンテンツへの反応を計測できること</strong>——どの種別に関心が集まるかが、スコープ2の優先順位を決める</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="layer late">
+        <div class="layer-head">
+          <span class="layer-tag">Layer 3 — 器</span>
+          <span class="layer-name">見せる</span>
+          <span class="layer-when">設計：2026.09 —<br>ゲート①：2026.11 末</span>
+        </div>
+        <div class="layer-body">
+          <p class="layer-desc">
+            新UIで、整理された既存コンテンツと<strong>新コンテンツ</strong>を並べる。用意が間に合わない分があっても、<strong>どこに何が載るのかが利用者に伝わる状態</strong>を作るのが、スコープ1における層3のゴール。
+          </p>
+          <ul class="layer-items">
+            <li>IA再設計（整理後のカテゴリ体系 ＋ 新コンテンツ種別の位置づけ）</li>
+            <li>デザインシステム構築（トークン化した色・タイポ・スペース、コンポーネント一式）</li>
+            <li>全画面のデザイン（トップ／各コンテンツの一覧・詳細／検索／マイページ／登録・ログイン／管理画面）</li>
+            <li><strong>Coming soon の見せ方</strong>（用意が間に合わなかった場合の保険／Risk 08）</li>
+            <li>アクセシビリティ要件の作り込み（§ 05 — 利用者に高年齢層を含む）</li>
+            <li>SEO基盤：URL体系の再設計、301リダイレクト、<code>sitemap.xml</code>、構造化データ</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §04 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 04　コンテンツ設計</span>
+      <h2 class="section-title">「素材＝DLして印刷」という<br>前提が、崩れる。</h2>
+    </div>
+    <p class="section-lead">
+      箱を作るということは、<strong>データモデルを決めるということ</strong>。現行の設計は「コンテンツ＝ファイルをダウンロードして印刷するもの」という一本の前提で組まれている。新コンテンツはこの前提に収まらない。<strong>中身は後から載せられるが、モデルは後から変えられない。</strong>
+    </p>
+
+    <div class="essence-block accent">
+      <div class="essence-head">
+        <span class="essence-tag">Critical — 9月のDB設計に効く</span>
+        <h3 class="essence-title">コンテンツモデルを、<br>「素材」一本で設計しない。</h3>
+      </div>
+      <p class="essence-body">
+        現行は素材・レクネタ・動画がそれぞれ独立したテーブルとして存在し、いずれも<strong>「ファイルを配布する」構造</strong>を持つ。新コンテンツはここに収まらない。デジタルレクは<strong>配布せず画面上で使う</strong>。エビデンス系は<strong>ファイルではなく知見の構造</strong>を持つ。
+      </p>
+      <p class="essence-body">
+        したがって、<strong>複数のコンテンツタイプを横断的に扱える設計</strong>を最初から採る。共通のメタデータ（タイトル・カテゴリ・季節・対象・難易度・公開状態）を持つ基底の上に、タイプ固有の属性を載せる形にする。あわせて<strong>会員モデルの側に施設アカウントの余地を残す</strong>（§ 01）。<strong>スコープ1で実装するのは器だけでよいが、器の形は今決める。</strong>
+      </p>
+    </div>
+
+    <div class="dtable" style="margin-top:44px;">
+      <table>
+        <thead>
+          <tr><th>タイプ</th><th>スコープ1での扱い</th><th>利用の形</th><th>設計上の論点</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="k">レク素材</td><td><strong>カテゴリ整理して移行</strong></td><td>DLして印刷し、現場で配る</td><td>整理後の体系と、削るカテゴリの旧URLの受け皿</td></tr>
+          <tr><td class="k">レクネタ</td><td><strong>カテゴリ整理して移行</strong></td><td>企画書として読み、現場で実施</td><td>現行 kind 4種の体系を維持するか</td></tr>
+          <tr><td class="k">レク動画</td><td>移行</td><td>視聴する（YouTube）</td><td>自社で視聴データを取れるか</td></tr>
+          <tr class="hl"><td class="k">デジタルレク</td><td><strong>箱＋中身も用意</strong><br>間に合わねば予告</td><td>DLせず、画面上で使う</td><td>DL数では測れない。起動・利用時間・完了のイベント設計を<strong>モデルとして先に持つ</strong></td></tr>
+          <tr class="hl"><td class="k">エビデンス系</td><td><strong>箱＋中身も用意</strong><br>PoC連動</td><td>読んで、実施して、記録する</td><td>ファイルではなく構造化された知見。PoC参加施設向け機能の余地</td></tr>
+          <tr><td class="k">有料サービス</td><td>作らないが<strong>余地を残す</strong></td><td>—（スコープ2）</td><td><strong>レク素材の有料化ではない。</strong>課金対象をコンテンツと別概念として置けるか（§ 01）</td></tr>
+          <tr><td class="k">企業向けLP</td><td><strong>LPのみ設置</strong></td><td>読む（システム連携なし）</td><td>静的ページとして成立するため、データモデルへの影響はない</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Digital — デジタルを活かしたレク</span>
+        <h3 class="essence-title">紙では成立しないものだけを、<br>デジタルで作る。</h3>
+      </div>
+      <p class="essence-body">
+        既存素材のPDFを画面で見られるようにするだけでは、デジタルを活かしたことにならない。<strong>紙に印刷できないもの——音が出る、動く、反応が返る、参加者ごとに変わる——を狙う</strong>。中身は用意する方向で進めるが、<strong>どういう性質のものを載せるのかは、器の形を決めるために先に必要</strong>になる。
+      </p>
+      <p class="essence-body">
+        事業側の意味も大きい。デジタルレクは<strong>DLで完結せず、サイト上で利用が続く</strong>。これは層2にとって、<strong>DLログでは取れなかった「実際に使われたか」を初めて観測できる</strong>ことを意味する。DOMAIN 05（コンテンツ資産）の測定精度が、ここで一段上がる。
+      </p>
+    </div>
+
+    <div class="essence-block">
+      <div class="essence-head">
+        <span class="essence-tag">Evidence — PoC連動のエビデンス系</span>
+        <h3 class="essence-title">DOMAIN 03-B への、<br>最初の一手になる。</h3>
+      </div>
+      <p class="essence-body">
+        Document B の DOMAIN 03-B は、対価の出所として<strong>「加算・補助金との接続」——科学的介護加算、個別機能訓練加算、LIFE 等との連動</strong>を挙げていた。Document A の Phase 2「磨く」にも <strong>EBR（科学的根拠付きレク）の試験運用</strong>が置かれている。エビデンス系コンテンツは、この線に乗る。
+      </p>
+      <p class="essence-body">
+        つまりこれは<strong>コンテンツであると同時に、マネタイズ仮説の検証装置</strong>でもある。<strong>PoCで何を証明しようとしているのかが、器の構造に影響する</strong>——とくに参加施設が実施記録や測定値を入力する機能が将来必要になるなら、その余地をモデルに残しておく必要がある。<strong>ここは施設アカウント（§ 01）とも直結する</strong>：PoC参加施設は、施設アカウントの最初の利用者になりうる（§ 09-12）。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §05 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 05　UI設計方針</span>
+      <h2 class="section-title">明日のレクの準備を、<br>5分で終わらせる。</h2>
+    </div>
+    <p class="section-lead">
+      新UIの評価軸を、好みではなく<strong>利用者像と価値仮説から導く</strong>。Document B の DOMAIN 02 は「提供価値の本体は素材そのものではなく、考える手間の代行・時間の節約・精神的負担の軽減にある」と置いた。<strong>UIはこの仮説に賭ける</strong>。
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>前提</th><th>根拠</th><th>UIへの含意</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">利用者は個人</td>
+            <td>SHIFT 02。施設の業務指示ではなく、現場の介護職が自己責任で使っている</td>
+            <td>法人向けの重い画面にしない。<strong>個人が業務の合間に開く道具</strong>として設計する</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">年齢層が幅広い</td>
+            <td>介護現場の職員構成。高年齢の職員も日常的に使う</td>
+            <td><strong>アクセシビリティは装飾ではなく必須要件</strong>。文字サイズ・コントラスト・タップ領域を規定値として固定する</td>
+          </tr>
+          <tr>
+            <td class="k">価値は「時短」</td>
+            <td>DOMAIN 02 の仮説。検証は Phase 0 で進行中</td>
+            <td>探す→見つける→使う、を最短経路にする。<strong>回遊させない設計</strong>が正解になりうる</td>
+          </tr>
+          <tr>
+            <td class="k">季節・行事が入口</td>
+            <td>GA4実績：七夕塗り絵 +942%、枕草子 78,214。季節物とシリーズ物が突出</td>
+            <td>検索窓中心ではなく、<strong>「今月のレク」から入れる導線</strong>を主動線に置く</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">箱が先にある</td>
+            <td>Decision 02。中身より先に、コンテンツタイプの枠が並ぶ</td>
+            <td><strong>空の箱が「手抜き」ではなく「これから増える」と伝わる設計</strong>。Coming soon の扱いが要になる</td>
+          </tr>
+          <tr>
+            <td class="k">デバイスは混在</td>
+            <td>個人スマホ・施設PC・施設タブレット（DOMAIN 01 の測定対象）</td>
+            <td>スマホで探して施設PCで印刷する、といった<strong>デバイスをまたぐ利用</strong>を想定する（お気に入り・DL履歴）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Design Principle</span>
+        <h3 class="essence-title">介護現場の道具として、<br>信頼できる佇まいにする。</h3>
+      </div>
+      <p class="essence-body">
+        目指すのは<strong>温かく、明快で、道具として信頼できる</strong>佇まい。素材そのものが色彩豊かなため、<strong>UI側は静かに引き、コンテンツを主役にする</strong>。装飾で新しさを主張する必要はない。「15年前のサイト」から変わったことは、探しやすさと速さで伝わればよい。
+      </p>
+      <p class="essence-body">
+        避けるべきは2方向。ひとつは<strong>介護＝高齢者向けという短絡から生まれる、文字が大きいだけの野暮ったい画面</strong>。もうひとつは<strong>今風のトレンドを当てただけの、細く薄く低コントラストな画面</strong>——後者はこの利用者層にとって実害になる。読みやすさと美しさは両立させる。
+      </p>
+    </div>
+
+    <div class="dtable" style="margin-top:32px;">
+      <table>
+        <thead>
+          <tr><th>項目</th><th>規定値（案）</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl"><td class="k">本文サイズ</td><td>16px 以上（スマホ・PC とも）。素材のタイトルなど主要素はさらに大きく</td></tr>
+          <tr class="hl"><td class="k">コントラスト比</td><td>WCAG 2.1 AA 準拠（本文 4.5:1 以上、大きい文字 3:1 以上）</td></tr>
+          <tr><td class="k">タップ領域</td><td>44 × 44px 以上。特にDLボタンと絞り込みUI</td></tr>
+          <tr><td class="k">フォーカス表示</td><td>キーボード操作時に必ず可視。輪郭を消さない</td></tr>
+          <tr><td class="k">画像の代替テキスト</td><td>素材サムネイルに必須。管理画面の入稿項目として強制する</td></tr>
+          <tr><td class="k">表示速度</td><td>一覧の初回表示を体感1秒台に。サムネイルは遅延読み込み</td></tr>
+          <tr><td class="k">印刷</td><td>印刷して使うタイプには印刷用CSSを用意し、余計なUIを落とす</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:32px;">
+      <div class="essence-head">
+        <span class="essence-tag">Deliverable</span>
+        <h3 class="essence-title">デザインの成果物を、<br>先に決めておく。</h3>
+      </div>
+      <p class="essence-body">
+        11月末のゲート①で「確定した」と言えるために、何が揃っていれば確定なのかを先に定義する。<strong>①デザイントークン（色・タイポ・スペース・角丸・影）、②コンポーネント一式、③全画面のデザイン、④レスポンシブ時の挙動、⑤空状態・エラー・読み込み中の表示</strong>。⑤は抜けやすく、実装中に必ず必要になる。<strong>今回は Coming soon も⑤に含める</strong>。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §06 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 06　機能要件</span>
+      <h2 class="section-title">スコープ1で、<br>作るもの。</h2>
+    </div>
+    <p class="section-lead">
+      <span class="pill must">MUST</span> は4月の運用開始時点で必須、<span class="pill gold">SHOULD</span> は間に合わなければ運用開始後の追加を許容、<span class="pill deep">余地</span> はスコープ1では作らないが<strong>データモデル上の余地だけ残す</strong>もの。
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>領域</th><th>要件</th><th>優先</th><th>層</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl"><td class="k">会員基盤</td><td>登録・ログイン・パスワード再発行・退会。<strong>既存7万会員の移行を含む</strong></td><td><span class="pill must">MUST</span></td><td>1</td></tr>
+          <tr class="hl"><td class="k">顧客ID連携</td><td>会員フラグ出力／DL×member_id／LINE名寄せ／流入媒体保存（層1の4連携）</td><td><span class="pill must">MUST</span></td><td>1</td></tr>
+          <tr class="hl"><td class="k">データ観測</td><td>行動ログ保持／アクティブ判定／属性 × アクティブのクロス集計出力</td><td><span class="pill must">MUST</span></td><td>2</td></tr>
+          <tr class="hl"><td class="k">コンテンツ基盤</td><td><strong>複数のコンテンツタイプを横断的に扱えるデータモデル</strong>（§ 04）。共通メタデータ＋タイプ固有属性</td><td><span class="pill must">MUST</span></td><td>1･3</td></tr>
+          <tr><td class="k">マイページ</td><td>DL履歴・お気に入り・プロフィール（属性）編集・LINE連携状態</td><td><span class="pill must">MUST</span></td><td>1･2</td></tr>
+          <tr><td class="k">レク素材</td><td>一覧・詳細・カテゴリ絞り込み・キーワード検索・DL（会員限定）・印刷</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">レクネタ</td><td>一覧・詳細・種別絞り込み</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">レク動画</td><td>一覧・再生（YouTube埋め込み想定）</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr class="hl"><td class="k">新コンテンツの器</td><td>デジタルレク／エビデンス系の<strong>枠・一覧・詳細・動線</strong>。中身は用意する方向、間に合わなければ予告表示</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">ヘルスケア企業向けLP</td><td>PoC・レク実装サービスの紹介ページと、そこへの動線。<strong>システムとは連動しない</strong></td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">特集／News</td><td>記事CMS。現行の運用をそのまま継続できること</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">季節導線</td><td>「今月のレク」等、季節・行事から入れる主動線（§05の設計方針）</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">管理画面</td><td>コンテンツ入稿（<strong>全タイプ対応</strong>）・会員管理・属性クロス集計の出力・アンケート作成</td><td><span class="pill must">MUST</span></td><td>1･2</td></tr>
+          <tr><td class="k">LINE連携</td><td>LINEログイン／LIFF・リッチメニュー連動・アカウント連携解除</td><td><span class="pill must">MUST</span></td><td>1</td></tr>
+          <tr class="hl"><td class="k">SEO基盤</td><td>URL再設計・301リダイレクト（<strong>整理で消えるカテゴリの受け皿を含む</strong>）・sitemap.xml・構造化データ・OGP</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">プレゼント</td><td>応募受付・当選管理</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">リクエスト受付</td><td>素材リクエストフォーム</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">問い合わせ</td><td>フォーム・FAQ・サイトポリシー・プライバシーポリシー等の静的ページ</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">送客導線</td><td>レクリエーション介護士・CareTEX・生産性DX・レクサポ等への計測付きリンク</td><td><span class="pill must">MUST</span></td><td>3</td></tr>
+          <tr><td class="k">新UIヘルプ</td><td>移行直後の会員向けに「どこが変わったか」を示す導線</td><td><span class="pill gold">SHOULD</span></td><td>3</td></tr>
+          <tr><td class="k">アンケート</td><td>1問マイクロ形式・回答後の即時素材配布・回答データの会員紐付け</td><td><span class="pill gold">SHOULD</span></td><td>2</td></tr>
+          <tr><td class="k">メルマガ</td><td>配信基盤との接続。現行ツールの特定が未了（§09-05）</td><td><span class="pill gold">SHOULD</span></td><td>2</td></tr>
+          <tr class="hl"><td class="k">所属施設の参照</td><td>会員が所属施設を参照できる形で持つ。<strong>施設アカウントの機能（職員管理・請求書払い）はスコープ2</strong></td><td><span class="pill must">MUST</span></td><td>1</td></tr>
+          <tr class="hl"><td class="k">同意管理</td><td><strong>同意事項の版・同意日時・同意項目を会員ごとに保持。</strong>移行時の再同意フロー（ログイン後1画面）を含む</td><td><span class="pill must">MUST</span></td><td>1</td></tr>
+          <tr><td class="k">決済</td><td>オンライン決済＋請求書払い。<strong>スコープ1では実装しない</strong></td><td><span class="pill deep">余地</span></td><td>1</td></tr>
+          <tr><td class="k">PoC記録機能</td><td>参加施設が実施記録・測定値を入力する機能。<strong>スコープ2</strong></td><td><span class="pill deep">余地</span></td><td>2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- §07 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 07　リスク</span>
+      <h2 class="section-title">この計画が失敗するとしたら、<br>ここで失敗する。</h2>
+    </div>
+    <p class="section-lead">
+      スコープ1に絞ったことで、新コンテンツ制作の遅延リスクは大きく下がった。残るのは<strong>移行と、器の設計を間違えること</strong>。着手順を誤ると取り返しがつかないものから並べる。
+    </p>
+
+    <div class="risk-list">
+      <div class="risk">
+        <span class="risk-num">01</span>
+        <div class="risk-body">
+          <span class="risk-when">最大 ／ 別資料</span>
+          <h3 class="risk-title">既存7万会員の移行。この計画で最も大きい課題。</h3>
+          <p class="risk-note">
+            新基盤を作ることより難しいのは、そこへ会員を移すこと。しかも<strong>7万人のうち何人に連絡が付くのかを、現時点で誰も知らない</strong>。<strong>ハード（データ移行）とソフト（会員の再有効化）は性質が違い、オペレーションとして分けて設計する</strong>。後者は失敗しても静かに進行し、エラーは出ないまま数字だけが消える。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            <a href="member_migration_roadmap.html" style="color:var(--accent-deep);font-weight:600;">会員移行ロードマップ</a>として別資料で扱う。なお<strong>スコープ1では利用者にとっての「無料で使える」条件が変わらない</strong>ため、移行の追い風は強い。有料化を伴わないことは、訴求の中心に置ける。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">02</span>
+        <div class="risk-body">
+          <span class="risk-when">最優先 ／ 8〜9月</span>
+          <h3 class="risk-title">既存管理会社の協力を、契約が生きているうちに固める。</h3>
+          <p class="risk-note">
+            契約満了に伴う移行であるため、<strong>相手には協力するインセンティブがない</strong>。会員DB・コンテンツ実体・メタデータ・DLログ・全URL一覧——これらが出てこなければ、どれだけ良い新サイトを作っても移行できない。<strong>DLログはカテゴリ整理の判断材料でもある</strong>ため、早期受領の重要度が高い。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            エクスポートの<strong>対象・形式・期限・回数</strong>を書面で合意する。ドライラン2回と本番用で<strong>最低3回</strong>取得できる条件にする。<strong>過去24ヶ月のDLログは最優先で早期に受領する</strong>。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">03</span>
+        <div class="risk-body">
+          <span class="risk-when">最優先 ／ 8月中</span>
+          <h3 class="risk-title">パスワードハッシュ方式が、会員移行の設計を分岐させる。</h3>
+          <p class="risk-note">
+            標準方式（bcrypt 等）なら、<strong>会員は何もせずこれまでどおりログインできる</strong>。独自方式・可逆暗号・平文なら移行できず、<strong>7万人全員にパスワード再設定を求める</strong>ことになる。これは「実アクティブ数を育て直す」という14期の中心テーマと正面から衝突し、移行率は桁で変わる。<strong>ハード側の唯一かつ最大の分岐点。</strong>
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            ハッシュ方式・ソルトの持ち方を最優先で確認する。移行不可の場合は、<strong>初回ログイン時に旧方式で検証して新方式へ再ハッシュする移行ロジック</strong>で吸収できるかを検討する。詳細は会員移行ロードマップ § 02。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">04</span>
+        <div class="risk-body">
+          <span class="risk-when">9月中</span>
+          <h3 class="risk-title">器の形を間違えると、スコープ2で作り直しになる。</h3>
+          <p class="risk-note">
+            中身は後から載せられるが、<strong>モデルは後から変えられない</strong>。DB設計は9月に行われるのに対し、スコープ2の仕組み（新しいマネタイズ・施設アカウント）は未確定。とくに<strong>会員モデルは最も直しにくい</strong>——7万件のデータを持ったまま親子構造を後付けするのは、コンテンツのスキーマ変更よりはるかに重い。「器だけ作る」の難しさは、ここにある。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            § 01 の論点を<strong>8月中に方針として決める</strong>。実装するかではなく、<strong>後から足せる形か</strong>を決めればよい。<strong>所属施設の参照はすでに決定済み</strong>のため、残るは決済と課金対象。ヘルスケア企業向けLPは静的ページのため考慮不要。データモデルの骨格は<a href="infrastructure_proposal.html" style="color:var(--accent-deep);font-weight:600;">インフラ・技術構成の提案 § 04</a>に示す。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">05</span>
+        <div class="risk-body">
+          <span class="risk-when">11月末</span>
+          <h3 class="risk-title">デザインとカテゴリ整理が、同じ日に確定しないと詰む。</h3>
+          <p class="risk-note">
+            UI刷新により<strong>デザインがクリティカルパスに乗っている</strong>。しかもIAはカテゴリ体系に依存するため、<strong>デザインとカテゴリ整理は同時に確定する必要がある</strong>。デザインは合意形成に時間がかかりやすく、カテゴリ整理は Document A が「最も心理的に難しい」と評した仕分けの一部。どちらも遅れやすい。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            <strong>10月にデザインシステムを先に固め、個別画面はその上で組む</strong>。カテゴリ整理は9月に前倒し着手し、<strong>DLログという判断材料を9月時点で手元に置く</strong>。<strong>レビュー参加者と承認者を8月中に決めておく</strong>——誰が「確定」と言えるのかが曖昧だと必ず遅れる。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">06</span>
+        <div class="risk-body">
+          <span class="risk-when">1月末</span>
+          <h3 class="risk-title">カテゴリ整理の結果を、個別コンテンツに落とし切れない。</h3>
+          <p class="risk-note">
+            カテゴリ単位の判断（ゲート①）と、個別コンテンツ単位の移行対象確定（ゲート②）は別作業。<strong>「このカテゴリは残す」が決まっても、その中の1点1点をどうするかは自動では決まらない</strong>。移行スクリプトの入力になるため、ドライラン①に間に合わないと切替全体が遅れる。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            ゲート②を<strong>1月末に固定</strong>し、判断材料（DLログ・アクティブ会員の利用実績）を先に揃える。<strong>原則を先に決めておく</strong>——例えば「直近24ヶ月にDL実績があるものは残す」といった機械的な線を引き、例外だけを人手で判断する形にすると、作業量が桁で減る。<br><br>あわせて<strong>保護対象を先に確定させる</strong>。DLログから S1（アクティブ層）が繰り返し使っているコンテンツを抽出し、整理の対象から外す。Document A の判断基準「利用ベース」を、移行の文脈では<strong>全体の利用回数ではなくアクティブ会員の利用</strong>で見る——最も移行してほしい層の使っているものを消さないための、明示的な歯止めになる。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">07</span>
+        <div class="risk-body">
+          <span class="risk-when">9月末</span>
+          <h3 class="risk-title">定点観測①で ROUTE 2 になった場合の扱いが、未定義。</h3>
+          <p class="risk-note">
+            9月末の定点観測①で ROUTE 1（価値化に進む）と ROUTE 2（最小コストで戦略資産として維持）に分岐する設計になっている。仮に ROUTE 2 と判定されても<strong>契約満了の期限は動かない</strong>ため、「移行だけは必ず必要」という状態が残る。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            スコープ1をさらに縮退させた版（<strong>層1＋既存コンテンツの移行のみ。層2と新コンテンツの箱は見送り</strong>）を事前に定義しておく。9月着手である以上、<strong>判定を待たずに層1から始め、判定後に層2と箱の規模を確定させる</strong>進め方が現実的。
+          </div>
+        </div>
+      </div>
+
+      <div class="risk">
+        <span class="risk-num">08</span>
+        <div class="risk-body">
+          <span class="risk-when">運用開始後</span>
+          <h3 class="risk-title">保険のはずの Coming soon が、常態になる。</h3>
+          <p class="risk-note">
+            新コンテンツは用意する方向で進めるが、<strong>間に合わなかった箱は予告のまま公開される</strong>。これは保険として正しい設計だが、<strong>4月に見た予告が半年後も同じなら、新しくなったという印象は逆に損なわれる</strong>。空の箱は、放置すると手抜きの証拠に見える。制作ラインが期限に縛られない分、<strong>この状態は静かに固定化しやすい</strong>。
+          </p>
+          <div class="risk-fix">
+            <strong>打ち手</strong>
+            <strong>時期を書くなら守れる時期だけを書く</strong>。書けないなら「準備中」ではなく<strong>関心を登録できる形</strong>にする（通知希望・LINE連携への導線）。これは層2にとっても価値があり、<strong>どの種別に関心が集まるかがスコープ2の優先順位を決める材料</strong>になる。あわせて<strong>4月時点で最低何点載っていれば「新しくなった」と言えるかを、先に決めておく</strong>。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §08 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 08　Phase 1 との接続</span>
+      <h2 class="section-title">カテゴリ整理を、<br>2段階に分ける。</h2>
+    </div>
+    <p class="section-lead">
+      スコープ1に含まれる「カテゴリ整理」は、Phase 1「仕分ける」の一部にあたる。しかし Phase 1 の結果確定は12月末、デザイン確定は11月末——このままでは順序が合わない。<strong>粒度を2つに分けることで、並走を成立させる。</strong>
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead>
+          <tr><th>ゲート</th><th>確定させるもの</th><th>期限</th><th>何の入力になるか</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">ゲート①<br>体系</td>
+            <td><strong>カテゴリ体系。</strong>残すカテゴリ／統合するカテゴリ／廃止するカテゴリ。あわせて新コンテンツ種別の位置づけ</td>
+            <td>2026.11 末</td>
+            <td>IA・デザイン。<strong>デザインが必要とするのは体系であって個別の可否ではない</strong></td>
+          </tr>
+          <tr class="hl">
+            <td class="k">ゲート②<br>個別</td>
+            <td><strong>個別コンテンツの移行対象リスト。</strong>1点単位で確定させる</td>
+            <td>2027.01 末</td>
+            <td>移行スクリプト。<strong>ドライラン①に間に合えばよい</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Requirement — Phase 1 への要求</span>
+        <h3 class="essence-title">カテゴリ整理だけ、<br>9月に前倒しする。</h3>
+      </div>
+      <p class="essence-body">
+        Phase 1 は本来 2026.10–12 の3ヶ月。しかしゲート①が11月末である以上、<strong>カテゴリ整理は9月に着手する必要がある</strong>。Phase 1 の他の対象（チャネル・キャンペーン）は予定どおり10月開始でよい——リニューアルの入力にならないため。
+      </p>
+      <p class="essence-body">
+        あわせて、判断材料の準備も前倒しになる。<strong>過去24ヶ月のDLログと、DOMAIN 05 の素材利用実績が、9月時点で手元にある必要がある</strong>。Document A は仕分けを「最も心理的に難しいフェーズ」と位置づけている。<strong>データがないまま議論を始めると、必ず期限を超える。</strong>
+      </p>
+    </div>
+
+    <div class="dtable" style="margin-top:44px;">
+      <table>
+        <thead>
+          <tr><th>向き</th><th>渡すもの</th><th>期限</th><th>受け取れないと</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td class="k">Phase 0 → 本PJ</td>
+            <td><strong>アクティブ会員の定義</strong>（STAGE 2）</td>
+            <td>2026.09 末</td>
+            <td>層2のアクティブ判定が実装できない</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">Phase 0 → 本PJ</td>
+            <td><strong>素材の利用実績（DOMAIN 05）</strong>。何が使われ、何が使われていないか</td>
+            <td>2026.09</td>
+            <td>カテゴリ整理の根拠がなくなる。<strong>勘で整理することになる</strong></td>
+          </tr>
+          <tr>
+            <td class="k">Phase 0 → 本PJ</td>
+            <td>属性項目の確定リスト（STAGE 3）</td>
+            <td>2026.10</td>
+            <td>層2のDB設計が固まらない。属性追加はスキーマ変更を伴う</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">Phase 1 → 本PJ</td>
+            <td><strong>ゲート①：カテゴリ体系の確定</strong></td>
+            <td>2026.11 末</td>
+            <td>IA・デザインが確定できず、2月のスコープ1完了が崩れる</td>
+          </tr>
+          <tr class="hl">
+            <td class="k">Phase 1 → 本PJ</td>
+            <td><strong>ゲート②：個別コンテンツの移行対象リスト</strong></td>
+            <td>2027.01 末</td>
+            <td>移行スクリプトが作れず、ドライランができない</td>
+          </tr>
+          <tr>
+            <td class="k">本PJ → Phase 1</td>
+            <td>現行コンテンツの全数リストと全URL（9月の棚卸し成果物）</td>
+            <td>2026.09</td>
+            <td>Phase 1 が「何を整理するのか」の母集団を持てない</td>
+          </tr>
+          <tr>
+            <td class="k">本PJ → Phase 2</td>
+            <td>層1・層2で取得可能になったデータ、および<strong>Coming soon への反応</strong></td>
+            <td>2027.04 —</td>
+            <td>Phase 2「磨く」＝スコープ2の優先順位を決める材料が揃わない</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Note — ロードマップ上の位置づけ</span>
+        <h3 class="essence-title">スコープ1が器を作り、<br>スコープ2が Phase 2 になる。</h3>
+      </div>
+      <p class="essence-body">
+        スコープを分けたことで、Document A のフェーズ構成との対応が明確になった。<strong>スコープ1は Phase 1「仕分ける」の一部（カテゴリ整理）を取り込みつつ、器を完成させる</strong>。<strong>スコープ2は、Phase 2「磨く」そのもの</strong>——EBR、有料サービスのMVP、データソリューションの実証は、いずれも Document A の Phase 2 に置かれていた項目である。
+      </p>
+      <p class="essence-body">
+        つまりリニューアルは戦略の外側の作業ではなく、<strong>Phase 2 を実行するための前提条件を、Phase 1 と並走して整える工程</strong>にあたる。ロードマップの記述を更新するかは Document A 側の判断（§ 09-15）。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §09 -->
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 09　確認事項</span>
+      <h2 class="section-title">要件を確定させるために、<br>先に埋める空白。</h2>
+    </div>
+    <p class="section-lead">
+      現時点で答えを持っていない項目。<strong>1〜4 と 8〜11 は、9月の着手より前に埋まっている必要がある</strong>。とくに 10・11 は、9月のDB設計で器の形を決めるために要る。
+    </p>
+
+    <div class="confirms">
+      <div class="confirm">
+        <span class="confirm-num">01</span>
+        <span class="confirm-title">「2027年2月にスコープ1完了」の定義。実装完了か、UAT開始か、受入完了か</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">02</span>
+        <span class="confirm-title">既存管理会社との契約満了日の正確な日付と、満了後の協力可否</span>
+        <span class="confirm-who">契約書<br>／ 管理会社</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">03</span>
+        <span class="confirm-title">会員パスワードのハッシュ方式（bcrypt 等の標準方式か、独自方式か）</span>
+        <span class="confirm-who">既存<br>管理会社</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">04</span>
+        <span class="confirm-title">エクスポート範囲・形式・回数。とくに過去24ヶ月のDLログを9月までに受領できるか</span>
+        <span class="confirm-who">既存<br>管理会社</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">05</span>
+        <span class="confirm-title">メルマガ配信ツールの特定と、新基盤との連携可否・セグメント配信の可否</span>
+        <span class="confirm-who">メルマガ<br>担当</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">06</span>
+        <span class="confirm-title">LINE公式アカウントのプランで LINEログイン／LIFF が使えるか、実装リソースの所在</span>
+        <span class="confirm-who">LINE<br>運用担当</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">07</span>
+        <span class="confirm-title">ドメイン・DNS・SSL・GTM・GA4・Search Console の管理権限の所在</span>
+        <span class="confirm-who">サイト<br>担当</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">08</span>
+        <span class="confirm-title">デザイン体制と承認者。11月末のゲート①で「確定」と言える人を先に決める</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">09</span>
+        <span class="confirm-title">開発体制と技術構成（<a href="infrastructure_proposal.html" style="color:var(--accent-gold);">インフラ提案</a> § 07 を参照）</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">10</span>
+        <span class="confirm-title">施設アカウントの機能（職員管理・請求書払い）を、スコープ2で作るか</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">11</span>
+        <span class="confirm-title">決済（オンライン＋請求書払い）を後から載せられる構造にしておくか</span>
+        <span class="confirm-who">PM<br>／ 開発</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">12</span>
+        <span class="confirm-title">PoCの設計。何を証明するのか、参加施設が施設アカウントの最初の利用者になるか</span>
+        <span class="confirm-who">PoC<br>担当</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">13</span>
+        <span class="confirm-title">4月時点で公開する新コンテンツの点数目標と、制作体制・担当</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">14</span>
+        <span class="confirm-title">カテゴリ整理を9月に前倒しすることの、Phase 1 側との合意</span>
+        <span class="confirm-who">Phase 1<br>／ PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">15</span>
+        <span class="confirm-title">Document A のロードマップ記述を、スコープ1／2の構成に合わせて更新するか</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">16</span>
+        <span class="confirm-title">ROUTE 2 判定時の縮退版スコープを、事前に定義しておくか</span>
+        <span class="confirm-who">社内合意<br>PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">17</span>
+        <span class="confirm-title">同意事項（規約・プライバシーポリシー）の改定案。①集計提供 ②媒体配信 ③マッチング を明記する</span>
+        <span class="confirm-who">PM<br>／ 法務</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §10 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 10　次のアクション</span>
+      <h2 class="section-title">8月中に、<br>着手すること。</h2>
+    </div>
+    <p class="section-lead">
+      9月の着手に間に合わせるには、以下が8月中に動いている必要がある。上から順に、着手が遅れるほど取り返しがつかなくなる順で並べる。
+    </p>
+
+    <div class="nextactions">
+      <div class="nextaction">
+        <span class="nextaction-num">A.</span>
+        <span class="nextaction-title">既存管理会社へ、ハッシュ方式・エクスポート範囲・DLログの早期提供を打診する</span>
+        <span class="nextaction-doc">Risk 02・03</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">B.</span>
+        <span class="nextaction-title">「器の形」を方針決めする（施設アカウント・決済・課金対象の余地）</span>
+        <span class="nextaction-doc">§ 01 ／ Risk 04</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">C.</span>
+        <span class="nextaction-title">Phase 1 へ、カテゴリ整理の9月前倒しと2段階ゲートを合意する</span>
+        <span class="nextaction-doc">§ 08 ／ Risk 05</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">D.</span>
+        <span class="nextaction-title">デザイン体制・開発体制と、それぞれの承認者を確定する</span>
+        <span class="nextaction-doc">§ 09-08･09</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">E.</span>
+        <span class="nextaction-title">§ 09 の確認事項を回収し、要件を v1.0 に確定させる</span>
+        <span class="nextaction-doc">§ 09</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">F.</span>
+        <span class="nextaction-title">会員移行ロードマップを、ハード／ソフト分離のオペレーションとして固める</span>
+        <span class="nextaction-doc">別資料</span>
+      </div>
+      <div class="nextaction">
+        <span class="nextaction-num">G.</span>
+        <span class="nextaction-title">ROUTE 2 判定に備えた縮退版スコープの定義</span>
+        <span class="nextaction-doc">Risk 07</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="web_line_linkage_plan.html" class="pagenav-side"><span class="pagenav-direction">← Related</span><span class="pagenav-title">連携・集客プラン<br>Web会員 × LINE</span></a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <a href="member_migration_roadmap.html" class="pagenav-side right"><span class="pagenav-direction">Next →</span><span class="pagenav-title">会員移行ロードマップ<br>7万人をどう連れていくか</span></a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">
+      介護レク広場 14期戦略 ／ サイトリニューアル要件定義（たたき台）<br>
+      検討稿 v0.8 ／ 2026年8月 ／ 内部討議用
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
