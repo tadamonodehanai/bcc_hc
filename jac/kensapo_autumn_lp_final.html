@@ -139,6 +139,12 @@ body{
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 .br{display:inline-block}
+.pcbr{display:inline}
+@media(max-width:700px){
+  .pcbr{display:none}
+  h1.fv-h{font-size:clamp(29px,8.4vw,50px)}
+  h2.sec{font-size:clamp(24px,6.6vw,37px)}
+}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
 .narrow{max-width:780px;margin:0 auto}
 section{position:relative}
@@ -265,7 +271,7 @@ h1.fv-h .hl::after{
 .band{background:var(--ink);color:#fff;padding:70px 0 76px;position:relative;overflow:hidden}
 .band-in{text-align:center;position:relative;z-index:2}
 .band h2{font-size:clamp(24px,4.8vw,34px);line-height:1.65;margin-bottom:34px;font-weight:700}
-.band h2 .mk{background:linear-gradient(transparent 64%,var(--amber) 64%);padding:0 2px;color:#fff}
+.band h2 .mk{background:none;padding:0;color:var(--amber)}
 .aki{display:grid;gap:1px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.2);border-radius:14px;overflow:hidden}
 @media(min-width:700px){.aki{grid-template-columns:repeat(3,1fr)}}
 .aki div{background:var(--ink);padding:30px 16px}
@@ -497,10 +503,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.7);padding:58px 0 38px;font
 .an.b{animation-name:pico2;animation-duration:2.8s}
 @keyframes pico{0%,100%{transform:rotate(-2.4deg)}50%{transform:rotate(2.8deg)}}
 @keyframes pico2{0%,100%{transform:translateY(0) rotate(1.8deg)}50%{transform:translateY(-5px) rotate(-2deg)}}
-.rv{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
-.rv.in{opacity:1;transform:none}
+.js .rv{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
 .rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 
 .toast{position:fixed;left:50%;bottom:110px;transform:translate(-50%,14px);z-index:1200;background:var(--ink);color:#fff;font-size:16px;font-weight:700;padding:13px 26px;border-radius:999px;opacity:0;pointer-events:none;transition:.3s}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -526,7 +532,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div>
       <span class="lb">MAIN VISUAL — 差し替え</span>
       <h3>1枚絵（W100%）</h3>
-      <p>30〜50代の受講者が主役。スマホで学ぶ姿。<br>PC 16:9 ／ SP 4:5 で書き出し。</p>
+      <p><span class="br">30〜50代の受講者が主役。</span><span class="br">スマホで学ぶ姿。</span><br class="pcbr"><span class="br">PC 16:9 ／ SP 4:5 で書き出し。</span></p>
     </div>
   </div>
   <div class="scroll-guide"><span class="tx">SCROLL</span><span class="ln"></span></div>
@@ -540,10 +546,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <div>
       <span class="badge-camp"><i>祭</i>けんさぽ、秋まつりキャンペーン</span>
-      <h1 class="fv-h">読書の秋、食欲の秋、<br>そして、<span class="hl">まなびの秋</span>。</h1>
+      <h1 class="fv-h"><span class="br">読書の秋、</span><span class="br">食欲の秋、</span><br class="pcbr"><span class="br">そして、<span class="hl">まなびの秋</span>。</span></h1>
       <p class="fv-sub">
-        <span class="br">仕事や家事の<b>スキマ時間、約2時間。</b></span>
-        <span class="br">大切な人を<b>“支える側”</b>になるための</span><span class="br">資格を、この秋に。</span>
+        <span class="br">仕事や家事の</span><span class="br"><b>スキマ時間、約2時間。</b></span>
+        <span class="br">大切な人を<b>“支える側”</b>に</span><span class="br">なるための資格を、</span><span class="br">この秋に。</span>
       </p>
       <div class="fv-chip">最短<span class="num">2</span><span class="unit">時間</span>で資格取得</div>
       <p class="fv-disc"><b>「けんさぽ」</b>は、高齢者の<b>健</b>康と幸せ（＝健幸）を<b>サポ</b>ートする人のための資格「高齢者健幸サポーター」の愛称です。高齢者ご本人ではなく、<b>ご家族・介護施設で働く方・介護に関心のある方など、高齢者を支える立場の方</b>が学びます。</p>
@@ -576,7 +582,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
   
   <div class="wrap band-in">
-    <h2 class="rv">この秋、いちばん<span class="mk">実り</span>のある2時間を。</h2>
+    <h2 class="rv"><span class="br">この秋、いちばん<span class="mk">実り</span>のある</span><span class="br">2時間を。</span></h2>
     <div class="aki">
       <div class="rv"><span class="t">読書の秋</span><span class="d">知識が、増える</span></div>
       <div class="rv d1"><span class="t">食欲の秋</span><span class="d">実りを、味わう</span></div>
@@ -596,7 +602,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
     
     
-    <h2 class="sec rv">あなたのこんな<span class="mk">“モヤモヤ”</span>、<br>そのままにしていませんか？</h2>
+    <h2 class="sec rv"><span class="br">あなたのこんな<span class="mk">“モヤモヤ”</span>、</span><br class="pcbr"><span class="br">そのままに</span><span class="br">していませんか？</span></h2>
     <div class="checks">
       <div class="check rv"><i></i>実家の親と、話が噛み合わなくなってきた</div>
       <div class="check rv d1"><i></i>家族の介護が、そろそろ現実味を帯びてきた</div>
@@ -605,7 +611,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="check rv d2"><i></i>介護の仕事に興味はあるが、何から始めればいいのか</div>
       <div class="check rv d3"><i></i>いずれ来る“その時”に、何も準備できていない</div>
     </div>
-    <p class="turn rv">その“すれ違い”には、<br><span class="mk">ちゃんと理由</span>があります。</p>
+    <p class="turn rv"><span class="br">その“すれ違い”には、</span><br class="pcbr"><span class="br"><span class="mk">ちゃんと理由</span>があります。</span></p>
     
     
   </div>
@@ -622,7 +628,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <div class="narrow" style="text-align:center">
       <span class="eyebrow c">About the course</span>
-      <h2 class="sec rv"><span class="mk">「けんさぽ」</span>は、<br>高齢者を“支える人”のための資格。</h2>
+      <h2 class="sec rv"><span class="br"><span class="mk">「けんさぽ」</span>は、</span><br class="pcbr"><span class="br">高齢者を“支える人”の</span><span class="br">ための資格。</span></h2>
       <p class="lead rv d1">高齢者の<b>健</b>康と幸せを<b>サポ</b>ートする、「高齢者健幸サポーター」の愛称です。「高齢者ってなに？」という基本から、こころと身体の変化、接し方まで。知識がないまま向き合う不安を、体系的な学びで解消します。</p>
     </div>
     <div class="merits">
@@ -666,7 +672,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
     
     
-    <h2 class="sec rv">全5章。<br>秋の夜長に、<span class="mk">ちょうどいい</span></h2>
+    <h2 class="sec rv"><span class="br">全5章。</span><br class="pcbr"><span class="br">秋の夜長に、</span><span class="br"><span class="mk">ちょうどいい</span></span></h2>
     <p class="lead rv d1">第一章から第四章までは各3問の確認問題、第五章に25問の最終試験。合格すると認定証が発行されます。</p>
     <div class="curr rv">
       <div class="ch"><span class="n">1</span><span class="t">高齢期に起こること<span>身体・生活に現れる変化を知る</span></span></div>
@@ -690,7 +696,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
   <div class="wrap narrow" style="text-align:center">
     <span class="eyebrow c">Your 2 hours</span>
-    <h2 class="sec rv">「2時間」は、<br>こうやって<span class="mk">つくれます</span>。</h2>
+    <h2 class="sec rv"><span class="br">「2時間」は、</span><br class="pcbr"><span class="br">こうやって<span class="mk">つくれます</span>。</span></h2>
     <p class="lead rv d1">まとまった時間を用意する必要はありません。あなたの生活のどこかに、すでに2時間は隠れています。</p>
   </div>
   <div class="wrap narrow">
@@ -716,7 +722,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
     
     
-    <h2 class="sec rv">キャンペーン価格は、<br><span class="mk">クーポンコード</span>のご入力で。</h2>
+    <h2 class="sec rv"><span class="br">キャンペーン価格は、</span><br class="pcbr"><span class="br"><span class="mk">クーポンコード</span>の</span><span class="br">ご入力で。</span></h2>
     <p class="lead rv d1">お支払い画面でコードを入力すると、その場で1,020円が割り引かれます。</p>
   </div>
   <div class="wrap narrow">
@@ -757,7 +763,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
       
       
-      <h2 class="sec rv">けんさぽは、<br>次の学びへの<span class="mk">“入口”</span>にもなります。</h2>
+      <h2 class="sec rv"><span class="br">けんさぽは、</span><br class="pcbr"><span class="br">次の学びへの<span class="mk">“入口”</span>に</span><span class="br">もなります。</span></h2>
       <p class="lead rv d1">まずは高齢者を「知る」。その先に、楽しませる力を身につける道が続いています。</p>
     </div>
     <div class="steps-up">
@@ -908,7 +914,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <svg class="peek pk3" style="left:calc(50% + 190px);top:34%;transform:rotate(12deg)" viewBox="0 0 64 64" aria-hidden="true"><g class="an" style="animation-delay:0.85s"><path d="M30.6 57.5c.4-5.4.6-10 .5-15.3l-8.7 4.9 1.6-8.3-9.4 2.7 4-7.6-8.9-1.7 6.9-5.2-4.9-6.3 7.8 1.2 1.5-7.9 5.8 5.6c1.3-3.8 2.9-7.2 5.2-10.6 2.3 3.4 3.9 6.8 5.2 10.6l5.8-5.6 1.5 7.9 7.8-1.2-4.9 6.3 6.9 5.2-8.9 1.7 4 7.6-9.4-2.7 1.6 8.3-8.7-4.9c-.1 5.3.1 9.9.5 15.3z" fill="url(#f5)"/></g></svg><svg class="peek pk1" style="right:calc(50% + 260px);bottom:14%;transform:rotate(-9deg)" viewBox="0 0 64 64" aria-hidden="true"><g class="an b" style="animation-delay:1.45s"><path d="M30.8 21.4c-5.8-4.8-13-6.6-21.8-5.7v29.4c8.8-.9 16 .9 21.8 5.2zm2.4 0c5.8-4.8 13-6.6 21.8-5.7v29.4c-8.8-.9-16 .9-21.8 5.2z" fill="url(#f2)"/><path d="M30.2 21h3.6v29.6h-3.6z" fill="url(#f7)"/></g></svg>
   
   <div class="wrap last-in narrow">
-    <h2 class="rv">知ることは、<br>いちばん優しい備えになる。</h2>
+    <h2 class="rv"><span class="br">知ることは、</span><br class="pcbr"><span class="br">いちばん優しい</span><span class="br">備えになる。</span></h2>
     <p class="rv d1">この秋、あなたが少し学ぶだけで、大切な人との時間は、きっと変わります。</p>
     <div class="pricebox rv d1">
       <div class="pb-term"><span>2026年9月1日(火) 〜 9月28日(月)</span><span class="cd" id="cd2">— 日</span></div>
@@ -950,6 +956,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="toast" id="toast">クーポンコードをコピーしました</div>
 
 <script>
+document.documentElement.classList.add('js');
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 const sticky=document.getElementById('sticky');
