@@ -416,6 +416,13 @@ footer{background:var(--ink);color:rgba(255,255,255,.7);padding:58px 0 38px;font
 /* PCではMVの下部に重ねる（負マージンで引き上げ、フロー高さは相殺） */
 @media(min-width:1180px){
   .garland{position:relative;z-index:5;margin-top:-36vw;margin-bottom:8.2vw}
+  .garland-sp{display:none}
+}
+/* SP：PC帯は消し、SP専用5点をMV下部へ重ねる（viewBox 390x140＝35.9vw） */
+.garland-sp{display:block;width:100%;height:auto;pointer-events:none}
+@media(max-width:1179px){
+  .garland{display:none}
+  .garland-sp{position:relative;z-index:5;margin-top:-58.9vw;margin-bottom:23vw}
 }
 .strip{display:block;width:100%;height:auto;pointer-events:none}
 /* ---------- 秋モチーフ：カードやテーブルの背後に差し込む ---------- */
@@ -427,7 +434,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.7);padding:58px 0 38px;font
 @media(max-width:1179px){
   .peek-sp{display:block}
   /* 装飾帯はSPでは拡大表示（transformなのでレイアウト幅に影響しない） */
-  .garland,.strip{transform:scale(1.45);transform-origin:50% 50%}
+  .strip{transform:scale(1.2);transform-origin:50% 50%}
 }
 /* ピコピコ（2コマのステップ動作） */
 .an{transform-box:fill-box;transform-origin:50% 88%;animation:pico 2.2s steps(1,end) infinite}
