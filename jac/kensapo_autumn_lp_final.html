@@ -413,16 +413,22 @@ footer{background:var(--ink);color:rgba(255,255,255,.7);padding:58px 0 38px;font
 
 /* ---------- 秋モチーフ：装飾帯（フロー内配置） ---------- */
 .garland{display:block;width:100%;height:auto;pointer-events:none}
-/* PCではMVの下部に重ねる（負マージンで引き上げ、フロー高さは相殺） */
+/* PC帯はMVの下部に重ねる（負マージンで引き上げ、フロー高さは相殺）。701pxまで維持 */
 @media(min-width:1180px){
   .garland{position:relative;z-index:5;margin-top:-36vw;margin-bottom:8.2vw}
-  .garland-sp{display:none}
 }
-/* SP：PC帯は消し、SP専用5点をMV下部へ重ねる（viewBox 390x140＝35.9vw） */
-.garland-sp{display:block;width:100%;height:auto;pointer-events:none}
-@media(max-width:1179px){
+/* タブレット帯（701〜1179px）：MVが16:9のままなのでPC帯を継続。
+   SCROLLガイドとの間隔が詰まるためガイドを短縮 */
+@media(min-width:701px) and (max-width:1179px){
+  .garland{position:relative;z-index:5;margin-top:-40vw;margin-bottom:12.2vw}
+  .scroll-guide .ln{height:44px}
+  .scroll-guide .tx{font-size:11px}
+}
+/* SP（700px以下）：MVが4:5になるのでSP専用5点に切り替え */
+.garland-sp{display:none;width:100%;height:auto;pointer-events:none}
+@media(max-width:700px){
   .garland{display:none}
-  .garland-sp{position:relative;z-index:5;margin-top:-58.9vw;margin-bottom:23vw}
+  .garland-sp{display:block;position:relative;z-index:5;margin-top:-58.9vw;margin-bottom:23vw}
 }
 .strip{display:block;width:100%;height:auto;pointer-events:none}
 /* ---------- 秋モチーフ：カードやテーブルの背後に差し込む ---------- */
@@ -433,6 +439,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.7);padding:58px 0 38px;font
 .peek-sp{position:absolute;z-index:2;height:auto;display:none;pointer-events:none}
 @media(max-width:1179px){
   .peek-sp{display:block}
+}
+@media(max-width:700px){
   /* 装飾帯はSPでは拡大表示（transformなのでレイアウト幅に影響しない） */
   .strip{transform:scale(1.2);transform-origin:50% 50%}
 }
@@ -505,7 +513,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="pb-cpn">
           <span class="lb">お支払い画面でクーポン入力</span>
-          <span class="code">AKI8880</span>
+          <span class="code">AKI8800</span>
         </div>
         <p class="pb-note">※コードの入力がない場合は通常価格（9,900円）でのご決済となります。</p>
       </div>
@@ -567,7 +575,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="narrow" style="text-align:center">
       <span class="eyebrow c">About the course</span>
       <h2 class="sec rv"><span class="br"><span class="mk">「けんさぽ」</span>は、</span><br class="pcbr"><span class="br">高齢者を“支える人”の</span><span class="br">ための資格。</span></h2>
-      <p class="lead rv d1">高齢者の<b>健</b>康と幸せを<b>サポ</b>ートする、「高齢者健幸サポーター」の愛称です。「高齢者ってなに？」という基本から、こころと身体の変化、接し方まで。知識がないまま向き合う不安を、体系的な学びで解消します。</p>
+      <p class="lead rv d1"><span class="br">高齢者の<b>健</b>康と幸せを<b>サポ</b>ートする、「高齢者健幸サポーター」の愛称です。</span> <span class="br">「高齢者ってなに？」という基本から、こころと身体の変化、接し方まで。</span> <span class="br">知識がないまま向き合う不安を、体系的な学びで解消します。</span></p>
     </div>
     <div class="merits">
       <div class="merit rv"><span class="no">1</span>
@@ -635,7 +643,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap narrow" style="text-align:center">
     <span class="eyebrow c">Your 2 hours</span>
     <h2 class="sec rv"><span class="br">「2時間」は、</span><br class="pcbr"><span class="br">こうやって<span class="mk">つくれます</span>。</span></h2>
-    <p class="lead rv d1">まとまった時間を用意する必要はありません。あなたの生活のどこかに、すでに2時間は隠れています。</p>
+    <p class="lead rv d1"><span class="br">まとまった時間を用意する必要はありません。</span> <span class="br">あなたの生活のどこかに、すでに2時間は隠れています。</span></p>
   </div>
   <div class="wrap narrow">
     <div class="slots">
@@ -661,12 +669,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
     
     <h2 class="sec rv"><span class="br">キャンペーン価格は、</span><br class="pcbr"><span class="br"><span class="mk">クーポンコード</span>の</span><span class="br">ご入力で。</span></h2>
-    <p class="lead rv d1">お支払い画面でコードを入力すると、その場で1,100円が割り引かれます。</p>
+    <p class="lead rv d1"><span class="br">お支払い画面でコードを入力すると、</span><span class="br">その場で1,100円が割り引かれます。</span></p>
   </div>
   <div class="wrap narrow">
     <div class="cpn-card rv">
       <span class="cpn-lb">CAMPAIGN COUPON CODE</span>
-      <div class="cpn-code"><span id="code">AKI8880</span><button id="copy">コピーする</button></div>
+      <div class="cpn-code"><span id="code">AKI8800</span><button id="copy">コピーする</button></div>
       <div class="cpn-amt">
         <span class="a">9,900円</span><span>→</span><span class="b">8,800円</span>
         <span class="off">1,100円OFF（約11%OFF）</span>
@@ -675,7 +683,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="stripe-ui">
         <p class="scap">▼ お支払い画面（イメージ）</p>
         <div class="fld">カード番号</div>
-        <div class="fld act"><em>AKI8880</em> ✓ 適用されました</div>
+        <div class="fld act"><em>AKI8800</em> ✓ 適用されました</div>
         <div class="row"><span>けんさぽ講座</span><span>9,900円</span></div>
         <div class="row dsc"><span>クーポン割引</span><span>−1,100円</span></div>
         <div class="row tot"><span>お支払い金額</span><span>8,800円</span></div>
@@ -702,7 +710,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
       
       <h2 class="sec rv"><span class="br">けんさぽは、</span><br class="pcbr"><span class="br">次の学びへの<span class="mk">“入口”</span>に</span><span class="br">もなります。</span></h2>
-      <p class="lead rv d1">まずは高齢者を「知る」。その先に、楽しませる力を身につける道が続いています。</p>
+      <p class="lead rv d1"><span class="br">まずは高齢者を「知る」。</span> <span class="br">その先に、楽しませる力を身につける道が続いています。</span></p>
     </div>
     <div class="steps-up">
       <div class="su now rv"><span class="tagnow">START</span><span class="lv">STEP 01</span><h4>けんさぽ</h4><p>高齢者を「知る」。約2時間・オンライン完結。</p></div>
@@ -772,7 +780,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="flow">
       <div class="fl rv"><span class="n">STEP 01</span><h4>会員登録</h4><p>eラーニングシステムに必要事項を入力。届いたメールのURLから認証すれば完了です。</p></div>
       <div class="fl rv d1"><span class="n">STEP 02</span><h4>講座を選ぶ</h4><p>ログイン後「コースを探す」から、けんさぽ（高齢者健幸サポーター）講座を選びます。</p></div>
-      <div class="fl key rv d2"><span class="n">STEP 03</span><h4>クーポン入力とお支払い</h4><p>お支払い画面で <b>AKI8880</b> を入力すると8,800円に。クレジットカードでお支払いください。</p><span class="kb">ここが割引の要です</span></div>
+      <div class="fl key rv d2"><span class="n">STEP 03</span><h4>クーポン入力とお支払い</h4><p>お支払い画面で <b>AKI8800</b> を入力すると8,800円に。クレジットカードでお支払いください。</p><span class="kb">ここが割引の要です</span></div>
       <div class="fl rv d3"><span class="n">STEP 04</span><h4>受講スタート</h4><p>「マイコース」から受講開始。約2時間で修了、合格後に認定証が発行されます。</p></div>
     </div>
     <a class="cta cta-wide" href="https://learning.japan-ac.jp/auth/create-account" target="_blank" rel="noopener" data-cta="flow">会員登録して申し込む<span class="ar">→</span></a>
@@ -796,7 +804,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <tr><th>名称</th><td>高齢者健幸サポーター（愛称：けんさぽ）</td></tr>
       <tr><th>通常料金</th><td>9,900円（税込）</td></tr>
       <tr><th>キャンペーン価格</th><td class="hi">8,800円（税込）<s>1,100円OFF・約11%OFF</s></td></tr>
-      <tr><th>クーポンコード</th><td><span class="cs">AKI8880</span>（お支払い画面で入力）</td></tr>
+      <tr><th>クーポンコード</th><td><span class="cs">AKI8800</span>（お支払い画面で入力）</td></tr>
       <tr><th>キャンペーン期間</th><td>2026年9月1日(火)0:00 〜 9月28日(月)23:59</td></tr>
       <tr><th>お支払い方法</th><td>クレジットカード決済（VISA / MasterCard / JCB / American Express / Diners Club）</td></tr>
       <tr><th>受講時間</th><td>約2時間（確認問題・最終試験を含む）</td></tr>
@@ -825,7 +833,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="faq"><button><span class="q">Q</span><span class="qt">「けんさぽ」って何のことですか？</span><span class="ic">＋</span></button>
         <div class="faq-bd"><div>資格「<b>高齢者健幸サポーター</b>」の愛称です。高齢者の<b>健</b>康と幸せ（健幸）を<b>サポ</b>ートする、という意味を込めています。高齢者ご本人ではなく、<b>高齢者を支える立場の方</b>が学ぶ資格で、ご家族、介護施設で働く方、介護やレクリエーションに関心のある方など、どなたでも受講いただけます。</div></div></div>
       <div class="faq"><button><span class="q">Q</span><span class="qt">クーポンコードはどこに入力しますか？</span><span class="ic">＋</span></button>
-        <div class="faq-bd"><div>お支払い画面（決済フォーム）の「クーポンコードを追加」欄に <b>AKI8880</b> をご入力ください。適用されると合計金額が<b>8,800円（税込）</b>に変わります。金額が変わったことをご確認のうえ、お支払いにお進みください。</div></div></div>
+        <div class="faq-bd"><div>お支払い画面（決済フォーム）の「クーポンコードを追加」欄に <b>AKI8800</b> をご入力ください。適用されると合計金額が<b>8,800円（税込）</b>に変わります。金額が変わったことをご確認のうえ、お支払いにお進みください。</div></div></div>
       <div class="faq"><button><span class="q">Q</span><span class="qt">クーポンを入れ忘れて決済してしまいました。</span><span class="ic">＋</span></button>
         <div class="faq-bd"><div>申し訳ございませんが、<b>決済完了後にさかのぼって適用すること、差額を返金することはできません</b>。お支払い前に、割引が反映されているかを必ずご確認ください。</div></div></div>
       <div class="faq"><button><span class="q">Q</span><span class="qt">期間を過ぎたらどうなりますか？</span><span class="ic">＋</span></button>
@@ -853,11 +861,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
   <div class="wrap last-in narrow">
     <h2 class="rv"><span class="br">知ることは、</span><br class="pcbr"><span class="br">いちばん優しい</span><span class="br">備えになる。</span></h2>
-    <p class="rv d1">この秋、あなたが少し学ぶだけで、大切な人との時間は、きっと変わります。</p>
+    <p class="rv d1"><span class="br">この秋、あなたが少し学ぶだけで、</span><span class="br">大切な人との時間は、きっと変わります。</span></p>
     <div class="pricebox rv d1">
       <div class="pb-term"><span>2026年9月1日(火) 〜 9月28日(月)</span><span class="cd" id="cd2">— 日</span></div>
       <div class="pb-main"><span class="pb-was">通常 9,900円</span><span class="pb-now">8,800<small>円（税込）</small></span></div>
-      <div class="pb-cpn"><span class="lb">クーポンコード</span><span class="code">AKI8880</span></div>
+      <div class="pb-cpn"><span class="lb">クーポンコード</span><span class="code">AKI8800</span></div>
       <p class="pb-note">※お支払い画面でのコード入力が必要です。</p>
     </div>
     <a class="cta" href="https://learning.japan-ac.jp/auth/create-account" target="_blank" rel="noopener" data-cta="last">今すぐ申し込む<span class="ar">→</span></a>
@@ -887,7 +895,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="sk-items">
     <div class="sk-i term"><span class="lb">キャンペーン期間</span><span class="v" id="cd3">9/28まで</span></div>
     <div class="sk-i"><span class="lb">受講料（税込）</span><span class="v num">8,800<small>円</small><s>9,900円</s></span></div>
-    <div class="sk-i cpn"><span class="lb">クーポンコード</span><span class="v cc">AKI8880</span></div>
+    <div class="sk-i cpn"><span class="lb">クーポンコード</span><span class="v cc">AKI8800</span></div>
   </div>
   <a class="cta" href="https://learning.japan-ac.jp/auth/create-account" target="_blank" rel="noopener" data-cta="sticky">申し込む →</a>
 </div>
