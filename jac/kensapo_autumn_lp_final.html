@@ -87,8 +87,8 @@ h2.sec .mk{background:linear-gradient(transparent 64%,var(--amber) 64%);padding:
 /* ---------- ヘッダー ---------- */
 header{position:absolute;top:0;left:0;right:0;z-index:60;padding:20px 0}
 .hd{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.logo svg{height:64px;width:auto;display:block}
-@media(max-width:560px){.logo svg{height:48px}}
+.logo svg{height:80px;width:auto;display:block;transform:translateY(5px)}
+@media(max-width:560px){.logo svg{height:58px;transform:translateY(3px)}}
 .hd-cta{display:none;background:var(--ink);color:#fff;padding:13px 30px;border-radius:999px;font-size:15px;font-weight:700;transition:.2s}
 .hd-cta:hover{background:var(--amber);color:var(--ink)}
 @media(min-width:880px){.hd-cta{display:block}}
@@ -384,6 +384,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.7);padding:58px 0 38px;font
 .sk-i:last-child{border-right:0}
 .sk-i .lb{font-size:12px;font-weight:700;color:var(--ink-3);letter-spacing:.08em;line-height:1.4;white-space:nowrap}
 .sk-i .v{font-size:19px;font-weight:700;color:var(--ink);line-height:1.25;white-space:nowrap}
+.sk-i.term .v{font-size:15px;letter-spacing:.01em}
 .sk-i .v.num{font-family:"Outfit",sans-serif;font-size:30px;font-weight:700;letter-spacing:-.01em}
 .sk-i .v.num small{font-family:"Zen Kaku Gothic New",sans-serif;font-size:14px;font-weight:700}
 .sk-i .v.num s{color:var(--ink-3);font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;font-weight:500;margin-left:7px}
@@ -927,24 +928,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <footer>
   <div class="wrap">
     <div class="ft">
-      <div><h5>一般社団法人 日本アクティブコミュニティ協会</h5>けんさぽ（高齢者健幸サポーター）／レクリエーション介護士 認定団体<br>TEL 06-6208-5030</div>
+      <div><h5>一般社団法人 日本アクティブコミュニティ協会</h5>けんさぽ（高齢者健幸サポーター）／<br>レクリエーション介護士 認定団体<br>TEL 06-6208-5030</div>
       <div><h5>資格について</h5>
-        <a href="https://japan-ac.jp/supporter-class/">けんさぽ（高齢者健幸サポーター）</a>
-        <a href="https://japan-ac.jp/second-class/">レクリエーション介護士2級</a>
-        <a href="https://japan-ac.jp/first-class/">レクリエーション介護士1級</a>
-        <a href="https://japan-ac.jp/flow/">資格取得の流れ</a></div>
+        <a href="https://japan-ac.jp/supporter-class/" target="_blank" rel="noopener">けんさぽ（高齢者健幸サポーター）</a>
+        <a href="https://japan-ac.jp/second-class/" target="_blank" rel="noopener">レクリエーション介護士2級</a>
+        <a href="https://japan-ac.jp/first-class/" target="_blank" rel="noopener">レクリエーション介護士1級</a>
+        <a href="https://japan-ac.jp/flow/" target="_blank" rel="noopener">資格取得の流れ</a></div>
       <div><h5>お問い合わせ</h5>
-        <a href="https://japan-ac.jp/contact/">資料請求・お問い合わせ</a>
-        <a href="https://learning.japan-ac.jp/auth/login">マイページログイン</a>
-        <a href="https://japan-ac.jp/privacy-policy/">個人情報保護方針</a></div>
+        <a href="https://japan-ac.jp/contact/" target="_blank" rel="noopener">資料請求・お問い合わせ</a>
+        <a href="https://learning.japan-ac.jp/auth/login" target="_blank" rel="noopener">マイページログイン</a>
+        <a href="https://japan-ac.jp/privacy-policy/" target="_blank" rel="noopener">個人情報保護方針</a></div>
     </div>
-    <div class="copy">© BCC Co., Ltd. All Rights Reserved.</div>
+    <div class="copy">© ＢＣＣ Co., Ltd. All Rights Reserved.</div>
   </div>
 </footer>
 
 <div class="sticky" id="sticky">
   <div class="sk-items">
-    <div class="sk-i term"><span class="lb">キャンペーン期間</span><span class="v" id="cd3">9/28まで</span></div>
+    <div class="sk-i term"><span class="lb">キャンペーン期間</span><span class="v">2026年9月1日(火) 〜 9月28日(月)</span></div>
     <div class="sk-i"><span class="lb">受講料（税込）</span><span class="v num">8,800<small>円</small><s>9,900円</s></span></div>
     <div class="sk-i cpn"><span class="lb">クーポンコード</span><span class="v cc">AKI8800</span></div>
   </div>
@@ -969,7 +970,6 @@ document.getElementById('copy').addEventListener('click',()=>{const t=document.g
   else if(now<=end){txt='残り'+d(end)+'日';bar='残り'+d(end)+'日';}
   else{txt='終了しました';bar='終了しました';}
   ['cd','cd2'].forEach(i=>{const e=document.getElementById(i);if(e)e.textContent=txt});
-  const e3=document.getElementById('cd3');if(e3)e3.textContent=bar;
 })();
 </script>
 <script src="kensapo_autumn_motifs.js" defer></script>
