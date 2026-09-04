@@ -180,6 +180,14 @@ body[data-dev="sp"] .prof .pic{width:96px}
 body[data-dev="sp"] .next .row{gap:10px}
 .next .item{border:1px solid var(--rule);padding:14px;display:block}
 body[data-dev="sp"] .next .item{padding:9px}
+.course{border:2px solid var(--pink);background:#fff;padding:30px 32px;margin:46px 0 10px;text-align:center}
+.course .t{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--pink-deep);margin-bottom:14px}
+.course h4{font-size:21px;font-weight:900;line-height:1.5;margin-bottom:10px}
+.course .meta{font-size:14px;color:var(--ink-2);line-height:1.9;margin-bottom:20px}
+.course .btn{display:inline-block;background:var(--pink-deep);color:#fff;font-size:15px;font-weight:700;letter-spacing:.06em;padding:13px 36px;text-decoration:none}
+.course .btn.soon{background:var(--paper);color:var(--ink-2);border:1px solid var(--rule-2);pointer-events:none}
+body[data-dev="sp"] .course{padding:24px 18px}
+body[data-dev="sp"] .course h4{font-size:18px}
 .next .ph{height:100px;margin-bottom:12px}
 .next .item img{display:block;width:100%;height:100px;object-fit:cover;margin-bottom:12px}
 body[data-dev="sp"] .next .item img{height:64px;margin-bottom:8px}
@@ -487,6 +495,13 @@ function article(){return `
         </div>
       </div>
 
+      <div class="course">
+        <div class="t">二階講師のフォローアップ講座</div>
+        <h4>音活クラブのエッセンスを学べる講座（準備中）</h4>
+        <div class="meta">日程・会場は近日公開予定です</div>
+        <a class="btn soon" href="#">近日公開</a>
+      </div>
+
       <div class="next">
         <div class="t">ほかの3名の記事を読む</div>
         <div class="row">
@@ -646,6 +661,13 @@ function articleHirao(){return `
         </div>
       </div>
 
+      <div class="course">
+        <div class="t">平尾講師のフォローアップ講座</div>
+        <h4>お口と脳を元気にする介護レクリエーション</h4>
+        <div class="meta">2026年11月17日（火）　ブルースペース上野御徒町（東京・上野）<br>講師：平尾 麻衣子</div>
+        <a class="btn" href="https://japan-ac.jp/schedule/post-08-2/" target="_blank" rel="noopener">講座の詳細・お申し込み</a>
+      </div>
+
       <div class="next">
         <div class="t">ほかの3名の記事を読む</div>
         <div class="row">
@@ -764,7 +786,7 @@ function articleKondo(){return `
 
       <div class="msg">
         <div class="t">介護レクリエーションに関わる方へ</div>
-        <p>私は以前、姑を介護施設に預けたことがあります。そこで職員の方が「〇〇さん、お口を開けてくださいね〜」と、まるで小さな子どもに話すように声をかけているのを聞いて、うわっ、嫌だ、と思ったんです。だから私は、それは絶対にやめようと決めました。目の前にいるのは、私よりも長く生きてこられた方です。私は敬語が足りないかもしれないし、仲間にしゃべるように話してしまうかもしれない。でも「してあげる立場」としての声がけだけは、絶対にやりたくない。そこだけは、ずっと思っているところです。</p>
+        <p>いつも立っている舞台と環境は違いますが、皆さまに非日常を楽しんでいただきたい、喜んでいただきたいという思いは、舞台も介護レクリエーションも同じです。わたしなら、これ、という特技をお持ちの方がたくさんいらっしゃると思います。一緒に介護レクリエーションに携わってみませんか。よしっ！私も！　ってやってみませんか。</p>
       </div>
 
       <figure>
@@ -777,9 +799,10 @@ function articleKondo(){return `
           <h4>近藤 真紀子</h4>
           <dl>
             <dt>協会での立場</dt><dd>レクリエーション介護士2級</dd>
+            <dt>所属</dt><dd>朗読アンサンブルれもんの会 講師（有限会社げんごろう（言語朗）朗読教室）<br>ＮＰＯ法人「声とことばの力」健康朗読エキスパート指導士<br>日本新劇俳優協会 会員</dd>
             <dt>専門</dt><dd>語り・朗読・三味線（舞台俳優としても活動）</dd>
             <dt>届けているもの</dt><dd>声と言葉の体操（口腔機能体操）／朗読レクリエーション</dd>
-            <dt>原点</dt><dd>子育て中に出会った朗読。舞台からNPO法人声とことばの力での講師活動へ</dd>
+            <dt>原点</dt><dd>子育て中に出会った朗読。舞台から健康朗読の指導へ</dd>
           </dl>
         </div>
       </div>
@@ -952,11 +975,40 @@ function ogp(){return `
   </div>
 </div>`}
 
+
+const SHARE_TITLES={
+  index:'高齢社会と、これからの介護レク',
+  art:'「できないことがあるなら、できる方法を探せばいい」二階喜美子',
+  hirao:'「効果の前に、成果がある」平尾麻衣子',
+  kondo:'「60分ぜんぶ、こっちを向いてくれなくていい」近藤真紀子',
+  maru:'「完成形は、どこの施設でも全部違う」丸本幸'
+};
+function bindShare(){
+  document.querySelectorAll('.share div').forEach(el=>{
+    el.style.cursor='pointer';
+    el.onclick=()=>{
+      const p=document.body.dataset.page||'index';
+      const t=(SHARE_TITLES[p]||'')+'｜0915レクリエーション介護士の日 特別インタビュー';
+      const u=location.href;
+      const label=el.textContent;
+      if(label.indexOf('X')===0){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(t)+'&url='+encodeURIComponent(u),'_blank');}
+      else if(label.indexOf('Facebook')===0){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(u),'_blank');}
+      else if(label.indexOf('LINE')===0){window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(u)+'&text='+encodeURIComponent(t),'_blank');}
+      else{
+        const done=()=>{const o=el.textContent;el.textContent='コピーしました';setTimeout(()=>{el.textContent=o;},1600);};
+        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(done).catch(done);}
+        else{const ta=document.createElement('textarea');ta.value=u;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);done();}
+      }
+    };
+  });
+}
+
 function go(p){
   document.body.dataset.page = p;
   document.getElementById('root').innerHTML = p==='index'?index():p==='ogp'?ogp():p==='hirao'?articleHirao():p==='kondo'?articleKondo():p==='maru'?articleMarumoto():article();
   document.querySelectorAll('[data-go]').forEach(b=>{ if(b.tagName==='BUTTON') b.setAttribute('aria-pressed', b.dataset.go===p); });
   window.scrollTo({top:0});
+  bindShare();
 }
 document.addEventListener('click', e=>{
   const t=e.target.closest('[data-go]');
