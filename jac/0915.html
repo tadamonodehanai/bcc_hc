@@ -47,6 +47,42 @@ body[data-dev="sp"] .label{font-size:12px;padding:3px 11px}
 
 /* Index */
 .hero{padding:56px 40px 46px;text-align:center;background:var(--white);border-bottom:1px solid var(--rule)}
+
+/* ===== 協会サイト共通ヘッダー／フッター（実サイト再現・実装時はWP共通テンプレに置換） ===== */
+.site-h{background:#fff;border-bottom:1px solid #E8E4DE;position:relative;z-index:60}
+.site-h .in{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:12px 18px}
+.site-h .logo img{height:38px;display:block;width:auto}
+.site-h nav{flex:1}
+.site-h nav ul{display:flex;justify-content:flex-end;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.site-h nav li{position:relative}
+.site-h nav li>a,.site-h nav li>span{display:block;padding:12px 5px;font-size:11px;font-weight:700;color:#3A3330;text-decoration:none;cursor:pointer;white-space:nowrap;line-height:1.4}
+.site-h nav li>span::after{content:"▾";margin-left:4px;font-size:10px;color:#B75237}
+.site-h nav li ul{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #E8E4DE;min-width:250px;padding:6px 0;z-index:80}
+.site-h nav li:hover>ul{display:block}
+.site-h nav li ul li{width:100%}
+.site-h nav li ul a{display:block;padding:10px 16px;font-size:12.5px;font-weight:500;color:#3A3330;text-decoration:none}
+.site-h nav li ul a:hover{background:#FBF3EF}
+.site-h .cta img{height:42px;display:block;width:auto}
+body[data-dev="sp"] .site-h nav{display:none}
+body[data-dev="sp"] .site-h .in{padding:10px 14px;justify-content:space-between}
+body[data-dev="sp"] .site-h .logo img{height:36px}
+body[data-dev="sp"] .site-h .cta img{height:38px}
+.site-f{background:#fff;border-top:1px solid #E8E4DE}
+.site-f .cols{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0 44px;padding:44px 24px 10px}
+.site-f .cols ul{list-style:none;margin:0;padding:0}
+.site-f .cols a{display:block;padding:7px 0;font-size:12.5px;color:#3A3330;text-decoration:none;border-bottom:1px solid #F0EBE5}
+.site-f .mid{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:26px 24px 8px}
+.site-f .sns{display:flex;gap:14px}
+.site-f .sns img{width:34px;height:34px;display:block}
+.site-f .fcta img{height:48px;display:block;width:auto}
+.site-f .logos{display:flex;align-items:center;justify-content:center;gap:34px;padding:26px 24px 30px}
+.site-f .logos .l1{height:46px;width:auto;display:block}
+.site-f .logos .l2{height:30px;width:auto;display:block}
+.site-f .cr{background:#3A3330;color:#fff;text-align:center;font-size:11px;letter-spacing:.06em;padding:14px 10px}
+body[data-dev="sp"] .site-f .cols{grid-template-columns:1fr 1fr;gap:0 20px;padding:30px 18px 8px}
+body[data-dev="sp"] .site-f .mid{flex-direction:column;gap:18px}
+body[data-dev="sp"] .site-f .logos{flex-direction:column;gap:18px}
+
 .mv{position:relative;background:var(--paper);overflow:hidden}
 .mv-bg{position:absolute;top:-72px;left:50%;transform:translateX(-50%);width:max(112%,1660px);height:auto;pointer-events:none}
 .mv-sig{text-align:center;padding:100px 20px 108px}
@@ -274,7 +310,7 @@ const IMG = {
 
 function index(){return `
 <div class="device">
-  <div class="chrome">協会サイト共通ヘッダー（既存流用）</div>
+  ${siteHeader()}
   <div class="mv">
     <img class="mv-bg pc-el" src="${IMG.hbg}" alt="">
     <img class="mv-bg mv-bgS sp-el" src="${IMG.hbg_sp}" alt="">
@@ -356,12 +392,12 @@ function index(){return `
   </div>
   </div>
   <div class="mv-sig"><img src="${IMG.hsig}" alt="0915 レ・ク・カイ・ゴ"></div>
-  <div class="chrome foot">協会サイト共通フッター（既存流用）</div>
+  ${siteFooter()}
 </div>`}
 
 function article(){return `
 <div class="device">
-  <div class="chrome">協会サイト共通ヘッダー（既存流用）</div>
+  ${siteHeader()}
   <div class="crumb"><a href="#" data-go="index">特集｜高齢社会と、これからの介護レク</a>　＞　二階 喜美子</div>
   <div class="art">
     <div class="art-head">
@@ -516,13 +552,13 @@ function article(){return `
       <a class="back" href="#" data-go="index">特集トップへ戻る</a>
     </div></div>
   </div>
-  <div class="chrome foot">協会サイト共通フッター（既存流用）</div>
+  ${siteFooter()}
 </div>`}
 
 
 function articleHirao(){return `
 <div class="device">
-  <div class="chrome">協会サイト共通ヘッダー（既存流用）</div>
+  ${siteHeader()}
   <div class="crumb"><a href="#" data-go="index">特集｜高齢社会と、これからの介護レク</a>　＞　平尾 麻衣子</div>
   <div class="art">
     <div class="art-head">
@@ -682,13 +718,13 @@ function articleHirao(){return `
       <a class="back" href="#" data-go="index">特集トップへ戻る</a>
     </div></div>
   </div>
-  <div class="chrome foot">協会サイト共通フッター（既存流用）</div>
+  ${siteFooter()}
 </div>`}
 
 
 function articleKondo(){return `
 <div class="device">
-  <div class="chrome">協会サイト共通ヘッダー（既存流用）</div>
+  ${siteHeader()}
   <div class="crumb"><a href="#" data-go="index">特集｜高齢社会と、これからの介護レク</a>　＞　近藤 真紀子</div>
   <div class="art">
     <div class="art-head">
@@ -786,7 +822,7 @@ function articleKondo(){return `
 
       <div class="msg">
         <div class="t">介護レクリエーションに関わる方へ</div>
-        <p>いつも立っている舞台と環境は違いますが、皆さまに非日常を楽しんでいただきたい、喜んでいただきたいという思いは、舞台も介護レクリエーションも同じです。わたしなら、これ、という特技をお持ちの方がたくさんいらっしゃると思います。一緒に介護レクリエーションに携わってみませんか。よしっ！私も！　ってやってみませんか。</p>
+        <p>いつも立っている舞台と環境は違いますが、皆さまに非日常を楽しんでいただきたい、喜んでいただきたいという思いは、舞台も介護レクリエーションも同じです。わたしなら、これ、という特技をお持ちの方がたくさんいらっしゃると思います。一緒に介護レクリエーションに携わってみませんか。同じ思いを持つ仲間が増えたらうれしいです。</p>
       </div>
 
       <figure>
@@ -821,13 +857,13 @@ function articleKondo(){return `
       <a class="back" href="#" data-go="index">特集トップへ戻る</a>
     </div></div>
   </div>
-  <div class="chrome foot">協会サイト共通フッター（既存流用）</div>
+  ${siteFooter()}
 </div>`}
 
 
 function articleMarumoto(){return `
 <div class="device">
-  <div class="chrome">協会サイト共通ヘッダー（既存流用）</div>
+  ${siteHeader()}
   <div class="crumb"><a href="#" data-go="index">特集｜高齢社会と、これからの介護レク</a>　＞　丸本 幸</div>
   <div class="art">
     <div class="art-head">
@@ -957,7 +993,7 @@ function articleMarumoto(){return `
       <a class="back" href="#" data-go="index">特集トップへ戻る</a>
     </div></div>
   </div>
-  <div class="chrome foot">協会サイト共通フッター（既存流用）</div>
+  ${siteFooter()}
 </div>`}
 
 function ogp(){return `
@@ -974,6 +1010,52 @@ function ogp(){return `
   </div>
 </div>`}
 
+
+
+const AC='https://japan-ac.jp';
+const NAV=[
+ {t:'トップ',u:AC+'/'},
+ {t:'高齢者健幸サポーター',c:[['高齢者健幸サポーター',AC+'/supporter-class/'],['資格取得の流れ',AC+'/flow/#flow03']]},
+ {t:'レクリエーション介護士資格',c:[['2級ガイド',AC+'/second-class/'],['1級ガイド',AC+'/first-class/'],['マスターガイド',AC+'/master-class/'],['資格取得の流れ',AC+'/flow/'],['資格活用ガイド',AC+'/utilization/']]},
+ {t:'レクのご依頼について',c:[['団体研修の依頼',AC+'/group/'],['レクリエーション代行サービスの依頼','https://www.kaigo-rec.com/feature/rec-supporter/'],['導入事例',AC+'/group/#case']]},
+ {t:'各種講座・セミナーについて',c:[['レクリエーション介護士2級講座',AC+'/schedule/#second-class'],['介護レクリエーション講座',AC+'/schedule/#rec'],['その他（セミナー・体験会等）',AC+'/schedule/#other']]},
+ {t:'資格を活かすサポート制度',c:[['介護レクサポーター','https://www.kaigo-rec.com/feature/rec-supporter/'],['マスターガイド',AC+'/master-class/'],['介護レク広場','https://www.kaigo-rec.com/'],['活きがいプロジェクト','https://smile-plus.co.jp/expo/']]}
+];
+function siteHeader(){
+  const nav=NAV.map(n=>{
+    if(n.u)return '<li><a href="'+n.u+'">'+n.t+'</a></li>';
+    const sub=n.c.map(c=>'<li><a href="'+c[1]+'">'+c[0]+'</a></li>').join('');
+    return '<li><span>'+n.t+'</span><ul>'+sub+'</ul></li>';
+  }).join('');
+  return '<header class="site-h"><div class="in">'
+    +'<a class="logo" href="'+AC+'/"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/ac_logo.png" alt="レクリエーション介護士｜日本アクティブコミュニティ協会"></a>'
+    +'<nav><ul>'+nav+'</ul></nav>'
+    +'<a class="cta" href="'+AC+'/contact/"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/contact_btn.png" alt="資料請求・お問い合わせ"></a>'
+    +'</div></header>';
+}
+function siteFooter(){
+  const col=(items)=>'<ul>'+items.map(i=>'<li><a href="'+i[1]+'">'+i[0]+'</a></li>').join('')+'</ul>';
+  return '<footer class="site-f">'
+    +'<div class="cols">'
+    +col([['高齢者健幸サポーターガイド',AC+'/supporter-class/'],['２級ガイド',AC+'/second-class/'],['1級ガイド',AC+'/first-class/'],['マスターガイド',AC+'/master-class/'],['資格取得の流れ',AC+'/flow/']])
+    +col([['2級通学講座',AC+'/kaikou/'],['講座スケジュール',AC+'/schedule/'],['団体研修ガイド',AC+'/group/'],['資格活用ガイド',AC+'/utilization/'],['特別講師陣',AC+'/teacher/']])
+    +col([['協力・応援施設',AC+'/yell/'],['賛助会員',AC+'/patronage/'],['メディア掲載情報',AC+'/media/'],['組織情報',AC+'/about/'],['個人情報保護方針',AC+'/privacy-policy/']])
+    +'</div>'
+    +'<div class="mid">'
+    +'<div class="sns">'
+    +'<a href="https://twitter.com/rekukaigoshi"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/icon-twitter.svg" alt="X"></a>'
+    +'<a href="https://lin.ee/cGgnzk1"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/icon-line.svg" alt="LINE"></a>'
+    +'<a href="https://www.facebook.com/rekukaigoshi"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/icon-facebook.svg" alt="Facebook"></a>'
+    +'</div>'
+    +'<a class="fcta" href="'+AC+'/contact/"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/contact_btn.png" alt="資料請求・お問い合わせ"></a>'
+    +'</div>'
+    +'<div class="logos">'
+    +'<a href="'+AC+'/"><img class="l1" src="'+AC+'/wp-content/themes/reccare/src/img/common/ac_logo.png" alt="日本アクティブコミュニティ協会"></a>'
+    +'<a href="https://www.e-bcc.jp/"><img class="l2" src="'+AC+'/wp-content/themes/reccare/src/img/common/bcc_logo.png" alt="ＢＣＣ株式会社"></a>'
+    +'</div>'
+    +'<div class="cr">© ＢＣＣ株式会社. All Rights Reserved.</div>'
+    +'</footer>';
+}
 
 const SHARE_TITLES={
   index:'高齢社会と、これからの介護レク',
