@@ -3,7 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>0915レクリエーション介護士の日｜特別インタビュー</title>
+<meta name="description" content="9月15日はレクリエーション介護士の日。高齢社会とこれからの介護レクリエーションについて、4名のレクリエーション介護士に聞きました。">
+<link rel="canonical" href="https://japan-ac.jp/spacial0915/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://japan-ac.jp/spacial0915/">
+<meta property="og:title" content="レクリエーション介護士の日｜インタビュー企画">
+<meta property="og:description" content="9月15日はレクリエーション介護士の日。高齢社会とこれからの介護レクリエーションについて、4名のレクリエーション介護士に聞きました。">
+<meta property="og:image" content="https://japan-ac.jp/spacial0915/ogp.png">
+<meta property="og:site_name" content="レクリエーション介護士｜日本アクティブコミュニティ協会">
+<meta name="twitter:card" content="summary_large_image">
+<title>レクリエーション介護士の日｜インタビュー企画</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -20,8 +29,9 @@ body{font-family:"Zen Kaku Gothic New","Yu Gothic","Hiragino Kaku Gothic ProN",s
 a{color:inherit;text-decoration:none}
 img{display:block;width:100%;height:auto}
 
-.tool{position:sticky;top:0;z-index:50;background:var(--ink);color:#fff;padding:12px 22px;
-  display:flex;align-items:center;gap:24px;flex-wrap:wrap;line-height:1.6}
+.tool{display:none;position:sticky;top:0;z-index:50;background:var(--ink);color:#fff;padding:12px 22px;
+  align-items:center;gap:24px;flex-wrap:wrap;line-height:1.6}
+body.devmode .tool{display:flex}
 .tool .ttl{font-size:14px;font-weight:700;letter-spacing:.08em}
 .tool .lb{font-size:11px;letter-spacing:.12em;opacity:.65;margin-right:6px}
 .tool button{font-family:inherit;font-size:13px;color:#fff;background:transparent;
@@ -32,7 +42,7 @@ img{display:block;width:100%;height:auto}
 .stage{padding:30px 20px 80px;display:flex;justify-content:center}
 .device{background:var(--paper);border:1px solid var(--rule-2);width:100%}
 body[data-dev="pc"] .device{max-width:1100px}
-body[data-dev="sp"] .device{max-width:390px;border-width:8px;border-color:var(--ink);border-radius:6px}
+body.devmode[data-dev="sp"] .device{max-width:390px;border-width:8px;border-color:var(--ink);border-radius:6px}
 
 .chrome{background:var(--paper-2);border-bottom:1px solid var(--rule);color:var(--ink-2);
   font-size:12px;letter-spacing:.06em;padding:12px 24px;line-height:1.6}
@@ -50,8 +60,8 @@ body[data-dev="sp"] .label{font-size:12px;padding:3px 11px}
 
 /* ===== 協会サイト共通ヘッダー／フッター（実サイト再現・実装時はWP共通テンプレに置換） ===== */
 .site-h{background:#fff;border-bottom:1px solid #E8E4DE;position:relative;z-index:60}
-.site-h .in{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:12px 18px}
-.site-h .logo img{height:38px;display:block;width:auto}
+.site-h .in{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:center;padding:14px 18px}
+.site-h .logo img{height:44px;display:block;width:auto}
 .site-h nav{flex:1}
 .site-h nav ul{display:flex;justify-content:flex-end;list-style:none;margin:0;padding:0;flex-wrap:wrap}
 .site-h nav li{position:relative}
@@ -221,6 +231,7 @@ body[data-dev="sp"] .next .item{padding:9px}
 .course h4{font-size:21px;font-weight:900;line-height:1.5;margin-bottom:10px}
 .course .meta{font-size:14px;color:var(--ink-2);line-height:1.9;margin-bottom:20px}
 .course .btn{display:inline-block;background:var(--pink-deep);color:#fff;font-size:15px;font-weight:700;letter-spacing:.06em;padding:13px 36px;text-decoration:none}
+.course .c-sep{height:1px;background:var(--rule);margin:28px auto;max-width:440px}
 .course .btn.soon{background:var(--paper);color:var(--ink-2);border:1px solid var(--rule-2);pointer-events:none}
 body[data-dev="sp"] .course{padding:24px 18px}
 body[data-dev="sp"] .course h4{font-size:18px}
@@ -533,9 +544,13 @@ function article(){return `
 
       <div class="course">
         <div class="t">二階講師のフォローアップ講座</div>
-        <h4>音活クラブのエッセンスを学べる講座（準備中）</h4>
-        <div class="meta">日程・会場は近日公開予定です</div>
-        <a class="btn soon" href="#">近日公開</a>
+        <h4>「できない」を決めつけない！<br>視点を変えてレクの可能性を広げよう</h4>
+        <div class="meta">2027年1月27日（水）　ATCエイジレスセンターイベントホール（大阪・南港）</div>
+        <a class="btn" href="https://japan-ac.jp/schedule/post-08-4/" target="_blank" rel="noopener">講座の詳細・お申し込み</a>
+        <div class="c-sep"></div>
+        <h4>レクリエーション介護士2級講座</h4>
+        <div class="meta">2027年3月11日（木）・3月25日（木）全2日間　大阪メトロ 本町駅周辺を予定</div>
+        <a class="btn" href="https://japan-ac.jp/schedule/post-08-5/" target="_blank" rel="noopener">講座の詳細・お申し込み</a>
       </div>
 
       <div class="next">
@@ -947,7 +962,7 @@ function articleMarumoto(){return `
         <p>全員に同じ参加の仕方を求めるのではなく、その方なりの関わり方や過ごし方を大切にする。怒っていても、笑っていても、輪の外から眺めていてもいい。その方が、その場で自分らしくいられたら。</p>
         <p>レクリエーション介護士の資格を取ったのは、コロナ禍がきっかけだった。音楽の活動から離れていた時期、地域のカフェで折り紙を折っていたら、折り紙好きのおばあちゃんと小学生が集まってきた。密にはなれない時代に、折り紙一つで世代を超えた輪ができ、その間に自分がいた。</p>
         <p>「もう一度勉強してみたいと思ったんです。でも相手は元気な方だし、音楽療法ではない。調べていったら、レクリエーション介護士という資格があると知りました」</p>
-        <p>2級の講座で「レクリエーションとは何か」から考え直した。先生がいて何かをやるものだと思っていたが、みんなで作り上げていくものなのだと知った。1級では、プログラムへのアプローチそのものを変えた。「1級を取らなかったら、たぶん変えていなかった」と振り返る。</p>
+        <p>2級の講座で「レクリエーションとは何か」から考え直した。講師の柴田先生が、受講生の発言を一つひとつ拾い上げてくれた。先生がいて何かをやるものだと思っていたが、みんなで作り上げていくものなのだと知った。1級では、プログラムへのアプローチそのものを変えた。「1級を取らなかったら、たぶん変えていなかった」と振り返る。</p>
         <p>10年後の介護レクリエーションについては、こう答えた。介護のレクリエーションには「何かをしてあげなきゃ」という空気がある。でも、皆さんは意外にいろんなことを生み出せる。</p>
         <p>「だから、待つのが一番なのかなと思っています」</p>
       </div>
@@ -1012,6 +1027,17 @@ function ogp(){return `
 
 
 
+
+// ===== 公開用：デバイス自動判定（?dev=1 でプロトタイプUI表示） =====
+const DEVMODE=/[?&]dev=1/.test(location.search);
+if(DEVMODE)document.body.classList.add('devmode');
+function autoDevice(){
+  if(DEVMODE)return; // devモード中は手動切替を尊重
+  document.body.dataset.dev = window.innerWidth<=820 ? 'sp' : 'pc';
+}
+window.addEventListener('resize', autoDevice);
+autoDevice();
+
 const AC='https://japan-ac.jp';
 const NAV=[
  {t:'トップ',u:AC+'/'},
@@ -1028,29 +1054,13 @@ function siteHeader(){
     return '<li><span>'+n.t+'</span><ul>'+sub+'</ul></li>';
   }).join('');
   return '<header class="site-h"><div class="in">'
-    +'<a class="logo" href="'+AC+'/"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/ac_logo.png" alt="レクリエーション介護士｜日本アクティブコミュニティ協会"></a>'
-    +'<nav><ul>'+nav+'</ul></nav>'
-    +'<a class="cta" href="'+AC+'/contact/"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/contact_btn.png" alt="資料請求・お問い合わせ"></a>'
+    +'<a class="logo" href="'+AC+'/" target="_self"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/ac_logo.png" alt="レクリエーション介護士｜日本アクティブコミュニティ協会"></a>'
     +'</div></header>';
 }
 function siteFooter(){
-  const col=(items)=>'<ul>'+items.map(i=>'<li><a href="'+i[1]+'">'+i[0]+'</a></li>').join('')+'</ul>';
   return '<footer class="site-f">'
-    +'<div class="cols">'
-    +col([['高齢者健幸サポーターガイド',AC+'/supporter-class/'],['２級ガイド',AC+'/second-class/'],['1級ガイド',AC+'/first-class/'],['マスターガイド',AC+'/master-class/'],['資格取得の流れ',AC+'/flow/']])
-    +col([['2級通学講座',AC+'/kaikou/'],['講座スケジュール',AC+'/schedule/'],['団体研修ガイド',AC+'/group/'],['資格活用ガイド',AC+'/utilization/'],['特別講師陣',AC+'/teacher/']])
-    +col([['協力・応援施設',AC+'/yell/'],['賛助会員',AC+'/patronage/'],['メディア掲載情報',AC+'/media/'],['組織情報',AC+'/about/'],['個人情報保護方針',AC+'/privacy-policy/']])
-    +'</div>'
-    +'<div class="mid">'
-    +'<div class="sns">'
-    +'<a href="https://twitter.com/rekukaigoshi"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/icon-twitter.svg" alt="X"></a>'
-    +'<a href="https://lin.ee/cGgnzk1"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/icon-line.svg" alt="LINE"></a>'
-    +'<a href="https://www.facebook.com/rekukaigoshi"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/icon-facebook.svg" alt="Facebook"></a>'
-    +'</div>'
-    +'<a class="fcta" href="'+AC+'/contact/"><img src="'+AC+'/wp-content/themes/reccare/src/img/common/contact_btn.png" alt="資料請求・お問い合わせ"></a>'
-    +'</div>'
     +'<div class="logos">'
-    +'<a href="'+AC+'/"><img class="l1" src="'+AC+'/wp-content/themes/reccare/src/img/common/ac_logo.png" alt="日本アクティブコミュニティ協会"></a>'
+    +'<a href="'+AC+'/" target="_self"><img class="l1" src="'+AC+'/wp-content/themes/reccare/src/img/common/ac_logo.png" alt="日本アクティブコミュニティ協会"></a>'
     +'<a href="https://www.e-bcc.jp/"><img class="l2" src="'+AC+'/wp-content/themes/reccare/src/img/common/bcc_logo.png" alt="ＢＣＣ株式会社"></a>'
     +'</div>'
     +'<div class="cr">© ＢＣＣ株式会社. All Rights Reserved.</div>'
