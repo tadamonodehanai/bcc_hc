@@ -489,7 +489,7 @@
 <div class="banner">
   <div class="banner-inner">
     <a href="index.html" class="banner-link">介護レク広場 14期戦略｜サイトリニューアル要件定義</a>
-    <span class="banner-tag">v0.8 / 2026.08 / DRAFT</span>
+    <span class="banner-tag">v0.10 / 2026.09 / DRAFT</span>
   </div>
 </div>
 
@@ -874,10 +874,10 @@
         </div>
         <div class="layer-body">
           <p class="layer-desc">
-            層1でつないだIDに、<strong>観測できるデータを載せる</strong>。SHIFT 03（業界外スポンサー）で売る対象は「精度の高いアクティブ会員データ」。<strong>スコープ2の商品を売るための在庫を、スコープ1で貯め始める</strong>という関係にある。
+            層1でつないだIDに、<strong>観測できるデータを載せる</strong>。SHIFT 03（業界外スポンサー）で売る対象は「精度の高いアクティブ会員データ」。<strong>スコープ2の商品を売るための在庫を、スコープ1で貯め始める</strong>という関係にある。構造トレースにより、<strong>属性の主要3項目はすでに現行DBに存在する</strong>ことが判明した——在庫はゼロからではない。
           </p>
           <ul class="layer-items">
-            <li>属性項目：役職／施設形態／地域／担当業務／関心テーマ／購買関与</li>
+            <li>属性項目：役職／施設形態／地域／担当業務／関心テーマ／購買関与。<strong>うち役職・施設形態・地域は現行DBに既存</strong>（職業7種・事業所の種類12種・都道府県）——新規取得ではなく<strong>移行＋精度検証＋不足3項目の追加</strong>とする（<a href="site_trace.html" style="color:var(--accent-warm);">構造トレース § 05</a>）</li>
             <li>アクティブ判定ロジックの実装（定義は Phase 0 STAGE 2 の結果を採用）</li>
             <li>会員別の行動履歴（ログイン・DL・閲覧）を分析可能な形で保持</li>
             <li>属性 × アクティブのクロス集計を、管理画面から出力できること</li>
@@ -1534,7 +1534,7 @@
   <div class="container">
     <p class="footer-text">
       介護レク広場 14期戦略 ／ サイトリニューアル要件定義（たたき台）<br>
-      検討稿 v0.8 ／ 2026年8月 ／ 内部討議用
+      検討稿 v0.10 ／ 2026年9月 ／ 内部討議用
     </p>
   </div>
 </footer>

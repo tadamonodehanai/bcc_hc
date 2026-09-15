@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>現行サイト構造トレース｜介護レク広場</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-paper: #FAF6EE;
+    --bg-card: #FFFFFF;
+    --bg-section: #F2ECDE;
+    --bg-deep: #1F4847;
+    --text-primary: #2A2825;
+    --text-secondary: #5A5651;
+    --text-muted: #8E887F;
+    --text-on-deep: #F2ECDE;
+    --accent-deep: #1F4847;
+    --accent-warm: #B85C3D;
+    --accent-gold: #B8924A;
+    --border-soft: #E5DDC8;
+    --border-line: #C9BFA8;
+    --max-width: 920px;
+    --font-display: "Shippori Mincho B1", "Yu Mincho", "游明朝", serif;
+    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", sans-serif;
+    --font-mono: "JetBrains Mono", "Menlo", monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-paper);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent-warm); color: var(--bg-paper); }
+
+  .banner {
+    background: var(--bg-deep);
+    color: var(--text-on-deep);
+    padding: 12px 0;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .banner-link { color: inherit; text-decoration: none; transition: opacity 0.2s ease; }
+  .banner-link:hover { opacity: 0.7; }
+  .banner-tag { font-family: var(--font-mono); font-size: 10px; opacity: 0.7; }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+
+  .hero { padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 60px; right: -40px;
+    width: 320px; height: 320px;
+    background: var(--bg-section);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before { content: ""; width: 32px; height: 1px; background: var(--accent-warm); }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+  .hero-title em { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 64px;
+    max-width: 660px;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-line);
+    max-width: 700px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 8px; }
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .hero-meta-value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section.deep { background: var(--bg-section); border-top: none; }
+  .section.dark { background: var(--bg-deep); color: var(--text-on-deep); border-top: none; }
+  .section.dark .section-title { color: var(--text-on-deep); }
+  .section.dark .section-lead { color: rgba(242, 236, 222, 0.85); }
+  .section.dark .section-number { color: var(--accent-gold); }
+  .section.dark .section-lead strong { color: var(--accent-gold); }
+
+  .section-header { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .section-lead { font-size: 16px; line-height: 2.1; color: var(--text-secondary); max-width: 700px; }
+  .section-lead strong { color: var(--text-primary); font-weight: 600; }
+
+  .emph-warm { font-style: normal; color: var(--accent-warm); font-weight: 600; }
+
+  /* Essence blocks */
+  .essence-block {
+    margin-top: 40px;
+    padding: 44px 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-left: 4px solid var(--accent-warm);
+  }
+  .essence-block.accent { background: var(--bg-section); border-left-color: var(--accent-deep); }
+  .essence-block + .essence-block { margin-top: 24px; }
+  .essence-head { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }
+  .essence-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .essence-block.accent .essence-tag { color: var(--accent-deep); }
+  .essence-title {
+    font-family: var(--font-display);
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.55;
+  }
+  .essence-body { font-size: 14.5px; line-height: 2.05; color: var(--text-secondary); margin-bottom: 18px; }
+  .essence-body:last-child { margin-bottom: 0; }
+  .essence-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+
+  .shift-arrow {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 0; margin-top: 20px;
+    border-top: 1px dashed var(--border-line);
+  }
+  .shift-from, .shift-to { font-family: var(--font-display); font-size: 14.5px; line-height: 1.6; flex: 1; }
+  .shift-from { color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shift-to { color: var(--accent-deep); font-weight: 500; }
+  .shift-mark { font-family: var(--font-mono); color: var(--accent-warm); font-size: 14px; }
+
+  /* Generic data table */
+  .dtable { margin-top: 40px; border: 1px solid var(--border-soft); background: var(--bg-card); overflow-x: auto; }
+  .dtable table { width: 100%; border-collapse: collapse; min-width: 620px; }
+  .dtable th, .dtable td {
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 13.5px;
+    line-height: 1.85;
+    border-bottom: 1px solid var(--border-soft);
+    border-right: 1px solid var(--border-soft);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .dtable th:last-child, .dtable td:last-child { border-right: none; }
+  .dtable tr:last-child td { border-bottom: none; }
+  .dtable th {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--bg-section);
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  .dtable td.k { font-family: var(--font-display); font-size: 14.5px; color: var(--text-primary); font-weight: 500; white-space: nowrap; }
+  .dtable td strong { color: var(--text-primary); font-weight: 600; }
+  .dtable tr.hl { background: rgba(184, 92, 61, 0.05); }
+  .dtable tr.hl td.k { color: var(--accent-warm); }
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+    border: 1px solid var(--border-line);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .pill.must { color: var(--accent-warm); border-color: var(--accent-warm); }
+  .pill.gold { color: var(--accent-gold); border-color: var(--accent-gold); }
+  .pill.deep { color: var(--accent-deep); border-color: var(--accent-deep); }
+
+  /* Timeline */
+  .timeline { margin-top: 40px; border: 1px solid var(--border-line); background: var(--bg-card); }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 150px;
+    border-bottom: 1px solid var(--border-soft);
+    align-items: stretch;
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-row.gate { background: var(--bg-section); }
+  .tl-row.fixed { background: var(--bg-deep); color: var(--text-on-deep); }
+  .tl-when {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    padding: 22px 18px;
+    color: var(--accent-warm);
+    border-right: 1px solid var(--border-soft);
+    white-space: nowrap;
+  }
+  .tl-row.fixed .tl-when { color: var(--accent-gold); border-right-color: rgba(184,146,74,0.3); }
+  .tl-what { padding: 22px 22px; display: flex; flex-direction: column; gap: 6px; }
+  .tl-title { font-family: var(--font-display); font-size: 18px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .tl-row.fixed .tl-title { color: var(--text-on-deep); }
+  .tl-note { font-size: 13px; line-height: 1.85; color: var(--text-secondary); }
+  .tl-row.fixed .tl-note { color: rgba(242,236,222,0.85); }
+  .tl-track {
+    padding: 22px 18px;
+    border-left: 1px solid var(--border-soft);
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+  .tl-row.fixed .tl-track { color: rgba(242,236,222,0.6); border-left-color: rgba(184,146,74,0.3); }
+
+  /* Layer cards */
+  .layer-list { display: flex; flex-direction: column; gap: 20px; margin-top: 44px; }
+  .layer {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--border-line);
+    padding: 36px 32px;
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 36px;
+  }
+  .layer.must { border-top-color: var(--accent-warm); }
+  .layer.mid { border-top-color: var(--accent-gold); }
+  .layer.late { border-top-color: var(--accent-deep); }
+  .layer-head { display: flex; flex-direction: column; gap: 10px; }
+  .layer-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .layer.must .layer-tag { color: var(--accent-warm); }
+  .layer-name { font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+  .layer-when { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); letter-spacing: 0.05em; line-height: 1.7; }
+  .layer-body { display: flex; flex-direction: column; gap: 14px; }
+  .layer-desc { font-size: 14px; line-height: 2; color: var(--text-secondary); }
+  .layer-desc strong { color: var(--text-primary); font-weight: 600; }
+  .layer-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .layer-items li { padding-left: 20px; position: relative; font-size: 13.5px; line-height: 1.9; color: var(--text-secondary); }
+  .layer-items li::before { content: "▸"; position: absolute; left: 0; color: var(--accent-warm); font-size: 12px; }
+
+  /* Risk list */
+  .risk-list { display: flex; flex-direction: column; margin-top: 44px; }
+  .risk {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    align-items: baseline;
+  }
+  .risk:last-child { border-bottom: 1px solid var(--border-soft); }
+  .risk-num { font-family: var(--font-display); font-size: 28px; color: var(--accent-warm); font-weight: 500; line-height: 1; }
+  .risk-body { display: flex; flex-direction: column; gap: 10px; }
+  .risk-title { font-family: var(--font-display); font-size: 21px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .risk-note { font-size: 14px; color: var(--text-secondary); line-height: 1.95; }
+  .risk-note strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: linear-gradient(transparent 60%, rgba(184, 92, 61, 0.18) 60%);
+    padding: 0 2px;
+  }
+  .risk-fix {
+    margin-top: 6px;
+    padding: 14px 18px;
+    background: var(--bg-section);
+    border-left: 3px solid var(--accent-deep);
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--text-secondary);
+  }
+  .risk-fix strong { font-family: var(--font-display); color: var(--accent-deep); font-weight: 600; display: block; margin-bottom: 3px; }
+  .risk-when {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent-warm);
+    border: 1px solid var(--accent-warm);
+    padding: 3px 9px;
+    align-self: flex-start;
+  }
+
+  /* Confirm list (dark) */
+  .confirms { display: flex; flex-direction: column; margin-top: 36px; }
+  .confirm {
+    padding: 26px 0;
+    border-top: 1px solid rgba(242, 236, 222, 0.2);
+    display: grid;
+    grid-template-columns: 48px 1fr 190px;
+    gap: 24px;
+    align-items: center;
+  }
+  .confirm:last-child { border-bottom: 1px solid rgba(242, 236, 222, 0.2); }
+  .confirm-num { font-family: var(--font-display); font-size: 24px; color: var(--accent-gold); font-weight: 500; }
+  .confirm-title { font-family: var(--font-display); font-size: 18px; color: var(--text-on-deep); line-height: 1.6; }
+  .confirm-who {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 6px 12px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* Next actions */
+  .nextactions { display: flex; flex-direction: column; margin-top: 32px; }
+  .nextaction {
+    padding: 28px 0;
+    border-top: 1px solid var(--border-soft);
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .nextaction:last-child { border-bottom: 1px solid var(--border-soft); }
+  .nextaction-num { font-family: var(--font-display); font-size: 26px; color: var(--accent-warm); font-weight: 500; }
+  .nextaction-title { font-family: var(--font-display); font-size: 19px; color: var(--text-primary); line-height: 1.55; }
+  .nextaction-doc {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--accent-deep);
+    text-transform: uppercase;
+    padding: 6px 13px;
+    border: 1px solid var(--border-line);
+    white-space: nowrap;
+  }
+
+  .footer { padding: 60px 0; text-align: center; }
+  .footer-text { font-family: var(--font-display); font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  .pagenav { border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); background: var(--bg-paper); }
+  .pagenav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .pagenav-side { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s ease; }
+  .pagenav-side:hover { opacity: 0.65; }
+  .pagenav-side.right { text-align: right; align-items: flex-end; }
+  .pagenav-direction {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+  }
+  .pagenav-title { font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .pagenav-center {
+    text-align: center;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid var(--border-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+  .pagenav-center:hover { background: var(--bg-deep); color: var(--text-on-deep); border-color: var(--bg-deep); }
+
+  @media print {
+    .banner { position: static; }
+    .section { padding: 60px 0; page-break-inside: avoid; }
+    body { font-size: 12px; }
+    .hero-title { font-size: 42px; }
+  }
+
+  @media (max-width: 720px) {
+    .container, .banner-inner { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-title { font-size: 36px; }
+    .hero-subtitle { font-size: 17px; }
+    .hero-meta { grid-template-columns: 1fr; gap: 20px; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 27px; }
+    .essence-block { padding: 30px 22px; }
+    .essence-title { font-size: 21px; }
+    .layer { grid-template-columns: 1fr; gap: 20px; padding: 28px 22px; }
+    .tl-row { grid-template-columns: 1fr; }
+    .tl-when { border-right: none; border-bottom: 1px solid var(--border-soft); padding: 14px 18px; }
+    .tl-track { border-left: none; border-top: 1px solid var(--border-soft); padding: 14px 18px; }
+    .risk { grid-template-columns: 44px 1fr; gap: 16px; }
+    .confirm { grid-template-columns: 36px 1fr; gap: 14px; }
+    .confirm-who { grid-column: 1 / -1; justify-self: start; }
+    .nextaction { grid-template-columns: 40px 1fr; }
+    .nextaction-doc { grid-column: 1 / -1; justify-self: start; }
+    .pagenav-inner { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
+    .pagenav-side.right { text-align: left; align-items: flex-start; }
+    .shift-arrow { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+  /* Matrix marks */
+  .mx td, .mx th { text-align: center; }
+  .mx td.k, .mx td.note { text-align: left; }
+  .mx td.note { font-size: 12.5px; line-height: 1.75; }
+  .m { font-family: var(--font-mono); font-size: 15px; font-weight: 500; }
+  .m.a { color: var(--accent-warm); }
+  .m.b { color: var(--accent-deep); }
+  .m.c { color: var(--text-muted); }
+  .m.d { color: #A63D2F; }
+  .mx tr.pick { background: rgba(184, 92, 61, 0.07); }
+  .mx tr.pick td.k { color: var(--accent-warm); font-weight: 600; }
+  .mx tr.avoid td.k { color: var(--text-muted); }
+  .axis-key { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; font-size: 12.5px; color: var(--text-secondary); }
+  .axis-key span { font-family: var(--font-mono); }
+  @media (max-width: 720px) { .mx table { min-width: 720px; } }
+
+  /* Sitemap tree */
+  .tree { font-family: var(--font-body); font-size: 13.5px; line-height: 1.7; margin-top: 32px; background: var(--bg-card); border: 1px solid var(--border-soft); padding: 32px 36px; }
+  .tree ul { list-style: none; padding-left: 22px; border-left: 1px solid var(--border-soft); margin: 4px 0 4px 6px; }
+  .tree > ul { border-left: none; padding-left: 0; margin: 0; }
+  .tree li { position: relative; padding: 3px 0 3px 14px; }
+  .tree li::before { content: ""; position: absolute; left: 0; top: 15px; width: 10px; height: 1px; background: var(--border-line); }
+  .tree > ul > li::before { display: none; }
+  .tree > ul > li { padding-left: 0; }
+  .tree .n { font-family: var(--font-display); font-weight: 600; color: var(--text-primary); font-size: 15px; }
+  .tree .u { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-left: 8px; }
+  .tree .c { font-family: var(--font-mono); font-size: 10.5px; color: var(--accent-warm); margin-left: 8px; }
+  .tree .g { display: inline-block; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; padding: 1px 6px; border: 1px solid var(--border-line); color: var(--text-muted); margin-left: 8px; vertical-align: middle; }
+  .tree .g.m { color: var(--accent-deep); border-color: var(--accent-deep); }
+  .tree .g.x { color: var(--accent-warm); border-color: var(--accent-warm); }
+  .tree .sub { color: var(--text-secondary); }
+  .kv { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+  .kv .box { background: var(--bg-card); border: 1px solid var(--border-soft); border-top: 3px solid var(--accent-warm); padding: 22px 20px; }
+  .kv .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; color: var(--text-muted); text-transform: uppercase; }
+  .kv .num { font-family: var(--font-display); font-size: 34px; font-weight: 600; color: var(--text-primary); line-height: 1.2; margin: 8px 0 4px; }
+  .kv .sub { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+  .kv .box.warn { border-top-color: var(--accent-gold); }
+  .kv .box.warn .num { color: var(--accent-warm); }
+  .verdict { display: inline-block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em; padding: 3px 8px; white-space: nowrap; }
+  .verdict.keep { color: var(--accent-deep); border: 1px solid var(--accent-deep); }
+  .verdict.change { color: var(--accent-gold); border: 1px solid var(--accent-gold); }
+  .verdict.add { color: var(--bg-paper); background: var(--accent-warm); border: 1px solid var(--accent-warm); }
+  .verdict.drop { color: var(--text-muted); border: 1px solid var(--border-line); text-decoration: line-through; }
+  .verdict.ask { color: var(--accent-warm); border: 1px dashed var(--accent-warm); }
+  .dtable td.be, .dtable td.fe { text-align: center; font-family: var(--font-mono); font-size: 12px; }
+  @media (max-width: 720px) { .kv { grid-template-columns: 1fr 1fr; } .tree { padding: 20px 16px; } }
+</style>
+
+
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-inner">
+    <a href="index.html" class="banner-link">介護レク広場 14期戦略｜現行サイト構造トレース</a>
+    <span class="banner-tag">v0.3 / 2026.09 / DRAFT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-label">SITE TRACE — 現行サイトの構造と機能</span>
+    <h1 class="hero-title">いま何があるかを、<br>数えて、並べる。</h1>
+    <p class="hero-subtitle">
+      公開エリア70ページと会員エリア12ページを巡回し、URL体系・分類軸・機能・技術構成を洗い出した。<br>
+      <em>減らす前に、全部を見える化する</em>——原則01「引き算」の、最初の一歩。
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Traced</span>
+        <span class="hero-meta-value">公開 70 ＋ 会員 12 ページ<br>2026.09.10 時点</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Finding</span>
+        <span class="hero-meta-value">属性データは<br>すでに存在する</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Direction</span>
+        <span class="hero-meta-value">ミニマルで、クール。<br>BE／FE の両輪で</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- §00 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 00　実数</span>
+      <h2 class="section-title">サイトが語る数字と、<br>実際の数字。</h2>
+    </div>
+    <p class="section-lead">
+      検索結果の内部カウンタから、掲載コンテンツの実数を取得した。サイト上の会員特典には<strong>「3,500点以上のレク素材・レクネタ」</strong>と書かれているが、<strong>実数は2,166点</strong>。素材1点にA4・色見本・カレンダー付きの3バリエーションがあるため、ファイル数で数えればその表記に近づくが、<strong>コンテンツ数としては1.6倍の開き</strong>がある。DOMAIN 06 が指摘した「語られる数字と実態の乖離」は、会員数だけでなくコンテンツ数にも存在する。
+    </p>
+
+    <div class="kv">
+      <div class="box"><div class="lbl">レク素材</div><div class="num">1,940</div><div class="sub">24カテゴリ／122ページ×16件<br>レクNo. は 0002904 まで採番</div></div>
+      <div class="box"><div class="lbl">レクネタ</div><div class="num">226</div><div class="sub">10カテゴリ／29ページ×8件<br>企画書形式・レクリエーション介護士が提供</div></div>
+      <div class="box"><div class="lbl">レク動画</div><div class="num">≈ 51</div><div class="sub">6カテゴリ／YouTube埋め込み<br>2025〜2026 に月1本ペース</div></div>
+      <div class="box warn"><div class="lbl">新着情報</div><div class="num">≈ 417</div><div class="sub">41ページ／ほぼ「〇〇をアップしました」<br><strong>手動運用の可能性が高い</strong></div></div>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:40px;">
+      <div class="essence-head">
+        <span class="essence-tag">Note — 採番の空白</span>
+        <h3 class="essence-title">レクNo. 2,904 に対して、<br>公開は 1,940。</h3>
+      </div>
+      <p class="essence-body">
+        素材の採番は 0002904 まで進んでいるが、検索に出るのは1,940点。約960点が非公開・削除済み・下書きのいずれかで存在すると思われる。<strong>この非公開分は移行しない（決定）</strong>。カテゴリ整理（要件定義 § 08）の母集団は<strong>公開中の1,940点＋レクネタ226点</strong>で確定し、エクスポート依頼も公開分に限定する。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §01 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 01　サイトマップ</span>
+      <h2 class="section-title">現行の全ページを、<br>階層で並べる。</h2>
+    </div>
+    <p class="section-lead">
+      公開エリアの全ページ。<span class="tree" style="display:inline;padding:0;border:none;background:none;"><span class="g m">会員</span></span> はログイン必須、<span class="tree" style="display:inline;padding:0;border:none;background:none;"><span class="g x">別体系</span></span> は本体と異なるデザイン・テンプレートで作られているページ。<strong>1つのドメインの中に、3つのデザイン体系が同居している</strong>——これが現行の最も大きな構造上の特徴になる。
+    </p>
+
+    <div class="tree">
+      <ul>
+        <li><span class="n">HOME</span><span class="u">/</span>
+          <ul>
+            <li class="sub">人気レク素材（5件）／人気レクネタ（5件）／人気レク動画（3本）／特集（8件）／新着情報（5件）／初めての方へ／おすすめのサービス（8バナー）</li>
+          </ul>
+        </li>
+        <li><span class="n">レク素材</span><span class="u">/TRecreationMaterials/</span>
+          <ul>
+            <li>探す <span class="u">/search</span><span class="c">キーワード ＋ 24カテゴリ・季節4・月12・行事18・難易度6 ／ 並び順：新着・人気 ／ Ajax読み込み 16件×122p</span></li>
+            <li>詳細 <span class="u">/detail/?tRecreationMaterial_id=…&amp;cMaterialDifficulty_id=…&amp;category_id=…</span><span class="c">A4／色見本／カレンダー付き（12ヶ月選択）・豆知識・難易度・DL数・類似10件</span></li>
+            <li>お試しダウンロード <span class="u">/trial</span><span class="c">非会員向け・6点</span></li>
+            <li>レク素材とは <span class="u">/pages/recreationMaterials</span></li>
+            <li>ダウンロードに追加 <span class="u">/download_session/</span><span class="g m">会員</span><span class="c">セッションカート方式</span></li>
+            <li>お気に入り <span class="u">/favorite_save/</span><span class="g m">会員</span><span class="c">Ajax POST</span></li>
+          </ul>
+        </li>
+        <li><span class="n">レクネタ</span><span class="u">/TRecreationInformations/</span>
+          <ul>
+            <li>探す <span class="u">/search</span><span class="c">キーワード ＋ 種別5・カテゴリ10・行事18・参加形態2・準備2・所要時間4・予算5 ／ 8件×29p</span></li>
+            <li>詳細 <span class="u">/detail/?tRecreationInformation_id=…&amp;kind_id=…</span><span class="c">企画書：目的／対象者／タイムスケジュール／予算／人数／スペース／準備物／連絡事項／写真・類似4件</span></li>
+            <li>お試しダウンロード <span class="u">/trial</span></li>
+            <li>ダウンロードに追加／お気に入り<span class="g m">会員</span></li>
+          </ul>
+        </li>
+        <li><span class="n">介護レクNews（特集）</span><span class="u">/MSpecials/</span><span class="g x">別体系</span>
+          <ul>
+            <li>トップ <span class="u">/</span><span class="c">自称「現場を支える介護レク情報サイト」・独自ヘッダー／フッター</span></li>
+            <li>記事一覧 <span class="u">/list?category_id=…</span><span class="c">11カテゴリ：注目記事・レクネタ・いつでも使える・春夏秋冬・学びの場・キャンペーン・お知らせ・人気の連載</span></li>
+            <li>タグ一覧 <span class="u">/list?tag_id=…</span><span class="c">16タグ（#あの頃あの日 #朝のお目覚め脳活 #体操レク …）</span></li>
+            <li>記事詳細 <span class="u">/detail/&lt;uuid&gt;</span><span class="c">SNSシェア（FB・X・LINE）・会員特典CTA・今読まれている記事</span></li>
+            <li>レク動画 <span class="u">/movie</span><span class="c">6カテゴリ：体操・音楽・クイズ・クラフト・ゲーム・その他 ／ 5p</span></li>
+            <li>記事内検索 <span class="u">/list?keyword=</span></li>
+          </ul>
+        </li>
+        <li><span class="n">プレゼント</span><span class="u">/MPresents/</span><span class="g m">会員</span>
+          <ul>
+            <li>申込可能 <span class="u">/present_list</span>　／　終了 <span class="u">/present_past_list</span><span class="c">協賛企業の提供品・会員限定</span></li>
+          </ul>
+        </li>
+        <li><span class="n">新着情報</span><span class="u">/MInformations/information_list</span><span class="c">4カテゴリ：お知らせ・メディア掲載・プレスリリース・その他 ／ 41p</span></li>
+        <li><span class="n">会員</span><span class="u">/MMembers/ ・ /mypage/</span>
+          <ul>
+            <li>新規登録 <span class="u">/MMembers/regist</span><span class="c">4ステップ：メール → 確認メール → 基本情報 → 完了（規約・個人情報同意）</span></li>
+            <li>ログイン／ログアウト <span class="u">/mypage/MMembers/login, logout</span></li>
+            <li>パスワード再発行 <span class="u">/MMembers/password</span></li>
+            <li>退会 <span class="u">/mypage/MMembers/withdrawal</span><span class="g m">会員</span></li>
+            <li>マイページ <span class="u">/mypage.html</span><span class="g m">会員</span><span class="c">運営からのお知らせ・最近のDL履歴・最近のお気に入り・新着情報 の4ブロック</span>
+              <ul>
+                <li>会員情報変更 <span class="u">/mypage/MMembers/edit</span><span class="c">氏名・フリガナ・都道府県・生年月日・性別・<strong>職業7種・事業所の種類12種・勤務先名称・保有資格11種</strong>・メルマガ案内3種</span></li>
+                <li>メールアドレス変更 <span class="u">/mypage/MMembers/mail_input</span>　／　パスワード変更 <span class="u">/mypage/MMembers/password</span></li>
+                <li>お気に入りレク素材 <span class="u">/mypage/TRecreationMaterials/favorite</span>　／　お気に入りレクネタ <span class="u">/mypage/TRecreationInformations/favorite</span></li>
+                <li>ダウンロード履歴 <span class="u">/mypage/CMemberDownloads/list</span><span class="c">日時・カテゴリ・タイトル ／ カテゴリ絞込（素材・ネタ）</span></li>
+                <li>レクネタ登録 <span class="u">/mypage/Tops/reckaigoshi</span><span class="g x">UGC</span><span class="c"><strong>レクリエーション介護士のみ。</strong>認定番号を登録するとレクネタを投稿できる</span></li>
+                <li>認定番号登録 <span class="u">/mypage/TMemberKaigoRecLicenseNumbers/detail</span><span class="c">レクリエーション介護士2級の認定番号・氏名</span></li>
+                <li>運営からのお知らせ <span class="u">/mypage/MInformationManages/information_list</span><span class="c">休業案内・不具合告知 12件（2017〜）</span></li>
+              </ul>
+            </li>
+            <li>選んだ素材・ネタをダウンロードする <span class="u">ヘッダー常設</span><span class="g m">会員</span><span class="c">セッションカート。件数バッジ付き。0件では何も起きない</span></li>
+          </ul>
+        </li>
+        <li><span class="n">サポート</span>
+          <ul>
+            <li>初めての方へ <span class="u">/pages/for_visitor</span><span class="c">サービス紹介・介護レクとは・3つの基本レク</span></li>
+            <li>検索・ダウンロード方法 <span class="u">/pages/how_to_download</span></li>
+            <li>よくあるご質問 <span class="u">/pages/question</span><span class="c">全般／会員登録／利用方法／利用環境／セキュリティ／その他</span></li>
+            <li>リクエスト受付 <span class="u">/Requests/reception</span><span class="g m">会員</span><span class="c">メールアドレス＋自由記述。「目の不自由な方でもできるレク」等の例示</span></li>
+            <li>お問い合わせ <span class="u">/Requests/inquiring</span><span class="c">名前・メール・電話・カテゴリ・内容</span></li>
+          </ul>
+        </li>
+        <li><span class="n">サイト情報</span>
+          <ul>
+            <li>サイトマップ ／ サイトポリシー ／ プライバシーポリシー及び外部送信に係る公表事項 <span class="u">/pages/…</span></li>
+            <li>当サイトに興味のある企業様へ <span class="u">/pages/to_company</span><span class="c">モニター調査・実態調査・プレゼント企画・タイアップ・素材下広告</span></li>
+          </ul>
+        </li>
+        <li><span class="n">企業・サービスLP</span><span class="g x">別体系</span>
+          <ul>
+            <li>介護レクサポーター <span class="u">/feature/rec-supporter/</span><span class="c">レク代行サービス（プロ 12,000円〜／プレミアム 50,000円〜）・外部フォームへ</span></li>
+            <li>吉本興業タレント版 <span class="u">/app/webroot/feature/rec-supporter/regular</span><span class="c">CakePHP の webroot パスが露出</span></li>
+            <li>介護レク広場 × AYUMIEYE <span class="u">/waseda</span><span class="c">早稲田エルダリーヘルス事業団とのタイアップ・Bootstrap製・外部フォームへ</span></li>
+          </ul>
+        </li>
+        <li><span class="n">短縮URL</span><span class="u">/&lt;8〜12文字&gt;</span><span class="c">23件検出。素材・レクネタ詳細や外部フォームへ302リダイレクト。SNS投稿用と推定</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- §02 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 02　分類軸</span>
+      <h2 class="section-title">探すための軸が、<br>多すぎる。</h2>
+    </div>
+    <p class="section-lead">
+      現行の情報設計で最も目立つのは<strong>分類軸の多さ</strong>。素材だけで5軸、レクネタは7軸。しかも素材のカテゴリには<strong>「塗り絵」「歌つき塗り絵」が2回ずつ現れる</strong>（IDが異なる重複）。ミニマルにするなら、<strong>軸を消すのではなく、入口を1本にして残りをフィルタに落とす</strong>。
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead><tr><th>対象</th><th>軸</th><th>選択肢</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td class="k" rowspan="5">レク素材</td><td>カテゴリ</td><td>24（6グループ）</td><td>塗り絵系6・便利素材4・脳活4・歌ことば3・工作3・学生作品／塗り絵／歌つき塗り絵／習字4。<strong>ID 1/22、3/23 が同名で重複</strong></td></tr>
+          <tr><td>季節</td><td>4</td><td>春・夏・秋・冬</td></tr>
+          <tr><td>月</td><td>12</td><td>1〜12月。<strong>季節と重複する軸</strong></td></tr>
+          <tr><td>行事</td><td>18</td><td>お誕生日・お正月・節分・バレンタイン・ひな祭り・ホワイトデー・お花見・こどもの日・母の日・父の日・七夕・夏祭り・十五夜・敬老の日・運動会・紅葉狩り・ハロウィン・クリスマス</td></tr>
+          <tr><td>難易度</td><td>6</td><td>★1〜6。詳細ページでは類似素材にも表示</td></tr>
+          <tr class="hl"><td class="k" rowspan="7">レクネタ</td><td>種別</td><td>5</td><td>作る・描く／体を動かす／考える／歌う／その他</td></tr>
+          <tr><td>カテゴリ</td><td>10</td><td>絵画・手芸工芸・音楽・脳活ゲーム・体操・フラワーアレンジ・美容ファッション・書道・回想・その他。<strong>種別と意味が重なる</strong></td></tr>
+          <tr><td>行事</td><td>18</td><td>素材と同じマスタ</td></tr>
+          <tr><td>参加形態</td><td>2</td><td>1人でできる／複数人でできる</td></tr>
+          <tr><td>準備</td><td>2</td><td>すぐできる／前準備が必要</td></tr>
+          <tr><td>所要時間</td><td>4</td><td>10分／30分／60分以内／それ以上</td></tr>
+          <tr><td>予算</td><td>5</td><td>無し／500／1,000／3,000円以下／3,001円以上</td></tr>
+          <tr><td class="k" rowspan="2">介護レクNews</td><td>カテゴリ</td><td>11</td><td>注目・レクネタ・いつでも使える・春夏秋冬・学びの場・キャンペーン・お知らせ・人気の連載</td></tr>
+          <tr><td>タグ</td><td>16</td><td>#あの頃あの日 #レクリエーション介護士 #朝のお目覚め脳活 #体操レク #料理おやつレク #クラフトレク #音楽レク #脳活レク #ゲームレク #アイスブレイク #口腔体操レク #手遊び #認知症 …</td></tr>
+          <tr><td class="k">レク動画</td><td>カテゴリ</td><td>6</td><td>体操・音楽・クイズ・クラフト・ゲーム・その他。<strong>レクネタの種別・カテゴリとも介護レクNewsのタグとも別体系</strong></td></tr>
+          <tr><td class="k">新着情報</td><td>カテゴリ</td><td>4</td><td>お知らせ・メディア掲載・プレスリリース・その他</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Finding</span>
+        <h3 class="essence-title">同じことを指す軸が、<br>コンテンツ種別ごとに別々に生えている。</h3>
+      </div>
+      <p class="essence-body">
+        「体操」は、レクネタではカテゴリ、動画ではカテゴリ、Newsではタグとして<strong>3箇所に別のIDで存在する</strong>。「秋」は素材では季節、Newsではカテゴリ。<strong>横断して探せない</strong>のは、軸が多いからではなく、軸が種別ごとに閉じているから。
+      </p>
+      <p class="essence-body">
+        新基盤のコンテンツモデル（インフラ提案 § 04）で<strong>共通メタデータとして「季節・行事・活動種別」を1つのマスタに統合</strong>すれば、素材・レクネタ・動画・記事・デジタルレクを<strong>同じ「今月のレク」から横断して出せる</strong>。ミニマルなUIは、この統合があって初めて成立する。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §03 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 03　機能一覧と整頓</span>
+      <h2 class="section-title">残す・変える・足す・落とす。<br>BE／FE の両輪で。</h2>
+    </div>
+    <p class="section-lead">
+      現行の全機能を洗い出し、判定を付けた。<span class="verdict keep">残す</span> は機能として維持、<span class="verdict change">変える</span> は目的は同じで実装・体験を作り直す、<span class="verdict add">足す</span> は新設、<span class="verdict drop">落とす</span> は継承しない、<span class="verdict ask">要判断</span> はログや利用実態を見てから決める。BE／FE 列は<strong>どちらの設計に主に効くか</strong>。
+    </p>
+
+    <div class="dtable" style="margin-top:32px;">
+      <table>
+        <thead><tr><th style="width:150px">機能</th><th>現行の実装</th><th>判定</th><th style="width:36px">BE</th><th style="width:36px">FE</th><th>整頓の方向</th></tr></thead>
+        <tbody>
+          <tr><td colspan="6" style="background:var(--bg-section);font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;color:var(--text-muted);">探す・見る</td></tr>
+          <tr class="hl"><td class="k">トップページ</td><td>人気素材／人気ネタ／人気動画／特集／新着／初めて／おすすめの7ブロック縦積み</td><td><span class="verdict change">変える</span></td><td class="be">—</td><td class="fe">●</td><td><strong>「今月のレク」を主動線に。</strong>7ブロックを、季節・行事から入る1本の導線＋新コンテンツの器に絞る</td></tr>
+          <tr class="hl"><td class="k">素材検索</td><td>キーワード＋5軸フィルタ＋難易度＋並び順。Ajax読み込み</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">●</td><td>軸は統合マスタに（§ 02）。<strong>季節と月の重複を解消</strong>。検索結果はSSRで返し、クローラビリティを回復</td></tr>
+          <tr class="hl"><td class="k">レクネタ検索</td><td>キーワード＋7軸フィルタ。Ajax読み込み</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">●</td><td>種別とカテゴリの重なりを整理。参加・準備・時間・予算の4軸は<strong>レクネタ固有の価値なので残す</strong></td></tr>
+          <tr><td class="k">素材詳細</td><td>3バリエーション（A4／色見本／カレンダー12ヶ月）・豆知識・難易度・DL数・類似10件</td><td><span class="verdict change">変える</span></td><td class="be">○</td><td class="fe">●</td><td>豆知識と類似は良い資産。<strong>印刷を一級市民に</strong>（印刷用CSS）。バリエーション選択をワンタップに</td></tr>
+          <tr><td class="k">レクネタ詳細</td><td>企画書の構造化項目（目的・対象・時間・予算・人数・スペース・準備物・連絡事項）</td><td><span class="verdict keep">残す</span></td><td class="be">○</td><td class="fe">●</td><td><strong>構造そのものが優れている。</strong>知見型コンテンツ（エビデンス系）の雛形として流用できる</td></tr>
+          <tr><td class="k">類似コンテンツ</td><td>詳細ページ下部に類似10件／4件</td><td><span class="verdict keep">残す</span></td><td class="be">●</td><td class="fe">○</td><td>統合マスタで<strong>種別を横断した類似</strong>に拡張（素材→レクネタ→動画）</td></tr>
+          <tr><td class="k">お試しダウンロード</td><td>非会員向けに素材6点・レクネタ数点</td><td><span class="verdict keep">残す</span></td><td class="be">○</td><td class="fe">○</td><td>登録前の体験として有効。<strong>DLイベントは非会員でも記録</strong>し、登録転換率を測る</td></tr>
+          <tr><td class="k">介護レクNews</td><td>別デザインの記事サイト。11カテゴリ・16タグ・SNSシェア</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">●</td><td><strong>サイト内サイトを解消し、本体に統合。</strong>記事はコンテンツ基底の1タイプに。DOMAIN 05 の「関係性が不明瞭」への回答</td></tr>
+          <tr><td class="k">レク動画</td><td>YouTube埋め込み・6カテゴリ・≈51本</td><td><span class="verdict keep">残す</span></td><td class="be">○</td><td class="fe">○</td><td>コンテンツ基底の1タイプに。カテゴリは統合マスタへ</td></tr>
+          <tr><td class="k">新着情報</td><td>4カテゴリ・≈417件・「〇〇をアップしました」が大半</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">○</td><td><strong>コンテンツ公開から自動生成</strong>に。手動投稿はプレスリリース・メディア掲載のみに絞る</td></tr>
+          <tr><td class="k">短縮URL</td><td>/xxxxxxxx → 詳細へ302。23件検出</td><td><span class="verdict ask">要判断</span></td><td class="be">●</td><td class="fe">—</td><td>SNS投稿用と推定。新URL体系が読める形なら不要になりうる。<strong>既存23件は301で受ける</strong></td></tr>
+
+          <tr><td colspan="6" style="background:var(--bg-section);font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;color:var(--text-muted);">持ち帰る</td></tr>
+          <tr class="hl"><td class="k">ダウンロードに追加<br>（カート）</td><td>セッションに積んでまとめてDL。3ステップ（追加→一覧→DL）</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">●</td><td><strong>即DLの1ステップに。</strong>利用実態はログから取れないため設計判断で決める。まとめてDLは<strong>お気に入りからの一括DL</strong>として残せば、用途は失わない</td></tr>
+          <tr><td class="k">お気に入り</td><td>Ajax POST・ログイン必須・未ログインはモーダル誘導</td><td><span class="verdict keep">残す</span></td><td class="be">●</td><td class="fe">○</td><td>デバイスをまたぐ利用（スマホで探して施設PCで印刷）の中核。マイページと連携</td></tr>
+          <tr><td class="k">ダウンロード履歴</td><td>日時・カテゴリ・タイトルの一覧。カテゴリ絞込。再DL導線はなし</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">○</td><td>events テーブルから自動で出る。<strong>履歴から再DLできる導線</strong>を足す（現行は一覧のみ）</td></tr>
+
+          <tr><td colspan="6" style="background:var(--bg-section);font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;color:var(--text-muted);">会員</td></tr>
+          <tr class="hl"><td class="k">会員登録</td><td>4ステップ：メール→確認メール→基本情報→完了。規約・個人情報同意</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">●</td><td>流入媒体の保存（連携D）、<strong>同意の版管理</strong>、属性は任意・後追い。LINE連携の案内を完了画面に</td></tr>
+          <tr><td class="k">ログイン／再発行／退会</td><td>メール＋パスワード。CakePHP の _Token 付きフォーム</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">○</td><td><strong>サイレント移行</strong>（旧ハッシュ検証→再ハッシュ）を組み込む。LINEログインを追加</td></tr>
+          <tr><td class="k">マイページ</td><td>運営お知らせ・最近のDL・最近のお気に入り・新着情報の4ブロック＋左メニュー7項目</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">●</td><td>お気に入り・DL履歴・属性編集・LINE連携状態・<strong>所属施設</strong>を1画面に。運営お知らせは新着情報に統合</td></tr>
+          <tr class="hl"><td class="k">会員情報変更</td><td>氏名・フリガナ・都道府県・生年月日・性別・<strong>職業・事業所の種類・勤務先名称・保有資格</strong>・メルマガ案内。職業と事業所種別は必須</td><td><span class="verdict change">変える</span></td><td class="be">●</td><td class="fe">●</td><td><strong>属性はすでにある。</strong>層2の属性項目はこの既存データを移行して精度を上げる形に。勤務先名称は<strong>施設名寄せの種</strong></td></tr>
+          <tr class="hl"><td class="k">レクネタ登録（UGC）</td><td>レクリエーション介護士のみ。認定番号登録 → レクネタ投稿。レクネタ226点の供給源</td><td><span class="verdict keep">残す</span></td><td class="be">●</td><td class="fe">●</td><td><strong>japan-ac.jp（資格）との接点機能。</strong>エビデンス系の投稿・記録フローの雛形にもなる。保有資格＝レク介護士1級/2級と連動</td></tr>
+          <tr><td class="k">お気に入り一覧</td><td>素材・ネタ別の2ページ。件数表示</td><td><span class="verdict keep">残す</span></td><td class="be">○</td><td class="fe">○</td><td>コンテンツ種別を横断した1つの一覧に</td></tr>
+          <tr><td class="k">メール／PW変更</td><td>個別ページ（mail_input・password）</td><td><span class="verdict keep">残す</span></td><td class="be">●</td><td class="fe">○</td><td>メール変更は<strong>到達可能アドレスの更新機会</strong>。バウンス済み会員への案内導線に</td></tr>
+          <tr><td class="k">運営からのお知らせ</td><td>会員向け。休業案内・不具合告知12件（2017〜）</td><td><span class="verdict drop">落とす</span></td><td class="be">○</td><td class="fe">—</td><td>新着情報のカテゴリに統合。会員限定である必要がない</td></tr>
+          <tr><td class="k">プレゼント</td><td>協賛企業提供・会員限定・募集中／終了</td><td><span class="verdict keep">残す</span></td><td class="be">●</td><td class="fe">○</td><td><strong>DOMAIN 03-A のスポンサー導線として重要。</strong>応募データを会員に紐付け、属性取得の機会に</td></tr>
+          <tr><td class="k">リクエスト受付</td><td>メール＋自由記述。「目の不自由な方でもできるレク」等の例示付き</td><td><span class="verdict ask">要判断</span></td><td class="be">○</td><td class="fe">○</td><td>利用実態を確認。<strong>アンケート基盤（1問マイクロ）に統合</strong>できる可能性</td></tr>
+
+          <tr><td colspan="6" style="background:var(--bg-section);font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;color:var(--text-muted);">静的・サポート</td></tr>
+          <tr><td class="k">初めての方へ／DL方法／レク素材とは／FAQ</td><td>4ページに分散。FAQは6分類</td><td><span class="verdict change">変える</span></td><td class="be">—</td><td class="fe">●</td><td><strong>1つのガイドページに統合。</strong>新UIならDL方法の説明は不要になるべき</td></tr>
+          <tr><td class="k">お問い合わせ</td><td>名前・メール・電話・カテゴリ・内容</td><td><span class="verdict keep">残す</span></td><td class="be">○</td><td class="fe">○</td><td>ヘルスケア企業からの問い合わせを受ける導線を分ける</td></tr>
+          <tr><td class="k">サイトマップ／ポリシー類</td><td>静的ページ</td><td><span class="verdict keep">残す</span></td><td class="be">—</td><td class="fe">○</td><td>プライバシーポリシーは<strong>同意事項の改定に合わせて更新</strong>（インフラ提案 § 00）</td></tr>
+          <tr><td class="k">Cookie同意</td><td>画面下のダイアログ（jquery.cookie）</td><td><span class="verdict keep">残す</span></td><td class="be">—</td><td class="fe">○</td><td>外部送信規律への対応として維持</td></tr>
+
+          <tr><td colspan="6" style="background:var(--bg-section);font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;color:var(--text-muted);">企業・外部</td></tr>
+          <tr class="hl"><td class="k">当サイトに興味のある企業様へ</td><td>モニター調査・実態調査・プレゼント企画・タイアップ・素材下広告の提案ページ</td><td><span class="verdict change">変える</span></td><td class="be">—</td><td class="fe">●</td><td><strong>ヘルスケア企業向けLPの原型がすでにある。</strong>PoC・レク実装サービスを加えて再構成。システム非連動</td></tr>
+          <tr><td class="k">タイアップLP（AYUMIEYE）</td><td>/waseda・Bootstrap製・外部フォーム</td><td><span class="verdict change">変える</span></td><td class="be">—</td><td class="fe">●</td><td>タイアップLPの<strong>前例</strong>。新体系のLPテンプレートに載せ替え</td></tr>
+          <tr><td class="k">レクサポLP</td><td>/feature/rec-supporter/・別テンプレ・料金表あり</td><td><span class="verdict ask">要判断</span></td><td class="be">—</td><td class="fe">○</td><td>サービスが継続中かを確認。継続なら新LPテンプレートへ</td></tr>
+          <tr><td class="k">SNS導線</td><td>FB・X・YouTube・Instagram・LINE</td><td><span class="verdict keep">残す</span></td><td class="be">—</td><td class="fe">○</td><td>LINEを主に（Phase 0 のチャネル方針）。SNSシェアは記事だけでなく<strong>素材にも</strong></td></tr>
+          <tr><td class="k">外部送客バナー</td><td>レクリエーション介護士・CareTEX・生産性DX・レクサポ・AYUMIEYE</td><td><span class="verdict keep">残す</span></td><td class="be">○</td><td class="fe">○</td><td>計測付きリンクに。<strong>クリックを events に記録</strong>し、送客実績を戦略価値として可視化（DOMAIN 06）</td></tr>
+
+          <tr><td colspan="6" style="background:var(--bg-section);font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;color:var(--text-muted);">落とす</td></tr>
+          <tr><td class="k">右クリック禁止</td><td>oncontextmenu="return false" を全ページに</td><td><span class="verdict drop">落とす</span></td><td class="be">—</td><td class="fe">●</td><td>体験を損ねるだけで保護効果はない</td></tr>
+          <tr><td class="k">UserHeat</td><td>ヒートマップタグ。コメントアウト済</td><td><span class="verdict drop">落とす</span></td><td class="be">—</td><td class="fe">—</td><td>停止中。計測は GA4 ＋ 自前 events に一本化</td></tr>
+          <tr><td class="k">/app/webroot/ 露出</td><td>CakePHP の内部パスがURLに出ている</td><td><span class="verdict drop">落とす</span></td><td class="be">●</td><td class="fe">—</td><td>該当URLは301で新LPへ</td></tr>
+          <tr><td class="k">3つのデザイン体系</td><td>本体／介護レクNews／LP群で別々のCSS・JS</td><td><span class="verdict drop">落とす</span></td><td class="be">—</td><td class="fe">●</td><td><strong>デザインシステム1つに統合。</strong>ミニマルにする最短ルート</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- §04 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 04　足すもの</span>
+      <h2 class="section-title">現行にないもので、<br>要件定義がすでに決めているもの。</h2>
+    </div>
+    <p class="section-lead">
+      § 03 の「足す」を、要件定義 § 06 の機能要件と突き合わせて並べる。<strong>すべてスコープ1で器を作る</strong>。BE／FE の分担が明確なものが多く、両輪で並走しやすい。
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead><tr><th style="width:170px">機能</th><th>何をするか</th><th style="width:36px">BE</th><th style="width:36px">FE</th><th>根拠</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td class="k">顧客ID連携（4連携）</td><td>会員フラグの dataLayer 出力／DLに member_id／LINE名寄せ／流入媒体保存</td><td class="be">●</td><td class="fe">○</td><td>要件定義 Decision 01・層1</td></tr>
+          <tr class="hl"><td class="k">events テーブル</td><td>閲覧・DL・起動・完了・外部クリックを1つの形で記録</td><td class="be">●</td><td class="fe">—</td><td>インフラ提案 § 04・層2</td></tr>
+          <tr class="hl"><td class="k">同意管理</td><td>版付きの同意記録。移行時の再同意フロー（ログイン後1画面）</td><td class="be">●</td><td class="fe">●</td><td>インフラ提案 § 00・§ 06-04</td></tr>
+          <tr><td class="k">所属施設の参照</td><td>会員テーブルに facility_id。施設テーブルは空でよい</td><td class="be">●</td><td class="fe">—</td><td>決定事項</td></tr>
+          <tr><td class="k">属性プロフィール</td><td>役職・施設形態・地域・担当業務・関心テーマ・購買関与。任意・後追い</td><td class="be">●</td><td class="fe">●</td><td>層2</td></tr>
+          <tr><td class="k">LINEログイン／LIFF</td><td>member_id ↔ LINE userId の自動突合</td><td class="be">●</td><td class="fe">●</td><td>層1・連携C</td></tr>
+          <tr class="hl"><td class="k">今月のレク（季節導線）</td><td>季節・行事から、素材・レクネタ・動画・記事を横断して出す主動線</td><td class="be">●</td><td class="fe">●</td><td>要件定義 § 05・§ 02 統合マスタ</td></tr>
+          <tr class="hl"><td class="k">デジタルレクの器</td><td>埋め込み型コンテンツの枠・一覧・詳細・動線。起動・完了イベント</td><td class="be">●</td><td class="fe">●</td><td>Decision 02・スコープ1</td></tr>
+          <tr class="hl"><td class="k">エビデンス系の器</td><td>知見型コンテンツの枠。<strong>レクネタ企画書の構造を雛形に</strong></td><td class="be">●</td><td class="fe">●</td><td>Decision 02・DOMAIN 03-B</td></tr>
+          <tr><td class="k">ヘルスケア企業向けLP</td><td>to_company を再構成。PoC・レク実装サービス。システム非連動</td><td class="be">—</td><td class="fe">●</td><td>3つの主体</td></tr>
+          <tr><td class="k">印刷用CSS</td><td>DL型コンテンツの詳細で、余計なUIを落として印刷</td><td class="be">—</td><td class="fe">●</td><td>要件定義 § 05 規定値</td></tr>
+          <tr><td class="k">SEO基盤</td><td>読めるURL・301マップ（DB管理）・sitemap.xml・robots.txt・構造化データ・H1</td><td class="be">●</td><td class="fe">○</td><td>§ 05 技術負債</td></tr>
+          <tr><td class="k">管理画面</td><td>全タイプ入稿・会員管理・属性クロス集計・301編集・アンケート</td><td class="be">●</td><td class="fe">○</td><td>インフラ提案 ⑦</td></tr>
+          <tr><td class="k">メール配信基盤</td><td>バウンスWebhook→会員レコードへ書き戻し</td><td class="be">●</td><td class="fe">—</td><td>インフラ提案 § 06-02</td></tr>
+          <tr><td class="k">アンケート基盤</td><td>1問マイクロ・回答で即時素材配布（SHOULD）</td><td class="be">●</td><td class="fe">○</td><td>層2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- §05 -->
+<section class="section deep">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 05　技術負債</span>
+      <h2 class="section-title">トレースで見えた、<br>構造上の問題。</h2>
+    </div>
+    <p class="section-lead">
+      新基盤へ持ち込まないために、明示しておく。<strong>上の3つは、リニューアルの理由そのもの</strong>にあたる。
+    </p>
+
+    <div class="dtable">
+      <table>
+        <thead><tr><th style="width:190px">項目</th><th>現状</th><th>影響</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td class="k">3つのデザイン体系</td><td>本体（default/common/base.css＋jQuery 3.6）／介護レクNews（独自ヘッダー・フッター・「サイト内サイト」）／LP群（Bootstrap・jQuery 1.11・Sawarabi Gothic）</td><td>統一感の欠如。改修のたびに3箇所を触る。<strong>ミニマルにできない最大の理由</strong></td></tr>
+          <tr class="hl"><td class="k">CakePHP 2系の露出</td><td>data[Model][field] 形式・_Token・/app/webroot/ パス・コントローラ名がURLに</td><td>フレームワークの内部構造が外に出ている。セキュリティ上も望ましくない</td></tr>
+          <tr class="hl"><td class="k">UUIDクエリURL</td><td>?tRecreationMaterial_id=…&amp;cMaterialDifficulty_id=…&amp;category_id=… と3パラメータ</td><td>共有しづらく、SEOに弱い。<strong>短縮URL機能が必要になった原因</strong></td></tr>
+          <tr><td class="k">検索結果がAjax</td><td>初期HTMLは16件、以降は非同期。点数表記も「00点」がJS埋め込み</td><td>クローラーが2ページ目以降を見ない。1,924点分の詳細がインデックスされにくい</td></tr>
+          <tr><td class="k">H1 が空</td><td>本体ページの h1 は空タグ。介護レクNewsのみ「現場を支える介護レク情報サイト」</td><td>検索エンジンがページの主題を取れない</td></tr>
+          <tr><td class="k">sitemap.xml / robots.txt 不在</td><td>両方とも404→トップへ</td><td>クロール制御ができない。Search Console の活用にも支障</td></tr>
+          <tr><td class="k">分類マスタの重複</td><td>素材カテゴリの「塗り絵」「歌つき塗り絵」が2つずつ。体操・秋などが種別ごとに別ID</td><td>横断検索ができない。カテゴリ整理（ゲート①）で統合が必要</td></tr>
+          <tr><td class="k">新着情報の手動運用</td><td>≈417件が「〇〇をアップしました」</td><td>運用工数の無駄。公開イベントから自動生成すべき</td></tr>
+          <tr><td class="k">レスポンシブ</td><td>768px ブレークポイント1本。viewport は設定済み</td><td>対応はしているが、タブレット・大画面スマホの中間帯が粗い</td></tr>
+          <tr><td class="k">JSライブラリの混在</td><td>jQuery 3.6 と 1.11、colorbox、slick、bxslider、inview、Bootstrap がページごとに</td><td>読み込み速度と保守性。デザインシステム統合で一掃</td></tr>
+          <tr><td class="k">数字の乖離</td><td>「3,500点以上」表記 vs 実数2,166。「5万人以上の会員」（企業向けページ）vs 戦略資料の7万人</td><td>語る数字が場所によって違う。<strong>DOMAIN 06 の指摘がコンテンツ数にも当てはまる</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Finding — 最重要</span>
+        <h3 class="essence-title">層2で「これから取る」としていた属性が、<br>現行DBにすでに存在する。</h3>
+      </div>
+      <p class="essence-body">
+        会員情報変更フォームには、<strong>職業（7種）・事業所の種類（12種）・勤務先名称・保有資格（11種）・都道府県・生年月日・性別</strong>が並んでいる。要件定義 § 03 層2で「役職／施設形態／地域／担当業務／関心テーマ／購買関与」と置いた属性のうち、<strong>役職≒職業、施設形態≒事業所の種類、地域≒都道府県は、すでに取れている</strong>。しかも職業と事業所種別は<strong>必須項目</strong>。
+      </p>
+      <p class="essence-body">
+        これは3つの資料に影響する。<strong>①要件定義</strong>——層2の属性は「新規取得」ではなく<strong>「既存データの移行＋精度向上＋不足分（担当業務・関心テーマ・購買関与）の追加」</strong>に変わる。<strong>②会員移行</strong>——移行後すぐに「属性 × アクティブ」のクロス集計が出せる。属性取得を移行の動機付けに使う必要が下がり、<strong>移行フローをさらに軽くできる</strong>。<strong>③インフラ</strong>——member_profiles は移行対象テーブルに含める。
+      </p>
+      <p class="essence-body">
+        ただし注意点が2つ。<strong>必須項目は「とりあえず選んだ」値が混ざる</strong>ため、精度は移行後に検証する。そして<strong>勤務先名称がフリーテキストで存在する</strong>——これは所属施設（facility_id）を作るときの<strong>名寄せの種</strong>になる。7万件の勤務先名称を正規化すれば、施設テーブルの初期データが作れる可能性がある。
+      </p>
+    </div>
+
+    <div class="essence-block" style="margin-top:24px;">
+      <div class="essence-head">
+        <span class="essence-tag">Finding — レクネタ登録という UGC</span>
+        <h3 class="essence-title">レクネタは、<br>会員が投稿している。</h3>
+      </div>
+      <p class="essence-body">
+        マイページに「レクネタ登録」がある。<strong>レクリエーション介護士（資格取得者）のみ</strong>が使え、認定番号を登録するとレクネタを投稿できる。レクネタ226点の作成者欄に「匿名希望」「A.T」等の個人名が並ぶのは、このためだった。
+      </p>
+      <p class="essence-body">
+        つまり介護レク広場は<strong>すでに UGC（会員投稿）の仕組みを持っている</strong>。しかも投稿者は資格保持者に限定されており、<strong>japan-ac.jp（レクリエーション介護士資格）と広場をつなぐ、唯一のシステム上の接点</strong>になっている。Document A 課題04「レク介護士認定資格と広場の接続が十分に設計されていない」への回答は、この機能の再設計から始められる。エビデンス系コンテンツで「実施記録を入力する」フローが将来必要になるなら、<strong>この投稿フローが雛形になる</strong>。
+      </p>
+    </div>
+
+    <div class="essence-block" style="margin-top:24px;">
+      <div class="essence-head">
+        <span class="essence-tag">Finding — 施設アカウントの需要</span>
+        <h3 class="essence-title">FAQが、施設アカウントの<br>必要性をすでに語っている。</h3>
+      </div>
+      <p class="essence-body">
+        よくあるご質問に「<strong>施設（法人）では登録できないのですか？</strong>」という項目があり、回答は「できます。施設内で担当者を決めてご登録ください。個人での登録を推奨しています。複数人でアカウントを共有するのは避けてください」。会員登録画面にも同じ注意書きがある。
+      </p>
+      <p class="essence-body">
+        つまり<strong>施設単位で使いたいという問い合わせが、FAQに載るほど繰り返し来ている</strong>。それを「個人で登録して、担当者を決めて」と運用でしのいでいるのが現状。<strong>所属施設の参照を持つという決定は、この需要に対する最初の構造的な回答</strong>にあたる。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §06 -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 06　整頓の方針</span>
+      <h2 class="section-title">ミニマルでクールは、<br>減らすことで作る。</h2>
+    </div>
+    <p class="section-lead">
+      新サイトの方向性は「<strong>ミニマルでクール</strong>」。トレースの結果から、それを実現する具体的な引き算を5つに絞る。<strong>装飾を足してクールにするのではなく、構造を減らしてクールにする。</strong>
+    </p>
+
+    <div class="layer-list">
+      <div class="layer must">
+        <div class="layer-head"><span class="layer-tag">Reduce 01</span><span class="layer-name">3 → 1</span><span class="layer-when">デザイン体系</span></div>
+        <div class="layer-body"><p class="layer-desc">本体・介護レクNews・LP群の3体系を<strong>1つのデザインシステム</strong>に。介護レクNewsは「サイト内サイト」をやめ、記事というコンテンツタイプに戻す。LP群は同じトークンで組んだLPテンプレートに載せ替える。<strong>これだけで見た目の統一感の大半が得られる。</strong></p></div>
+      </div>
+      <div class="layer must">
+        <div class="layer-head"><span class="layer-tag">Reduce 02</span><span class="layer-name">7 → 1</span><span class="layer-when">トップの入口</span></div>
+        <div class="layer-body"><p class="layer-desc">7ブロック縦積みのトップを、<strong>「今月のレク」1本の導線</strong>に。季節・行事から素材・レクネタ・動画・記事を横断して出す。人気・新着はその中の並び順に落とす。GA4実績（七夕塗り絵 +942%、枕草子 78,214）が、この判断を裏付けている。</p></div>
+      </div>
+      <div class="layer mid">
+        <div class="layer-head"><span class="layer-tag">Reduce 03</span><span class="layer-name">別々 → 共通</span><span class="layer-when">分類マスタ</span></div>
+        <div class="layer-body"><p class="layer-desc">季節・行事・活動種別を<strong>全コンテンツ共通のマスタ</strong>に統合。素材24カテゴリの重複を解消し、レクネタの種別とカテゴリの重なりを整理する。軸を消すのではなく、<strong>入口を1本にして残りをフィルタに落とす</strong>。ゲート①（2026.11末）で確定させる対象。</p></div>
+      </div>
+      <div class="layer mid">
+        <div class="layer-head"><span class="layer-tag">Reduce 04</span><span class="layer-name">3 → 1</span><span class="layer-when">DLのステップ</span></div>
+        <div class="layer-body"><p class="layer-desc">「ダウンロードに追加 → 一覧 → DL」の3ステップを、<strong>即DLの1ステップ</strong>に。カートの利用実態はログから取れないため、<strong>設計判断で決める</strong>。A4／色見本／カレンダーの選択は詳細ページ内でワンタップに収め、「まとめて持ち帰る」用途は<strong>お気に入りからの一括DL</strong>に引き継ぐ。新基盤では events で利用が測れるため、<strong>運用開始後に検証できる</strong>。</p></div>
+      </div>
+      <div class="layer late">
+        <div class="layer-head"><span class="layer-tag">Reduce 05</span><span class="layer-name">4 → 1</span><span class="layer-when">サポートページ</span></div>
+        <div class="layer-body"><p class="layer-desc">初めての方へ・検索DL方法・レク素材とは・FAQ の4ページを<strong>1つのガイド</strong>に。<strong>新UIが十分にわかりやすければ「ダウンロード方法」の説明ページ自体が不要になる</strong>——説明が要らないことが、ミニマルの証明になる。</p></div>
+      </div>
+    </div>
+
+    <div class="essence-block accent" style="margin-top:44px;">
+      <div class="essence-head">
+        <span class="essence-tag">Note — 要件定義 § 05 との関係</span>
+        <h3 class="essence-title">「温かく明快」から、<br>「ミニマルでクール」へ。</h3>
+      </div>
+      <p class="essence-body">
+        要件定義 § 05 のデザイン原則は「温かく、明快で、道具として信頼できる」と書いていた。今回の「ミニマルでクール」は、この上位に来る<strong>明確なトーンの指定</strong>として受け取る。両立はする——<strong>クールさは構造の少なさから、温かさはコンテンツ（素材そのものの色彩）から</strong>来る。UI側が静かに引くという原則は、むしろ強まる。
+      </p>
+      <p class="essence-body">
+        ただし § 05 の規定値（本文16px以上・WCAG AA・タップ44px）は<strong>そのまま守る</strong>。ミニマルにするとき最も起きやすい失敗が「細く・薄く・小さく」であり、この利用者層にはそれが実害になる。<strong>要件定義 § 05 を「ミニマルでクール」前提で改訂する。</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- §07 -->
+<section class="section dark">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">§ 07　未着手と次のアクション</span>
+      <h2 class="section-title">トレースは完了。<br>次は実データで裏を取る。</h2>
+    </div>
+    <p class="section-lead">
+      公開エリア・会員エリアともに巡回を完了した。残るのは、<strong>トレースでは見えない「実データの中身」</strong>——属性の充足率、カートの利用率、非公開素材の扱い——であり、いずれも既存管理会社からのエクスポートを待つ項目になる。
+    </p>
+
+    <div class="confirms">
+      <div class="confirm">
+        <span class="confirm-num">01</span>
+        <span class="confirm-title">会員情報CSVを既存管理会社から取得し、属性の充足率・精度・勤務先名称の名寄せ可能性を分析する</span>
+        <span class="confirm-who">管理会社<br>→ 分析</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">02</span>
+        <span class="confirm-title">カートは即DLに変更（決定）。利用実態は取れないため設計判断。運用開始後に events で検証</span>
+        <span class="confirm-who">決定済</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">03</span>
+        <span class="confirm-title">非公開素材は移行しない（決定）。母集団は公開中1,940＋226で確定</span>
+        <span class="confirm-who">決定済</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">04</span>
+        <span class="confirm-title">レクサポ・AYUMIEYE タイアップ・リクエスト受付・短縮URL の継続要否</span>
+        <span class="confirm-who">PM<br>／ はるちゃん</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">05</span>
+        <span class="confirm-title">要件定義 § 05 を「ミニマルでクール」前提で改訂する</span>
+        <span class="confirm-who">次回</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">06</span>
+        <span class="confirm-title">§ 02 の統合マスタ案（季節・行事・活動種別）を、カテゴリ整理ゲート①の叩き台にする</span>
+        <span class="confirm-who">Phase 1<br>／ PM</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">07</span>
+        <span class="confirm-title">要件定義 § 03 層2の属性項目を「既存データの移行＋不足分の追加」に改訂する</span>
+        <span class="confirm-who">次回</span>
+      </div>
+      <div class="confirm">
+        <span class="confirm-num">08</span>
+        <span class="confirm-title">レクネタ登録（UGC）を、レク介護士との接点・エビデンス系投稿の雛形として再設計するか</span>
+        <span class="confirm-who">PM<br>／ japan-ac</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="pagenav">
+  <div class="pagenav-inner">
+    <a href="renewal_requirements.html" class="pagenav-side"><span class="pagenav-direction">← Related</span><span class="pagenav-title">サイトリニューアル<br>要件定義</span></a>
+    <a href="index.html" class="pagenav-center">Index</a>
+    <a href="infrastructure_proposal.html" class="pagenav-side right"><span class="pagenav-direction">Related →</span><span class="pagenav-title">インフラ・技術構成<br>の提案</span></a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">
+      介護レク広場 14期戦略 ／ 現行サイト構造トレース — サイトマップ・機能一覧・整頓<br>
+      検討稿 v0.3 ／ 2026年9月 ／ 内部討議用
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

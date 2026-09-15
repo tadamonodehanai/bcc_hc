@@ -489,7 +489,7 @@
 <div class="banner">
   <div class="banner-inner">
     <a href="index.html" class="banner-link">介護レク広場 14期戦略｜会員移行ロードマップ</a>
-    <span class="banner-tag">v0.6 / 2026.08 / DRAFT</span>
+    <span class="banner-tag">v0.7 / 2026.09 / DRAFT</span>
   </div>
 </div>
 
@@ -985,8 +985,8 @@
           </tr>
           <tr>
             <td class="k">属性</td>
-            <td>初回ログイン後に1画面。<strong>スキップ可能にする</strong>。マイページとLINEで継続的に積み増す</td>
-            <td>任意</td>
+            <td><strong>職業・事業所種別・都道府県は現行DBから移行済み</strong>（構造トレース § 05）。初回ログイン後は<strong>確認と不足分（担当業務・関心テーマ）の任意入力</strong>のみ。スキップ可能</td>
+            <td>任意（既存分は移行）</td>
           </tr>
           <tr>
             <td class="k">LINE連携</td>
@@ -1009,6 +1009,9 @@
       </div>
       <p class="essence-body">
         属性データは戦略上ほしい。しかし<strong>移行フローの必須ステップにすると、そこで離脱が発生する</strong>。会員基盤そのものを失うほうが損失は大きい。したがって<strong>属性は任意・スキップ可能とし、移行後にマイページとLINEで時間をかけて積み増す</strong>方針を取る。
+      </p>
+      <p class="essence-body">
+        この判断は、構造トレースの発見でさらに軽くなった。<strong>職業・事業所の種類・都道府県・保有資格は、現行DBにすでに存在する</strong>。移行フローで属性を「取る」必要は薄く、<strong>「確認してもらう」だけでよい</strong>。属性取得を移行の動機付けに使わなくて済むため、フローは<strong>ログイン → 再同意（1画面）</strong>の実質2ステップまで縮められる。
       </p>
       <p class="essence-body">
         これは層2（測る・貯める）を「登録時に取り切らず、継続的に積み増す設計にする」とした要件定義 § 03 の方針と一致している。<strong>急がない。ただし取れる仕組みは最初から入れておく。</strong>
@@ -1090,7 +1093,7 @@
   <div class="container">
     <p class="footer-text">
       介護レク広場 14期戦略 ／ 会員移行ロードマップ<br>
-      検討稿 v0.6 ／ 2026年8月 ／ 内部討議用
+      検討稿 v0.7 ／ 2026年9月 ／ 内部討議用
     </p>
   </div>
 </footer>
