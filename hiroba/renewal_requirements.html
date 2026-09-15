@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>サイトリニューアル要件定義｜介護レク広場</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -563,7 +564,7 @@
         <h3 class="essence-title">スコープを2つに分け、<br>スコープ1を2月に置く。</h3>
       </div>
       <p class="essence-body">
-        <strong>スコープ1は「今の機能ベース」</strong>——現行機能を新基盤・新UIで実現し、カテゴリを整理し、既存会員を移す。2027年2月に完了させ、4月に運用開始する。この期限は既存管理会社との契約満了に紐づく<strong>固定の外部制約</strong>であり、日付は動かせない。
+        <strong>スコープ1は「今の機能ベース」</strong>——現行機能を新基盤・新UIで実現し、カテゴリを整理し、既存会員を移す。2027年2月に完了させ、4月に運用開始する。この期限は現行の運用体制の切り替え時期に紐づく<strong>固定の外部制約</strong>であり、日付は動かせない。
       </p>
       <p class="essence-body">
         <strong>スコープ2は、その器に載せていくもの</strong>——新コンテンツの拡充と、<strong>新しい仕組みによるマネタイズ</strong>。既存のレク素材を有料化して売ることは考えていない。線引きの詳細は § 01。
@@ -746,7 +747,7 @@
         <span class="tl-when">2026.08</span>
         <span class="tl-what">
           <span class="tl-title">要件確定 ／ 体制確定 ／ 移行協議の着手</span>
-          <span class="tl-note">本資料の合意 ／ § 09 の確認事項を回収 ／ 既存管理会社へエクスポート範囲とハッシュ方式を打診 ／ 技術スタック・デザイン体制・<strong>新コンテンツの制作体制</strong>の確定 ／ <strong>器の形に関わる4論点（§ 01）の方針決め — とくに施設アカウント</strong></span>
+          <span class="tl-note">本資料の合意 ／ § 09 の確認事項を回収 ／ 現行環境からのエクスポート範囲とハッシュ方式を確認 ／ 技術スタック・デザイン体制・<strong>新コンテンツの制作体制</strong>の確定 ／ <strong>器の形に関わる4論点（§ 01）の方針決め — とくに施設アカウント</strong></span>
         </span>
         <span class="tl-track">並走：Phase 0「観る」</span>
       </div>
@@ -804,7 +805,7 @@
           <span class="tl-title">統合テスト ／ 移行ドライラン①</span>
           <span class="tl-note">本番同等データを載せた環境の構築 ／ 会員データ移行のリハーサル1回目 ／ 移行フローの検証 ／ 実機でのユーザビリティ確認</span>
         </span>
-        <span class="tl-track">要・管理会社の<br>データ提供</span>
+        <span class="tl-track">要・現行環境の<br>データ提供</span>
       </div>
       <div class="tl-row gate">
         <span class="tl-when">2027.02 末</span>
@@ -820,13 +821,13 @@
           <span class="tl-title">移行ドライラン② ／ UAT ／ 切替準備</span>
           <span class="tl-note">本番データでのリハーサル2回目 ／ 受入テストと是正 ／ 301リダイレクト検証 ／ 切替手順の確定 ／ 会員への切替日告知と新UIの事前案内</span>
         </span>
-        <span class="tl-track">既存管理会社の<br>協力が必要な期間</span>
+        <span class="tl-track">現行環境の<br>協力が必要な期間</span>
       </div>
       <div class="tl-row fixed">
         <span class="tl-when">2027.04</span>
         <span class="tl-what">
           <span class="tl-title">運用開始 ／ スコープ2 着手</span>
-          <span class="tl-note">新サイト本番稼働。既存管理会社との契約満了に伴う切替完了。ここから会員移行の実測が始まり、<strong>同時にスコープ2（新コンテンツの拡充・新しい仕組みによるマネタイズ）に着手する</strong>。</span>
+          <span class="tl-note">新サイト本番稼働。現行の運用体制からの切替完了。ここから会員移行の実測が始まり、<strong>同時にスコープ2（新コンテンツの拡充・新しい仕組みによるマネタイズ）に着手する</strong>。</span>
         </span>
         <span class="tl-track">Phase 2「磨く」<br>期間内</span>
       </div>
@@ -1153,13 +1154,13 @@
         <span class="risk-num">02</span>
         <div class="risk-body">
           <span class="risk-when">最優先 ／ 8〜9月</span>
-          <h3 class="risk-title">既存管理会社の協力を、契約が生きているうちに固める。</h3>
+          <h3 class="risk-title">現行環境からのデータ引き継ぎを、早期に固める。</h3>
           <p class="risk-note">
-            契約満了に伴う移行であるため、<strong>相手には協力するインセンティブがない</strong>。会員DB・コンテンツ実体・メタデータ・DLログ・全URL一覧——これらが出てこなければ、どれだけ良い新サイトを作っても移行できない。<strong>DLログはカテゴリ整理の判断材料でもある</strong>ため、早期受領の重要度が高い。
+            切り替え時期が固定であるため、<strong>データ引き継ぎの段取りを後回しにできない</strong>。会員DB・コンテンツ実体・メタデータ・DLログ・全URL一覧——これらが出てこなければ、どれだけ良い新サイトを作っても移行できない。<strong>DLログはカテゴリ整理の判断材料でもある</strong>ため、早期受領の重要度が高い。
           </p>
           <div class="risk-fix">
             <strong>打ち手</strong>
-            エクスポートの<strong>対象・形式・期限・回数</strong>を書面で合意する。ドライラン2回と本番用で<strong>最低3回</strong>取得できる条件にする。<strong>過去24ヶ月のDLログは最優先で早期に受領する</strong>。
+            エクスポートの<strong>対象・形式・期限・回数</strong>を事前に合意する。ドライラン2回と本番用で<strong>最低3回</strong>取得できる条件にする。<strong>過去24ヶ月のDLログは最優先で早期に受領する</strong>。
           </div>
         </div>
       </div>
@@ -1230,7 +1231,7 @@
           <span class="risk-when">9月末</span>
           <h3 class="risk-title">定点観測①で ROUTE 2 になった場合の扱いが、未定義。</h3>
           <p class="risk-note">
-            9月末の定点観測①で ROUTE 1（価値化に進む）と ROUTE 2（最小コストで戦略資産として維持）に分岐する設計になっている。仮に ROUTE 2 と判定されても<strong>契約満了の期限は動かない</strong>ため、「移行だけは必ず必要」という状態が残る。
+            9月末の定点観測①で ROUTE 1（価値化に進む）と ROUTE 2（最小コストで戦略資産として維持）に分岐する設計になっている。仮に ROUTE 2 と判定されても<strong>切り替えの期限は動かない</strong>ため、「移行だけは必ず必要」という状態が残る。
           </p>
           <div class="risk-fix">
             <strong>打ち手</strong>
@@ -1389,18 +1390,18 @@
       </div>
       <div class="confirm">
         <span class="confirm-num">02</span>
-        <span class="confirm-title">既存管理会社との契約満了日の正確な日付と、満了後の協力可否</span>
-        <span class="confirm-who">契約書<br>／ 管理会社</span>
+        <span class="confirm-title">現行の運用体制の切り替え日と、切り替え後のデータ提供の可否</span>
+        <span class="confirm-who">社内<br>／ 現行環境</span>
       </div>
       <div class="confirm">
         <span class="confirm-num">03</span>
         <span class="confirm-title">会員パスワードのハッシュ方式（bcrypt 等の標準方式か、独自方式か）</span>
-        <span class="confirm-who">既存<br>管理会社</span>
+        <span class="confirm-who">現行<br>環境</span>
       </div>
       <div class="confirm">
         <span class="confirm-num">04</span>
         <span class="confirm-title">エクスポート範囲・形式・回数。とくに過去24ヶ月のDLログを9月までに受領できるか</span>
-        <span class="confirm-who">既存<br>管理会社</span>
+        <span class="confirm-who">現行<br>環境</span>
       </div>
       <div class="confirm">
         <span class="confirm-num">05</span>
@@ -1485,7 +1486,7 @@
     <div class="nextactions">
       <div class="nextaction">
         <span class="nextaction-num">A.</span>
-        <span class="nextaction-title">既存管理会社へ、ハッシュ方式・エクスポート範囲・DLログの早期提供を打診する</span>
+        <span class="nextaction-title">現行環境から、ハッシュ方式・エクスポート範囲・DLログの早期提供を確認する</span>
         <span class="nextaction-doc">Risk 02・03</span>
       </div>
       <div class="nextaction">

@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>インフラ・技術構成の提案｜介護レク広場</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -505,7 +506,7 @@
 <div class="banner">
   <div class="banner-inner">
     <a href="index.html" class="banner-link">介護レク広場 14期戦略｜インフラ・技術構成の提案</a>
-    <span class="banner-tag">v0.2 / 2026.08 / DRAFT</span>
+    <span class="banner-tag">v0.3 / 2026.09 / DRAFT</span>
   </div>
 </div>
 
@@ -1016,6 +1017,36 @@
       </table>
     </div>
 
+    <div class="dtable" style="margin-top:44px;">
+      <table>
+        <thead><tr><th>構成（推奨 P1 の実装例）</th><th>主な内訳</th><th>月額目安</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td class="k">A　最小（Fly.io 東京）</td><td>アプリ 2GB ＋ マネージドPostgres 1GB（HA・バックアップ込み）＋ R2 ＋ Cloudflare Free ＋ SES</td><td><strong>≈ ¥11,000</strong></td></tr>
+          <tr><td class="k">B　標準（Render）</td><td>Web Standard ＋ Postgres Basic ＋ R2 ＋ Cloudflare Pro ＋ SendGrid ＋ Sentry。東京リージョンなし</td><td>≈ ¥17,000</td></tr>
+          <tr><td class="k">C　堅牢（AWS 東京）</td><td>EC2/Fargate ＋ RDS ＋ ALB ＋ R2 ＋ SES。Multi-AZ にすると上限側</td><td>≈ ¥13,000 〜 30,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-lead" style="margin-top:16px;font-size:13px;">
+      1ドル=150円換算、各社の公開価格（2026.09時点）からの目安。3.6万UU・7万会員・素材ファイル約6,500点（20〜50GB）・DL転送100〜200GB/月を前提。<strong>移行期のメール一斉配信は7万通で約¥1,000（SES）</strong>。保守・監視の人件費、LINE公式（既存契約）、ドメイン、開発費は含まない。
+    </p>
+
+    <div class="essence-block accent" style="margin-top:32px;">
+      <div class="essence-head">
+        <span class="essence-tag">Comparison — 現行の運用コスト</span>
+        <h3 class="essence-title">現行は月およそ15万円。<br>そのうち保守費が4割強。</h3>
+      </div>
+      <p class="essence-body">
+        現行の月額運用コストは、<strong>サイト保守費（約¥68,000）・コンテンツ制作関連（約¥35,000）・アドバイザー費（約¥50,000）</strong>の3区分で、合計<strong>約¥152,000／月（税抜）＝年約¥183万</strong>。Document A 課題01「運用コスト＞売上」の実額がこれにあたる。
+      </p>
+      <p class="essence-body">
+        リニューアルで直接下がるのは<strong>保守費のうちインフラ実費の部分</strong>。上の試算（¥11,000〜30,000）と比べると、<strong>インフラ単体では月¥4〜5万下がる</strong>計算になる。ただし現行の保守費に<strong>監視・障害対応・改修工数がどこまで含まれているか</strong>で、削減幅の意味が変わる——含まれているなら、その分は内製（人件費）か新しい保守契約に移るだけで消えない。<strong>現行契約の内訳確認が先</strong>（§ 07-01）。
+      </p>
+      <p class="essence-body">
+        コンテンツ制作関連（塗り絵・脳活の外注、記事制作、レクネタ入力）は<strong>リニューアル後も続き、新コンテンツで増える方向</strong>。一方で<strong>レクネタ入力の手作業は、管理画面の入稿UIと会員投稿（UGC）の再設計で減らせる</strong>——ここは削減ではなく、工数を新コンテンツ側へ振り向ける対象になる。
+      </p>
+    </div>
+
     <div class="essence-block" style="margin-top:44px;">
       <div class="essence-head">
         <span class="essence-tag">Note</span>
@@ -1136,12 +1167,12 @@
       <div class="confirm">
         <span class="confirm-num">04</span>
         <span class="confirm-title">現行DBの種別（MySQL系か）と、素材の総容量・点数</span>
-        <span class="confirm-who">既存<br>管理会社</span>
+        <span class="confirm-who">現行<br>環境</span>
       </div>
       <div class="confirm">
         <span class="confirm-num">05</span>
         <span class="confirm-title">パスワードハッシュ方式。認証構成の前提（要件定義 § 09-03 と同一項目）</span>
-        <span class="confirm-who">既存<br>管理会社</span>
+        <span class="confirm-who">現行<br>環境</span>
       </div>
       <div class="confirm">
         <span class="confirm-num">06</span>
@@ -1225,7 +1256,7 @@
   <div class="container">
     <p class="footer-text">
       介護レク広場 14期戦略 ／ インフラ・技術構成の提案<br>
-      検討稿 v0.2 ／ 2026年8月 ／ 内部討議用
+      検討稿 v0.3 ／ 2026年9月 ／ 内部討議用
     </p>
   </div>
 </footer>
